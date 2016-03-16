@@ -23,3 +23,8 @@ error_log
 ######################
 *.sublime-project
 *.sublime-workspace
+
+# Models #
+######################
+**.obj
+**.mix
