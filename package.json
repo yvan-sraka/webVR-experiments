@@ -5,6 +5,7 @@
   "main": "armthethinker.github.io/webVR-experiments",
   "dependencies": {},
   "devDependencies": {
+    "bower": "^1.7.7",
     "deploy": "^1.0.3",
     "ghpages": "0.0.3",
     "grunt": "^0.4.5",

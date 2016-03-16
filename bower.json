@@ -1,0 +1,25 @@
+{
+  "name": "webvr-experiments",
+  "description": "A personal sandbox for webVR experiments.",
+  "main": "armthethinker.github.io/webVR-experiments",
+  "authors": [
+    "Andrew R McHugh"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "vr"
+  ],
+  "homepage": "https://github.com/armthethinker/webVR-experiments",
+  "moduleType": [],
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jQuery": "^2.2.1"
+  }
+}
