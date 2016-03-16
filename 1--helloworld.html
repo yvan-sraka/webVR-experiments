@@ -5,18 +5,26 @@
    <script src="https://aframe.io/releases/latest/aframe.min.js"></script>
 </head>
 <body>
+
    <a-scene>
+      <!-- <a-camera wasd-controls-enabled="true" cursor-scale="1" cursor-color="red"></a-camera> -->
+
       <!-- Ground plane -->
       <a-cube position="0 0 0" scale="10 .5 10"></a-cube>
 
       <!-- The Rest -->
       <a-cube position="0 0 0" rotation="0 45 20" scale="1 2 1" color="red"></a-cube>
-      <a-entity id="tree" position="0 0 0">
-         <a-sphere color="green" radius="1" position="0 4 0"></a-sphere>
+      <a-entity id="tree" position="2 0 2">
+         <a-sphere color="green" radius="1" position="0 3.9 0"></a-sphere>
          <a-sphere color="green" radius=".4" position=".6 3.5 .5"></a-sphere>
-         <a-sphere color="green" radius=".2" position="-.5 4.8 0"></a-sphere>
+         <a-sphere color="green" radius=".5" position="-.9 3.8 0"></a-sphere>
          <a-cylinder color="brown" radius="0.2" height="5" position="0 0.5 0"></a-cylinder>
       </a-entity>
+
+      <a-cube color="yellow">
+         <a-animation attribute="rotation" from="0 0 0" to="0 360 0" repeat="indefinite" easing="linear"></a-animation>
+      </a-cube>
+
    </a-scene>
 </body>
 </html>
