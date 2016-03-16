@@ -1,4 +1,4 @@
-# This is a personal sandbox for webVR experiements
+# This is a personal sandbox for webVR experiments
 
 Planned experiments:
 - Reading in VR
