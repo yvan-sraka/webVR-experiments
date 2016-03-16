@@ -15,7 +15,7 @@ grunt.initConfig({
    },
    md2html: {
       options: {
-
+         layout: 'layout.html'
       },
       index: {
          src: ['README.md'],
