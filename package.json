@@ -2,7 +2,7 @@
   "name": "webvr-experiments",
   "version": "1.0.0",
   "description": "A personal sandbox for webVR experiments.",
-  "main": "armthethinker-vr.github.io",
+  "main": "armthethinker.github.io/webVR-experiments",
   "dependencies": {},
   "devDependencies": {
     "grunt": "^0.4.5",
