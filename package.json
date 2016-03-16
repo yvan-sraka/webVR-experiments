@@ -4,7 +4,10 @@
   "description": "A personal sandbox for webVR experiments.",
   "main": "armthethinker-vr.github.io",
   "dependencies": {},
-  "devDependencies": {},
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-watch": "^1.0.0"
+  },
   "scripts": {
     "test": "tap test/*.js"
   },
