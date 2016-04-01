@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+<head>
+   <title>4 - ViewPoint</title>
+   <script src="bower_components/aframe/dist/aframe-v0.2.0.min.js"></script>
+   <!--
+   <script src="https://aframe.io/releases/latest/aframe.min.js"></script>
+ -->
+</head>
+<body>
+   <!--
+   Credits
+   360 Photo from: https://www.flickr.com/photos/bhalash/4156765224/
+   Yousif: http://www.immediateentourage.com/muslim-man-2/
+   Ann: http://www.immediateentourage.com/girl-in-a-striped-shirt/
+   -->
+
+   <a-scene fog="type: exponential; color: #111; density:.05">
+      <!-- Global Settings -->
+      <a-sky color="#111"></a-sky>
+      <a-light type="ambient" color="#fff"></a-light>
+      <a-cube color="#333" position="0 -.5 0" scale="10 .5 10"></a-cube>
+
+      <!-- Room 1 -->
+      <a-entity position="0 0 0">
+         <a-entity position="0 0 0" light="
+            type: spot;
+            color: #fff;
+            intensity: 3;
+            angle:150">
+         </a-entity>
+         <!-- Walls -->
+         <!-- Left -->
+         <a-image src="assets/img/2-left@2x.png" height="5" width="10" position="-5 2.25 0" rotation="0 90 0"></a-image>
+         <!-- Back -->
+         <a-image src="assets/img/1-back@2x.png" height="5" width="10" position="0 2.25 -5"></a-image>
+         <!-- Right -->
+         <a-image src="assets/img/2-right@2x.png" height="5" width="10" position="5 2.25 0" rotation="0 -90 0"></a-image>
+         <!-- Front -->
+         <a-image src="assets/img/1-front@2x.png" height="5" width="10" position="0 2.25 5" rotation="0 180 0"></a-image>
+      </a-entity>
+
+
+
+
+      <!-- <a-curvedimage src="assets/img/1-@2x.png" radius="2.2" theta-length="360" height="3" rotation="0 210 0" scale="1 1 1" position="0 1.5 3"></a-curvedimage>
+      <a-curvedimage src="assets/img/interviewee-people-f@2x.png" radius="2" theta-length="360" height="3" rotation="0 210 0" scale="1 1 1" position="0 1.5 3"></a-curvedimage>
+
+      <a-curvedimage src="assets/img/interviewee-panel-question@2x.png" radius="2" theta-length="360" height="3" rotation="0 210 0" scale="1 1 1" position="4 1.5 3"></a-curvedimage> -->
+
+   </a-scene>
+</body>
+</html>
