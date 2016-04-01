@@ -2,8 +2,14 @@
 
 Everything is built with [A-Frame](https://aframe.io).
 
-## 1. [Hello World](https://armthethinker.github.io/webVR-experiments/1--helloworld.html)
+## 1. [Hello World](/1--helloworld.html)
 A basic world with random components. Made while learning A-Frame.
+
+## 2. [Hello World](/2--ui.html)
+A basic test with cylinder UI.
+
+## 3. [Figures in Space](/1--figures-in-space.html)
+Testing a project for IXDS.
 
 ## Planned experiments:
 - Reading in VR
