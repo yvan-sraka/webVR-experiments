@@ -8,7 +8,7 @@ A basic world with random components. Made while learning A-Frame.
 ## 2. [Hello World](/2--ui.html)
 A basic test with cylinder UI.
 
-## 3. [Figures in Space](/1--figures-in-space.html)
+## 3. [Figures in Space](/3--figures-in-space.html)
 Testing a project for IXDS.
 
 ## Planned experiments:
