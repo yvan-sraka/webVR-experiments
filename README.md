@@ -11,6 +11,9 @@ A basic test with cylinder UI.
 ## 3. [Figures in Space](/3--figures-in-space.html)
 Testing a project for IXDS.
 
+## 4. [ViewPoint](/4--viewpoint.html)
+The working model for a class project (IXDS public display).
+
 ## Planned experiments:
 - Reading in VR
 - Speech input
