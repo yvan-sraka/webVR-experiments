@@ -32,14 +32,15 @@
 
       </a-entity>
 
-      <!-- Room 1 -->
-      <a-entity position="0 0 0">
+      <!-- Room: Interviews -->
+      <a-entity position="0 0 0" visible="false">
          <a-entity position="0 0 0" light="
             type: spot;
             color: #fff;
             intensity: 3;
             angle:150">
          </a-entity>
+         <!-- <a-entity id="river" geometry="primitive: plane" material="color: blue" position="-2 0 -2" sound="src: assets/4/years-5.mp3; autoplay: true"></a-entity> -->
          <!-- <a-image src="assets/4/2-right@3x.jpg" height="4" width="10" position="4 2 3" rotation="0 0 0"></a-image> -->
          <!-- Walls -->
          <!-- Left -->
@@ -47,7 +48,7 @@
          <!-- Back -->
          <a-image src="assets/4/1-back@3x.jpg" height="5" width="10" position="0 2.5 -5"></a-image>
          <!-- Right -->
-         <a-image src="assets/4/2-right@3x.jpg" height="4" width="10" position="5 2 0" rotation="0 -90 0"></a-image>
+         <a-image src="assets/4/2-right-active@3x.jpg" height="4" width="10" position="5 2 0" rotation="0 -90 0"></a-image>
          <!-- Front -->
          <a-image src="assets/4/1-front@3x.jpg" height="5" width="10" position="0 2.5 5" rotation="0 180 0"></a-image>
       </a-entity>
