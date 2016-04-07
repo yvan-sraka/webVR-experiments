@@ -33,7 +33,7 @@
       <!-- Human Camera -->
       <a-entity position="17 0 -10">
          <a-entity position="0 1.6 4">
-            <a-camera wasd-controls-enabled="true" look-controls-enabled="true" active="true">
+            <a-camera id="human-camera" wasd-controls-enabled="true" look-controls-enabled="true" active="true">
                <a-entity cursor="fuse: true; maxDistance: 30; timeout: 500"
                   position="0 0 -1"
                   geometry="primitive: ring"
@@ -46,7 +46,7 @@
 
       <!-- God Camera -->
       <a-entity position="0 15 -7" rotation="-60 -60 0">
-         <a-camera wasd-controls-enabled="true" look-controls-enabled="true" active="true">
+         <a-camera id="god-camera" wasd-controls-enabled="true" look-controls-enabled="true" active="false">
             <a-entity cursor="fuse: true; maxDistance: 30; timeout: 500"
                position="0 0 -1"
                geometry="primitive: ring"
@@ -216,6 +216,25 @@
    </a-scene>
 
    <script>
+      /*
+      *
+      * God mode toggle, press 1 to enter human mode, 2 to enter god mode
+      *
+      */
+      document.onkeydown = checkKey;
+      function checkKey(e) {
+
+          e = e || window.event;
+
+          if (e.keyCode == '49') {
+            document.querySelector('#god-camera').setAttribute("active","false");
+            document.querySelector('#human-camera').setAttribute("active","true");
+          }
+          else if (e.keyCode == '50') {
+            document.querySelector('#god-camera').setAttribute("active","true");
+            document.querySelector('#human-camera').setAttribute("active","false");
+          }
+      }
 
       /*
       *
