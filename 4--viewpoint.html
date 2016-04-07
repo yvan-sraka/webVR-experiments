@@ -16,6 +16,14 @@
    -->
 
    <a-scene fog="type: exponential; color: #111; density:.005">
+
+   <!-- block showing scene until these assets are loaded -->
+      <a-assets>
+         <img src="./assets/4/interviewee-people-test@3x.jpg">
+         <img src="./assets/4/floor-plan.png">
+         <img src="./assets/4/interviewee-people-b@2x.png">
+      </a-assets>
+
       <!-- Global Settings -->
       <a-sky color="#111"></a-sky>
       <a-light type="ambient" color="#fff"></a-light>
@@ -206,20 +214,44 @@
       <a-curvedimage src="assets/img/interviewee-panel-question@3x.jpg" radius="2" theta-length="360" height="3" rotation="0 210 0" scale="1 1 1" position="4 1.5 3"></a-curvedimage> -->
 
    </a-scene>
-</body>
-<script>
 
-// document.querySelector('#link').addEventListener('click', function () {
-//   document.querySelector('#camera').emit('navigate-to-link');
-// });
+   <script>
 
-// AFRAME.registerComponent('my-component', {
-//   dependencies: ['raycaster'],
+      /*
+      *
+      * Mechanism for toggling between image sources for an asset. 
+      * To implement, simply add a comma delimited data-alt-src attribute to any asset, in addition to its src attribute.
+      * The image indicated in the src attribute will load into the VR asset first, followed in succession by
+      * each data-alt-src image. The images are swapped out on mouseup when the raycaster is directed at that asset.
+      */
+      document.querySelector('[data-alt-src]:not([value=""])').addEventListener('mouseup', function () {
+         // get the total number of states, explode the alt-src array string
+         var srcstates = this.getAttribute("data-alt-src").split();
+         // add the current src to the end of the array
+         srcstates.push(this.getAttribute("src"));
+         var newsrc = srcstates.shift(); // remove the first element
+         // set the new src, add old source and unused sources back to the alt-src array string
+         this.setAttribute('src', newsrc);
+         this.setAttribute('data-alt-src',srcstates.join());
+      });
 
-//   init: function () {
-//     this.raycaster = this.el.components.raycaster;
-//   }
-// });
+   </script>
 
-</script>
+
+   <script>
+
+   // document.querySelector('#link').addEventListener('click', function () {
+   //   document.querySelector('#camera').emit('navigate-to-link');
+   // });
+
+   // AFRAME.registerComponent('my-component', {
+   //   dependencies: ['raycaster'],
+
+   //   init: function () {
+   //     this.raycaster = this.el.components.raycaster;
+   //   }
+   // });
+
+   </script>
+   </body>
 </html>
