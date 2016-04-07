@@ -241,9 +241,9 @@
       * Mechanism for toggling between image sources for an asset. 
       * To implement, simply add a comma delimited data-alt-src attribute to any asset, in addition to its src attribute.
       * The image indicated in the src attribute will load into the VR asset first, followed in succession by
-      * each data-alt-src image. The images are swapped out on mouseup when the raycaster is directed at that asset.
+      * each data-alt-src image. The images are swapped out on mouseup when the cursor is directed at that asset.
       */
-      document.querySelector('[data-alt-src]:not([value=""])').addEventListener('mouseup', function () {
+      document.querySelector('[data-alt-src]:not([value=""])').addEventListener('mousedown', function () {
          // get the total number of states, explode the alt-src array string
          var srcstates = this.getAttribute("data-alt-src").split();
          // add the current src to the end of the array
