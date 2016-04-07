@@ -15,7 +15,7 @@
    Ann: http://www.immediateentourage.com/girl-in-a-striped-shirt/
    -->
 
-   <a-scene fog="type: exponential; color: #111; density:.005">
+   <a-scene id="main-scene" fog="type: exponential; color: #111; density:.005">
 
    <!-- block showing scene until these assets are loaded -->
       <a-assets>
@@ -230,10 +230,12 @@
           if (e.keyCode == '49') {
             document.querySelector('#god-camera').setAttribute("active","false");
             document.querySelector('#human-camera').setAttribute("active","true");
+            document.querySelector('#main-scene').setAttribute("fog","density",.05);
           }
           else if (e.keyCode == '50') {
             document.querySelector('#god-camera').setAttribute("active","true");
             document.querySelector('#human-camera').setAttribute("active","false");
+            document.querySelector('#main-scene').setAttribute("fog","density",.005);
           }
       }
 
