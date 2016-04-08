@@ -34,7 +34,7 @@
       <a-entity position="0 0 0">
          <a-entity position="0 1.6 4">
             <a-camera id="human-camera" wasd-controls-enabled="true" look-controls-enabled="true" active="true">
-               <a-entity cursor="fuse: true; maxDistance: 30; timeout: 500"
+               <a-entity cursor="fuse: false; maxDistance: 30; timeout: 500"
                   position="0 0 -1"
                   geometry="primitive: ring"
                   scale=".01 .01 .01"
@@ -236,6 +236,7 @@
          document.querySelector('#human-camera').setAttribute("active","false");
          document.querySelector('#main-scene').setAttribute("fog","density",.005);
       }
+      var animationclickmode = false;
       function checkKey(e) {
 
          e = e || window.event;
@@ -246,6 +247,10 @@
             } else {
                godMode();
             }
+         }
+         // toggle click mode
+         if(e.keyCode == '67') { // the letter c
+            animationclickmode = !animationclickmode;
          }
          // welcome room
           else if (e.keyCode == '49') { // key 1
@@ -312,15 +317,17 @@
       var assetswithstates = document.querySelectorAll('[data-alt-src]:not([value=""])');
       if(assetswithstates && assetswithstates.length){
          for (var i=0; i<assetswithstates.length; i++) {
-            assetswithstates[i].addEventListener('mousedown', function () {
-               // get the total number of states, explode the alt-src array string
-               var srcstates = this.getAttribute("data-alt-src").split(",");
-               // add the current src to the end of the array
-               srcstates.push(this.getAttribute("src"));
-               var newsrc = srcstates.shift(); // remove the first element
-               // set the new src, add old source and unused sources back to the alt-src array string
-               this.setAttribute('src', newsrc);
-               this.setAttribute('data-alt-src',srcstates.join());
+            assetswithstates[i].addEventListener('click', function () {
+               if(animationclickmode){
+                  // get the total number of states, explode the alt-src array string
+                  var srcstates = this.getAttribute("data-alt-src").split(",");
+                  // add the current src to the end of the array
+                  srcstates.push(this.getAttribute("src"));
+                  var newsrc = srcstates.shift(); // remove the first element
+                  // set the new src, add old source and unused sources back to the alt-src array string
+                  this.setAttribute('src', newsrc);
+                  this.setAttribute('data-alt-src',srcstates.join());
+               }
             });
          };
       }
