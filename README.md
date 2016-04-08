@@ -21,4 +21,17 @@ The working model for a class project (IXDS public display).
 - Time
 - Space, scale
 
+## Setup
+```
+1. $ npm install
+2. $ bower update
+3. $ grunt
+```
+Grunt uses [LiveReload](https://chrome.google.com/webstore/detail/livereload/jnihajbhpnppcggbcgedagnkighmdlei).
+
+To deploy,
+```
+$ npm run deploy
+```
+
 Personal site: [andrewrmchugh.rocks](http://andrewrmchugh.rocks).
