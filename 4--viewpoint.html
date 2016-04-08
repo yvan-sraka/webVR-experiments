@@ -223,20 +223,83 @@
       *
       */
       document.onkeydown = checkKey;
+      var cameramode = "human";
+      function humanMode(){
+         cameramode = "human";
+         document.querySelector('#god-camera').setAttribute("active","false");
+         document.querySelector('#human-camera').setAttribute("active","true");
+         document.querySelector('#main-scene').setAttribute("fog","density",.05);
+      }
+      function godMode(){
+         cameramode = "god";
+         document.querySelector('#god-camera').setAttribute("active","true");
+         document.querySelector('#human-camera').setAttribute("active","false");
+         document.querySelector('#main-scene').setAttribute("fog","density",.005);
+      }
       function checkKey(e) {
 
-          e = e || window.event;
-
-          if (e.keyCode == '49') {
-            document.querySelector('#god-camera').setAttribute("active","false");
-            document.querySelector('#human-camera').setAttribute("active","true");
-            document.querySelector('#main-scene').setAttribute("fog","density",.05);
+         e = e || window.event;
+         // toggle god mode
+         if(e.keyCode == '71') { // the letter g
+            if(cameramode == "god"){
+               humanMode();
+            } else {
+               godMode();
+            }
+         }
+         // welcome room
+          else if (e.keyCode == '49') { // key 1
+               document.querySelector('#human-camera').setAttribute("rotation","-2.0626480624709576 -404.393611803335 0");
+               document.querySelector('#human-camera').setAttribute("position","-2.2701610252157285 0 2.4709360834056313");
           }
+          // presspass room
           else if (e.keyCode == '50') {
-            document.querySelector('#god-camera').setAttribute("active","true");
-            document.querySelector('#human-camera').setAttribute("active","false");
-            document.querySelector('#main-scene').setAttribute("fog","density",.005);
+               document.querySelector('#human-camera').setAttribute("rotation","-0.3437746770785135 -92.13161345703645 0");
+               document.querySelector('#human-camera').setAttribute("position","6.6146990685869 0 -1.7318656030372355");
           }
+          // story room
+          else if (e.keyCode == '51') {
+            humanMode();
+            document.querySelector('#human-camera').setAttribute("rotation","0.34377467707852 -0.6875493541569095 0");
+            document.querySelector('#human-camera').setAttribute("position","10.055369105611913 0 -6.718526290458131");
+          }
+          // jump to interview room
+         else if (e.keyCode == '52') {
+            humanMode();
+            document.querySelector('#human-camera').setAttribute("rotation","-6.187944187412869 28.533298197515176 0");
+            document.querySelector('#human-camera').setAttribute("position","9.738957843160394 0 -10.163887419790576");
+          }
+          // jump to photo room
+          else if (e.keyCode == '53') {
+            humanMode();
+            document.querySelector('#human-camera').setAttribute("rotation","-8.25059224988383 -25.668509221860692 0");
+            document.querySelector('#human-camera').setAttribute("position","2.526906111888138 0 -20.33886048491035");
+          }
+          // jump to writers room
+         else if (e.keyCode == '54') {
+            humanMode();
+            document.querySelector('#human-camera').setAttribute("rotation","-1.2605071492877804 -125.47775713365013 0");
+            document.querySelector('#human-camera').setAttribute("position","11.53646584872858 0 -29.14691015956221");
+          }
+          // jump to headline room
+         else if (e.keyCode == '55') {
+            humanMode();
+            document.querySelector('#human-camera').setAttribute("rotation","1.6042818263663143 -268.4880227983038 0");
+            document.querySelector('#human-camera').setAttribute("position","17.092953551367632 0 -16.042708445292202");
+          }
+          // jump to analysis room
+         else if (e.keyCode == '56') {
+            humanMode();
+            document.querySelector('#human-camera').setAttribute("rotation","-2.2918311805232854 181.62762105647093 0");
+            document.querySelector('#human-camera').setAttribute("position","16.462211065141506 0 -12.55243682271476");
+          }
+          // jump to public analysis room
+         else if (e.keyCode == '48') {
+            humanMode();
+            document.querySelector('#human-camera').setAttribute("rotation","-3.2085636527326113 -179.22119831692137 0");
+            document.querySelector('#human-camera').setAttribute("position","18.28849168930665 0 -7.979145529918815");
+          }
+
       }
 
       /*
