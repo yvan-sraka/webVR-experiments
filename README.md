@@ -14,9 +14,9 @@ A basic test with cylinder UI.
 Testing a project for IXDS.
 
 ## 4. [ViewPoint](4--viewpoint.html)
-The working model for a class project (IXDS public display).
-**Movement:** `W A S D`
-**God Cam:** `G`
+The working model for a class project (IXDS public display).<br>
+**Movement:** `W A S D`<br>
+**God Cam:** `G`<br>
 **Toggle Click Interactions:** `C`
 
 ## Planned experiments:
