@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"mar",
+				"margin-top"
+			],
+			[
 				"con",
 				"content"
 			],
@@ -67,6 +71,79 @@
 	},
 	"buffers":
 	[
+		{
+			"file": "1--helloworld.html",
+			"settings":
+			{
+				"buffer_size": 2287,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "2--ui.html",
+			"settings":
+			{
+				"buffer_size": 515,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "3--figures-in-space.html",
+			"settings":
+			{
+				"buffer_size": 1111,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "4--viewpoint.html",
+			"settings":
+			{
+				"buffer_size": 18125,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "5--vantage-points.html",
+			"settings":
+			{
+				"buffer_size": 9556,
+				"line_ending": "Unix",
+				"name": "5--vantage-points.html"
+			}
+		},
+		{
+			"file": "README.md",
+			"settings":
+			{
+				"buffer_size": 959,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "index.html",
+			"settings":
+			{
+				"buffer_size": 2331,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "bower.json",
+			"settings":
+			{
+				"buffer_size": 538,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": ".gitignore",
+			"settings":
+			{
+				"buffer_size": 408,
+				"line_ending": "Unix"
+			}
+		}
 	],
 	"build_system": "",
 	"command_palette":
@@ -152,16 +229,17 @@
 	},
 	"file_history":
 	[
-		"/Applications/MAMP/htdocs/webVR-experiments/README.md",
-		"/Applications/MAMP/htdocs/webVR-experiments/index.html",
-		"/Applications/MAMP/htdocs/webVR-experiments/1--helloworld.html",
+		"/Applications/MAMP/htdocs/webVR-experiments/layout.html",
+		"/Applications/MAMP/htdocs/webVR-experiments/Gruntfile.js",
 		"/Applications/MAMP/htdocs/webVR-experiments/.gitignore",
+		"/Applications/MAMP/htdocs/webVR-experiments/bower_components/aframe/index",
+		"/Applications/MAMP/htdocs/webVR-experiments/index.html",
+		"/Applications/MAMP/htdocs/webVR-experiments/README.md",
+		"/Applications/MAMP/htdocs/webVR-experiments/1--helloworld.html",
 		"/Applications/MAMP/htdocs/webVR-experiments/assets/models/cat2.obj",
 		"/Applications/MAMP/htdocs/webVR-experiments/airbnb.obj",
 		"/Applications/MAMP/htdocs/webVR-experiments/bower.json",
-		"/Applications/MAMP/htdocs/webVR-experiments/layout.html",
 		"/Applications/MAMP/htdocs/webVR-experiments/package.json",
-		"/Applications/MAMP/htdocs/webVR-experiments/Gruntfile.js",
 		"/Applications/MAMP/htdocs/webVR-experiments/1 - hello world.html",
 		"/Applications/MAMP/htdocs/webVR-experiments/1 - hello world",
 		"/Users/Andrew/Dropbox/Dasein Design/andrewrocks/andrewrocks/.gitignore",
@@ -278,8 +356,7 @@
 		"/Users/Andrew/Dropbox/Dasein Design/andrewrocks/perch/templates/pages/project.php",
 		"/Users/Andrew/Dropbox/Dasein Design/andrewrocks/backups/andrew/project.php",
 		"/Users/Andrew/Dropbox/Dasein Design/andrewrocks/backups/andrew/projects/index.php",
-		"/Users/Andrew/Dropbox/Dasein Design/andrewrocks/backups/perch/templates/pages/project.php",
-		"/Users/Andrew/Dropbox/Dasein Design/andrewrocks/backups/andrew/index.php"
+		"/Users/Andrew/Dropbox/Dasein Design/andrewrocks/backups/perch/templates/pages/project.php"
 	],
 	"find":
 	{
@@ -305,9 +382,47 @@
 	},
 	"find_state":
 	{
-		"case_sensitive": false,
+		"case_sensitive": true,
 		"find_history":
 		[
+			"muslim",
+			"floor",
+			"src=\"assets/4/X.jpg",
+			"src=\"assets/4/X",
+			"visible=\"false",
+			"visible=\"true",
+			"src=\"\"",
+			"https://dl.dropboxusercontent.com/u/32463552/temp-public-",
+			"ground",
+			"a-image",
+			"assets/",
+			"visible=\"false",
+			"src=\"\"",
+			"</a-image",
+			"src=\"\"",
+			"a-image",
+			"a-plane",
+			"a-image",
+			"a-im",
+			"a-image",
+			"photo",
+			"photos",
+			",",
+			"\"",
+			"@2x",
+			".png",
+			"interviewee-people-b@2x",
+			"hotel",
+			"Event",
+			"event",
+			"Flight",
+			"flight",
+			"Event",
+			"event",
+			"<a-cube position=\"0 0 0\" scale=\"200 .5 200\"></a-cube>",
+			")",
+			"(",
+			"\\(.*\\)",
 			"&quot;img/",
 			"PLAYER 1",
 			"Player 2",
@@ -387,8 +502,244 @@
 	"groups":
 	[
 		{
+			"selected": 4,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "1--helloworld.html",
+					"settings":
+					{
+						"buffer_size": 2287,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								818,
+								440
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 168.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "2--ui.html",
+					"settings":
+					{
+						"buffer_size": 515,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								483,
+								324
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "3--figures-in-space.html",
+					"settings":
+					{
+						"buffer_size": 1111,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								549,
+								720
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "4--viewpoint.html",
+					"settings":
+					{
+						"buffer_size": 18125,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								18125
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "5--vantage-points.html",
+					"settings":
+					{
+						"buffer_size": 9556,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2770,
+								2770
+							]
+						],
+						"settings":
+						{
+							"auto_name": "5--vantage-points.html",
+							"syntax": "Packages/HTML/HTML.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 453.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "README.md",
+					"settings":
+					{
+						"buffer_size": 959,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								531,
+								531
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Markdown/Markdown.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "index.html",
+					"settings":
+					{
+						"buffer_size": 2331,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1315,
+								1315
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "bower.json",
+					"settings":
+					{
+						"buffer_size": 538,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								491,
+								491
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JSON.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": ".gitignore",
+					"settings":
+					{
+						"buffer_size": 408,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								408,
+								408
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
 			]
 		},
 		{
@@ -425,7 +776,7 @@
 		"cols":
 		[
 			0.0,
-			0.752308980465,
+			0.951171875,
 			1.0
 		],
 		"rows":
@@ -672,6 +1023,6 @@
 	"show_open_files": true,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 289.0,
+	"side_bar_width": 229.0,
 	"status_bar_visible": true
 }

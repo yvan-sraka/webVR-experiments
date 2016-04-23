@@ -2,6 +2,8 @@
 
 Everything is built with [A-Frame](https://aframe.io).
 
+**Movement:** `W A S D`
+
 ## 1. [Hello World](1--helloworld.html)
 A basic world with random components. Made while learning A-Frame.
 
@@ -12,7 +14,16 @@ A basic test with cylinder UI.
 Testing a project for IXDS.
 
 ## 4. [ViewPoint](4--viewpoint.html)
-The working model for a class project (IXDS public display).
+The working model for a class project (IXDS public display).<br>
+**Movement:** `W A S D`<br>
+**God Cam:** `G`<br>
+**Toggle Click Interactions:** `C`
+
+## 5. [Missed Connections](5--missed-connections.html) (Work in progress)
+The working model for a class project (IXDS public display).<br>
+**Movement:** `W A S D`<br>
+**God Cam:** `G`<br>
+**Toggle Click Interactions:** `C`
 
 ## Planned experiments:
 - Reading in VR
