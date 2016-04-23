@@ -19,6 +19,12 @@ The working model for a class project (IXDS public display).<br>
 **God Cam:** `G`<br>
 **Toggle Click Interactions:** `C`
 
+## 5. [Missed Connections](5--missed-connections.html) (Work in progress)
+The working model for a class project (IXDS public display).<br>
+**Movement:** `W A S D`<br>
+**God Cam:** `G`<br>
+**Toggle Click Interactions:** `C`
+
 ## Planned experiments:
 - Reading in VR
 - Speech input
