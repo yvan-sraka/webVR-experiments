@@ -20,7 +20,7 @@ The working model for a class project (IXDS public display).<br>
 **Toggle Click Interactions:** `C`
 
 ## 5. [Missed Connections](5--missed-connections.html) (Work in progress)
-The working model for a class project (IXDS public display).<br>
+Prototype for a class project (PUI). Eventually to be made in Swift.<br>
 **Movement:** `W A S D`<br>
 **God Cam:** `G`<br>
 **Toggle Click Interactions:** `C`
