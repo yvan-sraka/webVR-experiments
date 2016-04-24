@@ -27,21 +27,24 @@
 
                135//67.5
          -->
-         <a-mixin id="bldg" geometry="primitive: box; depth: 30; height: 30; width: 30; roughness: 1;"></a-mixin>
+         <a-mixin id="bldg" geometry="primitive: box; depth: 30; height: 30; width: 30" material="roughness: 1; color: #f4f4f4"></a-mixin>
          <a-mixin id="bldg-h-sm" geometry="height: 21"></a-mixin>
          <a-mixin id="bldg-h-lg" geometry="height: 60"></a-mixin>
          <a-mixin id="bldg-w-lg" geometry=" width: 75"></a-mixin>
+         <a-mixin id="notification" geometry="primitive: sphere; radius: 20" material="color: #4CCCE5; opacity: .8"></a-mixin>
+
+         <!-- <a-asset-item id="test-obj" src="assets/5/myDrawing.obj"></a-asset-item> -->
       </a-assets>
 
       <!-- Global Settings -->
       <a-sky color="#111"></a-sky>
       <a-light type="ambient" color="#fff"></a-light>
       <a-light type="directional" color="#fff" position="-1 1 0" intensity="1"></a-light>
-      <a-cube color="#333" position="0 0 0" scale="2000 0 2000"></a-cube>
+      <a-box color="#333745" position="0 -.025 0" scale="2000 .05 2000"></a-box>
       <!-- <a-image height="26" width="33" position="10 0 -9.5" rotation="-90 90 0" src="assets/4/floor-plan.png"></a-image> -->
 
       <!-- Human Camera -->
-      <a-entity position="22.5 0 0">
+      <a-entity position="-22.5 0 0">
          <a-entity position="0 1.6 4">
             <a-camera id="human-camera" wasd-controls-enabled="true" look-controls-enabled="true" active="false">
                <a-entity cursor="fuse: false; maxDistance: 30; timeout: 500"
@@ -55,8 +58,8 @@
       </a-entity>
 
       <!-- God Camera -->
-      <a-entity position="0 150 0" rotation="-90 0 0">
-         <a-camera id="god-camera" wasd-controls-enabled="true" look-controls-enabled="true" active="true">
+      <a-entity position="0 350 0" rotation="-90 0 0">
+         <a-camera id="god-camera" look-controls-enabled="true" active="true" fov="60" wasd-controls="enabled: true; acceleration: 1800; fly: true">
 
             <a-entity cursor="fuse: true; maxDistance: 30; timeout: 500"
                position="0 0 -1"
@@ -68,6 +71,7 @@
       </a-entity>
 
       <!-- City -->
+      <!-- <a-obj-model src="#test-obj"></a-obj-model> -->
       <a-entity id="city">
          <a-entity id="city-block" position="0 0 0" rotation="0 0 0">
             <a-entity mixin="bldg"           position="45 15 0"></a-entity>
@@ -78,6 +82,10 @@
             <a-entity mixin="bldg bldg-w-lg" position="-22.5 15 -45"></a-entity>
             <a-entity mixin="bldg"           position="45 15 -45"></a-entity>
             <a-entity mixin="bldg bldg-h-lg" position="-45 30 45"></a-entity>
+            <a-entity mixin="notification"   position="25 0 0">
+               <a-sphere radius="5"></a-sphere>
+               <a-light type="point" color="#4CCCE5" decay="1" distance="80" intensity=".9" position="0 1 0"></a-light>
+            </a-entity>
          </a-entity>
          <a-entity id="city-block" position="135 0 0" rotation="0 90 0">
             <a-entity mixin="bldg"           position="45 15 0"></a-entity>
@@ -108,6 +116,10 @@
             <a-entity mixin="bldg bldg-w-lg" position="-22.5 15 -45"></a-entity>
             <a-entity mixin="bldg"           position="45 15 -45"></a-entity>
             <a-entity mixin="bldg bldg-h-lg" position="-45 30 45"></a-entity>
+            <a-entity mixin="notification"   position="25 0 0">
+               <a-sphere radius="5"></a-sphere>
+               <a-light type="point" color="#4CCCE5" decay="1" distance="80" intensity=".9" position="0 1 0"></a-light>
+            </a-entity>
          </a-entity>
          <a-entity id="city-block" position="-135 0 0" rotation="0 90 0">
             <a-entity mixin="bldg"           position="45 15 0"></a-entity>
@@ -148,6 +160,10 @@
             <a-entity mixin="bldg bldg-w-lg" position="-22.5 15 -45"></a-entity>
             <a-entity mixin="bldg"           position="45 15 -45"></a-entity>
             <a-entity mixin="bldg bldg-h-lg" position="-45 30 45"></a-entity>
+            <a-entity mixin="notification"   position="25 0 0">
+               <a-sphere radius="5"></a-sphere>
+               <a-light type="point" color="#4CCCE5" decay="1" distance="80" intensity=".9" position="0 1 0"></a-light>
+            </a-entity>
          </a-entity>
          <a-entity id="city-block" position="-135 0 135" rotation="0 180 0">
             <a-entity mixin="bldg"           position="45 15 0"></a-entity>
@@ -160,7 +176,6 @@
             <a-entity mixin="bldg bldg-h-lg" position="-45 30 45"></a-entity>
          </a-entity>
       </a-entity>
-
 
    </a-scene>
 
