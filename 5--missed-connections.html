@@ -30,14 +30,14 @@
          <a-mixin id="bldg-w-lg" geometry=" width: 75"></a-mixin>
          <a-mixin id="notification" geometry="primitive: sphere; radius: 20" material="color: #4CCCE5; opacity: .8"></a-mixin>
 
-         <a-asset-item id="nyc" src="assets/5/nyc-2016.obj"></a-asset-item>
+         <a-asset-item id="nyc" src="assets/5/manhattan+2001.obj"></a-asset-item>
       </a-assets>
 
       <!-- Global Settings -->
       <a-sky color="#111"></a-sky>
-      <!-- <a-light type="ambient" color="#fff" intensity=".1"></a-light>
-      <a-light type="directional" color="#fff" position="-1 1 0" intensity=".1"></a-light> -->
-      <a-image position="0 -.025 0" height="2000" width="2000" rotation="90 0 0" src="/assets/5/ground.png"></a-image>
+      <a-light type="ambient" color="#ccc" intensity=".1"></a-light>
+      <a-light type="directional" color="#ccc" position="-1 1 0" intensity=".1"></a-light>
+      <!-- <a-image position="0 -.025 0" height="2000" width="2000" rotation="90 0 0" src="/assets/5/ground.png"></a-image> -->
       <!-- <a-image height="26" width="33" position="10 0 -9.5" rotation="-90 90 0" src="assets/4/floor-plan.png"></a-image> -->
 
       <!-- Human Camera -->
@@ -56,7 +56,7 @@
 
       <!-- God Camera -->
       <a-entity position="0 350 0" rotation="-90 0 0">
-         <a-camera id="god-camera" look-controls-enabled="true" active="false" fov="60" wasd-controls="enabled: true; acceleration: 1800; fly: true">
+         <a-camera id="god-camera" look-controls-enabled="true" active="false" fov="60" wasd-controls="enabled: true; acceleration: 8000; fly: true">
             <a-entity cursor="fuse: true; maxDistance: 30; timeout: 500"
                position="0 0 -1"
                geometry="primitive: ring"
@@ -176,7 +176,7 @@
       <!-- Human -->
       <a-entity id="human" position="-22.5 0 2" > <!-- look-at="[camera]" -->
          <a-image src="/assets/5/human.png" height="1.6" width="1.6" position="0 0.8 0"></a-image>
-         <a-image src="/assets/5/white-text.png" height="1.6" width="1.6" position="0 1.4 0.2"></a-image>
+         <a-image src="/assets/5/white-text.png" height="1.6" width="1.6" position="0 1.5 0.2"></a-image>
          <a-image src="/assets/5/btn-next.png" height=".5" width=".5" position=".8 1.4 0.3"></a-image>
          <a-image src="/assets/5/btn-back.png" height=".5" width=".5" position="-.8 1.4 0.3"></a-image>
          <a-box height=".3" width=".3" depth=".3" position="0 1.45 0" material="color: #333"></a-box>
