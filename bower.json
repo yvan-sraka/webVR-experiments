@@ -21,6 +21,8 @@
   ],
   "dependencies": {
     "jQuery": "^2.2.1",
-    "aframe": "aframevr/aframe#^0.2.0"
+    "aframe": "aframevr/aframe#^0.2.0",
+    "aframe-layout-component": "ngokevin/aframe-layout-component",
+    "aframe-template-component": "ngokevin/aframe-template-component"
   }
 }
