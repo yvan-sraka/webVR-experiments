@@ -114,7 +114,7 @@
       <!-- Human Camera -->
       <a-entity position="-22.5 0 0">
          <a-entity position="0 1.6 4">
-            <a-camera id="human-camera" wasd-controls-enabled="true" look-controls-enabled="true" active="false">
+            <a-camera id="human-camera" wasd-controls-enabled="true" look-controls-enabled="true" active="true">
                <a-entity cursor="fuse: false; maxDistance: 30; timeout: 500"
                   position="0 0 -1"
                   geometry="primitive: ring"
@@ -127,7 +127,7 @@
 
       <!-- Topographic Camera -->
       <a-entity position="0 2000 0" rotation="-90 0 0">
-         <a-camera id="topology-camera" look-controls-enabled="true" active="true" fov="60" wasd-controls="enabled: true; acceleration: 8000; fly: true">
+         <a-camera id="topology-camera" look-controls-enabled="true" active="false" fov="60" wasd-controls="enabled: true; acceleration: 8000; fly: true">
             <a-entity cursor="fuse: true; maxDistance: 30; timeout: 500"
                position="0 0 -1"
                geometry="primitive: ring"
