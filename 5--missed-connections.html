@@ -3,14 +3,19 @@
 <head>
    <title>5 - Missed Connections</title>
    <script src="bower_components/aframe/dist/aframe-v0.2.0.min.js"></script>
-   <!--
-   <script src="https://aframe.io/releases/latest/aframe.min.js"></script>
- -->
+   <script src="bower_components/aframe-layout-component/dist/aframe-layout-component.min.js"></script>
+   <script src="bower_components/aframe-template-component/dist/aframe-template-component.min.js"></script>
+   <script src="bower_components/aframe-text-component/dist/aframe-text-component.min.js"></script>
 </head>
 <body>
    <!--
    Credits
    -->
+
+   <!-- Scripts that must run before Aframe initializes -->
+   <script type="text/javascript">
+
+   </script>
 
    <a-scene id="main-scene" fog="type: exponential; color: #111; density:.00034">
 
@@ -39,19 +44,35 @@
   <a-entity sound="src: river.mp3"></a-entity>
 
          <a-asset-item id="nyc" src="assets/5/manhattan+2001.obj"></a-asset-item>
+
+         <script id="humans" type="text/x-nunjucks-template">
+            {% for x in range(-2, 2) %}
+               {% for z in range(-2, 2) %}
+                  <a-entity template="src: /assets/5/templates/human.template; type: handlebars"
+                            data-position="{{ x * 5 }} 0 {{ z * 5 }}"></a-entity>
+               {% endfor %}
+            {% endfor %}
+         </script>
+         <script id="notifications" type="text/x-nunjucks-template">
+            {% for x in range(-2, 2) %}
+               {% for z in range(-2, 2) %}
+                  <a-entity template="src: /assets/5/templates/notifications.template; type: handlebars"
+                            data-position="{{ x * 90 }} 0 {{ z * 90 + 40}}"></a-entity>
+               {% endfor %}
+            {% endfor %}
+         </script>
       </a-assets>
 
       <!-- Global Settings -->
       <a-sky color="#111"></a-sky>
       <a-light type="ambient" color="#ccc" intensity=".1"></a-light>
-      <a-light type="directional" color="#ccc" position="-1 1 0" intensity=".1"></a-light>
-      <!-- <a-image position="0 -.025 0" height="2000" width="2000" rotation="90 0 0" src="/assets/5/ground.png"></a-image> -->
-      <!-- <a-image height="26" width="33" position="10 0 -9.5" rotation="-90 90 0" src="assets/4/floor-plan.png"></a-image> -->
+      <a-light type="directional" color="#ccc" position="-1 1 0" intensity=".5"></a-light>
+      <a-image position="0 -.025 0" height="2000" width="2000" rotation="90 0 0" src="/assets/5/ground.png"></a-image>
 
       <!-- Human Camera -->
-      <a-entity position="-22.5 0 0">
+      <a-entity position="0 0 0" id="human-camera-position">
          <a-entity position="0 1.6 4">
-            <a-camera id="human-camera" wasd-controls-enabled="true" look-controls-enabled="true" active="false">
+            <a-camera id="human-camera" wasd-controls-enabled="true" look-controls-enabled="true" active="true">
                <a-entity cursor="fuse: false; maxDistance: 30; timeout: 500"
                   position="0 0 -1"
                   geometry="primitive: ring"
@@ -64,7 +85,7 @@
 
       <!-- Topographic Camera -->
       <a-entity position="0 2000 0" rotation="-90 0 0">
-         <a-camera id="god-camera" look-controls-enabled="true" active="true" fov="60" wasd-controls="enabled: true; acceleration: 8000; fly: true">
+         <a-camera id="topology-camera" look-controls-enabled="true" active="false" fov="60" wasd-controls="enabled: true; acceleration: 8000; fly: true">
             <a-entity cursor="fuse: true; maxDistance: 30; timeout: 500"
                position="0 0 -1"
                geometry="primitive: ring"
@@ -74,166 +95,54 @@
          </a-camera>
       </a-entity>
 
-      <!-- City -->
-      <a-obj-model src="#nyc" position="-300 -1 0">
-         <!-- <a-animation id="running" attribute="position" to="-20 0 0" repeat="indefinite"  direction="alternate"></a-animation> -->
-      </a-obj-model>
-      <a-entity position="40 0 30">
-         <a-sphere mixin="notification"></a-sphere>
-         <a-sphere radius="5"></a-sphere>
-         <!-- <a-box height="5" width="5" depth="5"></a-box> -->
-         <a-light type="point" color="#4CCCE5" decay="1" distance="80" intensity=".6" position="0 1 0"></a-light>
-      </a-entity>
+      <!-- Fake City -->
+      <a-entity template="src: /assets/5/templates/city.template" position="22.5 0 0"></a-entity>
 
-      <!-- <a-entity id="city">
-         <a-entity id="city-block" position="0 0 0" rotation="0 0 0">
-            <a-entity mixin="bldg"           position="45 15 0"></a-entity>
-            <a-entity mixin="bldg bldg-h-sm" position="0 10.5 0"></a-entity>
-            <a-entity mixin="bldg bldg-h-sm" position="0 10.5 45"></a-entity>
-            <a-entity mixin="bldg bldg-h-sm" position="45 10.5 45"></a-entity>
-            <a-entity mixin="bldg"           position="-45 15 0"></a-entity>
-            <a-entity mixin="bldg bldg-w-lg" position="-22.5 15 -45"></a-entity>
-            <a-entity mixin="bldg"           position="45 15 -45"></a-entity>
-            <a-entity mixin="bldg bldg-h-lg" position="-45 30 45"></a-entity>
-            <a-entity mixin="notification"   position="25 0 0">
-               <a-sphere radius="5"></a-sphere>
-               <a-light type="point" color="#4CCCE5" decay="1" distance="80" intensity=".9" position="0 1 0"></a-light>
-            </a-entity>
-         </a-entity>
-         <a-entity id="city-block" position="135 0 0" rotation="0 90 0">
-            <a-entity mixin="bldg"           position="45 15 0"></a-entity>
-            <a-entity mixin="bldg bldg-h-sm" position="0 10.5 0"></a-entity>
-            <a-entity mixin="bldg bldg-h-sm" position="0 10.5 45"></a-entity>
-            <a-entity mixin="bldg bldg-h-sm" position="45 10.5 45"></a-entity>
-            <a-entity mixin="bldg"           position="-45 15 0"></a-entity>
-            <a-entity mixin="bldg bldg-w-lg" position="-22.5 15 -45"></a-entity>
-            <a-entity mixin="bldg"           position="45 15 -45"></a-entity>
-            <a-entity mixin="bldg bldg-h-lg" position="-45 30 45"></a-entity>
-         </a-entity>
-         <a-entity id="city-block" position="0 0 135" rotation="0 0 0">
-            <a-entity mixin="bldg"           position="45 15 0"></a-entity>
-            <a-entity mixin="bldg bldg-h-sm" position="0 10.5 0"></a-entity>
-            <a-entity mixin="bldg bldg-h-sm" position="0 10.5 45"></a-entity>
-            <a-entity mixin="bldg bldg-h-sm" position="45 10.5 45"></a-entity>
-            <a-entity mixin="bldg"           position="-45 15 0"></a-entity>
-            <a-entity mixin="bldg bldg-w-lg" position="-22.5 15 -45"></a-entity>
-            <a-entity mixin="bldg"           position="45 15 -45"></a-entity>
-            <a-entity mixin="bldg bldg-h-lg" position="-45 30 45"></a-entity>
-         </a-entity>
-         <a-entity id="city-block" position="135 0 135" rotation="0 90 0">
-            <a-entity mixin="bldg"           position="45 15 0"></a-entity>
-            <a-entity mixin="bldg bldg-h-sm" position="0 10.5 0"></a-entity>
-            <a-entity mixin="bldg bldg-h-sm" position="0 10.5 45"></a-entity>
-            <a-entity mixin="bldg bldg-h-sm" position="45 10.5 45"></a-entity>
-            <a-entity mixin="bldg"           position="-45 15 0"></a-entity>
-            <a-entity mixin="bldg bldg-w-lg" position="-22.5 15 -45"></a-entity>
-            <a-entity mixin="bldg"           position="45 15 -45"></a-entity>
-            <a-entity mixin="bldg bldg-h-lg" position="-45 30 45"></a-entity>
-            <a-entity mixin="notification"   position="25 0 0">
-               <a-sphere radius="5"></a-sphere>
-               <a-light type="point" color="#4CCCE5" decay="1" distance="80" intensity=".9" position="0 1 0"></a-light>
-            </a-entity>
-         </a-entity>
-         <a-entity id="city-block" position="-135 0 0" rotation="0 90 0">
-            <a-entity mixin="bldg"           position="45 15 0"></a-entity>
-            <a-entity mixin="bldg bldg-h-sm" position="0 10.5 0"></a-entity>
-            <a-entity mixin="bldg bldg-h-sm" position="0 10.5 45"></a-entity>
-            <a-entity mixin="bldg bldg-h-sm" position="45 10.5 45"></a-entity>
-            <a-entity mixin="bldg"           position="-45 15 0"></a-entity>
-            <a-entity mixin="bldg bldg-w-lg" position="-22.5 15 -45"></a-entity>
-            <a-entity mixin="bldg"           position="45 15 -45"></a-entity>
-            <a-entity mixin="bldg bldg-h-lg" position="-45 30 45"></a-entity>
-         </a-entity>
-         <a-entity id="city-block" position="0 0 -135" rotation="0 180 0">
-            <a-entity mixin="bldg"           position="45 15 0"></a-entity>
-            <a-entity mixin="bldg bldg-h-sm" position="0 10.5 0"></a-entity>
-            <a-entity mixin="bldg bldg-h-sm" position="0 10.5 45"></a-entity>
-            <a-entity mixin="bldg bldg-h-sm" position="45 10.5 45"></a-entity>
-            <a-entity mixin="bldg"           position="-45 15 0"></a-entity>
-            <a-entity mixin="bldg bldg-w-lg" position="-22.5 15 -45"></a-entity>
-            <a-entity mixin="bldg"           position="45 15 -45"></a-entity>
-            <a-entity mixin="bldg bldg-h-lg" position="-45 30 45"></a-entity>
-         </a-entity>
-         <a-entity id="city-block" position="-135 0 -135" rotation="0 0 0">
-            <a-entity mixin="bldg"           position="45 15 0"></a-entity>
-            <a-entity mixin="bldg bldg-h-sm" position="0 10.5 0"></a-entity>
-            <a-entity mixin="bldg bldg-h-sm" position="0 10.5 45"></a-entity>
-            <a-entity mixin="bldg bldg-h-sm" position="45 10.5 45"></a-entity>
-            <a-entity mixin="bldg"           position="-45 15 0"></a-entity>
-            <a-entity mixin="bldg bldg-w-lg" position="-22.5 15 -45"></a-entity>
-            <a-entity mixin="bldg"           position="45 15 -45"></a-entity>
-            <a-entity mixin="bldg bldg-h-lg" position="-45 30 45"></a-entity>
-         </a-entity>
-         <a-entity id="city-block" position="135 0 -135" rotation="0 -60 0">
-            <a-entity mixin="bldg"           position="45 15 0"></a-entity>
-            <a-entity mixin="bldg bldg-h-sm" position="0 10.5 0"></a-entity>
-            <a-entity mixin="bldg bldg-h-sm" position="0 10.5 45"></a-entity>
-            <a-entity mixin="bldg bldg-h-sm" position="45 10.5 45"></a-entity>
-            <a-entity mixin="bldg"           position="-45 15 0"></a-entity>
-            <a-entity mixin="bldg bldg-w-lg" position="-22.5 15 -45"></a-entity>
-            <a-entity mixin="bldg"           position="45 15 -45"></a-entity>
-            <a-entity mixin="bldg bldg-h-lg" position="-45 30 45"></a-entity>
-            <a-entity mixin="notification"   position="25 0 0">
-               <a-sphere radius="5"></a-sphere>
-               <a-light type="point" color="#4CCCE5" decay="1" distance="80" intensity=".9" position="0 1 0"></a-light>
-            </a-entity>
-         </a-entity>
-         <a-entity id="city-block" position="-135 0 135" rotation="0 180 0">
-            <a-entity mixin="bldg"           position="45 15 0"></a-entity>
-            <a-entity mixin="bldg bldg-h-sm" position="0 10.5 0"></a-entity>
-            <a-entity mixin="bldg bldg-h-sm" position="0 10.5 45"></a-entity>
-            <a-entity mixin="bldg bldg-h-sm" position="45 10.5 45"></a-entity>
-            <a-entity mixin="bldg"           position="-45 15 0"></a-entity>
-            <a-entity mixin="bldg bldg-w-lg" position="-22.5 15 -45"></a-entity>
-            <a-entity mixin="bldg"           position="45 15 -45"></a-entity>
-            <a-entity mixin="bldg bldg-h-lg" position="-45 30 45"></a-entity>
-         </a-entity>
-      </a-entity> -->
+      <!-- Real City -->
+      <!-- <a-obj-model src="#nyc" position="-300 -1 0"></a-obj-model> -->
 
-      <!-- Human -->
-      <a-entity id="human" position="-22.5 0 2.7" > <!-- look-at="[camera]" -->
-         <a-image src="/assets/5/human.png" height="1.6" width="1.6" position="0 0.8 0"></a-image>
-         <a-image src="/assets/5/white-text.png" height="1.6" width="1.6" position="0 1.5 0.2"></a-image>
-         <a-image src="/assets/5/btn-next.png" height=".5" width=".5" position=" .8 1.4 0.3"></a-image>
-         <a-image src="/assets/5/btn-back.png" height=".5" width=".5" position="-.8 1.4 0.3"></a-image>
-         <a-box height=".3" width=".3" depth=".3" position="0 1.45 0" material="color: #333"></a-box>
-         <!-- <a-animation id="running" attribute="position" to="-20 0 0" repeat="indefinite"></a-animation> -->
-         <!-- <a-image src="/assets/5/human.png" height="1.6" width="1.6" position="0 0.8 0"></a-image> -->
-      </a-entity>
+      <!-- Humans -->
+      <a-entity template="src: #humans"></a-entity>
 
+      <!-- Notifications -->
+      <a-entity template="src: #notifications"></a-entity>
 
    </a-scene>
 
    <script>
       /*
       *
-      * God mode toggle, press 1 to enter human mode, 2 to enter god mode
+      * Topology mode toggle
       *
       */
       document.onkeydown = checkKey;
       var cameramode = "human";
       function humanMode(){
          cameramode = "human";
-         document.querySelector('#god-camera').setAttribute("active","false");
+         document.querySelector('#topology-camera').setAttribute("active","false");
          document.querySelector('#human-camera').setAttribute("active","true");
          // document.querySelector('#main-scene').setAttribute("fog","density",.01);
       }
-      function godMode(){
-         cameramode = "god";
-         document.querySelector('#god-camera').setAttribute("active","true");
+      function topologyMode(){
+         cameramode = "topology";
+         document.querySelector('#topology-camera').setAttribute("active","true");
          document.querySelector('#human-camera').setAttribute("active","false");
          // document.querySelector('#main-scene').setAttribute("fog","density",.007);
       }
+
+      /*
+      Click mode toggle
+      */
       var animationclickmode = false;
       function checkKey(e) {
 
          e = e || window.event;
-         // toggle god mode
+         // toggle topology mode
          if(e.keyCode == '71') { // the letter g
-            if(cameramode == "god"){
+            if(cameramode == "topology"){
                humanMode();
             } else {
-               godMode();
+               topologyMode();
             }
          }
          // toggle click mode
