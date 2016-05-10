@@ -29,15 +29,12 @@
          <a-mixin id="bldg-h-lg" geometry="height: 60"></a-mixin>
          <a-mixin id="bldg-w-lg" geometry=" width: 75"></a-mixin>
          <a-mixin id="notification" geometry="radius: 20; height: 20; width: 20; depth: 20;" material="color: #4CCCE5; opacity: .8"></a-mixin>
-         <a-mixin id="soundcube" geometry="height: 1; width: 1; depth: 1"
-         <audio id="city-sounds" src="city_sounds.mp3">
-         <audio id="melancholy-piano" src="melancholy-piano.mp3">
-         <audio id="rain-sound" src="rain-sound.mp3">
-         <audio id="schindler-music" src="schindler-music.mp3">
-         <audio id="voices-murmur" src="voices-murmur.mp3">
-          </a-assets>
-
-  <a-entity sound="src: river.mp3"></a-entity>
+         <a-mixin id="soundcube" geometry="height: 1; width: 1; depth: 1"></a-mixin>
+         <audio id="city-sounds" src="city_sounds.mp3"></audio>
+         <audio id="melancholy-piano" src="melancholy-piano.mp3"></audio>
+         <audio id="rain-sound" src="rain-sound.mp3"></audio>
+         <audio id="schindler-music" src="schindler-music.mp3"></audio>
+         <audio id="voices-murmur" src="voices-murmur.mp3"></audio>
 
          <a-asset-item id="nyc" src="assets/5/manhattan+2001.obj"></a-asset-item>
       </a-assets>
@@ -73,6 +70,13 @@
                material="color: white; shader: flat">
             </a-entity>
          </a-camera>
+      </a-entity>
+
+
+
+      <!-- Sound Cubes -->
+      <a-entity mixin="soundcube" position="0 2010 0" sound="src: voices-murmur.mp3">
+      <a-entity sound="src: voices-murmur.mp3"></a-entity>
       </a-entity>
 
       <!-- City -->
