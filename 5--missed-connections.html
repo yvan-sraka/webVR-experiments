@@ -243,7 +243,7 @@
          console.log(humansByID);
          $.each(humansByID, function(i, val){
             // console.log(humanText.posts[i].bodyCleaned);
-            $(this).attr('text', "text: " + humanText.posts[i].bodyCleaned)
+            $(this).attr('text', "text: " + humanText.posts[i+1].bodyCleaned)
          })
       }
 
