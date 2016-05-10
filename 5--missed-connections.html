@@ -16,21 +16,19 @@
 
       <!-- Block showing scene until these assets are loaded -->
       <a-assets>
-         <!--
-            Buildings
-               10m/story
-               15m/between buildings (approx 4 12" lanes)
-               10m/width
-
-               135//67.5
-         -->
          <a-mixin id="bldg" geometry="primitive: box; depth: 30; height: 30; width: 30" material="roughness: 1; color: #f4f4f4"></a-mixin>
          <a-mixin id="bldg-h-sm" geometry="height: 21"></a-mixin>
          <a-mixin id="bldg-h-lg" geometry="height: 60"></a-mixin>
          <a-mixin id="bldg-w-lg" geometry=" width: 75"></a-mixin>
          <a-mixin id="notification" geometry="radius: 20; height: 20; width: 20; depth: 20;" material="color: #4CCCE5; opacity: .8"></a-mixin>
 
-         <a-asset-item id="nyc" src="assets/5/manhattan+2001.obj"></a-asset-item>
+         <a-asset-item id="nyc" src="/assets/5/manhattan+2001.obj"></a-asset-item>
+         <a-asset-item id="humanModel" src="/assets/models/maleCasual.dae"></a-asset-item>
+         <a-asset-item id="anotherHumanModel" src="/assets/models/anotherMaleModel.dae"></a-asset-item>
+         <a-asset-item id="femaleModel" src="/assets/models/femaleCasual.dae"></a-asset-item>
+         <!-- <a-asset-item><img id="backBTN" src="/assets/Textures/backBTN.png"></a-asset-item>
+         <a-asset-item><img id="nextBTN" src="/assets/Textures/nextBTN.png"></a-asset-item>
+         <a-asset-item id="colladaMaleModel" src="/assets/models/maleCasual/maleCasual.dae"></a-asset-item> -->
       </a-assets>
 
       <!-- Global Settings -->
@@ -182,13 +180,41 @@
          </a-entity>
       </a-entity> -->
 
-      <!-- Human -->
-      <a-entity id="human" position="-22.5 0 2.7" > <!-- look-at="[camera]" -->
-         <a-image src="/assets/5/human.png" height="1.6" width="1.6" position="0 0.8 0"></a-image>
+      <!-- Human Male Casual -->
+      
+      <a-entity id="model" position="22 0 0">
+        <a-collada-model position="22 0 0" rotation="5 0 0" scale="1.5 1.5 1.5"
+         src="#humanModel"></a-collada-model>
+      </a-entity>
+
+      <!--Another Human Male Casual --
+      <a-entity id="model2" position="18 0 0">
+        <a-collada-model position=" 18 0 0" rotation="0 0 0" scale="1.5 1.5 1.5"
+         src="#anotherHumanModel"></a-collada-model>
+      </a-entity> -->
+      
+      <!--Human Female Casual --
+      <a-entity id="model3" position="16 0 0">
+        <a-collada-model position="16 0 0" rotation="-5 0 0" scale="1.5 1.5 1.5"
+         src="#femaleModel"></a-collada-model>
+      </a-entity> -->
+
+
+         
+         <!--<a-image src="/assets/5/human.png" height="1.6" width="1.6" position="0 0.8 0"></a-image>
          <a-image src="/assets/5/white-text.png" height="1.6" width="1.6" position="0 1.5 0.2"></a-image>
+
          <a-image src="/assets/5/btn-next.png" height=".5" width=".5" position=" .8 1.4 0.3"></a-image>
-         <a-image src="/assets/5/btn-back.png" height=".5" width=".5" position="-.8 1.4 0.3"></a-image>
-         <a-box height=".3" width=".3" depth=".3" position="0 1.45 0" material="color: #333"></a-box>
+         <a-image src="/assets/5/btn-back.png" height=".5" width=".5" position="-.8 1.4 0.3"></a-image> -->
+
+         <!-- Basic box for btn. -->
+         <a-box color="#ccc" depth="2" height="4" width="0.5"></a-box>
+
+         <!-- Textured box. -->
+         <a-box src="#backBTN"></a-box>
+         <a-box height=".3" width=".3" depth=".3" position="0 1.45 0" material="color: #ccc"></a-box> 
+    
+         
          <!-- <a-animation id="running" attribute="position" to="-20 0 0" repeat="indefinite"></a-animation> -->
          <!-- <a-image src="/assets/5/human.png" height="1.6" width="1.6" position="0 0.8 0"></a-image> -->
       </a-entity>
