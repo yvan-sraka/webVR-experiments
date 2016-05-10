@@ -56,7 +56,7 @@
 
       <!-- Topographic Camera -->
       <a-entity position="0 2000 0" rotation="-90 0 0">
-         <a-camera id="god-camera" look-controls-enabled="true" active="true" fov="60" wasd-controls="enabled: true; acceleration: 8000; fly: true">
+         <a-camera id="topology-camera" look-controls-enabled="true" active="true" fov="60" wasd-controls="enabled: true; acceleration: 8000; fly: true">
             <a-entity cursor="fuse: true; maxDistance: 30; timeout: 500"
                position="0 0 -1"
                geometry="primitive: ring"
@@ -96,20 +96,20 @@
    <script>
       /*
       *
-      * God mode toggle, press 1 to enter human mode, 2 to enter god mode
+      * Topology mode toggle
       *
       */
       document.onkeydown = checkKey;
       var cameramode = "human";
       function humanMode(){
          cameramode = "human";
-         document.querySelector('#god-camera').setAttribute("active","false");
+         document.querySelector('#topology-camera').setAttribute("active","false");
          document.querySelector('#human-camera').setAttribute("active","true");
          // document.querySelector('#main-scene').setAttribute("fog","density",.01);
       }
-      function godMode(){
-         cameramode = "god";
-         document.querySelector('#god-camera').setAttribute("active","true");
+      function topologyMode(){
+         cameramode = "topology";
+         document.querySelector('#topology-camera').setAttribute("active","true");
          document.querySelector('#human-camera').setAttribute("active","false");
          // document.querySelector('#main-scene').setAttribute("fog","density",.007);
       }
@@ -117,12 +117,12 @@
       function checkKey(e) {
 
          e = e || window.event;
-         // toggle god mode
+         // toggle topology mode
          if(e.keyCode == '71') { // the letter g
-            if(cameramode == "god"){
+            if(cameramode == "topology"){
                humanMode();
             } else {
-               godMode();
+               topologyMode();
             }
          }
          // toggle click mode
