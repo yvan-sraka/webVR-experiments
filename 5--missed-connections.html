@@ -203,6 +203,9 @@
             document.querySelector('#human-camera').setAttribute("rotation","-3.2085636527326113 -179.22119831692137 0");
             document.querySelector('#human-camera').setAttribute("position","18.28849168930665 0 -7.979145529918815");
           }
+         else if (e.keyCode == '66') {
+            setHumans();
+          }
 
       }
 
@@ -229,6 +232,19 @@
                }
             });
          };
+      }
+
+      /*
+      Set humans up after load with 'b'
+      */
+      function setHumans(){
+         var humansByID = $('.human').find('[text]');
+         var humanText = postData;
+         console.log(humansByID);
+         $.each(humansByID, function(i, val){
+            // console.log(humanText.posts[i].bodyCleaned);
+            $(this).attr('text', "text: " + humanText.posts[i].bodyCleaned)
+         })
       }
 
    </script>
