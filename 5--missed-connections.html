@@ -49,7 +49,7 @@
             {% for x in range(-2, 2) %}
                {% for z in range(-2, 2) %}
                   <a-entity template="src: /assets/5/templates/notifications.template; type: handlebars"
-                            data-position="{{ x * 90 }} 0 {{ z * 90 }}"></a-entity>
+                            data-position="{{ x * 90 }} 0 {{ z * 90 + 40}}"></a-entity>
                {% endfor %}
             {% endfor %}
          </script>
