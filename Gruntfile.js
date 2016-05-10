@@ -1,6 +1,6 @@
 module.exports = function(grunt) {
 
-// Project configuration.
+// Project configuration
 grunt.initConfig({
    pkg: grunt.file.readJSON('package.json'),
    watch: {
@@ -28,7 +28,7 @@ grunt.initConfig({
 grunt.loadNpmTasks('grunt-md2html');
 grunt.loadNpmTasks('grunt-contrib-watch');
 
-// Default task(s).
+// Tasks
 grunt.registerTask('default', ['md2html', 'watch']);
 
 };
