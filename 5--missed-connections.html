@@ -7,7 +7,7 @@
    <script src="bower_components/aframe-template-component/dist/aframe-template-component.min.js"></script>
    <script src="bower_components/aframe-text-component/dist/aframe-text-component.min.js"></script>
    <script src="bower_components/jQuery/dist/jquery.min.js"></script>
-   <script src="/assets/5/data/nyc-data.js"></script>
+   <script src="assets/5/data/nyc-data.js"></script>
 </head>
 <body>
    <!--
@@ -39,20 +39,20 @@
 
          <a-mixin id="font" text="size: .15"></a-mixin>
 
-         <audio id="city_sounds" src="/assets/5/audio/city_sounds.mp3">
-         <audio id="melancholy_piano" src="/assets/5/audio/melancholy_piano.mp3">
-         <audio id="rain_sound" src="/assets/5/audio/rain_sound.mp3">
-         <audio id="schindler_music" src="/assets/5/audio/schindler_music.mp3">
-         <audio id="voices_murmur" src="/assets/5/audio/voicse_murmur.mp3">
+         <audio id="city_sounds" src="assets/5/audio/city_sounds.mp3">
+         <audio id="melancholy_piano" src="assets/5/audio/melancholy_piano.mp3">
+         <audio id="rain_sound" src="assets/5/audio/rain_sound.mp3">
+         <audio id="schindler_music" src="assets/5/audio/schindler_music.mp3">
+         <audio id="voices_murmur" src="assets/5/audio/voicse_murmur.mp3">
 
-         <a-entity sound="src: /assets/5/audio/river.mp3"></a-entity>
+         <a-entity sound="src: assets/5/audio/river.mp3"></a-entity>
 
          <a-asset-item id="nyc" src="assets/5/manhattan+2001.obj"></a-asset-item>
 
          <script id="humans" type="text/x-nunjucks-template">
             {% for x in range(-1, 1) %}
                {% for z in range(-1, 1) %}
-                  <a-entity template="src: /assets/5/templates/human.template; type: handlebars"
+                  <a-entity template="src: assets/5/templates/human.template; type: handlebars"
                             data-position="{{ x * 5 }} 0 {{ z * 5 }}"
                             data-humanID="5"></a-entity>
                {% endfor %}
@@ -61,7 +61,7 @@
          <script id="notifications" type="text/x-nunjucks-template">
             {% for x in range(-2, 2) %}
                {% for z in range(-2, 2) %}
-                  <a-entity template="src: /assets/5/templates/notifications.template; type: handlebars"
+                  <a-entity template="src: assets/5/templates/notifications.template; type: handlebars"
                             data-position="{{ x * 90 }} 0 {{ z * 90 + 40}}"></a-entity>
                {% endfor %}
             {% endfor %}
@@ -72,7 +72,7 @@
       <a-sky color="#111"></a-sky>
       <a-light type="ambient" color="#ccc" intensity=".1"></a-light>
       <a-light type="directional" color="#ccc" position="-1 1 0" intensity=".5"></a-light>
-      <a-image position="0 -.025 0" height="2000" width="2000" rotation="90 0 0" src="/assets/5/ground.png"></a-image>
+      <a-image position="0 -.025 0" height="2000" width="2000" rotation="90 0 0" src="assets/5/ground.png"></a-image>
 
       <!-- Human Camera -->
       <a-entity position="0 0 0" id="human-camera-position">
@@ -101,7 +101,7 @@
       </a-entity>
 
       <!-- Fake City -->
-      <a-entity template="src: /assets/5/templates/city.template" position="22.5 0 0"></a-entity>
+      <a-entity template="src: assets/5/templates/city.template" position="22.5 0 0"></a-entity>
 
       <!-- Real City -->
       <!-- <a-obj-model src="#nyc" position="-300 -1 0"></a-obj-model> -->
