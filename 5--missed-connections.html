@@ -112,6 +112,14 @@
                {% endfor %}
             {% endfor %}
          </script>
+         <script id="notifications" type="text/x-nunjucks-template">
+            {% for x in range(-2, 2) %}
+               {% for z in range(-2, 2) %}
+                  <a-entity template="src: /assets/5/templates/notifications.template; type: handlebars"
+                            data-position="{{ x * 90 }} 0 {{ z * 90 }}"></a-entity>
+               {% endfor %}
+            {% endfor %}
+         </script>
       </a-assets>
 
       <!-- Global Settings -->
@@ -170,6 +178,8 @@
       <a-entity template="src: #humans"></a-entity>
       <a-entity text="text: Missed Connections"></a-entity>
       <!-- <a-entity template="src: #city" data-num="10"></a-entity> -->
+      <!-- Notifications -->
+      <a-entity template="src: #notifications"></a-entity>
 
    </a-scene>
 
