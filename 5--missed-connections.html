@@ -102,6 +102,15 @@
          <a-mixin id="notification" geometry="radius: 20; height: 20; width: 20; depth: 20;" material="color: #4CCCE5; opacity: .8"></a-mixin>
 
          <a-asset-item id="nyc" src="assets/5/manhattan+2001.obj"></a-asset-item>
+
+         <script id="humans" type="text/x-nunjucks-template">
+            {% for x in range(0, 20) %}
+               {% for z in range(0, 20) %}
+                  <a-entity template="src: /assets/5/templates/human.template; type: handlebars"
+                            data-position="{{ x * 5 }} 0 {{ z * 5 }}"></a-entity>
+               {% endfor %}
+            {% endfor %}
+         </script>
       </a-assets>
 
       <!-- Global Settings -->
@@ -159,6 +168,7 @@
       <!-- Humans -->
       <!-- <a-entity template="src: /assets/5/templates/human.template"></a-entity> -->
 
+      <a-entity template="src: #humans"></a-entity>
       <!-- <a-entity template="src: #city" data-num="10"></a-entity> -->
 
    </a-scene>
