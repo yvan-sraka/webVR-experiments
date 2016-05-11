@@ -20,7 +20,10 @@
     "tests"
   ],
   "dependencies": {
-    "jQuery": "^2.2.1",
-    "aframe": "aframevr/aframe#^0.2.0"
+    "jQuery": "^2.2.3",
+    "aframe": "aframevr/aframe#^0.2.0",
+    "aframe-layout-component": "ngokevin/aframe-layout-component",
+    "aframe-template-component": "ngokevin/aframe-template-component",
+    "aframe-text-component": "ngokevin/aframe-text-component"
   }
 }
