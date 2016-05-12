@@ -63,6 +63,16 @@
                {% endfor %}
             {% endfor %}
          </script>
+
+          <script id="rain-sound" type="text/x-nunjucks-template">
+            {% for x in range(-4, 4) %}
+               {% for z in range(-2, 2) %}
+                  <a-entity template="src: assets/5/audio/rain-sound; type: handlebars"
+                            data-position="{{ x * 90 }} 0 {{ z * 90 + 40}}"></a-entity>
+                            <a-entity template="autoplay: true">
+               {% endfor %}
+            {% endfor %}
+         </script>
       </a-assets>
 
       <!-- Global Settings -->
