@@ -185,11 +185,28 @@
             var splitBySpace = humanText.posts[i].bodyCleaned.split(" ");
             console.log(splitBySpace);
             var lineHeight = 0;
-            for (textLine in splitBySpace){
-               $(this).after('<a-entity mixin="font" text="text: ' + splitBySpace[textLine] + '" position="-1 ' + lineHeight + ' 0"></a-entity>');
+            var textLine = 0;
+            while (textLine <= splitBySpace.length){
+               var word1 = splitBySpace[textLine];
+               var word2 = splitBySpace[textLine + 2];
+               var word3 = splitBySpace[textLine + 3];
+               var word4 = splitBySpace[textLine + 4];
+               if(word1 == undefined){
+                  word1 = '';
+               }
+               if(word2 == undefined){
+                  word2 = '';
+               }
+               if(word3 == undefined){
+                  word3 = '';
+               }
+               if(word4 == undefined){
+                  word4 = '';
+               }
+               $(this).after('<a-entity mixin="font" text="text: ' + word1 + ' ' + word2 + ' ' + word3 + ' ' + word4 + '" position="-1 ' + lineHeight + ' 0"></a-entity>');
                lineHeight += .2;
+               textLine += 4;
             }
-
          })
       }
 
