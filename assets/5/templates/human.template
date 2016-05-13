@@ -1,5 +1,8 @@
 <a-entity id="{{ humanID }}" class="human" position="{{ position }}">
-   <a-image src="assets/5/btn-next.png" height=".5" width=".5" position=" .9 1.4 0.3" look-at="[camera]"></a-image>
+   <a-image src="assets/5/btn-next.png" height=".5" width=".5" position=" .9 1.4 0.3" look-at="[camera]">
+      <a-event name="cursor-mouseenter" scale="3 1 1" color="#FFC65D"></a-event>
+      <a-event name="cursor-mouseleave" scale="1 1 1" color="#F16745"></a-event>
+   </a-image>
 
    <!-- Fill with text after load -->
    <a-entity id="human-text-container" position="0 .5 .2" domFlag>
