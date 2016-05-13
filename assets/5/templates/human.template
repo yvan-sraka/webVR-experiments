@@ -1,10 +1,35 @@
-<a-entity id="{{ humanID }}" class="human" position="{{ position }}" domFlag > <!-- -22.5 0 2.7 look-at="[camera]" -->
-   <a-image src="assets/5/human.png" height="1.6" width="1.6" position="0 0.8 0"></a-image>
-   <a-image src="assets/5/white-text.png" height="1.6" width="1.6" position="0 1.5 0.2"></a-image>
+<a-entity id="{{ humanID }}" class="human" position="{{ position }}"> <!-- -22.5 0 2.7 look-at="[camera]" -->
+   <!-- <a-image src="assets/5/human.png" height="1.6" width="1.6" position="0 0.8 0"></a-image> -->
+   <!-- <a-image src="assets/5/white-text.png" height="1.6" width="1.6" position="0 1.5 0.2"></a-image> -->
    <a-image src="assets/5/btn-next.png" height=".5" width=".5" position=" .8 1.4 0.3"></a-image>
    <a-image src="assets/5/btn-back.png" height=".5" width=".5" position="-.8 1.4 0.3"></a-image>
-   <a-box height=".3" width=".3" depth=".3" position="0 1.45 0" material="color: #333"></a-box>
-   <a-entity id="human-text-container">
-      <a-entity id="human-text" text="text: ." mixin="font"></a-entity>
+
+   <!-- Fill with text after load -->
+   <a-entity id="human-text-container" position="0 .5 .2" domFlag>
+      <a-animation attribute="position"
+                   dur="90000000"
+                   fil="forwards"
+                   easing="linear"
+                   to="0 3000 .2"></a-animation>
    </a-entity>
+   <a-entity position='0 0 -.1'>
+      <a-box height=".4" width=".4" depth=".4" rotation="20 10 0" position="0 1.65 0" material="color: #333"></a-box>
+      <a-collada-model position="0 0 -.25" rotation="5 0 0" scale="1 1 1" src="#humanModel"></a-collada-model>
+   </a-entity>
+   <!-- <a-entity id="model" position="22 0 0">
+   <a-collada-model position="22 0 0" rotation="5 0 0" scale="1.5 1.5 1.5"
+   src="#humanModel"></a-collada-model>
+   </a-entity> -->
+
+   <!--Another Human Male Casual
+   <a-entity id="model2" position="18 0 0">
+   <a-collada-model position=" 18 0 0" rotation="0 0 0" scale="1.5 1.5 1.5"
+   src="#anotherHumanModel"></a-collada-model>
+   </a-entity> -->
+
+   <!--Human Female Casual
+   <a-entity id="model3" position="16 0 0">
+   <a-collada-model position="16 0 0" rotation="-5 0 0" scale="1.5 1.5 1.5"
+   src="#femaleModel"></a-collada-model>
+   </a-entity> -->
 </a-entity>
