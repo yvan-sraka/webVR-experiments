@@ -1,5 +1,5 @@
 <a-entity id="{{ humanID }}" class="human" position="{{ position }}">
-   <a-image src="assets/5/btn-next.png" height=".5" width=".5" position=" .8 1.4 0.3" look-at="[camera]"></a-image>
+   <a-image src="assets/5/btn-next.png" height=".5" width=".5" position=" .9 1.4 0.3" look-at="[camera]"></a-image>
 
    <!-- Fill with text after load -->
    <a-entity id="human-text-container" position="0 .5 .2" domFlag>
