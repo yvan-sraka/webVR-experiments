@@ -31,7 +31,7 @@
 
                135//67.5
          -->
-         <a-mixin id="bldg" geometry="primitive: box; depth: 30; height: 30; width: 30" material="roughness: 1; color: #f4f4f4"></a-mixin>
+         <a-mixin id="bldg" geometry="primitive: box; depth: 30; height: 30; width: 30" material="roughness: 1; color: #404045"></a-mixin>
          <a-mixin id="bldg-h-sm" geometry="height: 21"></a-mixin>
          <a-mixin id="bldg-h-lg" geometry="height: 60"></a-mixin>
          <a-mixin id="bldg-w-lg" geometry=" width: 75"></a-mixin>
@@ -46,7 +46,7 @@
          <audio id="rain-sound"        src="assets/5/audio/rain-sound.mp3"></audio>
          <audio id="voices-murmur"     src="assets/5/audio/voices-murmur.mp3"></audio>
 
-         <a-asset-item id="nyc" src="assets/5/manhattan+2001.obj"></a-asset-item>
+         <a-asset-item id="nyc" src="assets/5/manhattan+2001.obj" material="color: #111"></a-asset-item>
 
          <script id="humans" type="text/x-nunjucks-template">
             {% for x in range(-1, 1) %}
