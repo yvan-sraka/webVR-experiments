@@ -184,10 +184,10 @@
          $.each(humanTextContainer, function(i, val){
             var splitBySpace = humanText.posts[i].bodyCleaned.split(" ");
             console.log(splitBySpace);
-            var textLinePosition = 0;
+            var lineHeight = 0;
             for (textLine in splitBySpace){
-               $(this).after('<a-entity mixin="font" text="text: ' + splitBySpace[textLine] + '" position="-1 ' + textLinePosition + ' 0"></a-entity>');
-               textLinePosition += .2;
+               $(this).after('<a-entity mixin="font" text="text: ' + splitBySpace[textLine] + '" position="-1 ' + lineHeight + ' 0"></a-entity>');
+               lineHeight += .2;
             }
 
          })
