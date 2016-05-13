@@ -260,6 +260,20 @@
          $('#human-camera-position').attr('position', newLocation);
       }
 
+      /*
+      Cursor events
+      */
+      var humanID = -1;
+      document.querySelector('#ground').addEventListener('click', function () {
+         this.setAttribute('material', 'color', 'red');
+         console.log('I was clicked!');
+         initializeScene();
+      });
+
+      function initializeScene(){
+         setHumans();
+         goNext();
+      }
 
 
    </script>
