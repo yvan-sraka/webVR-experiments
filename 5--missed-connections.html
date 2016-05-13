@@ -37,11 +37,10 @@
          <a-mixin id="bldg-w-lg" geometry=" width: 75"></a-mixin>
          <a-mixin id="notification" geometry="radius: 20; height: 20; width: 20; depth: 20;" material="color: #4CCCE5; opacity: .8"></a-mixin>
          <a-mixin id="font" text="size: .15"></a-mixin>
-         <a-mixin id="soundcube" geometry="primitive: box; height: .3; width: .3; depth: .3"></a-mixin>
+         <a-mixin id="soundcube" geometry="primitive: box; height: .1; width: .1; depth: .1"></a-mixin>
          <audio id="city-sounds"       src="assets/5/audio/city-sounds.mp3"></audio>
          <audio id="melancholy-piano"  src="assets/5/audio/melancholy-piano.mp3"></audio>
          <audio id="rain-sound"        src="assets/5/audio/rain-sound.mp3"></audio>
-         <audio id="schindler-music"   src="assets/5/audio/schindler-music.mp3"></audio>
          <audio id="voices-murmur"     src="assets/5/audio/voices-murmur.mp3"></audio>
 
          <a-asset-item id="nyc" src="assets/5/manhattan+2001.obj"></a-asset-item>
@@ -67,9 +66,8 @@
           <script id="rain-sound" type="text/x-nunjucks-template">
             {% for x in range(-4, 4) %}
                {% for z in range(-2, 2) %}
-                  <a-entity template="src: assets/5/audio/rain-sound; type: handlebars"
-                            data-position="{{ x * 90 }} 0 {{ z * 90 + 40}}"></a-entity>
-                            <a-entity template="autoplay: true">
+                  <a-entity template="src: assets/5/audio/piano-sound; type: handlebars"
+                            data-position="{{ x * 90 }} 0 {{ z * 90 + 40}}" autoplay: true"></a-entity>
                {% endfor %}
             {% endfor %}
          </script>
@@ -108,7 +106,10 @@
       </a-entity>
 
       <!-- Sound Cubes -->
-      <a-entity mixin="soundcube" position="0 0 0" sound="src: assets/5/audio/voices-murmur.mp3; autoplay: true; loop: true"></a-entity>
+      <a-entity mixin="soundcube" position="0 -1 0" sound="src: assets/5/audio/voices-murmur.mp3; autoplay: true; loop: true"></a-entity>
+      <a-entity mixin="soundcube" position="0 -3 0" sound="src: assets/5/audio/rain-sound.mp3; autoplay: true; loop: true; volume: .15"></a-entity>
+      <a-entity mixin="soundcube" position="10 -3 0" sound="src: assets/5/audio/city-sounds.mp3; autoplay: true; loop: true; volume: .40"></a-entity>
+      <a-entity mixin="soundcube" position="10 -3 0" sound="src: assets/5/audio/melancholy-piano.mp3; autoplay: true; loop: true; volume: .90"></a-entity>
 
       <!-- Fake City -->
       <a-entity template="src: assets/5/templates/city.template" position="22.5 0 0"></a-entity>
