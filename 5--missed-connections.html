@@ -173,8 +173,19 @@
          var humanText = postData;
          console.log(humansByID);
          $.each(humansByID, function(i, val){
+            setHuman(i, humansByID, humanText);
+         })
+      }
+
+      /*
+      Set single human up
+      */
+      function setHuman(humanID, humansByID, humanText){
+         $.each(humansByID, function(i, val){
             // console.log(humanText.posts[i].bodyCleaned);
-            $(this).attr('text', "text: " + humanText.posts[i+1].bodyCleaned)
+            var splitBySpace = humanText.posts[i].bodyCleaned.split(" ");
+            console.log(splitBySpace);
+            $(this).attr('text', "text: " + splitBySpace[3]);
          })
       }
 
