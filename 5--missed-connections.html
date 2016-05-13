@@ -139,6 +139,7 @@
       Click mode toggle
       */
       var animationclickmode = false;
+      var textInit = false;
       function checkKey(e) {
 
          e = e || window.event;
@@ -160,7 +161,10 @@
                document.querySelector('#human-camera').setAttribute("position","-2.2701610252157285 0 2.4709360834056313");
           }
          else if (e.keyCode == '66') {
-            setHumans();
+            if(textInit == false){
+               setHumans();
+               textInit = true;
+            }
           }
 
       }
