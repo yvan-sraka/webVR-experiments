@@ -8,10 +8,6 @@
       <a-entity mixin="bldg bldg-w-lg" position="-22.5 15 -45"></a-entity>
       <a-entity mixin="bldg"           position="45 15 -45"></a-entity>
       <a-entity mixin="bldg bldg-h-lg" position="-45 30 45"></a-entity>
-      <a-entity mixin="notification"   position="25 0 0">
-         <a-sphere radius="5"></a-sphere>
-         <a-light type="point" color="#4CCCE5" decay="1" distance="80" intensity=".9" position="0 1 0"></a-light>
-      </a-entity>
    </a-entity>
    <a-entity id="city-block" position="135 0 0" rotation="0 90 0">
       <a-entity mixin="bldg"           position="45 15 0"></a-entity>
@@ -42,10 +38,6 @@
       <a-entity mixin="bldg bldg-w-lg" position="-22.5 15 -45"></a-entity>
       <a-entity mixin="bldg"           position="45 15 -45"></a-entity>
       <a-entity mixin="bldg bldg-h-lg" position="-45 30 45"></a-entity>
-      <a-entity mixin="notification"   position="25 0 0">
-         <a-sphere radius="5"></a-sphere>
-         <a-light type="point" color="#4CCCE5" decay="1" distance="80" intensity=".9" position="0 1 0"></a-light>
-      </a-entity>
    </a-entity>
    <a-entity id="city-block" position="-135 0 0" rotation="0 90 0">
       <a-entity mixin="bldg"           position="45 15 0"></a-entity>
@@ -86,10 +78,6 @@
       <a-entity mixin="bldg bldg-w-lg" position="-22.5 15 -45"></a-entity>
       <a-entity mixin="bldg"           position="45 15 -45"></a-entity>
       <a-entity mixin="bldg bldg-h-lg" position="-45 30 45"></a-entity>
-      <a-entity mixin="notification"   position="25 0 0">
-         <a-sphere radius="5"></a-sphere>
-         <a-light type="point" color="#4CCCE5" decay="1" distance="80" intensity=".9" position="0 1 0"></a-light>
-      </a-entity>
    </a-entity>
    <a-entity id="city-block" position="-135 0 135" rotation="0 180 0">
       <a-entity mixin="bldg"           position="45 15 0"></a-entity>
