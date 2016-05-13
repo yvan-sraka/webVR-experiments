@@ -4,7 +4,6 @@
    <a-image src="assets/5/btn-next.png" height=".5" width=".5" position=" .8 1.4 0.3"></a-image>
    <a-image src="assets/5/btn-back.png" height=".5" width=".5" position="-.8 1.4 0.3"></a-image>
    <a-box height=".3" width=".3" depth=".3" position="0 1.45 0" material="color: #333"></a-box>
-   <a-entity id="human-text-container">
-      <a-entity id="human-text" text="text: ." mixin="font"></a-entity>
-   </a-entity>
+   <!-- Fill with text after load -->
+   <a-entity id="human-text-container"></a-entity>
 </a-entity>

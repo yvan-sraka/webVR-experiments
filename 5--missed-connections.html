@@ -169,23 +169,21 @@
       Set humans up after load with 'b'
       */
       function setHumans(){
-         var humansByID = $('.human').find('[text]');
+         var humanTextContainer = $('.human').find('#human-text-container');
          var humanText = postData;
-         console.log(humansByID);
-         $.each(humansByID, function(i, val){
-            setHuman(i, humansByID, humanText);
+         console.log(humanTextContainer);
+         $.each(humanTextContainer, function(i, val){
+            setHuman(i, humanTextContainer, humanText);
          })
       }
 
       /*
       Set single human up
       */
-      function setHuman(humanID, humansByID, humanText){
-         $.each(humansByID, function(i, val){
-            // console.log(humanText.posts[i].bodyCleaned);
+      function setHuman(humanID, humanTextContainer, humanText){
+         $.each(humanTextContainer, function(i, val){
             var splitBySpace = humanText.posts[i].bodyCleaned.split(" ");
             console.log(splitBySpace);
-            $(this).attr('text', "text: " + splitBySpace[3]);
             var textLinePosition = 0;
             for (textLine in splitBySpace){
                $(this).after('<a-entity mixin="font" text="text: ' + splitBySpace[textLine] + '" position="-1 ' + textLinePosition + ' 0"></a-entity>');
@@ -194,6 +192,8 @@
 
          })
       }
+
+
 
    </script>
    </body>
