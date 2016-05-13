@@ -241,7 +241,8 @@
                textLine += 5;
             }
             var textContainerHeight = lineHeight * (textLine / 4);
-            $(this).attr('position', '0 ' + textContainerHeight + ' 0')
+            $(this).attr('position', '0 ' + .8 + ' 0');
+            $(this).append('<a-animation attribute="position" dur="90000000" fil="forwards" easing="linear" to="0 3000 .2"></a-animation>')
          })
       }
 
