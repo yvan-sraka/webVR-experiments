@@ -24,6 +24,7 @@
     "aframe": "aframevr/aframe#^0.2.0",
     "aframe-layout-component": "ngokevin/aframe-layout-component",
     "aframe-template-component": "ngokevin/aframe-template-component",
-    "aframe-text-component": "ngokevin/aframe-text-component"
+    "aframe-text-component": "ngokevin/aframe-text-component",
+    "aframe-event-set-component": "ngokevin/aframe-event-set-component"
   }
 }
