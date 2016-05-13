@@ -6,11 +6,7 @@
 
    <!-- Fill with text after load -->
    <a-entity id="human-text-container" position="0 .5 .2" domFlag>
-      <a-animation attribute="position"
-                   dur="90000000"
-                   fil="forwards"
-                   easing="linear"
-                   to="0 3000 .2"></a-animation>
+
    </a-entity>
    <a-entity position='0 0 -.1'>
       <a-box height=".4" width=".4" depth=".4" rotation="20 10 0" position="0 1.65 0" material="color: #333"></a-box>
