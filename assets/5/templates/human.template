@@ -1,7 +1,8 @@
-<a-entity id="{{ humanID }}" class="human" position="{{ position }}">
-   <a-image src="assets/5/btn-next.png" height=".5" width=".5" position=" .9 1.4 0.3" look-at="[camera]">
-      <a-event name="cursor-mouseenter" scale="3 1 1" color="#FFC65D"></a-event>
-      <a-event name="cursor-mouseleave" scale="1 1 1" color="#F16745"></a-event>
+<a-entity class="human" position="{{ position }}">
+   <a-image id="btnNext" src="assets/5/btn-next.png" height=".5" width=".5" position=" .9 1.4 0.3" look-at="[camera]">
+      <!-- <a-event name="cursor-mouseenter" scale="3 1 1" color="#FFC65D"></a-event>
+      <a-event name="cursor-mouseleave" scale="1 1 1" color="#F16745"></a-event> -->
+      <a-animation begin="click" easing="ease-in" attribute="scale" fill="forwards" from="1 1 1" to="2 2 2" dur="1000"></a-animation>
    </a-image>
 
    <!-- Fill with text after load -->
