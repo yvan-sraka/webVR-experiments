@@ -16,14 +16,15 @@ Testing a project for IXDS.
 ## 4. [ViewPoint](4--viewpoint.html)
 The working model for a class project (IXDS public display).<br>
 **Movement:** `W A S D`<br>
-**God Cam:** `G`<br>
+**God Camera:** `G`<br>
 **Toggle Click Interactions:** `C`
 
 ## 5. [Missed Connections](5--missed-connections.html) (Work in progress)
-Prototype for a class project (PUI). Eventually to be made in Swift.<br>
+Prototype for a class project (Programming Usable Interfaces).<br>
+**Selection:** `Gaze`<br>
 **Movement:** `W A S D`<br>
-**God Cam:** `G`<br>
-**Toggle Click Interactions:** `C`
+**Topographic Camera:** `G`<br>
+**Force load text, if it doesn't load:** `B`
 
 ## Planned experiments:
 - Reading in VR
