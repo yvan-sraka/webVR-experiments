@@ -186,6 +186,10 @@
             var splitBySpace = humanText.posts[i].bodyCleaned.split(" ");
             console.log(splitBySpace);
             $(this).attr('text', "text: " + splitBySpace[3]);
+            for (textLine in splitBySpace){
+               $(this).after('<a-entity mixin="font" text="text: ' + splitBySpace[textLine] + '"></a-entity>');
+            }
+
          })
       }
 
