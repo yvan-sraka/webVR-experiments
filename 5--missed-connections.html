@@ -184,7 +184,8 @@
          $.each(humanTextContainer, function(i, val){
             var splitBySpace = humanText.posts[i].bodyCleaned.split(" ");
             console.log(splitBySpace);
-            var lineHeight = 0;
+            var lineHeight = .2;
+            var lineHeightRel = 0;
             var textLine = 0;
             while (textLine <= splitBySpace.length){
                var word1 = splitBySpace[textLine];
@@ -203,8 +204,8 @@
                if(word4 == undefined){
                   word4 = '';
                }
-               $(this).after('<a-entity mixin="font" text="text: ' + word1 + ' ' + word2 + ' ' + word3 + ' ' + word4 + '" position="-1 ' + lineHeight + ' 0"></a-entity>');
-               lineHeight += .2;
+               $(this).append('<a-entity mixin="font" text="text: ' + word1 + ' ' + word2 + ' ' + word3 + ' ' + word4 + '" position="-0.5 ' + lineHeightRel + ' 0"></a-entity>');
+               lineHeightRel -= lineHeight;
                textLine += 4;
             }
          })
