@@ -22,32 +22,35 @@
    <a-scene id="main-scene" fog="type: exponential; color: #111; density:.00034">
 
       <!-- Block showing scene until these assets are loaded -->
-      <a-assets>
-         <a-mixin id="bldg" geometry="primitive: box; depth: 30; height: 30; width: 30" material="roughness: 1; color: #f4f4f4"></a-mixin>
+         <!--
+            Buildings
+               10m/story
+               15m/between buildings (approx 4 12" lanes)
+               10m/width
+
+               135//67.5
+         -->
+         <a-mixin id="bldg" geometry="primitive: box; depth: 30; height: 30; width: 30" material="roughness: 1; color: #404045"></a-mixin>
+
          <a-mixin id="bldg-h-sm" geometry="height: 21"></a-mixin>
          <a-mixin id="bldg-h-lg" geometry="height: 60"></a-mixin>
          <a-mixin id="bldg-w-lg" geometry=" width: 75"></a-mixin>
          <a-mixin id="notification" geometry="radius: 20; height: 20; width: 20; depth: 20;" material="color: #4CCCE5; opacity: .8"></a-mixin>
 
-
          <a-asset-item id="humanModel" src="assets/models/maleCasual.dae"></a-asset-item>
          <a-asset-item id="anotherHumanModel" src="assets/models/anotherMaleModel.dae"></a-asset-item>
          <a-asset-item id="femaleModel" src="assets/models/femaleCasual.dae"></a-asset-item>
-         <!-- <a-asset-item><img id="backBTN" src="/assets/Textures/backBTN.png"></a-asset-item>
-         <a-asset-item><img id="nextBTN" src="/assets/Textures/nextBTN.png"></a-asset-item>
-         <a-asset-item id="colladaMaleModel" src="/assets/models/maleCasual/maleCasual.dae"></a-asset-item> -->
 
-         <a-mixin id="font" text="size: .15"></a-mixin>
+         <a-mixin id="font" text="size: .08; height: .02" material="color: #eee"></a-mixin>
 
-         <audio id="city_sounds" src="assets/5/audio/city_sounds.mp3">
-         <audio id="melancholy_piano" src="assets/5/audio/melancholy_piano.mp3">
-         <audio id="rain_sound" src="assets/5/audio/rain_sound.mp3">
-         <audio id="schindler_music" src="assets/5/audio/schindler_music.mp3">
-         <audio id="voices_murmur" src="assets/5/audio/voicse_murmur.mp3">
+         <a-mixin id="soundcube" ></a-mixin>
+         <!-- for testing soundcubes placement add geometry="primitive: box; height: .5; width: .5; depth: .5"></a-mixin> -->
+         <audio id="city-sounds"       src="assets/5/audio/city-sounds.mp3"></audio>
+         <audio id="melancholy-piano"  src="assets/5/audio/melancholy-piano.mp3"></audio>
+         <audio id="rain-sound"        src="assets/5/audio/rain-sound.mp3"></audio>
+         <audio id="voices-murmur"     src="assets/5/audio/voices-murmur.mp3"></audio>
 
-         <a-entity sound="src: assets/5/audio/river.mp3"></a-entity>
-
-         <a-asset-item id="nyc" src="assets/5/manhattan+2001.obj"></a-asset-item>
+         <a-asset-item id="nyc" src="assets/5/manhattan+2001.obj" material="color: #111"></a-asset-item>
 
          <script id="humans" type="text/x-nunjucks-template">
             {% for x in range(0, 1) %}
@@ -63,6 +66,14 @@
                {% for z in range(-2, 2) %}
                   <a-entity template="src: assets/5/templates/notifications.template; type: handlebars"
                             data-position="{{ x * 90 }} 0 {{ z * 90 + 40}}"></a-entity>
+               {% endfor %}
+            {% endfor %}
+         </script>
+
+          <script id="rain-sound" type="text/x-nunjucks-template">
+            {% for x in range(-4, 4) %}
+               {% for z in range(-2, 2) %}
+                  <a-entity template="src: assets/5/audio/piano-sound.mp3; type: handlebars" data-position="{{ x * 90 }} 0 {{ z * 90 + 40}}" autoplay="true"></a-entity>
                {% endfor %}
             {% endfor %}
          </script>
@@ -100,6 +111,13 @@
             </a-entity>
          </a-camera>
       </a-entity>
+
+      <!-- Sound Cubes -->
+      <a-entity mixin="soundcube" position="0 -1 0" sound="src: assets/5/audio/voices-murmur.mp3; autoplay: true; loop: true"></a-entity>
+      <a-entity mixin="soundcube" position="0 -4.5 0" sound="src: assets/5/audio/rain-sound.mp3; autoplay: true; loop: true; volume: .10"></a-entity>
+      <a-entity mixin="soundcube" position="10 -3 0" sound="src: assets/5/audio/city-sounds.mp3; autoplay: true; loop: true; volume: .40"></a-entity>
+      <a-entity mixin="soundcube" position="10 -3 0" sound="src: assets/5/audio/melancholy-piano.mp3; autoplay: true; loop: true; volume: .90"></a-entity>
+      <a-entity id="skypiano" position="0 2200 0" sound="src: assets/5/audio/melancholy-piano.mp3; autoplay: true; loop: true; volume: 2.10"></a-entity>
 
       <!-- Fake City -->
       <a-entity template="src: assets/5/templates/city.template" position="22.5 0 0"></a-entity>
@@ -140,6 +158,7 @@
       Click mode toggle
       */
       var animationclickmode = false;
+      var textInit = false;
       function checkKey(e) {
 
          e = e || window.event;
@@ -160,96 +179,64 @@
                document.querySelector('#human-camera').setAttribute("rotation","-2.0626480624709576 -404.393611803335 0");
                document.querySelector('#human-camera').setAttribute("position","-2.2701610252157285 0 2.4709360834056313");
           }
-          // presspass room
-          else if (e.keyCode == '50') {
-               document.querySelector('#human-camera').setAttribute("rotation","-0.3437746770785135 -92.13161345703645 0");
-               document.querySelector('#human-camera').setAttribute("position","6.6146990685869 0 -1.7318656030372355");
-          }
-          // story room
-          else if (e.keyCode == '51') {
-            humanMode();
-            document.querySelector('#human-camera').setAttribute("rotation","0.34377467707852 -0.6875493541569095 0");
-            document.querySelector('#human-camera').setAttribute("position","10.055369105611913 0 -6.718526290458131");
-          }
-          // jump to interview room
-         else if (e.keyCode == '52') {
-            humanMode();
-            document.querySelector('#human-camera').setAttribute("rotation","-6.187944187412869 28.533298197515176 0");
-            document.querySelector('#human-camera').setAttribute("position","9.738957843160394 0 -10.163887419790576");
-          }
-          // jump to photo room
-          else if (e.keyCode == '53') {
-            humanMode();
-            document.querySelector('#human-camera').setAttribute("rotation","-8.25059224988383 -25.668509221860692 0");
-            document.querySelector('#human-camera').setAttribute("position","2.526906111888138 0 -20.33886048491035");
-          }
-          // jump to writers room
-         else if (e.keyCode == '54') {
-            humanMode();
-            document.querySelector('#human-camera').setAttribute("rotation","-1.2605071492877804 -125.47775713365013 0");
-            document.querySelector('#human-camera').setAttribute("position","11.53646584872858 0 -29.14691015956221");
-          }
-          // jump to headline room
-         else if (e.keyCode == '55') {
-            humanMode();
-            document.querySelector('#human-camera').setAttribute("rotation","1.6042818263663143 -268.4880227983038 0");
-            document.querySelector('#human-camera').setAttribute("position","17.092953551367632 0 -16.042708445292202");
-          }
-          // jump to analysis room
-         else if (e.keyCode == '56') {
-            humanMode();
-            document.querySelector('#human-camera').setAttribute("rotation","-2.2918311805232854 181.62762105647093 0");
-            document.querySelector('#human-camera').setAttribute("position","16.462211065141506 0 -12.55243682271476");
-          }
-          // jump to public analysis room
-         else if (e.keyCode == '48') {
-            humanMode();
-            document.querySelector('#human-camera').setAttribute("rotation","-3.2085636527326113 -179.22119831692137 0");
-            document.querySelector('#human-camera').setAttribute("position","18.28849168930665 0 -7.979145529918815");
-          }
          else if (e.keyCode == '66') {
-            setHumans();
+            if(textInit == false){
+               setHumans();
+               textInit = true;
+            }
           }
 
-      }
-
-      /*
-      *
-      * Mechanism for toggling between image sources for an asset.
-      * To implement, simply add a comma delimited data-alt-src attribute to any asset, in addition to its src attribute.
-      * The image indicated in the src attribute will load into the VR asset first, followed in succession by
-      * each data-alt-src image. The images are swapped out on mouseup when the cursor is directed at that asset.
-      */
-      var assetswithstates = document.querySelectorAll('[data-alt-src]:not([value=""])');
-      if(assetswithstates && assetswithstates.length){
-         for (var i=0; i<assetswithstates.length; i++) {
-            assetswithstates[i].addEventListener('click', function () {
-               if(animationclickmode){
-                  // get the total number of states, explode the alt-src array string
-                  var srcstates = this.getAttribute("data-alt-src").split(",");
-                  // add the current src to the end of the array
-                  srcstates.push(this.getAttribute("src"));
-                  var newsrc = srcstates.shift(); // remove the first element
-                  // set the new src, add old source and unused sources back to the alt-src array string
-                  this.setAttribute('src', newsrc);
-                  this.setAttribute('data-alt-src',srcstates.join());
-               }
-            });
-         };
       }
 
       /*
       Set humans up after load with 'b'
       */
       function setHumans(){
-         var humansByID = $('.human').find('[text]');
+         var humanTextContainer = $('.human').find('#human-text-container');
          var humanText = postData;
-         console.log(humansByID);
-         $.each(humansByID, function(i, val){
-            // console.log(humanText.posts[i].bodyCleaned);
-            $(this).attr('text', "text: " + humanText.posts[i+1].bodyCleaned)
+         console.log(humanTextContainer);
+         $.each(humanTextContainer, function(i, val){
+            setHuman(i, humanTextContainer, humanText);
          })
       }
+
+      /*
+      Set single human up
+      */
+      function setHuman(humanID, humanTextContainer, humanText){
+         $.each(humanTextContainer, function(i, val){
+            var splitBySpace = humanText.posts[i].bodyCleaned.split(" ");
+            console.log(splitBySpace);
+            var lineHeight = .2;
+            var lineHeightRel = 0;
+            var textLine = 0;
+            while (textLine <= splitBySpace.length){
+               var word1 = splitBySpace[textLine];
+               var word2 = splitBySpace[textLine + 2];
+               var word3 = splitBySpace[textLine + 3];
+               var word4 = splitBySpace[textLine + 4];
+               if(word1 == undefined){
+                  word1 = '';
+               }
+               if(word2 == undefined){
+                  word2 = '';
+               }
+               if(word3 == undefined){
+                  word3 = '';
+               }
+               if(word4 == undefined){
+                  word4 = '';
+               }
+               $(this).append('<a-entity mixin="font" text="text: ' + word1 + ' ' + word2 + ' ' + word3 + ' ' + word4 + '" position="-0.5 ' + lineHeightRel + ' 0"></a-entity>');
+               lineHeightRel -= lineHeight;
+               textLine += 5;
+            }
+            var textContainerHeight = lineHeight * (textLine / 4);
+            $(this).attr('position', '0 ' + textContainerHeight + ' 0')
+         })
+      }
+
+
 
    </script>
    </body>
