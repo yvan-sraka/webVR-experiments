@@ -246,6 +246,15 @@
          })
       }
 
+      function addHumanTemplate(humanID){
+         $('a-scene').append('<a-entity id="nextHuman" position="0 0 0"></a-entity>');
+         $('a-scene #nextHuman').load('assets/5/templates/human.template', function(){
+            $(this).find('.human').attr('position', '1 0 0').attr('id', 'humanNo-' + humanID);
+            setHumans(humanID);
+            moveCamera(humanID);
+         });
+      }
+
 
 
    </script>
