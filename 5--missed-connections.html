@@ -208,6 +208,8 @@
                lineHeightRel -= lineHeight;
                textLine += 4;
             }
+            var textContainerHeight = lineHeight * (textLine / 4);
+            $(this).attr('position', '0 ' + textContainerHeight + ' 0')
          })
       }
 
