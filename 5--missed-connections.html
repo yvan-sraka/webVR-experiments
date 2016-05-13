@@ -275,6 +275,20 @@
          goNext();
       }
 
+      function goNext(){
+         document.querySelector('#btnNext').addEventListener('click', function () {
+            this.setAttribute('material', 'color', 'red');
+            console.log('I was clicked!');
+
+            // removeHuman(humanID);
+
+            humanID++;
+
+            addHumanTemplate(humanID);
+
+         });
+      }
+
 
    </script>
    </body>
