@@ -255,6 +255,11 @@
          });
       }
 
+      function moveCamera(humanID){
+         var newLocation = $('#humanNo-' + humanID).attr('position');
+         $('#human-camera-position').attr('position', newLocation);
+      }
+
 
 
    </script>
