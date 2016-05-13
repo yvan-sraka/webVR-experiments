@@ -7,7 +7,7 @@
    <!-- Fill with text after load -->
    <a-entity id="human-text-container" position="0 .5 .2" domFlag>
       <a-animation attribute="position"
-                   dur="100000000"
+                   dur="90000000"
                    fil="forwards"
                    easing="linear"
                    to="0 3000 .2"></a-animation>
