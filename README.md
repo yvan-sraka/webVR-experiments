@@ -19,7 +19,7 @@ The working model for a class project (IXDS public display).<br>
 **God Camera:** `G`<br>
 **Toggle Click Interactions:** `C`
 
-## 5. [Missed Connections](5--missed-connections.html) (Work in progress)
+## 5. [Missed Connections](5--missed-connections.html)
 Prototype for a class project (Programming Usable Interfaces).<br>
 **Selection:** `Gaze`<br>
 **Movement:** `W A S D`<br>
