@@ -6,6 +6,7 @@
    <script src="bower_components/aframe-layout-component/dist/aframe-layout-component.min.js"></script>
    <script src="bower_components/aframe-template-component/dist/aframe-template-component.min.js"></script>
    <script src="bower_components/aframe-text-component/dist/aframe-text-component.min.js"></script>
+   <script src="bower_components/aframe-event-set-component/dist/aframe-event-set-component.min.js"></script>
    <script src="bower_components/jQuery/dist/jquery.min.js"></script>
    <script src="assets/5/data/nyc-data.js"></script>
 </head>
@@ -16,13 +17,6 @@
 
    <!-- Scripts that must run before Aframe initializes -->
    <script type="text/javascript">
-      // AFRAME.registerComponent('btnNext', {
-      //    dependencies: ['raycaster'],
-
-      //    init: function () {
-      //       this.raycaster = this.el.components.raycaster;
-      //    }
-      // });
    </script>
 
    <a-scene id="main-scene" fog="type: exponential; color: #111; density:.00034">
@@ -57,16 +51,17 @@
          <audio id="voices-murmur"     src="assets/5/audio/voices-murmur.mp3"></audio>
 
          <a-asset-item id="nyc" src="assets/5/manhattan+2001.obj" material="color: #111"></a-asset-item>
-
-         <script id="humans" type="text/x-nunjucks-template">
+         <!--
+         <script id="humans-template" type="text/x-nunjucks-template">
             {% for x in range(0, 1) %}
                {% for z in range(0, 1) %}
                   <a-entity template="src: assets/5/templates/human.template; type: handlebars"
-                            data-position="{{ x * 5 }} 0 {{ z * 5 + 2.7 }}"
-                            data-humanID="5"></a-entity>
+                            data-position="0 0 0"
+                            data-humanID="-1"></a-entity>
                {% endfor %}
             {% endfor %}
          </script>
+          -->
          <script id="notifications" type="text/x-nunjucks-template">
             {% for x in range(-2, 2) %}
                {% for z in range(-2, 2) %}
@@ -90,21 +85,24 @@
       <a-sky color="#111"></a-sky>
       <a-light type="ambient" color="#ccc" intensity=".1"></a-light>
       <a-light type="directional" color="#ccc" position="-1 1 0" intensity=".5"></a-light>
-      <a-image position="0 -.025 0" height="2000" width="2000" rotation="90 0 0" src="assets/5/ground.png"></a-image>
+      <a-image id="ground" position="0 -.025 0" height="2000" width="2000" rotation="90 0 0" src="assets/5/ground.png"></a-image>
 
       <!-- Human Camera -->
       <a-entity position="0 0 0" id="human-camera-position">
-         <a-entity position="0 1.6 4">
+         <a-entity position="0 1.6 1.1">
             <a-camera id="human-camera" wasd-controls-enabled="true" look-controls-enabled="true" active="true">
-               <a-entity cursor="fuse: false; maxDistance: 30; timeout: 500"
+               <a-entity cursor="fuse: true; maxDistance: 5; timeout: 1500"
                   position="0 0 -1"
                   geometry="primitive: ring"
                   scale=".01 .01 .01"
                   material="color: white; shader: flat">
+                  <a-animation begin="click" easing="ease-in" attribute="scale" fill="backwards" from=".005 .005 .005" to=".01 .01 .01"></a-animation>
+                  <a-animation begin="fusing" easing="ease-in" attribute="scale" fill="forwards" from=".01 .01 .01" to=".005 .005 .005"></a-animation>
                </a-entity>
             </a-camera>
          </a-entity>
       </a-entity>
+      <!-- <a-entity id="cameras"></a-entity> -->
 
       <!-- Topographic Camera -->
       <a-entity position="0 2000 0" rotation="-90 0 0">
@@ -126,16 +124,16 @@
       <a-entity id="skypiano" position="0 2200 0" sound="src: assets/5/audio/melancholy-piano.mp3; autoplay: true; loop: true; volume: 2.10"></a-entity>
 
       <!-- Fake City -->
-      <a-entity template="src: assets/5/templates/city.template" position="22.5 0 0"></a-entity>
+      <a-entity id="city-container" template="src: assets/5/templates/city.template" position="22.5 0 0"></a-entity>
 
       <!-- Real City -->
       <!-- <a-obj-model src="#nyc" position="-300 -1 0"></a-obj-model> -->
 
       <!-- Humans -->
-      <a-entity template="src: #humans" id="#humans"></a-entity>
+      <!-- <a-entity template="src: #humans-template" id="humans"></a-entity> -->
 
       <!-- Notifications -->
-      <a-entity template="src: #notifications"></a-entity>
+      <!-- <a-entity template="src: #notifications"></a-entity> -->
 
    </a-scene>
 
@@ -187,7 +185,7 @@
           }
          else if (e.keyCode == '66') {
             if(textInit == false){
-               setHumans();
+               setHuman();
                textInit = true;
             }
           }
@@ -197,51 +195,114 @@
       /*
       Set humans up after load with 'b'
       */
-      function setHumans(){
-         var humanTextContainer = $('.human').find('#human-text-container');
-         var humanText = postData;
-         console.log(humanTextContainer);
-         $.each(humanTextContainer, function(i, val){
-            setHuman(i, humanTextContainer, humanText);
-         })
+      function setHuman(humanID){
+         var $humanTextContainer = $('.human').find('#human-text-container');
+         var humanText = postData.posts[humanID].bodyCleaned;
+         console.log(humanText);
+         var splitBySpace = humanText.split(" ");
+         console.log(splitBySpace);
+         var lineHeight = .2;
+         var lineHeightRel = 0;
+         var textLine = 0;
+         while (textLine <= splitBySpace.length){
+            var word1 = splitBySpace[textLine];
+            var word2 = splitBySpace[textLine + 1];
+            var word3 = splitBySpace[textLine + 2];
+            var word4 = splitBySpace[textLine + 3];
+            if(word1 == undefined){
+               word1 = '';
+            }
+            if(word2 == undefined){
+               word2 = '';
+            }
+            if(word3 == undefined){
+               word3 = '';
+            }
+            if(word4 == undefined){
+               word4 = '';
+            }
+            $humanTextContainer.append('<a-entity mixin="font" text="text: ' + word1 + ' ' + word2 + ' ' + word3 + ' ' + word4 + '" position="-0.5 ' + lineHeightRel + ' 0"></a-entity>');
+            lineHeightRel -= lineHeight;
+            textLine += 4;
+         }
+         var textContainerHeight = lineHeight * (textLine / 4);
+         $humanTextContainer.attr('position', '0 ' + .8 + ' 0');
+         $humanTextContainer.append('<a-animation attribute="position" dur="90000000" fil="forwards" easing="linear" to="0 3000 .2"></a-animation>')
       }
 
       /*
       Set single human up
       */
-      function setHuman(humanID, humanTextContainer, humanText){
-         $.each(humanTextContainer, function(i, val){
-            var splitBySpace = humanText.posts[i].bodyCleaned.split(" ");
-            console.log(splitBySpace);
-            var lineHeight = .2;
-            var lineHeightRel = 0;
-            var textLine = 0;
-            while (textLine <= splitBySpace.length){
-               var word1 = splitBySpace[textLine];
-               var word2 = splitBySpace[textLine + 2];
-               var word3 = splitBySpace[textLine + 3];
-               var word4 = splitBySpace[textLine + 4];
-               if(word1 == undefined){
-                  word1 = '';
-               }
-               if(word2 == undefined){
-                  word2 = '';
-               }
-               if(word3 == undefined){
-                  word3 = '';
-               }
-               if(word4 == undefined){
-                  word4 = '';
-               }
-               $(this).append('<a-entity mixin="font" text="text: ' + word1 + ' ' + word2 + ' ' + word3 + ' ' + word4 + '" position="-0.5 ' + lineHeightRel + ' 0"></a-entity>');
-               lineHeightRel -= lineHeight;
-               textLine += 5;
-            }
-            var textContainerHeight = lineHeight * (textLine / 4);
-            $(this).attr('position', '0 ' + textContainerHeight + ' 0')
-         })
+      // function setHuman(humanID, humanTextContainer, humanText){
+      //    $.each(humanTextContainer, function(i, val){
+
+      //    })
+      // }
+
+      function addHumanTemplate(humanID){
+         var newPosition = {
+            x: getRandomIntInclusive(-200, 200),
+            z: getRandomIntInclusive(-200, 200)
+         }
+         console.log(newPosition);
+         $('a-scene').append('<a-entity id="nextHuman" position="' + newPosition.x + ' 0 ' + newPosition.z + '"></a-entity>');
+         $('a-scene #nextHuman').load('assets/5/templates/human.template', function(){
+            $(this).find('.human').attr('position', '0 0 0').attr('id', 'humanNo-' + humanID);
+            setHuman(humanID);
+            moveCamera(humanID, newPosition);
+         });
       }
 
+      function moveCamera(humanID, newPosition){
+         var newLocation = $('#humanNo-' + humanID).attr('position');
+         console.log(newLocation);
+         $('#human-camera').attr('position', newPosition.x + ' ' + 0 + ' ' + newPosition.z);
+         $('#humanNo-' + humanID + ' #btnNext').on('click', function () {
+            console.log('moveCamera()' + humanID);
+            goNext(humanID);
+         });
+      }
+
+      function removeHuman(humanID){
+         console.log('remove '+ humanID)
+         $('#humanNo-' + humanID).remove();
+      }
+
+      /*
+      Cursor events
+      */
+      var humanID = -1;
+      var initialized = false;
+      document.querySelector('#ground').addEventListener('click', function () {
+
+         if (initialized == false){
+            this.setAttribute('material', 'color', '#eee');
+            console.log('addEventListener');
+            initializeScene(humanID);
+         }
+         initialized = true;
+      });
+
+      function initializeScene(humanID){
+         //setHumans();
+         console.log('initializeScene()' + humanID);
+         goNext(humanID);
+      }
+
+      function goNext(humanID){
+
+            removeHuman(humanID);
+
+            humanID++;
+
+            addHumanTemplate(humanID);
+
+      }
+
+      // Thanks Mozilla
+      function getRandomIntInclusive(min, max) {
+         return Math.floor(Math.random() * (max - min + 1)) + min;
+      }
 
 
    </script>

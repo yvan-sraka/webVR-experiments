@@ -1,19 +1,14 @@
-<a-entity id="{{ humanID }}" class="human" position="{{ position }}">
-   <a-image src="assets/5/btn-next.png" height=".5" width=".5" position=" .9 1.4 0.3" look-at="[camera]">
-      <a-event name="cursor-mouseenter" scale="3 1 1" color="#FFC65D"></a-event>
-      <a-event name="cursor-mouseleave" scale="1 1 1" color="#F16745"></a-event>
+<a-entity class="human" position="{{ position }}">
+   <a-image id="btnNext" src="assets/5/btn-next.png" height=".5" width=".5" position=" .9 1.4 0.3" rotation="10 -20 0">
+      <a-animation begin="click" easing="ease-in" attribute="scale" fill="forwards" from="1 1 1" to="2 2 2" dur="1000"></a-animation>
    </a-image>
 
    <!-- Fill with text after load -->
    <a-entity id="human-text-container" position="0 .5 .2" domFlag>
-      <a-animation attribute="position"
-                   dur="90000000"
-                   fil="forwards"
-                   easing="linear"
-                   to="0 3000 .2"></a-animation>
+
    </a-entity>
-   <a-entity position='0 0 -.1'>
-      <a-box height=".4" width=".4" depth=".4" rotation="20 10 0" position="0 1.65 0" material="color: #333"></a-box>
+   <a-entity position='0 0 -.35'>
+      <a-box height=".4" width=".4" depth=".4" rotation="20 10 0" position=".05 1.65 0" material="color: #333"></a-box>
       <a-collada-model position="0 0 -.25" rotation="5 0 0" scale="1 1 1" src="#humanModel"></a-collada-model>
    </a-entity>
    <!-- <a-entity id="model" position="22 0 0">
