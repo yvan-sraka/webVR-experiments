@@ -51,7 +51,7 @@
          <audio id="voices-murmur"     src="assets/5/audio/voices-murmur.mp3"></audio>
 
          <a-asset-item id="nyc" src="assets/5/manhattan+2001.obj" material="color: #111"></a-asset-item>
-         <!--
+         <!-- Templating engine for the humans
          <script id="humans-template" type="text/x-nunjucks-template">
             {% for x in range(0, 1) %}
                {% for z in range(0, 1) %}
@@ -62,6 +62,8 @@
             {% endfor %}
          </script>
           -->
+
+         <!-- Templating engine for the non-implemented notifications -->
          <script id="notifications" type="text/x-nunjucks-template">
             {% for x in range(-2, 2) %}
                {% for z in range(-2, 2) %}
@@ -71,6 +73,8 @@
             {% endfor %}
          </script>
 
+
+         <!-- Templating engine for the rain -->
           <script id="rain-sound" type="text/x-nunjucks-template">
             {% for x in range(-4, 4) %}
                {% for z in range(-2, 2) %}
@@ -96,13 +100,21 @@
                   geometry="primitive: ring"
                   scale=".01 .01 .01"
                   material="color: white; shader: flat">
+
+                  <!-- Animations for hovering -->
                   <a-animation begin="click" easing="ease-in" attribute="scale" fill="backwards" from=".005 .005 .005" to=".01 .01 .01"></a-animation>
                   <a-animation begin="fusing" easing="ease-in" attribute="scale" fill="forwards" from=".01 .01 .01" to=".005 .005 .005"></a-animation>
+
+                  <!-- Tied the soundcubes to the camera so that they move when we move the camera -->
+                  <a-entity mixin="soundcube" position="0 -1 0" sound="src: assets/5/audio/voices-murmur.mp3; autoplay: true; loop: true"></a-entity>
+                  <a-entity mixin="soundcube" position="0 -4.5 0" sound="src: assets/5/audio/rain-sound.mp3; autoplay: true; loop: true; volume: .10"></a-entity>
+                  <a-entity mixin="soundcube" position="10 -3 0" sound="src: assets/5/audio/city-sounds.mp3; autoplay: true; loop: true; volume: .40"></a-entity>
+                  <a-entity mixin="soundcube" position="10 -3 0" sound="src: assets/5/audio/melancholy-piano.mp3; autoplay: true; loop: true; volume: .90"></a-entity>
+                  <a-entity id="skypiano" position="0 2200 0" sound="src: assets/5/audio/melancholy-piano.mp3; autoplay: true; loop: true; volume: 2.10"></a-entity>
                </a-entity>
             </a-camera>
          </a-entity>
       </a-entity>
-      <!-- <a-entity id="cameras"></a-entity> -->
 
       <!-- Topographic Camera -->
       <a-entity position="0 2000 0" rotation="-90 0 0">
@@ -116,23 +128,17 @@
          </a-camera>
       </a-entity>
 
-      <!-- Sound Cubes -->
-      <a-entity mixin="soundcube" position="0 -1 0" sound="src: assets/5/audio/voices-murmur.mp3; autoplay: true; loop: true"></a-entity>
-      <a-entity mixin="soundcube" position="0 -4.5 0" sound="src: assets/5/audio/rain-sound.mp3; autoplay: true; loop: true; volume: .10"></a-entity>
-      <a-entity mixin="soundcube" position="10 -3 0" sound="src: assets/5/audio/city-sounds.mp3; autoplay: true; loop: true; volume: .40"></a-entity>
-      <a-entity mixin="soundcube" position="10 -3 0" sound="src: assets/5/audio/melancholy-piano.mp3; autoplay: true; loop: true; volume: .90"></a-entity>
-      <a-entity id="skypiano" position="0 2200 0" sound="src: assets/5/audio/melancholy-piano.mp3; autoplay: true; loop: true; volume: 2.10"></a-entity>
 
-      <!-- Fake City -->
+      <!-- Fake City (Better for not crashing mobile)-->
       <a-entity id="city-container" template="src: assets/5/templates/city.template" position="22.5 0 0"></a-entity>
 
-      <!-- Real City -->
+      <!-- Real City (Better for people who like NYC more than a working mobile version)-->
       <!-- <a-obj-model src="#nyc" position="-300 -1 0"></a-obj-model> -->
 
-      <!-- Humans -->
+      <!-- Humans (Code if you want to mess with the human templating engine)-->
       <!-- <a-entity template="src: #humans-template" id="humans"></a-entity> -->
 
-      <!-- Notifications -->
+      <!-- Notifications  (Code if you want to mess with the notifications)-->
       <!-- <a-entity template="src: #notifications"></a-entity> -->
 
    </a-scene>
@@ -140,7 +146,7 @@
    <script>
       /*
       *
-      * Topology mode toggle
+      * Topology mode toggle fns (only implemented for desktop)
       *
       */
       document.onkeydown = checkKey;
@@ -159,9 +165,8 @@
       }
 
       /*
-      Click mode toggle
+      Key checkers
       */
-      var animationclickmode = false;
       var textInit = false;
       function checkKey(e) {
 
@@ -174,15 +179,7 @@
                topologyMode();
             }
          }
-         // toggle click mode
-         if(e.keyCode == '67') { // the letter c
-            animationclickmode = !animationclickmode;
-         }
-         // welcome room
-          else if (e.keyCode == '49') { // key 1
-               document.querySelector('#human-camera').setAttribute("rotation","-2.0626480624709576 -404.393611803335 0");
-               document.querySelector('#human-camera').setAttribute("position","-2.2701610252157285 0 2.4709360834056313");
-          }
+         // reactivate setHuman() // letter b
          else if (e.keyCode == '66') {
             if(textInit == false){
                setHuman();
@@ -193,7 +190,7 @@
       }
 
       /*
-      Set humans up after load with 'b'
+      Activate a human template (text formatting, text init, add animation)
       */
       function setHuman(humanID){
          var $humanTextContainer = $('.human').find('#human-text-container');
@@ -231,14 +228,8 @@
       }
 
       /*
-      Set single human up
+      Add a human template to the scene
       */
-      // function setHuman(humanID, humanTextContainer, humanText){
-      //    $.each(humanTextContainer, function(i, val){
-
-      //    })
-      // }
-
       function addHumanTemplate(humanID){
          var newPosition = {
             x: getRandomIntInclusive(-200, 200),
@@ -253,6 +244,9 @@
          });
       }
 
+      /*
+      Move the camera to a new location
+      */
       function moveCamera(humanID, newPosition){
          var newLocation = $('#humanNo-' + humanID).attr('position');
          console.log(newLocation);
@@ -263,13 +257,16 @@
          });
       }
 
+      /*
+      Remove a human from the scene
+      */
       function removeHuman(humanID){
          console.log('remove '+ humanID)
          $('#humanNo-' + humanID).remove();
       }
 
       /*
-      Cursor events
+      Setup vars and, if the scene has not been initialized, tie the initialization to the ground
       */
       var humanID = -1;
       var initialized = false;
@@ -283,12 +280,18 @@
          initialized = true;
       });
 
+      /*
+      Initialize the scene
+      */
       function initializeScene(humanID){
          //setHumans();
          console.log('initializeScene()' + humanID);
          goNext(humanID);
       }
 
+      /*
+      Process when user wants to go the the next post
+      */
       function goNext(humanID){
 
             removeHuman(humanID);
