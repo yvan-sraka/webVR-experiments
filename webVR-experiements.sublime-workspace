@@ -4,6 +4,102 @@
 		"selected_items":
 		[
 			[
+				"new",
+				"newPosition"
+			],
+			[
+				"get",
+				"getRandomIntInclusive"
+			],
+			[
+				"hua",
+				"humanID"
+			],
+			[
+				"ini",
+				"initialized"
+			],
+			[
+				"add",
+				"addEventListener"
+			],
+			[
+				"l",
+				"lineHeight"
+			],
+			[
+				"hu",
+				"humanID"
+			],
+			[
+				"initial",
+				"initializeScene"
+			],
+			[
+				"human",
+				"humanID"
+			],
+			[
+				"asc",
+				"a-scene"
+			],
+			[
+				"temp",
+				"template"
+			],
+			[
+				"fun",
+				"function"
+			],
+			[
+				"post",
+				"postID"
+			],
+			[
+				"text",
+				"textInit"
+			],
+			[
+				"lin",
+				"lineHeight"
+			],
+			[
+				"line",
+				"lineHeightRel"
+			],
+			[
+				"te",
+				"textLine"
+			],
+			[
+				"tex",
+				"textPosition"
+			],
+			[
+				"split",
+				"splitBySpace"
+			],
+			[
+				"data-",
+				"data-humanID"
+			],
+			[
+				"humans",
+				"humansByID"
+			],
+			[
+				"que",
+				"querySelectorAll"
+			],
+			[
+				"human-",
+				"human-box"
+			],
+			[
+				"set",
+				"setAttribute"
+			],
+			[
 				"mar",
 				"margin-top"
 			],
@@ -20,16 +116,8 @@
 				"print_r"
 			],
 			[
-				"tex",
-				"text-align"
-			],
-			[
 				"font-",
 				"font-variant"
-			],
-			[
-				"text",
-				"text-transform"
 			],
 			[
 				"overflow",
@@ -71,76 +159,23 @@
 	},
 	"buffers":
 	[
-		{
-			"file": "2--ui.html",
-			"settings":
-			{
-				"buffer_size": 515,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "3--figures-in-space.html",
-			"settings":
-			{
-				"buffer_size": 1111,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "4--viewpoint.html",
-			"settings":
-			{
-				"buffer_size": 18125,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "README.md",
-			"settings":
-			{
-				"buffer_size": 1191,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "layout.html",
-			"settings":
-			{
-				"buffer_size": 941,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "5--missed-connections.html",
-			"settings":
-			{
-				"buffer_size": 16233,
-				"line_ending": "Unix",
-				"name": "5--vantage-points.html"
-			}
-		},
-		{
-			"file": "package.json",
-			"settings":
-			{
-				"buffer_size": 766,
-				"line_ending": "Unix"
-			}
-		}
 	],
 	"build_system": "",
 	"command_palette":
 	{
-		"height": 287.0,
+		"height": 127.0,
 		"selected_items":
 		[
 			[
-				"rein",
+				"reind",
 				"Indentation: Reindent Lines"
 			],
 			[
-				"reind",
+				"re",
+				"Indentation: Reindent Lines"
+			],
+			[
+				"rein",
 				"Indentation: Reindent Lines"
 			],
 			[
@@ -184,10 +219,6 @@
 				"Preferences: Settings - Default"
 			],
 			[
-				"re",
-				"Indentation: Reindent Lines"
-			],
-			[
 				"ind",
 				"Preferences: Settings - Default"
 			],
@@ -196,7 +227,7 @@
 				"Indentation: Reindent Lines"
 			]
 		],
-		"width": 575.0
+		"width": 449.0
 	},
 	"console":
 	{
@@ -213,22 +244,35 @@
 	},
 	"file_history":
 	[
+		"/Applications/MAMP/htdocs/webVR-experiments/README.md",
+		"/Applications/MAMP/htdocs/webVR-experiments/assets/5/templates/city.template",
+		"/Applications/MAMP/htdocs/webVR-experiments/assets/5/data/nyc-data.js",
+		"/Applications/MAMP/htdocs/webVR-experiments/assets/5/templates/human.template",
+		"/Applications/MAMP/htdocs/webVR-experiments/5--missed-connections.html",
+		"/Applications/MAMP/htdocs/webVR-experiments/assets/5/models/sketch/IXDS 3.sketch",
+		"/Applications/MAMP/htdocs/webVR-experiments/.gitignore",
+		"/Applications/MAMP/htdocs/webVR-experiments/Gruntfile.js",
+		"/Applications/MAMP/htdocs/webVR-experiments/assets/5/notes.html",
+		"/Applications/MAMP/htdocs/webVR-experiments/assets/5/templates/notifications.template",
+		"/Applications/MAMP/htdocs/webVR-experiments/bower.json",
+		"/Applications/MAMP/htdocs/webVR-experiments/assets/5/data/nyc-data.json",
+		"/Applications/MAMP/htdocs/webVR-experiments/assets/5/data/nyc-data-dirty.csv",
+		"/Applications/MAMP/htdocs/webVR-experiments/ehhhhhhh.html",
+		"/Applications/MAMP/htdocs/webVR-experiments/bower_components/aframe/docs/components/material.md",
+		"/Applications/MAMP/htdocs/webVR-experiments/4--viewpoint.html",
+		"/Applications/MAMP/htdocs/webVR-experiments/3--figures-in-space.html",
+		"/Applications/MAMP/htdocs/webVR-experiments/package.json",
+		"/Applications/MAMP/htdocs/webVR-experiments/layout.html",
+		"/Applications/MAMP/htdocs/webVR-experiments/2--ui.html",
 		"/Users/Andrew/Dropbox/CMU HCII/Gadgets/Gadgets/Homework/hw3 machine learning/ablevsnottargetpointing.arff",
 		"/Users/Andrew/Downloads/acmsiggraph/template.tex",
 		"/Users/Andrew/Downloads/myDrawing (1).obj",
 		"/Users/Andrew/Documents/Print Files/whale-support.obj",
 		"/Applications/MAMP/htdocs/webVR-experiments/index.html",
-		"/Applications/MAMP/htdocs/webVR-experiments/4--viewpoint.html",
-		"/Applications/MAMP/htdocs/webVR-experiments/bower.json",
-		"/Applications/MAMP/htdocs/webVR-experiments/.gitignore",
 		"/Applications/MAMP/htdocs/webVR-experiments/1--helloworld.html",
-		"/Applications/MAMP/htdocs/webVR-experiments/layout.html",
-		"/Applications/MAMP/htdocs/webVR-experiments/Gruntfile.js",
 		"/Applications/MAMP/htdocs/webVR-experiments/bower_components/aframe/index",
-		"/Applications/MAMP/htdocs/webVR-experiments/README.md",
 		"/Applications/MAMP/htdocs/webVR-experiments/assets/models/cat2.obj",
 		"/Applications/MAMP/htdocs/webVR-experiments/airbnb.obj",
-		"/Applications/MAMP/htdocs/webVR-experiments/package.json",
 		"/Applications/MAMP/htdocs/webVR-experiments/1 - hello world.html",
 		"/Applications/MAMP/htdocs/webVR-experiments/1 - hello world",
 		"/Users/Andrew/Dropbox/Dasein Design/andrewrocks/andrewrocks/.gitignore",
@@ -327,20 +371,7 @@
 		"/Applications/MAMP/htdocs/project-init-php/css/less/components/base.less",
 		"/Users/Andrew/Dropbox/Dasein Design/andrewrocks/andrewrocks/includes/README.php",
 		"/Users/Andrew/Dropbox/Dasein Design/andrewrocks/andrewrocks/includes/u-grid.php",
-		"/Applications/MAMP/htdocs/project-init-php/css/less/components/btn.less",
-		"/Applications/MAMP/htdocs/project-init-php/css/less/components/img.less",
-		"/Applications/MAMP/htdocs/project-init-php/css/less/components/nav.less",
-		"/Applications/MAMP/htdocs/project-init-php/css/less/components/typography.less",
-		"/Applications/MAMP/htdocs/project-init-php/css/less/build.less",
-		"/Applications/MAMP/htdocs/project-init-php/css/less/typography.less",
-		"/Users/Andrew/Dropbox/Dasein Design/andrewrocks/andrewrocks/package.json",
-		"/Users/Andrew/Dropbox/Dasein Design/andrewrocks/andrewrocks/andrewrocks.sublime-workspace",
-		"/Users/Andrew/Dropbox/Dasein Design/andrewrocks/andrewrocks/shhhhh-super-duper-secret/admin-redesign-for-a-service-company.php",
-		"/Users/Andrew/Dropbox/Dasein Design/andrewrocks/andrewrocks/shhhhh-super-duper-secret/campaign-management-app.php",
-		"/Users/Andrew/Dropbox/Dasein Design/andrewrocks/andrewrocks/cv/index.php",
-		"/Users/Andrew/Dropbox/Dasein Design/andrewrocks/andrewrocks/perch/core/templates/search/search-result.html",
-		"/Users/Andrew/Library/Application Support/Sublime Text 2/Packages/User/perchsnippets/README.md",
-		"/Users/Andrew/Dropbox/Dasein Design/andrewrocks/andrewrocks/project.php"
+		"/Applications/MAMP/htdocs/project-init-php/css/less/components/btn.less"
 	],
 	"find":
 	{
@@ -366,9 +397,32 @@
 	},
 	"find_state":
 	{
-		"case_sensitive": true,
+		"case_sensitive": false,
 		"find_history":
 		[
+			"male",
+			"cam",
+			"\\n",
+			"setHuman",
+			"\\n",
+			"textLinePosition",
+			"humansByID",
+			"/ass",
+			"mixin",
+			"notification",
+			"2",
+			"data-human",
+			"foo",
+			"#humans",
+			"title-cleaned",
+			"body-cleaned",
+			"\\nhide this posting\\nrestore this posting",
+			"},",
+			"},{",
+			"\",\"",
+			"{",
+			"God",
+			"god",
 			"a-cube",
 			"15",
 			"25",
@@ -489,195 +543,6 @@
 	"groups":
 	[
 		{
-			"selected": 6,
-			"sheets":
-			[
-				{
-					"buffer": 0,
-					"file": "2--ui.html",
-					"settings":
-					{
-						"buffer_size": 515,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								483,
-								324
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML/HTML.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "3--figures-in-space.html",
-					"settings":
-					{
-						"buffer_size": 1111,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								549,
-								720
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML/HTML.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "4--viewpoint.html",
-					"settings":
-					{
-						"buffer_size": 18125,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML/HTML.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "README.md",
-					"settings":
-					{
-						"buffer_size": 1191,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								887,
-								887
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Markdown/Markdown.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "layout.html",
-					"settings":
-					{
-						"buffer_size": 941,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								804,
-								804
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML/HTML.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "5--missed-connections.html",
-					"settings":
-					{
-						"buffer_size": 16233,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2033,
-								2033
-							]
-						],
-						"settings":
-						{
-							"auto_name": "5--vantage-points.html",
-							"syntax": "Packages/HTML/HTML.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 626.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 6,
-					"file": "package.json",
-					"settings":
-					{
-						"buffer_size": 766,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								444,
-								444
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JSON.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				}
-			]
-		},
-		{
 			"sheets":
 			[
 			]
@@ -700,18 +565,11 @@
 				0,
 				1,
 				1
-			],
-			[
-				1,
-				0,
-				2,
-				1
 			]
 		],
 		"cols":
 		[
 			0.0,
-			0.951171875,
 			1.0
 		],
 		"rows":
@@ -734,6 +592,22 @@
 			[
 				"",
 				".gitignore"
+			],
+			[
+				"human",
+				"assets/5/templates/human.template"
+			],
+			[
+				"g",
+				"Gruntfile.js"
+			],
+			[
+				"notif",
+				"assets/5/templates/notifications.template"
+			],
+			[
+				"grunt",
+				"Gruntfile.js"
 			],
 			[
 				"base.l",
@@ -784,10 +658,6 @@
 				"css/less/components/showcase.less"
 			],
 			[
-				"g",
-				"Gruntfile.js"
-			],
-			[
 				"footer",
 				"includes/footer.php"
 			],
@@ -834,10 +704,6 @@
 			[
 				"nav",
 				"andrewrocks/includes/navbar.php"
-			],
-			[
-				"grunt",
-				"andrewrocks/Gruntfile.js"
 			],
 			[
 				"jav",
@@ -954,10 +820,10 @@
 		],
 		"width": 380.0
 	},
-	"show_minimap": true,
+	"show_minimap": false,
 	"show_open_files": true,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 64.0,
+	"side_bar_width": 211.0,
 	"status_bar_visible": true
 }

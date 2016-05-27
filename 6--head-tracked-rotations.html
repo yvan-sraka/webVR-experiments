@@ -1,0 +1,100 @@
+<!doctype html>
+<html>
+<head>
+   <title>6 - Head Tracked Rotations</title>
+   <script src="bower_components/aframe/dist/aframe-v0.2.0.min.js"></script>
+</head>
+<body>
+
+   <a-scene id="main-scene" fog="type: exponential; color: #111; density: .05">
+
+      <!-- Global Settings -->
+      <a-sky color="#111"></a-sky>
+      <a-light type="ambient" color="#333" intensity=".1"></a-light>
+      <a-light type="directional" color="#fff" position="0 0 0" intensity=".5"></a-light>
+      <a-image id="ground" position="0 -.025 0" height="500" width="500" rotation="90 0 0" src="assets/5/ground.png"></a-image>
+
+      <!-- Human Camera -->
+      <a-entity position="0 0 0" id="human-camera-position">
+         <a-entity position="0 1.7 1.1">
+            <a-camera id="human-camera" wasd-controls-enabled="true" look-controls-enabled="true" rotation="1 25 62" active="true">
+               <a-entity position="0 0 -3" rotation="0 0 0" id="target" domFlag>
+                  <a-box position="0 0 0"  rotation="15 20 50"></a-box>
+                  <a-box position="-2 0 0" rotation="15 20 50"></a-box>
+                  <a-box position="2 0 0"  rotation="15 20 50"></a-box>
+               </a-entity>
+            </a-camera>
+         </a-entity>
+      </a-entity>
+
+
+
+   </a-scene>
+
+   <script>
+
+      document.onkeydown = checkKey;
+      var camera = {
+         x: 0,
+         y: 0,
+         z: 0,
+         a: 0,
+         b: 0,
+         c: 0
+      }
+      var target = document.querySelector('#target');
+
+      function checkKey(e) {
+         e = e || window.event;
+         // Check camera attributes
+         if(e.keyCode == '67') { // the letter c
+            setCameraAttributes();
+            console.log(camera);
+         }
+         if(e.keyCode == '86' || e.keyCode == '65' || e.keyCode == '83' || e.keyCode == '68' || e.keyCode == '87'){
+            setCameraAttributes();
+            updateTarget(target, 3);
+         }
+      }
+
+      function setCameraAttributes(){
+
+         var humanCameraPosition = document.querySelector('#human-camera').getAttribute('position');
+         camera.x = humanCameraPosition.x;
+         camera.y = humanCameraPosition.y;
+         camera.z = humanCameraPosition.z;
+
+         var humanCameraRotation = document.querySelector('#human-camera').getAttribute('rotation');
+         camera.a = humanCameraRotation.x;
+         camera.b = humanCameraRotation.y;
+         camera.c = humanCameraRotation.z;
+
+      }
+
+      function updateTarget(target, type){
+         if(type == undefined)
+            type = 1;
+         switch (type){
+            // Move position x
+            case 1:
+               target.setAttribute('position', camera.x + " 0 0");
+               break;
+            // Rotate x
+            case 2:
+               target.setAttribute('rotation', camera.z*60 + " 0 0");
+               break;
+            // Rotate inverse to human camera rotation
+            case 3:
+               target.setAttribute('rotation', -camera.a*5 + " " + -camera.b*3 + " 0");
+               break;
+            default:
+               break;
+         }
+      }
+
+      // Initially set the camera object
+      setCameraAttributes();
+
+   </script>
+   </body>
+</html>
