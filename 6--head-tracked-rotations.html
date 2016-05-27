@@ -6,7 +6,7 @@
 </head>
 <body>
 
-   <a-scene id="main-scene" fog="type: exponential; color: #111; density:.00034">
+   <a-scene id="main-scene" fog="type: exponential; color: #111; density: .05">
 
       <!-- Global Settings -->
       <a-sky color="#111"></a-sky>
@@ -45,21 +45,20 @@
       var target = document.querySelector('#target');
 
       function checkKey(e) {
-
          e = e || window.event;
-         // toggle click mode
+         // Check camera attributes
          if(e.keyCode == '67') { // the letter c
             setCameraAttributes();
             console.log(camera);
          }
-         if(e.keyCode == '67' || e.keyCode == '65' || e.keyCode == '83' || e.keyCode == '68' || e.keyCode == '87'){
+         if(e.keyCode == '86' || e.keyCode == '65' || e.keyCode == '83' || e.keyCode == '68' || e.keyCode == '87'){
             setCameraAttributes();
             updateTarget(target, 3);
          }
       }
 
-
       function setCameraAttributes(){
+
          var humanCameraPosition = document.querySelector('#human-camera').getAttribute('position');
          camera.x = humanCameraPosition.x;
          camera.y = humanCameraPosition.y;
@@ -88,13 +87,12 @@
             case 3:
                target.setAttribute('rotation', -camera.a*5 + " " + -camera.b*3 + " 0");
                break;
-            //
-            case 4:
-
+            default:
+               break;
          }
-
       }
 
+      // Initially set the camera object
       setCameraAttributes();
 
    </script>

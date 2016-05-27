@@ -2,16 +2,17 @@
 
 Everything is built with [A-Frame](https://aframe.io).
 
+## 1. [Hello World](1--helloworld.html)
+A basic world with random components. Made while learning A-Frame.<br>
 **Movement:** `W A S D`
 
-## 1. [Hello World](1--helloworld.html)
-A basic world with random components. Made while learning A-Frame.
-
 ## 2. [UI Test](2--ui.html)
-A basic test with cylinder UI.
+A basic test with cylinder UI.<br>
+**Movement:** `W A S D`
 
 ## 3. [Figures in Space](3--figures-in-space.html)
-Testing a project for IXDS.
+Testing a project for IXDS.<br>
+**Movement:** `W A S D`
 
 ## 4. [ViewPoint](4--viewpoint.html)
 The working model for a class project (IXDS public display).<br>
@@ -30,7 +31,8 @@ Prototype for a class project (Programming Usable Interfaces).<br>
 For headsets without position tracking (e.g. Google Cardboard), how can we allow position-esque movement? In this experiment, the blocks rotate inversely to the camera's rotation.<br>
 **Block Rotation:** `Head Rotation`<br>
 **Movement:** `W A S D`<br>
-**Force Block Update:** Hold `C` (temporary measure)<br>
+**Force Block Update:** Hold `V` (temporary measure)<br>
+**console.log(Camera Attributes):** `C`
 
 ## Planned experiments:
 - Reading in VR
