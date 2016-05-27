@@ -26,6 +26,12 @@ Prototype for a class project (Programming Usable Interfaces).<br>
 **Topographic Camera:** `G`<br>
 **Force load text, if it doesn't load:** `B`
 
+## 6. [Head Tracked Rotations](6--head-tracked-rotations.html)
+For headsets without position tracking (e.g. Google Cardboard), how can we allow position-esque movement? In this experiment, the blocks rotate inversely to the camera's rotation.<br>
+**Block Rotation:** `Head Rotation`<br>
+**Movement:** `W A S D`<br>
+**Force Block Update:** Hold `C` (temporary measure)<br>
+
 ## Planned experiments:
 - Reading in VR
 - Speech input
