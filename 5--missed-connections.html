@@ -19,9 +19,10 @@
    <script type="text/javascript">
    </script>
 
-   <a-scene id="main-scene" fog="type: exponential; color: #111; density:.00034">
+   <a-scene id="main-scene" fog="type: exponential; color: #111; density:.005">
 
       <!-- Block showing scene until these assets are loaded -->
+      <a-assets>
          <!--
             Buildings
                10m/story
@@ -38,8 +39,8 @@
          <a-mixin id="notification" geometry="radius: 20; height: 20; width: 20; depth: 20;" material="color: #4CCCE5; opacity: .8"></a-mixin>
 
          <a-asset-item id="humanModel" src="assets/5/models/maleCasual.dae"></a-asset-item>
-         <a-asset-item id="anotherHumanModel" src="assets/5/models/anotherMaleModel.dae"></a-asset-item>
-         <a-asset-item id="femaleModel" src="assets/5/models/femaleCasual.dae"></a-asset-item>
+         <!-- <a-asset-item id="anotherHumanModel" src="assets/5/models/anotherMaleModel.dae"></a-asset-item> -->
+         <!-- <a-asset-item id="femaleModel" src="assets/5/models/femaleCasual.dae"></a-asset-item> -->
 
          <a-mixin id="font" text="size: .08; height: .02" material="color: #eee"></a-mixin>
 
@@ -50,7 +51,7 @@
          <audio id="rain-sound"        src="assets/5/audio/rain-sound.mp3"></audio>
          <audio id="voices-murmur"     src="assets/5/audio/voices-murmur.mp3"></audio>
 
-         <a-asset-item id="nyc" src="assets/5/manhattan+2001.obj" material="color: #111"></a-asset-item>
+         <!-- <a-asset-item id="nyc" src="assets/5/manhattan+2001.obj" material="color: #111"></a-asset-item> -->
          <!-- Templating engine for the humans
          <script id="humans-template" type="text/x-nunjucks-template">
             {% for x in range(0, 1) %}
@@ -88,8 +89,8 @@
       <!-- Global Settings -->
       <a-sky color="#111"></a-sky>
       <a-light type="ambient" color="#ccc" intensity=".1"></a-light>
-      <a-light type="directional" color="#ccc" position="-1 1 0" intensity=".5"></a-light>
-      <a-image id="ground" position="0 -.025 0" height="2000" width="2000" rotation="90 0 0" src="assets/5/ground.png"></a-image>
+      <a-light type="directional" color="#ccc" position="1 1 0" intensity=".5"></a-light>
+      <a-image id="ground" position="0 -.025 0" height="500" width="500" rotation="90 0 0" src="assets/5/ground.png"></a-image>
 
       <!-- Human Camera -->
       <a-entity position="0 0 0" id="human-camera-position">
@@ -117,7 +118,7 @@
       </a-entity>
 
       <!-- Topographic Camera -->
-      <a-entity position="0 2000 0" rotation="-90 0 0">
+      <a-entity position="0 400 0" rotation="-90 0 0">
          <a-camera id="topology-camera" look-controls-enabled="true" active="false" fov="60" wasd-controls="enabled: true; acceleration: 8000; fly: true">
             <a-entity cursor="fuse: true; maxDistance: 30; timeout: 500"
                position="0 0 -1"
@@ -127,7 +128,6 @@
             </a-entity>
          </a-camera>
       </a-entity>
-
 
       <!-- Fake City (Better for not crashing mobile)-->
       <a-entity id="city-container" template="src: assets/5/templates/city.template" position="22.5 0 0"></a-entity>
@@ -150,18 +150,46 @@
       *
       */
       document.onkeydown = checkKey;
+
+      /*
+      Setup vars and, if the scene has not been initialized, tie the initialization to the ground
+      */
+      var humanID = -1;
+      var initialized = false;
+      var scene = {
+         el: document.querySelector('a-scene'),
+         fog: document.querySelector('a-scene').getAttribute('fog').density
+      };
+      scene.el.addEventListener('loaded', function(){
+         initializeScene(humanID);
+      });
+
+      /*
+      Initialize the scene
+      */
+      function initializeScene(humanID){
+         //setHumans();
+         console.log('initializeScene()' + humanID);
+         goNext(humanID);
+      }
+
       var cameramode = "human";
+      var cameras = {
+         human: document.querySelector('#human-camera'),
+         topology: document.querySelector('#topology-camera')
+      }
+
       function humanMode(){
          cameramode = "human";
-         document.querySelector('#topology-camera').setAttribute("active","false");
-         document.querySelector('#human-camera').setAttribute("active","true");
-         // document.querySelector('#main-scene').setAttribute("fog","density",.01);
+         cameras.topology.setAttribute("active","false");
+         cameras.human.setAttribute("active","true");
+         scene.el.setAttribute("fog", "density", scene.fog);
       }
       function topologyMode(){
          cameramode = "topology";
          document.querySelector('#topology-camera').setAttribute("active","true");
          document.querySelector('#human-camera').setAttribute("active","false");
-         // document.querySelector('#main-scene').setAttribute("fog","density",.007);
+         scene.el.setAttribute("fog", "density", 0);
       }
 
       /*
@@ -224,7 +252,7 @@
          }
          var textContainerHeight = lineHeight * (textLine / 4);
          $humanTextContainer.attr('position', '0 ' + .8 + ' 0');
-         $humanTextContainer.append('<a-animation attribute="position" dur="90000000" fil="forwards" easing="linear" to="0 3000 .2"></a-animation>')
+         $humanTextContainer.append('<a-animation attribute="position" dur="90000000" fil="forwards" easing="linear" to="0 3000 .2"></a-animation>');
       }
 
       /*
@@ -232,14 +260,15 @@
       */
       function addHumanTemplate(humanID){
          var newPosition = {
-            x: getRandomIntInclusive(-200, 200),
-            z: getRandomIntInclusive(-200, 200)
+            x: getRandomIntInclusive(-120, 120),
+            z: getRandomIntInclusive(-120, 120)
          }
          console.log(newPosition);
          $('a-scene').append('<a-entity id="nextHuman" position="' + newPosition.x + ' 0 ' + newPosition.z + '"></a-entity>');
          $('a-scene #nextHuman').load('assets/5/templates/human.template', function(){
             $(this).find('.human').attr('position', '0 0 0').attr('id', 'humanNo-' + humanID);
             setHuman(humanID);
+
             moveCamera(humanID, newPosition);
          });
       }
@@ -261,32 +290,7 @@
       Remove a human from the scene
       */
       function removeHuman(humanID){
-         console.log('remove '+ humanID)
-         $('#humanNo-' + humanID).remove();
-      }
-
-      /*
-      Setup vars and, if the scene has not been initialized, tie the initialization to the ground
-      */
-      var humanID = -1;
-      var initialized = false;
-      document.querySelector('#ground').addEventListener('click', function () {
-
-         if (initialized == false){
-            this.setAttribute('material', 'color', '#eee');
-            console.log('addEventListener');
-            initializeScene(humanID);
-         }
-         initialized = true;
-      });
-
-      /*
-      Initialize the scene
-      */
-      function initializeScene(humanID){
-         //setHumans();
-         console.log('initializeScene()' + humanID);
-         goNext(humanID);
+         $('#humanNo-' + humanID).parent().remove();
       }
 
       /*
@@ -296,7 +300,7 @@
 
             removeHuman(humanID);
 
-            humanID++;
+            humanID = getRandomIntInclusive(1, 100);
 
             addHumanTemplate(humanID);
 
