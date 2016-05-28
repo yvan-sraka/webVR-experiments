@@ -48,6 +48,19 @@
       scene.addEventListener('loaded', function(){
          // Initially set the camera object
          setCameraAttributes();
+         var observer = new MutationObserver(function(mutations){
+            mutations.forEach(function(mutation){
+               setCameraAttributes();
+               updateTarget(target);
+            });
+         });
+
+         var observerConfig = {
+            attributes:    true,
+            childList:     true,
+            characterData: true
+         }
+         observer.observe(camera.el, observerConfig);
       });
 
       var camera = {
