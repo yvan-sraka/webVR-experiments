@@ -44,6 +44,11 @@
    </a-scene>
 
    <script>
+      var scene = document.querySelector('a-scene');
+      scene.addEventListener('loaded', function(){
+         // Initially set the camera object
+         setCameraAttributes();
+      });
 
       var camera = {
          x: 0,
