@@ -84,7 +84,7 @@
          }
          if(e.keyCode == '86' || e.keyCode == '65' || e.keyCode == '83' || e.keyCode == '68' || e.keyCode == '87'){
             setCameraAttributes();
-            updateTarget(target, 3);
+            updateTarget(target);
          }
       }
 
@@ -102,9 +102,13 @@
 
       }
 
+      function cameraRotation(camera, cameraScalar){
+         return camera.a*cameraScalar[0] + " " + camera.b*cameraScalar[1] + " " + camera.c*cameraScalar[2];
+      }
+
       function updateTarget(target, type){
          if(type == undefined)
-            type = 1;
+            type = 4;
          switch (type){
             // Move position x
             case 1:
@@ -116,8 +120,10 @@
                break;
             // Rotate inverse to human camera rotation
             case 3:
-               target.setAttribute('rotation', -camera.a*5 + " " + -camera.b*3 + " 0");
+               target.setAttribute('rotation', cameraRotation(camera, [1, 1, 1]));
                break;
+            case 4:
+               target.setAttribute('rotation', cameraRotation(camera, [-4, -2, 1]));
             default:
                break;
          }
