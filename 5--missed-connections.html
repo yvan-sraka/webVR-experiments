@@ -291,8 +291,7 @@
       Remove a human from the scene
       */
       function removeHuman(humanID){
-         console.log('remove '+ humanID)
-         $('#humanNo-' + humanID).remove();
+         $('#humanNo-' + humanID).parent().remove();
       }
 
       /*
