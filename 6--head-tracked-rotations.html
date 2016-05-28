@@ -6,35 +6,65 @@
 </head>
 <body>
 
-   <a-scene id="main-scene" fog="type: exponential; color: #111; density: .05">
+   <a-scene id="main-scene" fog="type: exponential; color: #d81159; density: .05">
+
+      <!--
+         Dark Blue:  006ba6
+         Blue:       0496ff
+         Yellow:     ffbc42
+         Pink:       d81159
+         Plum:       8f2d56
+      -->
+
+      <a-assets>
+         <a-mixin id="box" material="color: #0496ff" geometry="height: .3; width: .3; depth: .3"></a-mixin>
+         <a-mixin id="torus" material="color: #ffbc42" geometry="radius: .05; radius-tubular: .01"></a-mixin>
+      </a-assets>
 
       <!-- Global Settings -->
-      <a-sky color="#111"></a-sky>
-      <a-light type="ambient" color="#333" intensity=".1"></a-light>
+      <a-sky color="#d81159"></a-sky>
+      <a-light type="ambient" color="#fff" intensity=".1"></a-light>
       <a-light type="directional" color="#fff" position="0 0 0" intensity=".5"></a-light>
-      <a-image id="ground" position="0 -.025 0" height="500" width="500" rotation="90 0 0" src="assets/5/ground.png"></a-image>
+      <a-image id="ground" position="0 -.025 0" height="300" width="300" rotation="90 0 0" src="assets/5/ground.png"></a-image>
 
       <!-- Human Camera -->
       <a-entity position="0 0 0" id="human-camera-position">
          <a-entity position="0 1.7 1.1">
             <a-camera id="human-camera" wasd-controls-enabled="true" look-controls-enabled="true" rotation="1 25 62" active="true">
-               <a-entity position="0 0 -3" rotation="0 0 0" id="target" domFlag>
-                  <a-box position="0 0 0"  rotation="15 20 50"></a-box>
-                  <a-box position="-2 0 0" rotation="15 20 50"></a-box>
-                  <a-box position="2 0 0"  rotation="15 20 50"></a-box>
+               <a-entity position="0 0 -1.4" rotation="0 0 0" id="target" domFlag>
+                  <a-box mixin="box" position="0 0 0"  rotation="15 20 50"></a-box>
+                  <a-box mixin="box" position="-.6 0 0" rotation="15 20 50"></a-box>
+                  <a-box mixin="box" position=".6 0 0"  rotation="15 20 50"></a-box>
+                  <a-torus mixin="torus" position="0 0 -.23"></a-torus>
                </a-entity>
             </a-camera>
          </a-entity>
       </a-entity>
 
-
-
    </a-scene>
 
    <script>
+      var scene = document.querySelector('a-scene');
+      scene.addEventListener('loaded', function(){
+         // Initially set the camera object
+         setCameraAttributes();
+         var observer = new MutationObserver(function(mutations){
+            mutations.forEach(function(mutation){
+               setCameraAttributes();
+               updateTarget(target);
+            });
+         });
 
-      document.onkeydown = checkKey;
+         var observerConfig = {
+            attributes:    true,
+            childList:     true,
+            characterData: true
+         }
+         observer.observe(camera.el, observerConfig);
+      });
+
       var camera = {
+         el: document.querySelector('#human-camera'),
          x: 0,
          y: 0,
          z: 0,
@@ -44,6 +74,7 @@
       }
       var target = document.querySelector('#target');
 
+      document.onkeydown = checkKey;
       function checkKey(e) {
          e = e || window.event;
          // Check camera attributes
@@ -53,27 +84,31 @@
          }
          if(e.keyCode == '86' || e.keyCode == '65' || e.keyCode == '83' || e.keyCode == '68' || e.keyCode == '87'){
             setCameraAttributes();
-            updateTarget(target, 3);
+            updateTarget(target);
          }
       }
 
       function setCameraAttributes(){
 
-         var humanCameraPosition = document.querySelector('#human-camera').getAttribute('position');
+         var humanCameraPosition = camera.el.getAttribute('position');
          camera.x = humanCameraPosition.x;
          camera.y = humanCameraPosition.y;
          camera.z = humanCameraPosition.z;
 
-         var humanCameraRotation = document.querySelector('#human-camera').getAttribute('rotation');
+         var humanCameraRotation = camera.el.getAttribute('rotation');
          camera.a = humanCameraRotation.x;
          camera.b = humanCameraRotation.y;
          camera.c = humanCameraRotation.z;
 
       }
 
+      function cameraRotation(camera, cameraScalar){
+         return camera.a*cameraScalar[0] + " " + camera.b*cameraScalar[1] + " " + camera.c*cameraScalar[2];
+      }
+
       function updateTarget(target, type){
          if(type == undefined)
-            type = 1;
+            type = 4;
          switch (type){
             // Move position x
             case 1:
@@ -85,15 +120,14 @@
                break;
             // Rotate inverse to human camera rotation
             case 3:
-               target.setAttribute('rotation', -camera.a*5 + " " + -camera.b*3 + " 0");
+               target.setAttribute('rotation', cameraRotation(camera, [1, 1, 1]));
                break;
+            case 4:
+               target.setAttribute('rotation', cameraRotation(camera, [-4, -2, 1]));
             default:
                break;
          }
       }
-
-      // Initially set the camera object
-      setCameraAttributes();
 
    </script>
    </body>
