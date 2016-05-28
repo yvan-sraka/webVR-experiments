@@ -5,7 +5,7 @@ grunt.initConfig({
    pkg: grunt.file.readJSON('package.json'),
    watch: {
       html: {
-         files: ['**.html', '**.md'],
+         files: ['**.html', '**.md', '**/**.template'],
          tasks: ['default'],
          options: {
             livereload: true,
