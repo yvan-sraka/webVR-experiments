@@ -151,7 +151,35 @@
       *
       */
       document.onkeydown = checkKey;
+
+      /*
+      Setup vars and, if the scene has not been initialized, tie the initialization to the ground
+      */
+      var humanID = -1;
+      var initialized = false;
+      var scene = {
+         el: document.querySelector('a-scene'),
+      };
+      scene.el.addEventListener('loaded', function(){
+         initializeScene(humanID);
+      });
+
+      /*
+      Initialize the scene
+      */
+      function initializeScene(humanID){
+         //setHumans();
+         console.log('initializeScene()' + humanID);
+         goNext(humanID);
+      }
+
       var cameramode = "human";
+      var cameras = {
+         human: document.querySelector('#human-camera'),
+         topology: document.querySelector('#topology-camera')
+      }
+
+
       function humanMode(){
          cameramode = "human";
          document.querySelector('#topology-camera').setAttribute("active","false");
@@ -264,25 +292,6 @@
       function removeHuman(humanID){
          console.log('remove '+ humanID)
          $('#humanNo-' + humanID).remove();
-      }
-
-      /*
-      Setup vars and, if the scene has not been initialized, tie the initialization to the ground
-      */
-      var humanID = -1;
-      var initialized = false;
-      var scene = document.querySelector('a-scene');
-      scene.addEventListener('loaded', function(){
-         initializeScene(humanID);
-      });
-
-      /*
-      Initialize the scene
-      */
-      function initializeScene(humanID){
-         //setHumans();
-         console.log('initializeScene()' + humanID);
-         goNext(humanID);
       }
 
       /*
