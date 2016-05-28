@@ -33,7 +33,6 @@ Team Members:<br>
 For headsets without position tracking (e.g. Google Cardboard), how can we allow position-esque movement? In this experiment, the blocks rotate inversely to the camera's rotation.<br>
 **Block Rotation:** `Head Rotation`<br>
 **Movement:** `W A S D`<br>
-**Force Block Update:** Hold `V` (temporary measure)<br>
 **console.log(Camera Attributes):** `C`
 
 ## Planned experiments:
