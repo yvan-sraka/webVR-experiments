@@ -19,7 +19,7 @@
    <script type="text/javascript">
    </script>
 
-   <a-scene id="main-scene" fog="type: exponential; color: #111; density:.00034">
+   <a-scene id="main-scene" fog="type: exponential; color: #111; density:.005">
 
       <!-- Block showing scene until these assets are loaded -->
       <a-assets>
@@ -159,6 +159,7 @@
       var initialized = false;
       var scene = {
          el: document.querySelector('a-scene'),
+         fog: document.querySelector('a-scene').getAttribute('fog').density
       };
       scene.el.addEventListener('loaded', function(){
          initializeScene(humanID);
@@ -182,15 +183,15 @@
 
       function humanMode(){
          cameramode = "human";
-         document.querySelector('#topology-camera').setAttribute("active","false");
-         document.querySelector('#human-camera').setAttribute("active","true");
-         // document.querySelector('#main-scene').setAttribute("fog","density",.01);
+         cameras.topology.setAttribute("active","false");
+         cameras.human.setAttribute("active","true");
+         scene.el.setAttribute("fog", "density", scene.fog);
       }
       function topologyMode(){
          cameramode = "topology";
          document.querySelector('#topology-camera').setAttribute("active","true");
          document.querySelector('#human-camera').setAttribute("active","false");
-         // document.querySelector('#main-scene').setAttribute("fog","density",.007);
+         scene.el.setAttribute("fog", "density", 0);
       }
 
       /*
