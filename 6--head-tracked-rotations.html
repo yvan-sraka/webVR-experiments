@@ -51,6 +51,7 @@
       });
 
       var camera = {
+         el: document.querySelector('#human-camera'),
          x: 0,
          y: 0,
          z: 0,
@@ -76,12 +77,12 @@
 
       function setCameraAttributes(){
 
-         var humanCameraPosition = document.querySelector('#human-camera').getAttribute('position');
+         var humanCameraPosition = camera.el.getAttribute('position');
          camera.x = humanCameraPosition.x;
          camera.y = humanCameraPosition.y;
          camera.z = humanCameraPosition.z;
 
-         var humanCameraRotation = document.querySelector('#human-camera').getAttribute('rotation');
+         var humanCameraRotation = camera.el.getAttribute('rotation');
          camera.a = humanCameraRotation.x;
          camera.b = humanCameraRotation.y;
          camera.c = humanCameraRotation.z;
@@ -108,9 +109,6 @@
                break;
          }
       }
-
-      // Initially set the camera object
-      setCameraAttributes();
 
    </script>
    </body>
