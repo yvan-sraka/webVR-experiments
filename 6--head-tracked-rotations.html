@@ -45,7 +45,6 @@
 
    <script>
 
-      document.onkeydown = checkKey;
       var camera = {
          x: 0,
          y: 0,
@@ -56,6 +55,7 @@
       }
       var target = document.querySelector('#target');
 
+      document.onkeydown = checkKey;
       function checkKey(e) {
          e = e || window.event;
          // Check camera attributes
