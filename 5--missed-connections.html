@@ -262,8 +262,8 @@
       */
       function addHumanTemplate(humanID){
          var newPosition = {
-            x: getRandomIntInclusive(-200, 200),
-            z: getRandomIntInclusive(-200, 200)
+            x: getRandomIntInclusive(-120, 120),
+            z: getRandomIntInclusive(-120, 120)
          }
          console.log(newPosition);
          $('a-scene').append('<a-entity id="nextHuman" position="' + newPosition.x + ' 0 ' + newPosition.z + '"></a-entity>');
