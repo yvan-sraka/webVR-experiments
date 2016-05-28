@@ -31,16 +31,15 @@
       <a-entity position="0 0 0" id="human-camera-position">
          <a-entity position="0 1.7 1.1">
             <a-camera id="human-camera" wasd-controls-enabled="true" look-controls-enabled="true" rotation="1 25 62" active="true">
-               <a-entity position="0 0 -3" rotation="0 0 0" id="target" domFlag>
-                  <a-box position="0 0 0"  rotation="15 20 50"></a-box>
-                  <a-box position="-2 0 0" rotation="15 20 50"></a-box>
-                  <a-box position="2 0 0"  rotation="15 20 50"></a-box>
+               <a-entity position="0 0 -1.4" rotation="0 0 0" id="target" domFlag>
+                  <a-box mixin="box" position="0 0 0"  rotation="15 20 50"></a-box>
+                  <a-box mixin="box" position="-.6 0 0" rotation="15 20 50"></a-box>
+                  <a-box mixin="box" position=".6 0 0"  rotation="15 20 50"></a-box>
+                  <a-torus mixin="torus" position="0 0 -.23"></a-torus>
                </a-entity>
             </a-camera>
          </a-entity>
       </a-entity>
-
-
 
    </a-scene>
 
