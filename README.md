@@ -3,34 +3,42 @@
 Everything is built with [A-Frame](https://aframe.io). Order is chronological.
 
 ## 1. [Hello World](1--helloworld.html)
-A basic world with random components. Made while learning A-Frame.<br>
+A basic world with random components. Made while learning A-Frame.
+
 **Movement:** `W A S D`
 
 ## 2. [UI Test](2--ui.html)
-A basic test with cylinder UI.<br>
+A basic test with cylinder UI.
+
 **Movement:** `W A S D`
 
 ## 3. [Figures in Space](3--figures-in-space.html)
-Testing a project for IXDS.<br>
+Testing a project for IXDS.
+
 **Movement:** `W A S D`
 
 ## 4. [ViewPoint](4--viewpoint.html)
-The working model for a class project (IXDS public display).<br>
-Team Members: Iris Wu, Tiffany Wang, Ryan Huber<br>
+The working model for a class project (IXDS public display).
+
+Team Members: Iris Wu, Tiffany Wang, Ryan Huber
+
 **Movement:** `W A S D`<br>
 **God Camera:** `G`<br>
 **Toggle Click Interactions:** `C`
 
 ## 5. [Missed Connections](5--missed-connections.html)
-Prototype for a class project (Programming Usable Interfaces).<br>
-Team Members: Andrew Novotny, Joel Rodrigues, & Rachel Ng<br>
+Prototype for a class project (Programming Usable Interfaces).
+
+Team Members: Andrew Novotny, Joel Rodrigues, & Rachel Ng
+
 **Selection:** `Gaze`<br>
 **Movement:** `W A S D`<br>
 **Topographic Camera:** `G`<br>
 **Force load text, if it doesn't load:** `B`
 
 ## 6. [Head Tracked Rotations](6--head-tracked-rotations.html)
-For headsets without position tracking (e.g. Google Cardboard), how can we allow position-esque movement? In this experiment, the blocks rotate inversely to the camera's rotation.<br>
+For headsets without positional tracking (e.g. Google Cardboard), how can we allow position-esque movement? In this experiment, the blocks rotate inversely to the camera's rotation.
+
 **Block Rotation:** `Head Rotation`<br>
 **Movement:** `W A S D`<br>
 **console.log(Camera Attributes):** `C`
