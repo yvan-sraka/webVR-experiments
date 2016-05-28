@@ -270,14 +270,9 @@
       */
       var humanID = -1;
       var initialized = false;
-      document.querySelector('#ground').addEventListener('click', function () {
-
-         if (initialized == false){
-            this.setAttribute('material', 'color', '#eee');
-            console.log('addEventListener');
-            initializeScene(humanID);
-         }
-         initialized = true;
+      var scene = document.querySelector('a-scene');
+      scene.addEventListener('loaded', function(){
+         initializeScene(humanID);
       });
 
       /*
