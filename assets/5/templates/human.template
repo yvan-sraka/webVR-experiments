@@ -1,9 +1,10 @@
 <a-entity class="human" position="{{ position }}">
    <!-- Next button -->
-   <a-image id="btnNext" src="assets/5/btn-next.png" height=".5" width=".5" position=" .9 1.4 0.3" rotation="10 -20 0">
+   <a-box id="btnNext" material="color: #fff" height=".15" width=".3" depth=".03" position=" .9 1.4 0.3" rotation="-1 -40 0">
+      <a-entity mixin="font" material="color: #666" text="text: Next" position="-.12 -.04 .04"></a-entity>
       <!-- Animation for click -->
-      <a-animation begin="click" easing="ease-in" attribute="scale" fill="forwards" from="1 1 1" to="2 2 2" dur="1000"></a-animation>
-   </a-image>
+      <a-animation begin="click" easing="ease-in" attribute="scale" fill="forwards" from="1 1 1" to="1.2 1.2 1.2" dur="1000"></a-animation>
+   </a-box>
 
    <!-- This will fill with text after load from the JS -->
    <a-entity id="human-text-container" position="0 .5 .2"></a-entity>

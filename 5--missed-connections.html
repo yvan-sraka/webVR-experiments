@@ -129,7 +129,6 @@
          </a-camera>
       </a-entity>
 
-
       <!-- Fake City (Better for not crashing mobile)-->
       <a-entity id="city-container" template="src: assets/5/templates/city.template" position="22.5 0 0"></a-entity>
 
@@ -269,6 +268,7 @@
          $('a-scene #nextHuman').load('assets/5/templates/human.template', function(){
             $(this).find('.human').attr('position', '0 0 0').attr('id', 'humanNo-' + humanID);
             setHuman(humanID);
+
             moveCamera(humanID, newPosition);
          });
       }
