@@ -101,9 +101,8 @@
       keyListener.simple_combo('5', function(){
          setObserver(5);
       });
-
+      var observer = undefined;
       function setObserver(mutationType){
-         console.log(observer);
          // disconnect existing observer
          if(observer != undefined)
             observer.disconnect();
@@ -126,7 +125,6 @@
          }
          // Set up the observer
          observer.observe(camera.el, observerConfig);
-         console.log(observer);
       }
 
       function setCameraAttributes(){
