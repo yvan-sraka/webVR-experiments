@@ -50,12 +50,8 @@ For headsets without positional tracking (e.g. Google Cardboard), how can we all
 | Move target in x-axis based on z-position of human camera | `4` |
 | Rotate target in x-axis based on z-position of human camera | `5` |
 
-## Planned experiments:
-- Reading in VR
-- Speech input
-- 2.5D Twine story with "cutouts"
-- Time
-- Space, scale
+## Planned experiments & other documentation:
+See my Medium collection, [Humane Virtuality](https://medium.com/humane-virtuality).
 
 ## Setup
 ```
