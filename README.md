@@ -39,9 +39,16 @@ Team Members: Andrew Novotny, Joel Rodrigues, & Rachel Ng
 ## 6. [Head Tracked Rotations](6--head-tracked-rotations.html)
 For headsets without positional tracking (e.g. Google Cardboard), how can we allow position-esque movement? In this experiment, the blocks rotate inversely to the camera's rotation.
 
-**Block Rotation:** `Head Rotation`<br>
 **Movement:** `W A S D`<br>
-**console.log(Camera Attributes):** `C`
+**console.log(Camera Attributes, activeTarget Attributes):** `C`
+
+| Mutation | Key |
+| ------------- |:------:|
+| Rotate target with human camera rotation | `1` |
+| Rotate target with human camera rotation<br><small>Includes reasonable magic numbers: 4x of horizontal rotation, 3x of vertical rotation</small> | `2` |
+| <small>**Default**</small><br>Rotate target inversely with human camera rotation<br><small>Includes reasonable magic numbers: -4x of horizontal rotation, -3x of vertical rotation</small> | `3` |
+| Move target in x-axis based on z-position of human camera | `4` |
+| Rotate target in x-axis based on z-position of human camera | `5` |
 
 ## Planned experiments:
 - Reading in VR
