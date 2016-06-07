@@ -36,19 +36,22 @@ Team Members: Andrew Novotny, Joel Rodrigues, & Rachel Ng
 **Topographic Camera:** `G`<br>
 **Force load text, if it doesn't load:** `B`
 
-## 6. [Head Tracked Rotations](6--head-tracked-rotations.html)
-For headsets without positional tracking (e.g. Google Cardboard), how can we allow position-esque movement? In this experiment, the blocks rotate inversely to the camera's rotation.
+## 6. [Head Tracked Mutations](6--head-tracked-mutations.html)
+For headsets without positional tracking (e.g. Google Cardboard), how can we allow position-esque movement? In this set of experiments, the blocks mutate based on the selected mutation.
 
-**Block Rotation:** `Head Rotation`<br>
 **Movement:** `W A S D`<br>
-**console.log(Camera Attributes):** `C`
+**console.log(Camera Attributes, activeTarget Attributes):** `C`
 
-## Planned experiments:
-- Reading in VR
-- Speech input
-- 2.5D Twine story with "cutouts"
-- Time
-- Space, scale
+| Mutation | Key |
+| ------------- |:------:|
+| Rotate target with human camera rotation | `1` |
+| Rotate target with human camera rotation<br><small>Includes reasonable magic numbers: 4x of horizontal rotation, 3x of vertical rotation</small> | `2` |
+| <small>**Default**</small><br>Rotate target inversely with human camera rotation<br><small>Includes reasonable magic numbers: -4x of horizontal rotation, -3x of vertical rotation</small> | `3` |
+| Move target in x-axis based on z-position of human camera | `4` |
+| Rotate target in x-axis based on z-position of human camera | `5` |
+
+## Planned experiments & other documentation:
+See my Medium collection, [Humane Virtuality](https://medium.com/humane-virtuality).
 
 ## Setup
 ```

@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-   <title>6 - Head Tracked Rotations</title>
+   <title>6 - Head Tracked Mutations</title>
    <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no,user-scalable=no,maximum-scale=1">
    <script src="bower_components/aframe/dist/aframe-v0.2.0.min.js"></script>
    <script src="bower_components/Keypress/keypress.js"></script>
@@ -25,8 +25,9 @@
 
       <!-- Global Settings -->
       <a-sky color="#d81159"></a-sky>
-      <a-light type="ambient" color="#fff" intensity=".1"></a-light>
-      <a-light type="directional" color="#fff" position="0 0 0" intensity=".5"></a-light>
+      <a-light type="ambient" color="#ccc" intensity=".1"></a-light>
+      <a-light type="directional" color="#fff" position="1 1 .5" intensity="1"></a-light>
+      <a-light type="directional" color="#ffbc42" position="-1 1 .4" intensity=".5"></a-light>
       <a-image id="ground" position="0 -.025 0" height="300" width="300" rotation="90 0 0" src="assets/5/ground.png"></a-image>
 
       <!-- Human Camera -->
@@ -73,12 +74,13 @@
       var target = document.getElementsByClassName('target');
       // Set active target
       var activeTarget = target[0];
-      var defaultMutation = 4;
+      var defaultMutation = 3;
 
       var keyListener = new window.keypress.Listener();
       keyListener.simple_combo('c', function(){
          setCameraAttributes();
          console.log(camera);
+         console.log(activeTarget);
       });
       keyListener.simple_combo('t', function(){
          toggleTarget();
@@ -103,14 +105,16 @@
       });
       var observer = undefined;
       function setObserver(mutationType){
-         // disconnect existing observer
+
+         // Disconnect existing observer
          if(observer != undefined)
             observer.disconnect();
-
+         // Set mutation type to default
          if(mutationType == undefined)
             mutationType = defaultMutation;
+
          // Observe the changes to the camera
-         var observer = new MutationObserver(function(mutations){
+         observer = new MutationObserver(function(mutations){
             mutations.forEach(function(mutation){
                setCameraAttributes();
                updateTarget(activeTarget, mutationType);
@@ -125,6 +129,9 @@
          }
          // Set up the observer
          observer.observe(camera.el, observerConfig);
+
+         // Pass it on up so it is available next time
+         return observer;
       }
 
       function setCameraAttributes(){
@@ -171,7 +178,11 @@
          setOpacityOfChildren(activeTarget.children, 1);
       }
 
-      function cameraRotation(camera, cameraScalar){
+      function cameraPositionScalar(camera, cameraScalar){
+         return camera.x*cameraScalar[0] + " " + camera.y*cameraScalar[1] + " " + camera.z*cameraScalar[2];
+      }
+
+      function cameraRotationScalar(camera, cameraScalar){
          return camera.a*cameraScalar[0] + " " + camera.b*cameraScalar[1] + " " + camera.c*cameraScalar[2];
       }
 
@@ -179,24 +190,30 @@
          if(mutationType == undefined)
             mutationType = defaultMutation;
          switch (mutationType){
-            // Move position x
+            // Rotate target with human camera rotation
             case 1:
-               //target.setAttribute('position', camera.x + " 0 0");
+               target.setAttribute('rotation', cameraRotationScalar(camera, [1, 1, 1]));
                break;
-            // Rotate x
+            // Rotate target with human camera rotation
+            // includes reasonable magic numbers: 4x of horizontal rotation, 3x of vertical rotation
             case 2:
-               target.setAttribute('rotation', camera.z*60 + " 0 0");
+               target.setAttribute('rotation', cameraRotationScalar(camera, [4, 3, 1]));
                break;
-            // Rotate inverse to human camera rotation
+            // Rotate target inversely with human camera rotation
+            // includes reasonable magic numbers: -4x of horizontal rotation, -3x of vertical rotation
             case 3:
-               target.setAttribute('rotation', cameraRotation(camera, [1, 1, 1]));
+               target.setAttribute('position', target.getAttribute('position'));
+               target.setAttribute('rotation', cameraRotationScalar(camera, [-4, -3, 1]));
                break;
-            // Reasonable magic numbers, 1/4 of horizontal rotation, 1/3 of vertical rotation
+            // Move target in x-axis based on z-position of human camera
             case 4:
-               target.setAttribute('rotation', cameraRotation(camera, [-4, -3, 1]));
+               newPosition = target.getAttribute('position');
+               newPosition.x = camera.z - 1;
+               target.setAttribute('position', newPosition);
                break;
+            // Rotate target in x-axis based on z-position of human camera
             case 5:
-               target.setAttribute('rotation', cameraRotation(camera, [4, 3, 1]));
+               target.setAttribute('rotation', camera.z*60 + " 0 0");
                break;
             default:
                break;
