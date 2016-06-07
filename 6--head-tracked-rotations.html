@@ -49,6 +49,8 @@
       scene.addEventListener('loaded', function(){
          // Initially set the camera object
          setCameraAttributes();
+
+         // Observe the changes to the camera
          var observer = new MutationObserver(function(mutations){
             mutations.forEach(function(mutation){
                setCameraAttributes();
@@ -56,6 +58,7 @@
             });
          });
 
+         // I don't know what I'm doing here
          var observerConfig = {
             attributes:    true,
             childList:     true,
@@ -79,7 +82,7 @@
       function checkKey(e) {
          e = e || window.event;
          // Check camera attributes
-         if(e.keyCode == '67') { // the letter c
+         if(e.keyCode == '67') { // c
             setCameraAttributes();
             console.log(camera);
          }
@@ -123,6 +126,7 @@
             case 3:
                target.setAttribute('rotation', cameraRotation(camera, [1, 1, 1]));
                break;
+            // Reasonable magic numbers, 1/4 of horizontal rotation, 1/3 of vertical rotation
             case 4:
                target.setAttribute('rotation', cameraRotation(camera, [-4, -3, 1]));
             default:
