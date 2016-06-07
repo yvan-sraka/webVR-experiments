@@ -55,21 +55,8 @@
          // Initially set the camera object
          setCameraAttributes();
 
-         // Observe the changes to the camera
-         var observer = new MutationObserver(function(mutations){
-            mutations.forEach(function(mutation){
-               setCameraAttributes();
-               updateTarget(activeTarget);
-            });
-         });
-
-         // I don't know what I'm doing here
-         var observerConfig = {
-            attributes:    true,
-            childList:     true,
-            characterData: true
-         }
-         observer.observe(camera.el, observerConfig);
+         // Setup observer
+         setObserver();
       });
 
       // Create a camera object
@@ -106,7 +93,31 @@
          setObserver(2);
       });
 
+      function setObserver(mutationType){
+         console.log(observer);
+         // disconnect existing observer
+         if(observer != undefined)
+            observer.disconnect();
 
+         if(mutationType == undefined)
+            mutationType = defaultMutation;
+         // Observe the changes to the camera
+         var observer = new MutationObserver(function(mutations){
+            mutations.forEach(function(mutation){
+               setCameraAttributes();
+               updateTarget(activeTarget, mutationType);
+            });
+         });
+
+         // I don't know what I'm doing here
+         var observerConfig = {
+            attributes:    true,
+            childList:     true,
+            characterData: true
+         }
+         // Set up the observer
+         observer.observe(camera.el, observerConfig);
+         console.log(observer);
       }
 
       function setCameraAttributes(){
