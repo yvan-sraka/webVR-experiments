@@ -5,10 +5,12 @@
    <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no,user-scalable=no,maximum-scale=1">
    <script src="bower_components/aframe/dist/aframe-v0.2.0.min.js"></script>
    <script src="bower_components/Keypress/keypress.js"></script>
+   <script src="bower_components/aframe-proxy-controls/dist/aframe-proxy-controls.min.js"></script>
+   <script src="bower_components/aframe-keyboard-controls/dist/aframe-keyboard-controls.min.js"></script>
 </head>
 <body>
 
-   <a-scene id="main-scene" fog="type: exponential; color: #d81159; density: .05">
+   <a-scene id="main-scene" fog="type: exponential; color: #d81159; density: .05" proxy-controls="debug: true">
 
       <!--
          Dark Blue:  006ba6
@@ -32,7 +34,7 @@
 
       <!-- Human Camera -->
       <a-entity position="0 1.7 1.1">
-         <a-camera id="human-camera" wasd-controls-enabled="true" look-controls-enabled="true" rotation="1 25 62" active="true">
+         <a-camera id="human-camera" wasd-controls-enabled="true" look-controls-enabled="true" keyboard-controls rotation="1 25 62" active="true">
             <a-entity position="0 0 -1.4" rotation="0 0 0" class="target">
                <a-box mixin="box" position="0 0 0"  rotation="15 20 50"></a-box>
                <a-box mixin="box" position="-.6 0 0" rotation="15 20 50"></a-box>
@@ -76,11 +78,25 @@
       var activeTarget = target[0];
       var defaultMutation = 3;
 
+      // Set up keyboard input listeners
+      // Don's Component
+      scene.addEventListener('proxycontrols', function (e) {
+         console.log(e);
+      });
+      var keyboardControls = camera.el.components['keyboard-controls'];
+      keyboardControls.isPressed('Digit1');
+      keyboardControls.isPressed('Digit2');
+      keyboardControls.isPressed('Digit4');
+
+      console.log(keyboardControls);
+
+      // KeyListener
       var keyListener = new window.keypress.Listener();
       keyListener.simple_combo('c', function(){
          setCameraAttributes();
          console.log(camera);
          console.log(activeTarget);
+         console.log(keyboardControls);
       });
       keyListener.simple_combo('t', function(){
          toggleTarget();

@@ -26,6 +26,8 @@
     "aframe-template-component": "ngokevin/aframe-template-component",
     "aframe-text-component": "ngokevin/aframe-text-component",
     "aframe-event-set-component": "ngokevin/aframe-event-set-component",
-    "Keypress": "^2.1.4"
+    "aframe-proxy-controls": "donmccurdy/aframe-proxy-controls#^0.6.0",
+    "Keypress": "^2.1.4",
+    "aframe-keyboard-controls": "donmccurdy/aframe-keyboard-controls#^1.0.0"
   }
 }
