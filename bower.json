@@ -25,6 +25,7 @@
     "aframe-layout-component": "ngokevin/aframe-layout-component",
     "aframe-template-component": "ngokevin/aframe-template-component",
     "aframe-text-component": "ngokevin/aframe-text-component",
-    "aframe-event-set-component": "ngokevin/aframe-event-set-component"
+    "aframe-event-set-component": "ngokevin/aframe-event-set-component",
+    "Keypress": "^2.1.4"
   }
 }
