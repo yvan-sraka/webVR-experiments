@@ -36,8 +36,8 @@ Team Members: Andrew Novotny, Joel Rodrigues, & Rachel Ng
 **Topographic Camera:** `G`<br>
 **Force load text, if it doesn't load:** `B`
 
-## 6. [Head Tracked Rotations](6--head-tracked-rotations.html)
-For headsets without positional tracking (e.g. Google Cardboard), how can we allow position-esque movement? In this experiment, the blocks rotate inversely to the camera's rotation.
+## 6. [Head Tracked Mutations](6--head-tracked-mutations.html)
+For headsets without positional tracking (e.g. Google Cardboard), how can we allow position-esque movement? In this set of experiments, the blocks mutate based on the selected mutation.
 
 **Movement:** `W A S D`<br>
 **console.log(Camera Attributes, activeTarget Attributes):** `C`
