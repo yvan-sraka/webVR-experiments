@@ -178,6 +178,10 @@
          setOpacityOfChildren(activeTarget.children, 1);
       }
 
+      function cameraPositionScalar(camera, cameraScalar){
+         return camera.x*cameraScalar[0] + " " + camera.y*cameraScalar[1] + " " + camera.z*cameraScalar[2];
+      }
+
       function cameraRotationScalar(camera, cameraScalar){
          return camera.a*cameraScalar[0] + " " + camera.b*cameraScalar[1] + " " + camera.c*cameraScalar[2];
       }
