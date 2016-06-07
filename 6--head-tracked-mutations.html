@@ -103,6 +103,8 @@
       keyListener.simple_combo('5', function(){
          setObserver(5);
       });
+
+      // Set global observer and creation function
       var observer = undefined;
       function setObserver(mutationType){
 
@@ -134,6 +136,7 @@
          return observer;
       }
 
+      // Set the camera attributes
       function setCameraAttributes(){
 
          var humanCameraPosition = camera.el.getAttribute('position');
