@@ -178,7 +178,7 @@
          setOpacityOfChildren(activeTarget.children, 1);
       }
 
-      function cameraRotation(camera, cameraScalar){
+      function cameraRotationScalar(camera, cameraScalar){
          return camera.a*cameraScalar[0] + " " + camera.b*cameraScalar[1] + " " + camera.c*cameraScalar[2];
       }
 
@@ -186,24 +186,30 @@
          if(mutationType == undefined)
             mutationType = defaultMutation;
          switch (mutationType){
-            // Move position x
+            // Rotate target with human camera rotation
             case 1:
-               //target.setAttribute('position', camera.x + " 0 0");
+               target.setAttribute('rotation', cameraRotationScalar(camera, [1, 1, 1]));
                break;
-            // Rotate x
+            // Rotate target with human camera rotation
+            // includes reasonable magic numbers: 4x of horizontal rotation, 3x of vertical rotation
             case 2:
-               target.setAttribute('rotation', camera.z*60 + " 0 0");
+               target.setAttribute('rotation', cameraRotationScalar(camera, [4, 3, 1]));
                break;
-            // Rotate inverse to human camera rotation
+            // Rotate target inversely with human camera rotation
+            // includes reasonable magic numbers: -4x of horizontal rotation, -3x of vertical rotation
             case 3:
-               target.setAttribute('rotation', cameraRotation(camera, [1, 1, 1]));
+               target.setAttribute('position', target.getAttribute('position'));
+               target.setAttribute('rotation', cameraRotationScalar(camera, [-4, -3, 1]));
                break;
-            // Reasonable magic numbers, 1/4 of horizontal rotation, 1/3 of vertical rotation
+            // Move target in x-axis based on z-position of human camera
             case 4:
-               target.setAttribute('rotation', cameraRotation(camera, [-4, -3, 1]));
+               newPosition = target.getAttribute('position');
+               newPosition.x = camera.z - 1;
+               target.setAttribute('position', newPosition);
                break;
+            // Rotate target in x-axis based on z-position of human camera
             case 5:
-               target.setAttribute('rotation', cameraRotation(camera, [4, 3, 1]));
+               target.setAttribute('rotation', camera.z*60 + " 0 0");
                break;
             default:
                break;
