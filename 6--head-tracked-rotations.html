@@ -105,14 +105,16 @@
       });
       var observer = undefined;
       function setObserver(mutationType){
-         // disconnect existing observer
+
+         // Disconnect existing observer
          if(observer != undefined)
             observer.disconnect();
-
+         // Set mutation type to default
          if(mutationType == undefined)
             mutationType = defaultMutation;
+
          // Observe the changes to the camera
-         var observer = new MutationObserver(function(mutations){
+         observer = new MutationObserver(function(mutations){
             mutations.forEach(function(mutation){
                setCameraAttributes();
                updateTarget(activeTarget, mutationType);
@@ -127,6 +129,9 @@
          }
          // Set up the observer
          observer.observe(camera.el, observerConfig);
+
+         // Pass it on up so it is available next time
+         return observer;
       }
 
       function setCameraAttributes(){
