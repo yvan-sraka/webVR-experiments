@@ -176,6 +176,9 @@
             // Reasonable magic numbers, 1/4 of horizontal rotation, 1/3 of vertical rotation
             case 4:
                target.setAttribute('rotation', cameraRotation(camera, [-4, -3, 1]));
+               break;
+               target.setAttribute('rotation', cameraRotation(camera, [4, 3, 1]));
+               break;
             default:
                break;
          }
