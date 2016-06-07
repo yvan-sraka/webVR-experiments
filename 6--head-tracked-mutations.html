@@ -80,15 +80,15 @@
 
       // Set up keyboard input listeners
       // Don's Component
-      scene.addEventListener('proxycontrols', function (e) {
-         console.log(e);
-      });
-      var keyboardControls = camera.el.components['keyboard-controls'];
-      keyboardControls.isPressed('Digit1');
-      keyboardControls.isPressed('Digit2');
-      keyboardControls.isPressed('Digit4');
+      // scene.addEventListener('proxycontrols', function (e) {
+      //    console.log(e);
+      // });
+      // var keyboardControls = camera.el.components['keyboard-controls'];
+      // keyboardControls.isPressed('Digit1');
+      // keyboardControls.isPressed('Digit2');
+      // keyboardControls.isPressed('Digit4');
 
-      console.log(keyboardControls);
+      // console.log(keyboardControls);
 
       // KeyListener
       var keyListener = new window.keypress.Listener();
@@ -96,7 +96,7 @@
          setCameraAttributes();
          console.log(camera);
          console.log(activeTarget);
-         console.log(keyboardControls);
+         // console.log(keyboardControls);
       });
       keyListener.simple_combo('t', function(){
          toggleTarget();
