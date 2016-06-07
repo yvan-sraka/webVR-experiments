@@ -181,7 +181,7 @@
          switch (mutationType){
             // Move position x
             case 1:
-               target.setAttribute('position', camera.x + " 0 0");
+               //target.setAttribute('position', camera.x + " 0 0");
                break;
             // Rotate x
             case 2:
@@ -195,6 +195,7 @@
             case 4:
                target.setAttribute('rotation', cameraRotation(camera, [-4, -3, 1]));
                break;
+            case 5:
                target.setAttribute('rotation', cameraRotation(camera, [4, 3, 1]));
                break;
             default:
