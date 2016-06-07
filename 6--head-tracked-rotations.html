@@ -157,9 +157,9 @@
          return camera.a*cameraScalar[0] + " " + camera.b*cameraScalar[1] + " " + camera.c*cameraScalar[2];
       }
 
-      function updateTarget(target, type){
-         if(type == undefined)
-            type = defaultMutation;
+      function updateTarget(target, mutationType){
+         if(mutationType == undefined)
+            mutationType = defaultMutation;
          switch (type){
             // Move position x
             case 1:
