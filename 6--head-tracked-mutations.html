@@ -60,6 +60,9 @@
          <a-box mixin="pillar" position="2 1.5 -6"></a-box>
          <a-box mixin="pillar" position="-3 1.5 -16"></a-box>
       </a-entity>
+      <a-entity id="building">
+         <a-box height="6" width="6" depth="6" position="0 2.9 0" material="opacity: 1; side: double; color: #8f2d56"></a-box>
+      </a-entity>
 
    </a-scene>
 
@@ -71,6 +74,9 @@
 
          // Turns the active target on
          toggleTarget(activeTarget);
+
+         // Setup building
+         toggleBuilding(building.state);
 
          // Setup observer
          setObserver();
@@ -101,6 +107,11 @@
           defaultRotations[0] = targets[0].getAttribute('rotation');
           defaultRotations[1] = targets[1].getAttribute('rotation');
 
+      var building = {
+         el: document.querySelector('#building'),
+         state: false
+      }
+
       // Set active target
       var activeTarget = defaultTarget;
 
@@ -114,6 +125,9 @@
       });
       keyListener.simple_combo('t', function(){
          toggleTarget();
+      });
+      keyListener.simple_combo('b', function(){
+         toggleBuilding();
       });
       keyListener.simple_combo('0', function(){
          setObserver(defaultMutation);
@@ -218,6 +232,28 @@
 
          // Turn on the new active target
          setOpacityOfChildren(activeTarget.children, 1);
+      }
+
+      function toggleBuilding(ioState){
+         console.log('initial: ' + building.state);
+         if(ioState == undefined){
+            if(building.state == false){
+               building.state = true;
+            }else{
+               building.state = false;
+            }
+         }else{
+            building.state = ioState;
+         }
+         console.log('set: ' + building.state);
+
+         if(building.state == true){
+            setOpacityOfChildren(building.el.children, 1);
+            console.log('set to be there')
+         }else{
+            setOpacityOfChildren(building.el.children, 0);
+            console.log('set to be NOT there')
+         }
       }
 
       function cameraPositionScalar(camera, cameraScalar){
