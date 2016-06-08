@@ -40,6 +40,7 @@ Team Members: Andrew Novotny, Joel Rodrigues, & Rachel Ng
 For headsets without positional tracking (e.g. Google Cardboard), how can we allow position-esque movement? In this set of experiments, the blocks mutate based on the selected mutation.
 
 **Movement:** `W A S D`<br>
+**Toggle target to be locked to camera or to world:** `T`<br>
 **console.log(Camera Attributes, activeTarget Attributes):** `C`
 
 | Mutation | Key |
