@@ -256,6 +256,7 @@
             // Move target in x-axis based on z-position of human camera
             case 4:
                newPosition = target.getAttribute('position');
+               // Offset position by one meter
                newPosition.x = camera.z - 1;
                target.setAttribute('position', newPosition);
                break;
