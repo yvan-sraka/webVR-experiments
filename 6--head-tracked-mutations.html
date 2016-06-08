@@ -224,6 +224,10 @@
          return camera.a*cameraScalar[0] + " " + camera.b*cameraScalar[1] + " " + camera.c*cameraScalar[2];
       }
 
+      function equalScalarString(scalar){
+         return scalar + ' ' + scalar + ' ' + scalar;
+      }
+
       function updateTarget(target, mutationType){
          if(mutationType == undefined)
             mutationType = defaultMutation;
