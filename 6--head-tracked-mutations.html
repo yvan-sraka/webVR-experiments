@@ -138,6 +138,12 @@
       keyListener.simple_combo('5', function(){
          setObserver(5);
       });
+      keyListener.simple_combo('6', function(){
+         setObserver(6);
+      });
+      keyListener.simple_combo('7', function(){
+         setObserver(7);
+      });
 
       // Set global observer and creation function
       var observer = undefined;
@@ -256,6 +262,38 @@
             // Rotate target in x-axis based on z-position of human camera
             case 5:
                target.setAttribute('rotation', camera.z*60 + " 0 0");
+               break;
+            // Move target in z-axis based on xy-axis rotation of camera
+            case 6:
+               newPosition = target.getAttribute('position');
+               // Right or down make the target come towards the initial camera
+               newPosition.z = -1 * (camera.a/10 + camera.b/60);
+               target.setAttribute('position', newPosition);
+               break;
+            // Scale target based on x-axis rotation
+            case 7:
+               newScaleBase = camera.a + 1;
+               if(newScaleBase > .1){
+                  newScale = equalScalarString(camera.a + 1);
+               }else{
+                  newScale = equalScalarString(.1);
+               }
+               target.setAttribute('scale', newScale);
+
+               if(newPositionCompInit == undefined){
+                  newPositionCompInit = target.getAttribute('position');
+                  newPositionComp = newPositionCompInit;
+                  centerPoint = {
+                     x: 1,
+                     y: 1,
+                     z: 1
+                  };
+               }
+               centerPoint.z = -.4;
+               centerPoint.y = .3;
+               newPositionComp.z = camera.a*centerPoint.z - 2.5;
+               newPositionComp.y = camera.a*centerPoint.y + 1.4;
+               target.setAttribute('position', newPositionComp);
                break;
             default:
                break;
