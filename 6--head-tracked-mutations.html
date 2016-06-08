@@ -93,6 +93,13 @@
       //Set defaults
       var defaultTarget = targets[1];
       var defaultMutation = 2;
+      var defaultPositions = [];
+          defaultPositions[0] = targets[0].getAttribute('position');
+          defaultPositions[1] = targets[1].getAttribute('position');
+
+      var defaultRotations = [];
+          defaultRotations[0] = targets[0].getAttribute('rotation');
+          defaultRotations[1] = targets[1].getAttribute('rotation');
 
       // Set active target
       var activeTarget = defaultTarget;
@@ -225,9 +232,23 @@
          return scalar + ' ' + scalar + ' ' + scalar;
       }
 
+      function resetTargetPositions(){
+         targets[0].setAttribute('position', defaultPositions[0]);
+         targets[1].setAttribute('position', defaultPositions[1]);
+      }
+
+      function resetTargetRotations(){
+         targets[0].setAttribute('rotation', defaultPositions[0]);
+         targets[1].setAttribute('rotation', defaultPositions[1]);
+      }
+
       function updateTarget(target, mutationType){
          if(mutationType == undefined)
             mutationType = defaultMutation;
+
+         resetTargetPositions();
+         resetTargetRotations();
+
          switch (mutationType){
             // Rotate target with human camera rotation
             case 1:
