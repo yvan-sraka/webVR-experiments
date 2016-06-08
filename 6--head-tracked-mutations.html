@@ -89,9 +89,13 @@
       }
       // Set target object
       var target = document.getElementsByClassName('target');
+      var newPositionCompInit = undefined;
+
+      //Set defaults
+      var defaultTarget = target[0];
+      var defaultMutation = 7;
       // Set active target
-      var activeTarget = target[0];
-      var defaultMutation = 3;
+      var activeTarget = defaultTarget;
 
       // Set up keyboard input listeners
       // Don's Component
