@@ -203,9 +203,18 @@
 
       // Sets opacity
       function setOpacityOfChildren(el, opacity){
+         // for each child element in the el[]
          for(var activeChild in el){
+            // if it is an object
             if(typeof el[activeChild] == 'object'){
-               el[activeChild].setAttribute('material', 'opacity: ' + opacity);
+               // take the material{}
+               var material = el[activeChild].getAttribute('material');
+
+               // change its opacity
+               material.opacity = opacity;
+
+               // set the new material{}
+               el[activeChild].setAttribute('material', material);
             }
          }
       }
