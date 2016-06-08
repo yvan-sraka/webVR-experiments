@@ -6,13 +6,13 @@
    <script src="bower_components/aframe/dist/aframe-v0.2.0.min.js"></script>
    <script src="bower_components/Keypress/keypress.js"></script>
 
-   <script src="bower_components/aframe-proxy-controls/dist/aframe-proxy-controls.min.js"></script>
-   <script src="bower_components/aframe-keyboard-controls/dist/aframe-keyboard-controls.min.js"></script>
+   <script src="bower_components/aframe-proxy-controls/dist/aframe-proxy-controls.js"></script>
+   <script src="bower_components/aframe-keyboard-controls/dist/aframe-keyboard-controls.js"></script>
 
 </head>
 <body>
 
-   <a-scene id="main-scene" fog="type: exponential; color: #d81159; density: .05" proxy-controls="debug: true">
+   <a-scene id="main-scene" fog="type: exponential; color: #d81159; density: .05" proxy-controls="debug: true; pairCode: innocent-believe">
 
       <!--
          Dark Blue:  006ba6
@@ -62,6 +62,31 @@
 
          // Setup observer
          setObserver();
+
+         // Set up keyboard input listeners
+
+         //
+         // giving up for now...
+         //
+
+
+         // Don's Component
+         // scene.addEventListener('proxycontrols', function (e) {
+         //    console.log('scene: ' + e);
+         // });
+         // var keyboardControls = camera.el.components['keyboard-controls'];
+         // console.log(keyboardControls.isPressed('Digit1'));
+         // // keyboardControls.addEventListener('keydown', function(e){
+         // //    console.log('keyboardControls: ' + e);
+         // // });
+         // camera.el.attEventListener('keydown:Digit1', function(e){
+         //    console.log('camera.el: ' + e);
+         // });
+         // // keyboardControls.isPressed('Digit2');
+         // // keyboardControls.isPressed('Digit4');
+
+         // console.log(keyboardControls);
+         // console.log(camera.el);
       });
 
       // Create a camera object
@@ -80,20 +105,7 @@
       var activeTarget = target[0];
       var defaultMutation = 3;
 
-      // Set up keyboard input listeners
-      // Don's Component
-      scene.addEventListener('proxycontrols', function (e) {
-         console.log(e);
-      });
-      var keyboardControls = camera.el.components['keyboard-controls'];
-      console.log(keyboardControls.isPressed('Digit1'));
-      keyboardControls.addEventListener('keydown', function(e){
-         console.log(e);
-      });
-      // keyboardControls.isPressed('Digit2');
-      // keyboardControls.isPressed('Digit4');
 
-      console.log(keyboardControls);
 
       // KeyListener
       var keyListener = new window.keypress.Listener();
