@@ -281,10 +281,14 @@
                      z: 1
                   };
                }
-               centerPoint.z = -.4;
+               centerPoint.z = -.1;
                centerPoint.y = .3;
                newPositionComp.z = camera.a*centerPoint.z - 2.5;
                newPositionComp.y = camera.a*centerPoint.y + 1.4;
+               if(newPositionComp.z > -2.5)
+                  newPositionComp.z = -2.5;
+               if(newPositionComp.y < .9)
+                  newPositionComp.y = .9;
                target.setAttribute('position', newPositionComp);
                break;
             default:
