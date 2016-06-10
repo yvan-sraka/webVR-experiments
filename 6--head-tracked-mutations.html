@@ -78,6 +78,9 @@
          // Setup building
          toggleBuilding(building.state);
 
+         // Setup pillars
+         togglePillars(pillars.state);
+
          // Setup observer
          setObserver();
       });
@@ -112,6 +115,11 @@
          state: false
       }
 
+      var pillars = {
+         el: document.querySelector('#pillars'),
+         state: settings.pillars
+      }
+
       // Set active target
       var activeTarget = defaultTarget;
 
@@ -128,6 +136,9 @@
       });
       keyListener.simple_combo('b', function(){
          toggleBuilding();
+      });
+      keyListener.simple_combo('p', function(){
+         togglePillars();
       });
       keyListener.simple_combo('0', function(){
          setObserver(defaultMutation);
@@ -262,6 +273,24 @@
          }else{
             setOpacityOfChildren(building.el.children, 0);
             console.log('set to be NOT there')
+         }
+      }
+
+      function togglePillars(ioState){
+         if(ioState == undefined){
+            if(pillars.state == false){
+               pillars.state = true;
+            }else{
+               pillars.state = false;
+            }
+         }else{
+            pillars.state = ioState;
+         }
+
+         if(pillars.state == true){
+            setOpacityOfChildren(pillars.el.children, 1);
+         }else{
+            setOpacityOfChildren(pillars.el.children, 0);
          }
       }
 
