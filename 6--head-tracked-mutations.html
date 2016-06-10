@@ -141,7 +141,7 @@
          setCameraAttributes();
          console.log(camera);
          console.log(activeTarget);
-         // console.log(keyboardControls);
+
       });
       keyListener.simple_combo('t', function(){
          toggleTarget();
@@ -267,7 +267,6 @@
       }
 
       function toggleBuilding(ioState){
-         console.log('initial: ' + building.state);
          if(ioState == undefined){
             if(building.state == false){
                building.state = true;
@@ -277,14 +276,11 @@
          }else{
             building.state = ioState;
          }
-         console.log('set: ' + building.state);
 
          if(building.state == true){
             setOpacityOfChildren(building.el.children, 1);
-            console.log('set to be there')
          }else{
             setOpacityOfChildren(building.el.children, 0);
-            console.log('set to be NOT there')
          }
       }
 
@@ -336,21 +332,25 @@
          resetTargetRotations();
 
          switch (mutationType){
+
             // Rotate target with human camera rotation
             case 1:
                target.setAttribute('rotation', cameraRotationScalar(camera, [1, 1, 1]));
                break;
+
             // Rotate target with human camera rotation
             // includes reasonable magic numbers: 4x of horizontal rotation, 3x of vertical rotation
             case 2:
                target.setAttribute('rotation', cameraRotationScalar(camera, [4, 3, 1]));
                break;
+
             // Rotate target inversely with human camera rotation
             // includes reasonable magic numbers: -4x of horizontal rotation, -3x of vertical rotation
             case 3:
                target.setAttribute('position', target.getAttribute('position'));
                target.setAttribute('rotation', cameraRotationScalar(camera, [-4, -3, 1]));
                break;
+
             // Move target in x-axis based on z-position of human camera
             case 4:
                newPosition = target.getAttribute('position');
@@ -358,10 +358,12 @@
                newPosition.x = camera.z - 1;
                target.setAttribute('position', newPosition);
                break;
+
             // Rotate target in x-axis based on z-position of human camera
             case 5:
                target.setAttribute('rotation', camera.z*60 + " 0 0");
                break;
+
             // Move target in z-axis based on xy-axis rotation of camera
             case 6:
                newPosition = target.getAttribute('position');
@@ -369,6 +371,7 @@
                newPosition.z = -1 * (camera.a/10 + camera.b/60);
                target.setAttribute('position', newPosition);
                break;
+
             // Scale target based on x-axis rotation
             case 7:
                newScaleBase = camera.a + 1;
@@ -398,6 +401,7 @@
                   newPositionComp.y = .9;
                target.setAttribute('position', newPositionComp);
                break;
+
             default:
                break;
          }
