@@ -67,6 +67,18 @@
    </a-scene>
 
    <script>
+
+
+
+      var settings = {
+         target:   1,     // 0 tied to cam, 1 tied to world
+         mutation: 3,     // three is my guess-best, others can be found in the docs or the switch below
+         building: false, // true is on, false is off
+         pillars:  true   // true is on, false is off
+      }
+
+
+
       var scene = document.querySelector('a-scene');
       scene.addEventListener('loaded', function(){
          // Initially set the camera object
@@ -100,8 +112,8 @@
       var newPositionCompInit = undefined;
 
       //Set defaults
-      var defaultTarget = targets[1];
-      var defaultMutation = 2;
+      var defaultTarget = targets[settings.target];
+      var defaultMutation = settings.mutation;
       var defaultPositions = [];
           defaultPositions[0] = targets[0].getAttribute('position');
           defaultPositions[1] = targets[1].getAttribute('position');
@@ -112,7 +124,7 @@
 
       var building = {
          el: document.querySelector('#building'),
-         state: false
+         state: settings.building
       }
 
       var pillars = {
