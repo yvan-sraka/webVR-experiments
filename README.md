@@ -36,8 +36,8 @@ Team Members: Andrew Novotny, Joel Rodrigues, & Rachel Ng
 **Topographic Camera:** `G`<br>
 **Force load text, if it doesn't load:** `B`
 
-## 6. [Head Tracked Mutations](6--head-tracked-mutations.html)
-For headsets without positional tracking (e.g. Google Cardboard), how can we allow position-esque movement? In this set of experiments, the blocks mutate based on the selected mutation.
+## 6. [Head Tracked Transformations](6--head-tracked-transformations.html)
+For headsets without positional tracking (e.g. Google Cardboard), how can we allow position-esque movement? In this set of experiments, the blocks mutate based on the selected transformation.
 
 **Movement:** `W A S D`<br>
 **Toggle target to be locked to camera or to world:** `T`<br>
@@ -45,7 +45,7 @@ For headsets without positional tracking (e.g. Google Cardboard), how can we all
 **Toggle pillars:** `P`<br>
 **console.log(Camera Attributes, activeTarget Attributes):** `C`
 
-| Mutation | Key |
+| Transformation | Key |
 | ------------- |:------:|
 | Rotate target with human camera rotation | `1` |
 | Rotate target with human camera rotation<br><small>Includes reasonable magic numbers: 4x of horizontal rotation, 3x of vertical rotation</small> | `2` |
