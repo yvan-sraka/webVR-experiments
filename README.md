@@ -42,6 +42,7 @@ For headsets without positional tracking (e.g. Google Cardboard), how can we all
 **Movement:** `W A S D`<br>
 **Toggle target to be locked to camera or to world:** `T`<br>
 **Toggle building:** `B`<br>
+**Toggle pillars:** `P`<br>
 **console.log(Camera Attributes, activeTarget Attributes):** `C`
 
 | Mutation | Key |
