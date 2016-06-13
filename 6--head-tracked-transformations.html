@@ -195,7 +195,7 @@
             transformationType = defaultTransformation;
 
          // Observe the changes to the camera
-         observer = new TransformationObserver(function(transformations){
+         observer = new MutationObserver(function(transformations){
             transformations.forEach(function(transformation){
                setCameraAttributes();
                updateTarget(activeTarget, transformationType);
