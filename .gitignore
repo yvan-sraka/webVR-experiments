@@ -30,3 +30,4 @@ error_log
 **.mix
 /assets/img/
 /assets/sketch/
+*.skp
