@@ -1,0 +1,68 @@
+<!doctype html>
+<html>
+<head>
+   <title>7 - Product Selection &amp; Customization</title>
+   <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no,user-scalable=no,maximum-scale=1">
+   <script src="bower_components/aframe/dist/aframe-v0.2.0.min.js"></script>
+   <script src="bower_components/Keypress/keypress.js"></script>
+   <style>
+   *{
+      cursor: none;
+   }
+   </style>
+
+</head>
+<body>
+
+   <a-scene id="main-scene" fog="type: exponential; color: #d81159; density: .02">
+
+      <!--
+         Dark Blue:  006ba6
+         Blue:       0496ff
+         Yellow:     ffbc42
+         Pink:       d81159
+         Plum:       8f2d56
+      -->
+
+      <a-assets>
+
+      </a-assets>
+
+      <!-- Global Settings -->
+      <a-sky color="#d81159"></a-sky>
+      <a-light type="ambient" color="#ccc" intensity=".1"></a-light>
+      <a-light type="directional" color="#fff" position="1 1 .5" intensity="1"></a-light>
+      <a-light type="directional" color="#ffbc42" position="-1 1 .4" intensity=".5"></a-light>
+      <!-- <a-image id="ground" position="0 -.025 0" height="300" width="300" rotation="90 0 0" src="assets/5/ground.png"></a-image> -->
+
+      <!-- Human Camera -->
+      <a-camera id="human-camera" position="0 1.7 1.1" wasd-controls-enabled="true" look-controls-enabled="true" mouse-controls active="true"></a-camera>
+
+      <a-entity id="environment" position="0 0 0" rotation="0 0 0">
+         <a-collada-model src="assets/7/models/scene-forest-mountain.dae"></a-collada-model>
+      </a-entity>
+
+      <a-entity id="wireframe">
+         <a-curved-image></a-curved-image>
+      </a-entity>
+
+   </a-scene>
+
+   <script>
+
+
+
+      var settings = {
+
+      }
+
+
+
+      var scene = document.querySelector('a-scene');
+      scene.addEventListener('loaded', function(){
+
+      });
+
+   </script>
+   </body>
+</html>
