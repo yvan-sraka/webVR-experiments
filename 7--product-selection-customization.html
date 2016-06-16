@@ -69,8 +69,8 @@
          <a-entity   id="wireframe-curved"
                      class="target"
                      position="0 1.65 0"
-                     data-heightOriginal="600"
-                     data-widthOriginal="540"
+                     data-heightorig="600"
+                     data-widthorig="540"
                      data-radius="1"
                      data-delta="-.2 0 .05"
                      theta-length="160"
@@ -163,8 +163,8 @@
          var curvedSet = curvedSetParent.find('a-curvedimage');
 
          var parameters = {
-            heightOriginal:   curvedSetParent.data('heightOriginal'),
-            widthOriginal:    curvedSetParent.data('widthOriginal'),
+            heightorig:   curvedSetParent.data('heightorig'),
+            widthorig:    curvedSetParent.data('widthorig'),
             radius:           curvedSetParent.data('radius'),
             delta:            curvedSetParent.data('delta').split(' '),
             thetaLength:      curvedSetParent.attr('theta-length'),
@@ -178,7 +178,7 @@
 
          curvedSet.attr('radius', parameters.radius);
 
-         var heightToWidth = parameters.heightOriginal / parameters.widthOriginal;
+         var heightToWidth = parameters.heightorig / parameters.widthorig;
          var setHeight = parameters.thetaLength * heightToWidth;
          console.log({
             heightToWidth: heightToWidth,
@@ -207,12 +207,12 @@
 
          // Curved images
          // var curvedImages = scene.find('a-curvedimage.js-set');
-         // var curvedWidthOriginal = curvedImages.data('width');
+         // var curvedwidthorig = curvedImages.data('width');
          // var thetaLength = curvedImages.attr('theta-length');
 
          // var thetaPercentage = thetaLength / 360;
 
-         // var radius = (curvedWidthOriginal / (2 * Math.PI * thetaPercentage)) / 200; // magic number right now
+         // var radius = (curvedwidthorig / (2 * Math.PI * thetaPercentage)) / 200; // magic number right now
          // console.log('Suggested Radius: ' + radius);
 
          // if(setBool == true)
