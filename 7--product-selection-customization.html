@@ -44,15 +44,19 @@
       <a-plane height="20" width="20" material="color: #932843" rotation="-90 0 0" position="0 0 0"></a-plane>
 
       <!-- Human Camera -->
-      <a-camera id="human-camera" position="0 1.7 1.1" wasd-controls-enabled="true" look-controls-enabled="true"  mouse-controls active="true"></a-camera>
+      <a-camera id="human-camera" position="0 1.7 0" wasd-controls-enabled="true" look-controls-enabled="true"  mouse-controls active="true"></a-camera>
 
-      <a-entity id="world" domflag>
+      <a-entity id="world">
 
          <a-entity id="environment" position="0 0 0" rotation="0 0 0">
             <a-collada-model src="#environment-model"></a-collada-model>
          </a-entity>
 
-         <a-entity id="wireframe-flat" class="target" position="0 .15 -.1" domflag>
+         <!-- <a-entity id="wireframe-flat" class="target" position="0 .15 -.1" domflag>
+            <a-image src="assets/7/henley-mockup-3" height="3" width="2"></a-image>
+         </a-entity> -->
+
+         <a-entity id="wireframe-flat" class="target" position="0 .15 -.1">
 
             <a-image class="js-set" src="assets/7/henley-mockup-3-z3@2x.png" height="3" width="2" data-height="600" data-width="540" position="0 1.5 -.2"></a-image>
 
@@ -62,17 +66,24 @@
 
          </a-entity>
 
-         <a-entity id="wireframe-curved" class="target" position="0 .15 2.9" domflag>
+         <a-entity   id="wireframe-curved"
+                     class="target"
+                     position="0 1.65 0"
+                     data-heightOriginal="600"
+                     data-widthOriginal="540"
+                     data-radius="1"
+                     data-delta="-.2 0 .05"
+                     theta-length="160"
+                     theta-start="100"
+                     domFlag>
 
-            <a-curvedimage class="js-set" src="assets/7/henley-mockup-3-z3@2x.png" height="3" data-width="540" radius="3" position="0 1.5 -.2" theta-length="40" theta-start="160"></a-curvedimage>
-
-            <a-curvedimage class="js-set" src="assets/7/henley-mockup-3-z2@2x.png" height="3" data-width="540" radius="3" position="0 1.5 0" theta-length="40" theta-start="160"></a-curvedimage>
-
-            <a-curvedimage class="js-set" src="assets/7/henley-mockup-3-z1@2x.png" height="3" data-width="540" radius="3" position="0 1.5 .05" theta-length="40" theta-start="160"></a-curvedimage>
+            <a-curvedimage class="js-set" src="assets/7/henley-mockup-3-z3@2x.png"></a-curvedimage>
+            <a-curvedimage class="js-set" src="assets/7/henley-mockup-3-z2@2x.png"></a-curvedimage>
+            <a-curvedimage class="js-set" src="assets/7/henley-mockup-3-z1@2x.png"></a-curvedimage>
 
          </a-entity>
 
-         <a-entity id="wireframe-threeDim" class="target" position="0 .15 2.5" domflag>
+         <a-entity id="wireframe-threeDim" class="target" position="0 .15 2.5" >
             <a-box height=".5" width=".5" depth=".5"></a-box>
          </a-entity>
 
@@ -96,7 +107,7 @@
       var world = $('#world');
 
       scene.on('loaded', function(){
-         jsSetImages(true);
+         setImagesCurved(true);
          // console.log(targets);
 
          toggleTargetTo(settings.target);
@@ -146,19 +157,69 @@
          active: settings.target
       }
 
-      function jsSetImages(setBool){
+      function setImagesCurved(setBool){
+
+         var curvedSetParent = $('#wireframe-curved');
+         var curvedSet = curvedSetParent.find('a-curvedimage');
+
+         var parameters = {
+            heightOriginal:   curvedSetParent.data('heightOriginal'),
+            widthOriginal:    curvedSetParent.data('widthOriginal'),
+            radius:           curvedSetParent.data('radius'),
+            delta:            curvedSetParent.data('delta').split(' '),
+            thetaLength:      curvedSetParent.attr('theta-length'),
+            thetaStart:       curvedSetParent.attr('theta-start'),
+         }
+         console.log(parameters);
+
+         // thetaLength is governing wrapper
+
+         // Apply parent values
+
+         curvedSet.attr('radius', parameters.radius);
+
+         var heightToWidth = parameters.heightOriginal / parameters.widthOriginal;
+         var setHeight = parameters.thetaLength * heightToWidth;
+         console.log({
+            heightToWidth: heightToWidth,
+            setHeight
+         });
+         //curvedSet.attr('height', parameters.height);
+         // curvedSet.attr('width', parameters.width);
+
+         curvedSet.attr('theta-length', parameters.thetaLength);
+         curvedSet.attr('theta-start', parameters.thetaStart);
+
+
+         // find zero delta
+         // calculate radius
+            //
+
+
+
+
+
+         // curvedSet.attr('delta', parameters.delta);
+         // for(var i = 0; i < parameters.delta.length; i++){
+
+         // }
+
+
          // Curved images
-         var curvedImages = scene.find('a-curvedimage.js-set');
-         var curvedWidthOriginal = curvedImages.data('width');
-         var thetaLength = curvedImages.attr('theta-length');
+         // var curvedImages = scene.find('a-curvedimage.js-set');
+         // var curvedWidthOriginal = curvedImages.data('width');
+         // var thetaLength = curvedImages.attr('theta-length');
 
-         var thetaPercentage = thetaLength / 360;
+         // var thetaPercentage = thetaLength / 360;
 
-         var radius = (curvedWidthOriginal / (2 * Math.PI * thetaPercentage)) / 200;
-         console.log('Suggested Radius: ' + radius);
+         // var radius = (curvedWidthOriginal / (2 * Math.PI * thetaPercentage)) / 200; // magic number right now
+         // console.log('Suggested Radius: ' + radius);
 
-         if(setBool == true)
-            curvedImages.attr('radius', radius);
+         // if(setBool == true)
+         //    curvedImages.attr('radius', radius);
+      }
+
+      function setImagesFlat(setBool){
 
          // Flat images
          var flatImages = scene.find('a-image.js-set');
