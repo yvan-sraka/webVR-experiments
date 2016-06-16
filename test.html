@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+<head>
+   <title>7 - Product Selection &amp; Customization</title>
+   <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no,user-scalable=no,maximum-scale=1">
+   <script src="bower_components/aframe/dist/aframe-v0.2.0.min.js"></script>
+
+</head>
+<body>
+
+   <a-scene id="main-scene">
+
+      <!-- Global Settings -->
+      <a-sky color="#d81159"></a-sky>
+      <!-- <a-plane height="50" width="50" material="color: #982384" rotation="-90 0 0" position="0 0 0"></a-plane> -->
+
+      <!-- Human Camera -->
+      <a-camera id="human-camera" position="0 1.7 0" wasd-controls-enabled="true" look-controls-enabled="true"  mouse-controls active="true"></a-camera>
+
+      <a-box height=".1" width=".1" depth=".1" position="0 0 0"></a-box>
+      <a-box height=".1" width=".1" depth=".1" position="0 0 0.5"></a-box>
+      <a-box height=".1" width=".1" depth=".1" position="0 0 1"></a-box>
+      <a-box height=".1" width=".1" depth=".1" position="0 0 1.5"></a-box>
+      <a-box height=".1" width=".1" depth=".1" position="0 0 2"></a-box>
+      <a-box height=".1" width=".1" depth=".1" position="0 0 2.5"></a-box>
+
+      <a-entity position="0 1.7 0">
+         <!-- <a-curvedimage src="assets/7/henley-mockup-3-z2@2x.png" scale=".22 .22 .22" height="10" theta-length="160" theta-start="100" radius="4"></a-curvedimage>
+         <a-curvedimage src="assets/7/henley-mockup-3-z1@2x.png" scale=".2 .2 .2" height="10" theta-length="160" theta-start="100" radius="4"></a-curvedimage> -->
+
+         <a-curvedimage src="assets/7/scale-test-green.png" scale="20 20 20" height="10" theta-length="360" theta-start="0" radius="4"></a-curvedimage>
+         <a-curvedimage src="assets/7/scale-test.png" scale=".2 .2 .2" height="10" theta-length="360" theta-start="22" radius="4"></a-curvedimage>
+
+
+      </a-entity>
+
+   </a-scene>
+
+   <script>
+
+   </script>
+   </body>
+</html>
