@@ -252,9 +252,9 @@
 
          // Flat images
          var flatImages = scene.find('a-image.js-set');
-         var flatWidthOriginal = flatImages.data('width');
-         var flatWidthHeight = flatImages.getAttribute('height');
-         var flatHeightOriginal = flatImages.data('height');
+         var flatWidthOriginal = flatImages.getAttribute('data-width');
+         var flatWidthHeight = flatImages.getAttribute('data-height'); // what?
+         var flatHeightOriginal = flatImages.getAttribute('data-height');
 
          var width = flatWidthHeight * flatWidthOriginal / flatHeightOriginal;
 
