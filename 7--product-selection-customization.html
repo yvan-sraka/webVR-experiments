@@ -158,7 +158,7 @@
       function setImagesCurved(setBool){
 
          var curvedSetParent = targets.wireframeCurved.el;
-         var curvedSet = curvedSetParent.querySelector('a-curvedimage');
+         var curvedSet = curvedSetParent.querySelectorAll('a-curvedimage');
 
          var parameters = {
             heightorig:       curvedSetParent.getAttribute('data-heightorig'),
