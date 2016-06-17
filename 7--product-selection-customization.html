@@ -165,8 +165,8 @@
          var curvedSet = curvedSetParent.find('a-curvedimage');
 
          var parameters = {
-            heightorig:   curvedSetParent.data('heightorig'),
-            widthorig:    curvedSetParent.data('widthorig'),
+            heightorig:       curvedSetParent.data('heightorig'),
+            widthorig:        curvedSetParent.data('widthorig'),
             radius:           curvedSetParent.data('radius'),
             delta:            curvedSetParent.data('delta').split(' '),
             thetaLength:      curvedSetParent.attr('theta-length'),
@@ -180,17 +180,41 @@
 
          curvedSet.attr('radius', parameters.radius);
 
-         var heightToWidth = parameters.heightorig / parameters.widthorig;
-         var setHeight = parameters.thetaLength * heightToWidth;
-         console.log({
-            heightToWidth: heightToWidth,
-            setHeight
-         });
-         //curvedSet.attr('height', parameters.height);
-         // curvedSet.attr('width', parameters.width);
+         parameters.heightToWidth = parameters.heightorig / parameters.widthorig;
+         parameters.height = parameters.heightToWidth * parameters.radius * (2 * Math.PI * (parameters.thetaLength / 360));
+         curvedSet.attr('height', parameters.height);
+
 
          curvedSet.attr('theta-length', parameters.thetaLength);
-         curvedSet.attr('theta-start', parameters.thetaStart);
+
+         if(parameters.thetaStart == undefined){
+
+            curvedSet.attr('theta-start', (360 - parameters.thetaLength) / 2);
+
+         }else{
+            curvedSet.attr('theta-start', parameters.thetaStart);
+         }
+
+         // set deltas
+         console.log(curvedSet);
+         // find zero delta
+         var zeroithPosition = parameters.delta.indexOf('0');
+         console.log(zeroithPosition);
+         for(var i = 0; i < zeroithPosition; i++){
+            var scale = [];
+            for(var j = 0; j < 3; j++){
+               scale[j] = parameters.delta[i]
+            }
+
+            console.log(scale);
+
+            // BROKE, TRY COMPUTED GEOMETRY
+            var givenGemetry = curvedSet[i].getAttribute('geometry');
+            // givenGemetry.setAttribute('scale', scale);
+            // givenGemetry.scale
+         }
+
+
 
 
          // find zero delta
