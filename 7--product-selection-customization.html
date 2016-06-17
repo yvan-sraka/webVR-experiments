@@ -173,39 +173,49 @@
 
          // Apply parent values
 
-         curvedSet.getAttribute('radius', parameters.radius);
+         for(var i = 0; i < curvedSet.length; i++){
 
-         parameters.heightToWidth = parameters.heightorig / parameters.widthorig;
-         parameters.height = parameters.heightToWidth * parameters.radius * (2 * Math.PI * (parameters.thetaLength / 360));
-         curvedSet.getAttribute('height', parameters.height);
+            var el = curvedSet[i];
+
+            el.setAttribute('radius', parameters.radius);
+
+            parameters.heightToWidth = parameters.heightorig / parameters.widthorig;
+            parameters.height = parameters.heightToWidth * parameters.radius * (2 * Math.PI * (parameters.thetaLength / 360));
+            el.setAttribute('height', parameters.height);
 
 
-         curvedSet.getAttribute('theta-length', parameters.thetaLength);
+            el.setAttribute('theta-length', parameters.thetaLength);
 
-         if(parameters.thetaStart == undefined){
+            if(parameters.thetaStart == undefined){
 
-            curvedSet.getAttribute('theta-start', (360 - parameters.thetaLength) / 2);
+               el.setAttribute('theta-start', (360 - parameters.thetaLength) / 2);
 
-         }else{
-            curvedSet.getAttribute('theta-start', parameters.thetaStart);
-         }
-
-         // set deltas
-         // find zero delta
-         var zeroithPosition = parameters.delta.indexOf('0');
-         for(var i = 0; i < zeroithPosition; i++){
-            var scale = [];
-
-            for(var j = 0; j < 3; j++){
-               scale[j] = parameters.delta[i]
+            }else{
+               el.setAttribute('theta-start', parameters.thetaStart);
             }
 
+            // set deltas
+            // find zero delta
+            var zeroithPosition = parameters.delta.indexOf('0');
+            for(var j = 0; j < zeroithPosition; j++){
+               var scale = [];
 
-            // BROKE, TRY COMPUTED GEOMETRY
-            var givenGemetry = curvedSet[i].getAttribute('geometry');
-            // givenGemetry.setAttribute('scale', scale);
-            // givenGemetry.scale
+               for(var k = 0; k < 3; k++){
+                  scale[k] = parameters.delta[j]
+               }
+
+
+               // BROKE, TRY COMPUTED GEOMETRY
+               console.log(el);
+               el.getAttribute('geometry').scale = scale;
+               // console.log(givenGeometry);
+               // givenGemetry.setAttribute('scale', scale);
+               // givenGemetry.scale
+            }
+
          }
+
+
 
 
 
