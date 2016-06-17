@@ -106,7 +106,6 @@
 
       scene.addEventListener('loaded', function(){
          setImagesCurved(true);
-         // console.log(targets);
 
          toggleTargetTo(settings.target);
 
@@ -121,19 +120,16 @@
       });
       keyListener.simple_combo('1', function(){
 
-         console.log('switch to wireframe-flat');
          toggleTargetTo('wireframe-flat');
 
       });
       keyListener.simple_combo('2', function(){
 
-         console.log('switch to wireframe-curved');
          toggleTargetTo('wireframe-curved');
 
       });
       keyListener.simple_combo('3', function(){
 
-         console.log('switch to wireframe-threeDim');
          toggleTargetTo('wireframe-threeDim');
 
       });
@@ -155,8 +151,6 @@
          active: settings.target
       }
 
-      console.log('targets');
-      console.log(targets);
 
       // Set the parameters of curved image sets using parent settings
       //
@@ -174,7 +168,6 @@
             thetaLength:      curvedSetParent.getAttribute('theta-length'),
             thetaStart:       curvedSetParent.getAttribute('theta-start'),
          }
-         console.log(parameters);
 
          // thetaLength is governing wrapper
 
@@ -198,10 +191,8 @@
          }
 
          // set deltas
-         console.log(curvedSet);
          // find zero delta
          var zeroithPosition = parameters.delta.indexOf('0');
-         console.log(zeroithPosition);
          for(var i = 0; i < zeroithPosition; i++){
             var scale = [];
 
@@ -209,7 +200,6 @@
                scale[j] = parameters.delta[i]
             }
 
-            console.log(scale);
 
             // BROKE, TRY COMPUTED GEOMETRY
             var givenGemetry = curvedSet[i].getAttribute('geometry');
@@ -280,7 +270,6 @@
       }
 
       function toggleTargetTo(toggleTo){
-         console.log(toggleTo);
 
          $('.target').getAttribute('position', settings.hiddenPosition.x + ' ' + settings.hiddenPosition.y + ' ' + settings.hiddenPosition.z);
 
@@ -299,7 +288,6 @@
 
             default:
                console.log('Wrong variable passed on toggleTargetTo()');
-               console.log(toggleTo);
                return;
                break;
          }
