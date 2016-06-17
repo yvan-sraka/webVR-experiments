@@ -280,8 +280,10 @@
       }
 
       function toggleTargetTo(toggleTo){
-
-         $('.target').getAttribute('position', settings.hiddenPosition.x + ' ' + settings.hiddenPosition.y + ' ' + settings.hiddenPosition.z);
+         var els = scene.querySelectorAll('.target');
+         els.forEach(function(el){
+            el.setAttribute('position', settings.hiddenPosition.x + ' ' + settings.hiddenPosition.y + ' ' + settings.hiddenPosition.z);
+         });
 
          switch (toggleTo){
             case 'wireframe-flat':
@@ -301,7 +303,9 @@
                return;
                break;
          }
-         $('#' + toggleTo).getAttribute('position', pos.x + ' ' + pos.y + ' ' + pos.z);
+
+         scene.querySelector('#' + toggleTo).setAttribute('position', pos.x + ' ' + pos.y + ' ' + pos.z);
+
 
       }
 
