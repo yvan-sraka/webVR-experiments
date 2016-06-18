@@ -4,7 +4,6 @@
    <title>7 - Product Selection &amp; Customization</title>
    <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no,user-scalable=no,maximum-scale=1">
    <script src="bower_components/aframe/dist/aframe-v0.2.0.min.js"></script>
-   <script src="bower_components/jQuery/dist/jquery.min.js"></script>
    <script src="bower_components/Keypress/keypress.js"></script>
    <script src="bower_components/is_js/is.min.js"></script>
    <style>
@@ -44,7 +43,9 @@
       <a-plane height="20" width="20" material="color: #932843" rotation="-90 0 0" position="0 0 0"></a-plane>
 
       <!-- Human Camera -->
-      <a-camera id="human-camera" position="0 1.7 0" wasd-controls-enabled="true" look-controls-enabled="true"  mouse-controls active="true"></a-camera>
+      <a-camera id="human-camera" position="0 1.7 0" wasd-controls-enabled="true" look-controls-enabled="true"  mouse-controls active="true" near=".05">
+         <a-entity position="0 0 -.06" geometry="primitive: circle; radius: .0002"  material="color: #fff"></a-entity>
+      </a-camera>
 
       <a-entity id="world">
 
@@ -72,8 +73,9 @@
                      data-heightorig="600"
                      data-widthorig="540"
                      data-radius=".8"
-                     data-delta="-.2 0 .05"
-                     theta-length="90"
+                     data-delta=".1 0 -.1"
+                     theta-length="120"
+                     data-scale="1"
                      domFlag>
 
             <a-curvedimage class="js-set" src="assets/7/henley-mockup-3-z3@2x.png"></a-curvedimage>
@@ -98,20 +100,40 @@
             x: 0,
             y: -1000,
             z: 0
-         }
+         },
+         reload: false,    // When developing, it's nice if your phone reloads automatically
+         reloadTime: 10    // In seconds
 
       }
 
-      var scene = $('#main-scene');
-      var world = $('#world');
+      var scene = document.querySelector('#main-scene');
+      var world = scene.querySelector('#world');
 
-      scene.on('loaded', function(){
+      scene.addEventListener('loaded', function(){
+
          setImagesCurved(true);
-         // console.log(targets);
 
          toggleTargetTo(settings.target);
 
+         if(settings.reload == true){
+            scene.enterVR();
+            reloadPage(settings.reloadTime);
+         }
+
       });
+
+      function reloadPage(seconds){
+
+         function reloadCallback(){
+            return function(){
+               window.location.reload();
+            }
+         }
+         var millis = seconds * 1000;
+
+         setTimeout(reloadCallback(), millis);
+
+      }
 
       // KeyListener
       var keyListener = new window.keypress.Listener();
@@ -122,19 +144,16 @@
       });
       keyListener.simple_combo('1', function(){
 
-         console.log('switch to wireframe-flat');
          toggleTargetTo('wireframe-flat');
 
       });
       keyListener.simple_combo('2', function(){
 
-         console.log('switch to wireframe-curved');
          toggleTargetTo('wireframe-curved');
 
       });
       keyListener.simple_combo('3', function(){
 
-         console.log('switch to wireframe-threeDim');
          toggleTargetTo('wireframe-threeDim');
 
       });
@@ -142,77 +161,101 @@
 
       var targets = {
          wireframeFlat:       {
-            el: $('#wireframe-flat')[0],
-            initPosition: $('#wireframe-flat').first().attr('position')
+            el: scene.querySelector('#wireframe-flat'),
+            initPosition: scene.querySelector('#wireframe-flat').getAttribute('position')
          },
          wireframeCurved:     {
-            el: $('#wireframe-curved')[0],
-            initPosition: $('#wireframe-curved').first().attr('position')
+            el: scene.querySelector('#wireframe-curved'),
+            initPosition: scene.querySelector('#wireframe-curved').getAttribute('position')
          },
          wireframeThreeDim:   {
-            el: $('#wireframe-threeDim')[0],
-            initPosition: $('#wireframe-threeDim').first().attr('position')
+            el: scene.querySelector('#wireframe-threeDim'),
+            initPosition: scene.querySelector('#wireframe-threeDim').getAttribute('position')
          },
          active: settings.target
       }
+
 
       // Set the parameters of curved image sets using parent settings
       //
       //
       function setImagesCurved(setBool){
 
-         var curvedSetParent = $('#wireframe-curved');
-         var curvedSet = curvedSetParent.find('a-curvedimage');
+         var curvedSetParent = targets.wireframeCurved.el;
+         var curvedSet = curvedSetParent.querySelectorAll('a-curvedimage');
 
          var parameters = {
-            heightorig:       curvedSetParent.data('heightorig'),
-            widthorig:        curvedSetParent.data('widthorig'),
-            radius:           curvedSetParent.data('radius'),
-            delta:            curvedSetParent.data('delta').split(' '),
-            thetaLength:      curvedSetParent.attr('theta-length'),
-            thetaStart:       curvedSetParent.attr('theta-start'),
+            heightorig:       curvedSetParent.getAttribute('data-heightorig'),
+            widthorig:        curvedSetParent.getAttribute('data-widthorig'),
+            radius:           curvedSetParent.getAttribute('data-radius'),
+            delta:            curvedSetParent.getAttribute('data-delta').split(' '),
+            thetaLength:      curvedSetParent.getAttribute('theta-length'),
+            thetaStart:       curvedSetParent.getAttribute('theta-start'),
+            scale:            curvedSetParent.getAttribute('data-scale')
          }
-         console.log(parameters);
 
          // thetaLength is governing wrapper
 
          // Apply parent values
 
-         curvedSet.attr('radius', parameters.radius);
-
-         parameters.heightToWidth = parameters.heightorig / parameters.widthorig;
-         parameters.height = parameters.heightToWidth * parameters.radius * (2 * Math.PI * (parameters.thetaLength / 360));
-         curvedSet.attr('height', parameters.height);
-
-
-         curvedSet.attr('theta-length', parameters.thetaLength);
-
-         if(parameters.thetaStart == undefined){
-
-            curvedSet.attr('theta-start', (360 - parameters.thetaLength) / 2);
-
-         }else{
-            curvedSet.attr('theta-start', parameters.thetaStart);
-         }
-
-         // set deltas
-         console.log(curvedSet);
-         // find zero delta
          var zeroithPosition = parameters.delta.indexOf('0');
-         console.log(zeroithPosition);
-         for(var i = 0; i < zeroithPosition; i++){
-            var scale = [];
-            for(var j = 0; j < 3; j++){
-               scale[j] = parameters.delta[i]
+
+         for(var i = 0; i < curvedSet.length; i++){
+
+            var el = curvedSet[i];
+
+            el.setAttribute('radius', parameters.radius);
+
+            parameters.heightToWidth = parameters.heightorig / parameters.widthorig;
+            parameters.height = parameters.heightToWidth * parameters.radius * (2 * Math.PI * (parameters.thetaLength / 360));
+            el.setAttribute('height', parameters.height);
+
+
+            el.setAttribute('theta-length', parameters.thetaLength);
+
+            if(parameters.thetaStart == undefined){
+               el.setAttribute('theta-start', (360 - parameters.thetaLength) / 2);
+
+            }else{
+               el.setAttribute('theta-start', parameters.thetaStart);
             }
 
+            // set deltas
+            // find zero delta
+
+            if(el.getAttribute('scale') == null){
+               el.setAttribute('scale', parameters.scale);
+            }
+            var scale = {};
+
+            // for(var k = 0; k < 3; k++){
+            //    scale[k] = Number(parameters.delta[i])
+            // }
+            scale = {
+               x: Number(parameters.scale) + Number(parameters.delta[i]),
+               y: Number(parameters.scale) + Number(parameters.delta[i]),
+               z: Number(parameters.scale) + Number(parameters.delta[i])
+            }
             console.log(scale);
+            // console.log(el.getAttribute('scale'));
+            el.setAttribute('scale', scale);
+
 
             // BROKE, TRY COMPUTED GEOMETRY
-            var givenGemetry = curvedSet[i].getAttribute('geometry');
+            // el.setAttribute('scale', scale)
+            // console.log(el);
+            // var elGeometry = el.getAttribute('scale');
+            // elGeometry.scale = scale;
+            // el.setAttribute('geometry', elGeometry);
+            // console.log(elGeometry);
+            // console.log(givenGeometry);
             // givenGemetry.setAttribute('scale', scale);
             // givenGemetry.scale
+
+
          }
+
+
 
 
 
@@ -225,7 +268,7 @@
 
 
 
-         // curvedSet.attr('delta', parameters.delta);
+         // curvedSet.getAttribute('delta', parameters.delta);
          // for(var i = 0; i < parameters.delta.length; i++){
 
          // }
@@ -234,7 +277,7 @@
          // Curved images
          // var curvedImages = scene.find('a-curvedimage.js-set');
          // var curvedwidthorig = curvedImages.data('width');
-         // var thetaLength = curvedImages.attr('theta-length');
+         // var thetaLength = curvedImages.getAttribute('theta-length');
 
          // var thetaPercentage = thetaLength / 360;
 
@@ -242,23 +285,23 @@
          // console.log('Suggested Radius: ' + radius);
 
          // if(setBool == true)
-         //    curvedImages.attr('radius', radius);
+         //    curvedImages.getAttribute('radius', radius);
       }
 
       function setImagesFlat(setBool){
 
          // Flat images
          var flatImages = scene.find('a-image.js-set');
-         var flatWidthOriginal = flatImages.data('width');
-         var flatWidthHeight = flatImages.attr('height');
-         var flatHeightOriginal = flatImages.data('height');
+         var flatWidthOriginal = flatImages.getAttribute('data-width');
+         var flatWidthHeight = flatImages.getAttribute('data-height'); // what?
+         var flatHeightOriginal = flatImages.getAttribute('data-height');
 
          var width = flatWidthHeight * flatWidthOriginal / flatHeightOriginal;
 
          console.log('Suggested Width: ' + width);
 
          if(setBool == true)
-            flatImages.attr('width', width);
+            flatImages.getAttribute('width', width);
       }
 
       function targetsKey(targetKey){
@@ -277,9 +320,11 @@
       }
 
       function toggleTargetTo(toggleTo){
-         console.log(toggleTo);
+         var els = scene.querySelectorAll('.target');
+         forEach(els, function(el){
 
-         $('.target').attr('position', settings.hiddenPosition.x + ' ' + settings.hiddenPosition.y + ' ' + settings.hiddenPosition.z);
+            el.setAttribute('position', settings.hiddenPosition.x + ' ' + settings.hiddenPosition.y + ' ' + settings.hiddenPosition.z);
+         });
 
          switch (toggleTo){
             case 'wireframe-flat':
@@ -296,12 +341,19 @@
 
             default:
                console.log('Wrong variable passed on toggleTargetTo()');
-               console.log(toggleTo);
                return;
                break;
          }
-         $('#' + toggleTo).attr('position', pos.x + ' ' + pos.y + ' ' + pos.z);
 
+         scene.querySelector('#' + toggleTo).setAttribute('position', pos.x + ' ' + pos.y + ' ' + pos.z);
+
+         targets.active = toggleTo;
+
+      }
+
+      function forEach(array, action) {
+         for (var i = 0; i < array.length; i++)
+         action(array[i]);
       }
 
    </script>
