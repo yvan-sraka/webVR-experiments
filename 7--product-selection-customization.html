@@ -133,7 +133,8 @@
 
       scene.addEventListener('loaded', function(){
 
-         setImagesCurved(true);
+         setImagesCurved(targets.wireframeCurved.el, true);
+         setImagesCurved(targets.wireframeThreeDim.el, true);
 
          toggleTargetTo(settings.target);
 
@@ -201,19 +202,18 @@
       // Set the parameters of curved image sets using parent settings
       //
       //
-      function setImagesCurved(setBool){
+      function setImagesCurved(parentEl, setBool){
 
-         var curvedSetParent = targets.wireframeCurved.el;
-         var curvedSet = curvedSetParent.querySelectorAll('a-curvedimage');
+         var curvedSet = parentEl.querySelectorAll('a-curvedimage');
 
          var parameters = {
-            heightorig:       curvedSetParent.getAttribute('data-heightorig'),
-            widthorig:        curvedSetParent.getAttribute('data-widthorig'),
-            radius:           curvedSetParent.getAttribute('data-radius'),
-            delta:            curvedSetParent.getAttribute('data-delta').split(' '),
-            thetaLength:      curvedSetParent.getAttribute('theta-length'),
-            thetaStart:       curvedSetParent.getAttribute('theta-start'),
-            scale:            curvedSetParent.getAttribute('data-scale')
+            heightorig:       parentEl.getAttribute('data-heightorig'),
+            widthorig:        parentEl.getAttribute('data-widthorig'),
+            radius:           parentEl.getAttribute('data-radius'),
+            delta:            parentEl.getAttribute('data-delta').split(' '),
+            thetaLength:      parentEl.getAttribute('theta-length'),
+            thetaStart:       parentEl.getAttribute('theta-start'),
+            scale:            parentEl.getAttribute('data-scale')
          }
 
          // thetaLength is governing wrapper
