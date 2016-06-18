@@ -41,13 +41,15 @@
       <a-light type="ambient" color="#ccc" intensity=".1"></a-light>
       <a-light type="directional" color="#fff" position="1 1 .5" intensity="1"></a-light>
       <a-light type="directional" color="#ffbc42" position="-1 1 .4" intensity=".5"></a-light>
-      <a-plane height="20" width="20" material="color: #932843" rotation="-90 0 0" position="0 0 0"></a-plane>
+      <a-plane height="20" width="20" material="color: #006ba6" rotation="-90 0 0" position="0 0 0"></a-plane>
 
       <!-- Human Camera -->
       <a-camera id="human-camera" position="0 1.7 0" wasd-controls-enabled="true" look-controls-enabled="true"  mouse-controls active="true" near=".05">
          <a-entity position="0 0 -.5" geometry="primitive: plane; height: .005; width: .005"  material="color: #fff"></a-entity>
       </a-camera>
 
+
+      <!-- World Elements -->
       <a-entity id="world">
 
          <a-entity id="environment" position="0 0 0" rotation="0 0 0">
@@ -116,15 +118,14 @@
    <script>
 
       var settings = {
-         target: 'wireframe-curved',
+         target: 'wireframe-threeDim',
          hiddenPosition: {
             x: 0,
             y: -1000,
             z: 0
          },
          reload: false,    // When developing, it's nice if your phone reloads automatically
-         reloadTime: 10    // In seconds
-
+         reloadTime: 6     // In seconds
       }
 
       var scene = document.querySelector('#main-scene');
