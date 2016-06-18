@@ -191,11 +191,14 @@
             delta:            curvedSetParent.getAttribute('data-delta').split(' '),
             thetaLength:      curvedSetParent.getAttribute('theta-length'),
             thetaStart:       curvedSetParent.getAttribute('theta-start'),
+            scale:            curvedSetParent.getAttribute('data-scale')
          }
 
          // thetaLength is governing wrapper
 
          // Apply parent values
+
+         var zeroithPosition = parameters.delta.indexOf('0');
 
          for(var i = 0; i < curvedSet.length; i++){
 
@@ -211,7 +214,6 @@
             el.setAttribute('theta-length', parameters.thetaLength);
 
             if(parameters.thetaStart == undefined){
-
                el.setAttribute('theta-start', (360 - parameters.thetaLength) / 2);
 
             }else{
@@ -220,22 +222,36 @@
 
             // set deltas
             // find zero delta
-            var zeroithPosition = parameters.delta.indexOf('0');
-            for(var j = 0; j < zeroithPosition; j++){
-               var scale = [];
 
-               for(var k = 0; k < 3; k++){
-                  scale[k] = parameters.delta[j]
-               }
-
-
-               // BROKE, TRY COMPUTED GEOMETRY
-               console.log(el);
-               el.getAttribute('geometry').scale = scale;
-               // console.log(givenGeometry);
-               // givenGemetry.setAttribute('scale', scale);
-               // givenGemetry.scale
+            if(el.getAttribute('scale') == null){
+               el.setAttribute('scale', parameters.scale);
             }
+            var scale = {};
+
+            // for(var k = 0; k < 3; k++){
+            //    scale[k] = Number(parameters.delta[i])
+            // }
+            scale = {
+               x: Number(parameters.scale) + Number(parameters.delta[i]),
+               y: Number(parameters.scale) + Number(parameters.delta[i]),
+               z: Number(parameters.scale) + Number(parameters.delta[i])
+            }
+            console.log(scale);
+            // console.log(el.getAttribute('scale'));
+            el.setAttribute('scale', scale);
+
+
+            // BROKE, TRY COMPUTED GEOMETRY
+            // el.setAttribute('scale', scale)
+            // console.log(el);
+            // var elGeometry = el.getAttribute('scale');
+            // elGeometry.scale = scale;
+            // el.setAttribute('geometry', elGeometry);
+            // console.log(elGeometry);
+            // console.log(givenGeometry);
+            // givenGemetry.setAttribute('scale', scale);
+            // givenGemetry.scale
+
 
          }
 
