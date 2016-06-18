@@ -305,7 +305,8 @@
 
       function toggleTargetTo(toggleTo){
          var els = scene.querySelectorAll('.target');
-         els.forEach(function(el){
+         forEach(els, function(el){
+
             el.setAttribute('position', settings.hiddenPosition.x + ' ' + settings.hiddenPosition.y + ' ' + settings.hiddenPosition.z);
          });
 
@@ -332,6 +333,11 @@
 
          targets.active = toggleTo;
 
+      }
+
+      function forEach(array, action) {
+         for (var i = 0; i < array.length; i++)
+         action(array[i]);
       }
 
    </script>
