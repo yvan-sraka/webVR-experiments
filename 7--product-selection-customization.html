@@ -55,15 +55,13 @@
          </a-entity>
 
          <!-- <a-entity id="wireframe-flat" class="target" position="0 .15 -.1" domflag>
-            <a-image src="assets/7/henley-mockup-3" height="3" width="2"></a-image>
+            <a-image src="assets/7/henley-mockup-3@2x.png" height="3" width="2"></a-image>
          </a-entity> -->
 
-         <a-entity id="wireframe-flat" class="target" position="0 .15 -.1">
+         <a-entity id="wireframe-straight" class="target" position="0 .15 -.1">
 
             <a-image class="js-set" src="assets/7/henley-mockup-3-z3@2x.png" height="3" width="2" data-height="600" data-width="540" position="0 1.5 -.2"></a-image>
-
             <a-image class="js-set" src="assets/7/henley-mockup-3-z2@2x.png" height="3" width="2" data-height="600" data-width="540" position="0 1.5 0"></a-image>
-
             <a-image class="js-set" src="assets/7/henley-mockup-3-z1@2x.png" height="3" width="2" data-height="600" data-width="540" position="0 1.5 .05"></a-image>
 
          </a-entity>
@@ -167,7 +165,7 @@
       });
       keyListener.simple_combo('1', function(){
 
-         toggleTargetTo('wireframe-flat');
+         toggleTargetTo('wireframe-straight');
 
       });
       keyListener.simple_combo('2', function(){
@@ -184,8 +182,8 @@
 
       var targets = {
          wireframeFlat:       {
-            el: scene.querySelector('#wireframe-flat'),
-            initPosition: scene.querySelector('#wireframe-flat').getAttribute('position')
+            el: scene.querySelector('#wireframe-straight'),
+            initPosition: scene.querySelector('#wireframe-straight').getAttribute('position')
          },
          wireframeCurved:     {
             el: scene.querySelector('#wireframe-curved'),
@@ -328,7 +326,7 @@
       }
 
       function targetsKey(targetKey){
-         if(targetKey == 'wireframeFlat' || targetKey == 'wireframe-flat'){
+         if(targetKey == 'wireframeFlat' || targetKey == 'wireframe-straight'){
             return 0;
          }
          else if(targetKey == 'wireframeCurved' || targetKey == 'wireframe-curved'){
@@ -350,7 +348,7 @@
          });
 
          switch (toggleTo){
-            case 'wireframe-flat':
+            case 'wireframe-straight':
                var pos = targets.wireframeFlat.initPosition;
                break;
 
