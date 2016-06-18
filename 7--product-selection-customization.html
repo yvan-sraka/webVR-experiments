@@ -342,12 +342,17 @@
          }
       }
 
+      /*
+         Toggle to a target. Works by setting all targets below the ground plane, then pulling up the active one
+      */
       function toggleTargetTo(toggleTo){
 
+         // For each target, set the position below the ground plane
          forEach(targets.els, function(el){
             el.setAttribute('position', settings.hiddenPosition.x + ' ' + settings.hiddenPosition.y + ' ' + settings.hiddenPosition.z);
          });
 
+         // Depending on the toggleTo target, set a position variable to its initial position
          switch (toggleTo){
             case 'wireframe-straight':
                var pos = targets.wireframeFlat.initPosition;
@@ -367,12 +372,17 @@
                break;
          }
 
+         // Find the toggleTo and actually set the position attribute
          scene.querySelector('#' + toggleTo).setAttribute('position', pos.x + ' ' + pos.y + ' ' + pos.z);
 
+         // Change the active target to the toggleTo
          targets.active = toggleTo;
 
       }
 
+      /*
+         Replacement of for() loops over arrays
+      */
       function forEach(array, action) {
          for (var i = 0; i < array.length; i++)
          action(array[i]);
