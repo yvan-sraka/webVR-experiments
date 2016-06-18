@@ -43,7 +43,9 @@
       <a-plane height="20" width="20" material="color: #932843" rotation="-90 0 0" position="0 0 0"></a-plane>
 
       <!-- Human Camera -->
-      <a-camera id="human-camera" position="0 1.7 0" wasd-controls-enabled="true" look-controls-enabled="true"  mouse-controls active="true"></a-camera>
+      <a-camera id="human-camera" position="0 1.7 0" wasd-controls-enabled="true" look-controls-enabled="true"  mouse-controls active="true" near=".05">
+         <a-entity position="0 0 -.06" geometry="primitive: circle; radius: .0002"  material="color: #fff"></a-entity>
+      </a-camera>
 
       <a-entity id="world">
 
