@@ -183,6 +183,7 @@
 
 
       var targets = {
+         els: scene.querySelectorAll('.targets'),
          wireframeFlat:       {
             el: scene.querySelector('#wireframe-straight'),
             initPosition: scene.querySelector('#wireframe-straight').getAttribute('position')
@@ -342,9 +343,8 @@
       }
 
       function toggleTargetTo(toggleTo){
-         var els = scene.querySelectorAll('.target');
-         forEach(els, function(el){
 
+         forEach(targets.els, function(el){
             el.setAttribute('position', settings.hiddenPosition.x + ' ' + settings.hiddenPosition.y + ' ' + settings.hiddenPosition.z);
          });
 
