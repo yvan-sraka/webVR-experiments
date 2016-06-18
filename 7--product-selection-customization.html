@@ -33,6 +33,7 @@
 
       <a-assets>
          <!-- <a-asset-item id="model-environment" src="assets/7/models/scene-forest-mountain.dae"></a-collada-model> -->
+         <a-asset-item id="model-shirt" src="assets/7/models/shirt.dae"></a-collada-model>
       </a-assets>
 
       <!-- Global Settings -->
@@ -84,8 +85,29 @@
 
          </a-entity>
 
-         <a-entity id="wireframe-threeDim" class="target" position="0 .15 2.5" >
-            <a-box height=".5" width=".5" depth=".5"></a-box>
+         <a-entity id="wireframe-threeDim"
+                     class="target"
+                     position="0 1.7 0"
+                     data-heightorig="600"
+                     data-widthorig="540"
+                     data-radius=".8"
+                     data-delta="3 .1 0 -.1"
+                     theta-length="120"
+                     data-scale="1"
+                     domFlag>
+
+            <a-collada-model  src="#model-shirt"
+                              rotation="90 35 0"
+                              position="-.65 -.35 -.58"
+                              scale=".285 .285 .285"
+                              material="metalness: 0; roughness: 1;"
+            >
+            </a-collada-model>
+
+            <a-curvedimage class="js-set" src="assets/7/henley-mockup-3-z4@2x.png"></a-curvedimage>
+            <a-curvedimage class="js-set" src="assets/7/henley-mockup-3-z3@2x.png"></a-curvedimage>
+            <a-curvedimage class="js-set" src="assets/7/henley-mockup-3-z2-noshirt@2x.png"></a-curvedimage>
+            <a-curvedimage class="js-set" src="assets/7/henley-mockup-3-z1@2x.png"></a-curvedimage>
          </a-entity>
 
       </a-entity>
