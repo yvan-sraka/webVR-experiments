@@ -56,7 +56,7 @@
             <a-collada-model src="#model-environment"></a-collada-model>
          </a-entity>
 
-         <!-- <a-entity id="wireframe-flat" class="target" position="0 .15 -.1" domflag>
+         <!-- <a-entity id="wireframe-straight" class="target" position="0 .15 -.1" domflag>
             <a-image src="assets/7/henley-mockup-3@2x.png" height="3" width="2"></a-image>
          </a-entity> -->
 
@@ -119,7 +119,7 @@
    <script>
 
       var settings = {
-         target: 'wireframe-straight',  // Which mockup should be active (wireframe-straight, -curved, or -threeDim1)
+         target: 'wireframe-curved',  // Which mockup should be active (wireframe-straight, -curved, or -threeDim1)
          hiddenPosition: {              // Location of the hidden position, e.g. below the ground plane
             x: 0,
             y: -1000,
@@ -129,6 +129,11 @@
          reloadTime: 6                  // In seconds
       }
 
+
+
+      /*
+         Setup global variables
+      */
       var scene = document.querySelector('#main-scene');
       var world = scene.querySelector('#world');
 
@@ -148,18 +153,23 @@
          },
          active: settings.target
       }
-      console.log('targets');
-      console.log(targets);
 
+      /*
+         Add event listener to run after scene is loaded
+      */
       scene.addEventListener('loaded', function(){
 
-         setImagesFlat();
+         // Set the dimensions of the straight images
+         setImagesStraight();
 
+         // Set the dimensions of the curved images
          setImagesCurved(targets.wireframeCurved.el, true);
          setImagesCurved(targets.wireframeThreeDim.el, true);
 
-         toggleTargetTo(settings.target);
+         // Toggle active target to whichever one is active
+         toggleTargetTo(targets.active);
 
+         // If the reload setting is turned on, enterVR and reload the page after a set time
          if(settings.reload == true){
             scene.enterVR();
             reloadPage(settings.reloadTime);
@@ -167,6 +177,9 @@
 
       });
 
+      /*
+         Reload page after so many seconds, used for development
+      */
       function reloadPage(seconds){
 
          function reloadCallback(){
@@ -180,40 +193,38 @@
 
       }
 
-      // KeyListener
+      /*
+         Keylistener functions
+      */
+      // Setup
       var keyListener = new window.keypress.Listener();
+
+      // check targets object
       keyListener.simple_combo('c', function(){
-
-         //console.log(targetsHTML.wireframe);
-
+         console.log(targets);
       });
+
+      // Toggle to a target
       keyListener.simple_combo('1', function(){
-
          toggleTargetTo('wireframe-straight');
-
       });
       keyListener.simple_combo('2', function(){
-
          toggleTargetTo('wireframe-curved');
-
       });
       keyListener.simple_combo('3', function(){
-
          toggleTargetTo('wireframe-threeDim');
-
       });
 
 
-
-
-
-      // Set the parameters of curved image sets using parent settings
-      //
-      //
+      /*
+         Set the parameters of curved image sets using parent settings
+      */
       function setImagesCurved(parentEl, setBool){
 
+         // find the set of curved elements
          var curvedSet = parentEl.querySelectorAll('a-curvedimage');
 
+         // create a parameters object based on attribute
          var parameters = {
             heightorig:       parentEl.getAttribute('data-heightorig'),
             widthorig:        parentEl.getAttribute('data-widthorig'),
@@ -224,19 +235,17 @@
             scale:            parentEl.getAttribute('data-scale')
          }
 
-         // thetaLength is governing wrapper
-
-         // Apply parent values
-
-         var zeroithPosition = parameters.delta.indexOf('0');
-
+         // For each element in the curved set, calculate and set its attributes
          for(var i = 0; i < curvedSet.length; i++){
 
             var el = curvedSet[i];
 
+            // set the radius
             el.setAttribute('radius', parameters.radius);
 
+            // calculate the height to width ratio
             parameters.heightToWidth = parameters.heightorig / parameters.widthorig;
+            // The height should be the arc length (the curved width or circumfrence length)
             parameters.height = parameters.heightToWidth * parameters.radius * (2 * Math.PI * (parameters.thetaLength / 360));
             el.setAttribute('height', parameters.height);
 
@@ -256,81 +265,32 @@
             if(el.getAttribute('scale') == null){
                el.setAttribute('scale', parameters.scale);
             }
-            var scale = {};
 
-            // for(var k = 0; k < 3; k++){
-            //    scale[k] = Number(parameters.delta[i])
-            // }
-            scale = {
+            var scale = {
                x: Number(parameters.scale) + Number(parameters.delta[i]),
                y: Number(parameters.scale) + Number(parameters.delta[i]),
                z: Number(parameters.scale) + Number(parameters.delta[i])
             }
-            console.log(scale);
-            // console.log(el.getAttribute('scale'));
+
             el.setAttribute('scale', scale);
 
 
-            // BROKE, TRY COMPUTED GEOMETRY
-            // el.setAttribute('scale', scale)
-            // console.log(el);
-            // var elGeometry = el.getAttribute('scale');
-            // elGeometry.scale = scale;
-            // el.setAttribute('geometry', elGeometry);
-            // console.log(elGeometry);
-            // console.log(givenGeometry);
-            // givenGemetry.setAttribute('scale', scale);
-            // givenGemetry.scale
-
-
          }
-
-
-
-
-
-
-         // find zero delta
-         // calculate radius
-            //
-
-
-
-
-
-         // curvedSet.getAttribute('delta', parameters.delta);
-         // for(var i = 0; i < parameters.delta.length; i++){
-
-         // }
-
-
-         // Curved images
-         // var curvedImages = scene.find('a-curvedimage.js-set');
-         // var curvedwidthorig = curvedImages.data('width');
-         // var thetaLength = curvedImages.getAttribute('theta-length');
-
-         // var thetaPercentage = thetaLength / 360;
-
-         // var radius = (curvedwidthorig / (2 * Math.PI * thetaPercentage)) / 200; // magic number right now
-         // console.log('Suggested Radius: ' + radius);
-
-         // if(setBool == true)
-         //    curvedImages.getAttribute('radius', radius);
       }
 
       /*
-         Sets the flat/planar images based on a given height and width
+         Sets the straight/planar images based on a given height and width
       */
-      function setImagesFlat(){
+      function setImagesStraight(){
 
-         var flatImages = scene.querySelectorAll('a-image.js-set');
-         console.log(flatImages);
-         forEach(flatImages, function(el){
-            var flatWidthOriginal = el.getAttribute('data-width');
-            var flatHeightOriginal = el.getAttribute('data-height');
-            var flatDesiredHeight = el.getAttribute('height');
+         var straightImages = scene.querySelectorAll('a-image.js-set');
+         console.log(straightImages);
+         forEach(straightImages, function(el){
+            var straightWidthOriginal = el.getAttribute('data-width');
+            var straightHeightOriginal = el.getAttribute('data-height');
+            var straightDesiredHeight = el.getAttribute('height');
 
-            var width = flatDesiredHeight * flatWidthOriginal / flatHeightOriginal;
+            var width = straightDesiredHeight * straightWidthOriginal / straightHeightOriginal;
             el.setAttribute('width', width);
          });
       }
