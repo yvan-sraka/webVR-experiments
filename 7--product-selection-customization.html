@@ -133,6 +133,8 @@
 
       scene.addEventListener('loaded', function(){
 
+         setImagesFlat();
+
          setImagesCurved(targets.wireframeCurved.el, true);
          setImagesCurved(targets.wireframeThreeDim.el, true);
 
@@ -313,21 +315,18 @@
       /*
          Sets the flat/planar images based on a given height and width
       */
+      function setImagesFlat(){
 
-      function setImagesFlat(setBool){
+         var flatImages = scene.querySelectorAll('a-image.js-set');
+         console.log(flatImages);
+         forEach(flatImages, function(el){
+            var flatWidthOriginal = el.getAttribute('data-width');
+            var flatHeightOriginal = el.getAttribute('data-height');
+            var flatDesiredHeight = el.getAttribute('height');
 
-         // Flat images
-         var flatImages = scene.find('a-image.js-set');
-         var flatWidthOriginal = flatImages.getAttribute('data-width');
-         var flatWidthHeight = flatImages.getAttribute('data-height'); // what?
-         var flatHeightOriginal = flatImages.getAttribute('data-height');
-
-         var width = flatWidthHeight * flatWidthOriginal / flatHeightOriginal;
-
-         console.log('Suggested Width: ' + width);
-
-         if(setBool == true)
-            flatImages.getAttribute('width', width);
+            var width = flatDesiredHeight * flatWidthOriginal / flatHeightOriginal;
+            el.setAttribute('width', width);
+         });
       }
 
       /*
