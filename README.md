@@ -59,11 +59,11 @@ Looking at the differences in prototyping with a single planar mockup, a curved 
 **Movement:** `W A S D`<br>
 **console.log(Targets):** `C`
 
-| Transformation | Key |
-| -------------  |:------:|
-| Planar mockup  | `1` |
-| Curved mockup  | `2` |
-| 3D mockups     | `3` |
+| Mockup Selection | Key |
+| ---------------- |:---:|
+| Planar mockup    | `1` |
+| Curved mockup    | `2` |
+| 3D mockups       | `3` |
 
 ## Planned experiments & other documentation:
 See my Medium collection, [Humane Virtuality](https://medium.com/humane-virtuality).
