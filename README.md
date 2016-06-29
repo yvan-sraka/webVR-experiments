@@ -54,7 +54,16 @@ For headsets without positional tracking (e.g. Google Cardboard), how can we all
 | Rotate target in x-axis based on z-position of human camera | `5` |
 
 ## 7. [Product Selection & Customization](7--product-selection-customization.html)
-WIP
+Looking at the differences in prototyping with a single planar mockup, a curved mockup, and a three dimensional mockup.
+
+**Movement:** `W A S D`<br>
+**console.log(Targets):** `C`
+
+| Transformation | Key |
+| -------------  |:------:|
+| Planar mockup  | `1` |
+| Curved mockup  | `2` |
+| 3D mockups     | `3` |
 
 ## Planned experiments & other documentation:
 See my Medium collection, [Humane Virtuality](https://medium.com/humane-virtuality).

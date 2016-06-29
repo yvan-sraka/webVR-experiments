@@ -74,7 +74,31 @@
 </tbody>
 </table>
 <h2 id="7-product-selection-customization-7-product-selection-customization-html-">7. <a href="7--product-selection-customization.html">Product Selection &amp; Customization</a></h2>
-<p>WIP</p>
+<p>Looking at the differences in prototyping with a single planar mockup, a curved mockup, and a three dimensional mockup.</p>
+<p><strong>Movement:</strong> <code>W A S D</code><br>
+<strong>console.log(Targets):</strong> <code>C</code></p>
+<table>
+<thead>
+<tr>
+<th>Transformation</th>
+<th style="text-align:center">Key</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Planar mockup</td>
+<td style="text-align:center"><code>1</code></td>
+</tr>
+<tr>
+<td>Curved mockup</td>
+<td style="text-align:center"><code>2</code></td>
+</tr>
+<tr>
+<td>3D mockups</td>
+<td style="text-align:center"><code>3</code></td>
+</tr>
+</tbody>
+</table>
 <h2 id="planned-experiments-other-documentation-">Planned experiments &amp; other documentation:</h2>
 <p>See my Medium collection, <a href="https://medium.com/humane-virtuality">Humane Virtuality</a>.</p>
 <h2 id="setup">Setup</h2>
@@ -107,6 +131,8 @@ pre code{
 }
 </style>
 <script>
-   document.querySelector('table').className = "table";
+   var table = document.querySelectorAll('table');
+   for(i = 0; i < table.length; i++)
+      table[i].className = "table";
 </script>
 </html>

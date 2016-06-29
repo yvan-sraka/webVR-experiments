@@ -26,7 +26,6 @@ error_log
 
 # Models #
 ######################
-
 **.mix
 /assets/img/
 /assets/sketch/

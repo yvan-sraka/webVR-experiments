@@ -30,6 +30,7 @@
     "Keypress": "^2.1.4",
     "aframe-keyboard-controls": "donmccurdy/aframe-keyboard-controls#^1.0.0",
     "aframe-extras": "donmccurdy/aframe-extras#^1.16.2",
-    "is_js": "^0.7.6"
+    "is_js": "^0.7.6",
+    "bonzo": "ded/bonzo#^2.0.0"
   }
 }
