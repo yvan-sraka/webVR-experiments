@@ -245,13 +245,19 @@
 
             // calculate the height to width ratio
             parameters.heightToWidth = parameters.heightorig / parameters.widthorig;
-            // The height should be the arc length (the curved width or circumfrence length)
+            // The height should be
+            // the arc length (the curved width or circumference length)
+            //    c = 2 * pi * r
+            //    a percentage of c is the arc length
+            //    parameters.thetaLength / 360 degrees is that percentage
+            // then multiply by the scalar height to width ratio to get the final height
             parameters.height = parameters.heightToWidth * parameters.radius * (2 * Math.PI * (parameters.thetaLength / 360));
             el.setAttribute('height', parameters.height);
 
-
+            // set the theta-length
             el.setAttribute('theta-length', parameters.thetaLength);
 
+            // if thetaStart isn't set, set the midpoint of the mockup to be the center
             if(parameters.thetaStart == undefined){
                el.setAttribute('theta-start', (360 - parameters.thetaLength) / 2);
 
@@ -259,12 +265,10 @@
                el.setAttribute('theta-start', parameters.thetaStart);
             }
 
-            // set deltas
-            // find zero delta
-
-            if(el.getAttribute('scale') == null){
-               el.setAttribute('scale', parameters.scale);
-            }
+            // if the scale isn't set, give it the attribute ... don't think I need this, but it'd be nice to setup something like this for a default value
+            // if(el.getAttribute('scale') == null){
+            //    el.setAttribute('scale', parameters.scale);
+            // }
 
             var scale = {
                x: Number(parameters.scale) + Number(parameters.delta[i]),
@@ -273,7 +277,6 @@
             }
 
             el.setAttribute('scale', scale);
-
 
          }
       }
