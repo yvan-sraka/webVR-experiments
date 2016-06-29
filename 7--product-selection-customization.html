@@ -132,6 +132,25 @@
       var scene = document.querySelector('#main-scene');
       var world = scene.querySelector('#world');
 
+      var targets = {
+         els: scene.querySelectorAll('.target'),
+         wireframeStraight:       {
+            el: scene.querySelector('#wireframe-straight'),
+            initPosition: scene.querySelector('#wireframe-straight').getAttribute('position')
+         },
+         wireframeCurved:     {
+            el: scene.querySelector('#wireframe-curved'),
+            initPosition: scene.querySelector('#wireframe-curved').getAttribute('position')
+         },
+         wireframeThreeDim:   {
+            el: scene.querySelector('#wireframe-threeDim'),
+            initPosition: scene.querySelector('#wireframe-threeDim').getAttribute('position')
+         },
+         active: settings.target
+      }
+      console.log('targets');
+      console.log(targets);
+
       scene.addEventListener('loaded', function(){
 
          setImagesFlat();
@@ -185,22 +204,7 @@
       });
 
 
-      var targets = {
-         els: scene.querySelectorAll('.target'),
-         wireframeStraight:       {
-            el: scene.querySelector('#wireframe-straight'),
-            initPosition: scene.querySelector('#wireframe-straight').getAttribute('position')
-         },
-         wireframeCurved:     {
-            el: scene.querySelector('#wireframe-curved'),
-            initPosition: scene.querySelector('#wireframe-curved').getAttribute('position')
-         },
-         wireframeThreeDim:   {
-            el: scene.querySelector('#wireframe-threeDim'),
-            initPosition: scene.querySelector('#wireframe-threeDim').getAttribute('position')
-         },
-         active: settings.target
-      }
+
 
 
       // Set the parameters of curved image sets using parent settings
