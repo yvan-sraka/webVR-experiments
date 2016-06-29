@@ -60,15 +60,15 @@
             <a-image src="assets/7/henley-mockup-3@2x.png" height="3" width="2"></a-image>
          </a-entity> -->
 
-         <a-entity id="wireframe-straight" class="target" position="0 .15 -.1">
+         <a-entity id="wireframe-straight" class="target" position="0 .15 -1.5" domFlag>
 
-            <a-image class="js-set" src="assets/7/henley-mockup-3-z3@2x.png" height="3" width="2" data-height="600" data-width="540" position="0 1.5 -.2"></a-image>
-            <a-image class="js-set" src="assets/7/henley-mockup-3-z2@2x.png" height="3" width="2" data-height="600" data-width="540" position="0 1.5 0"></a-image>
-            <a-image class="js-set" src="assets/7/henley-mockup-3-z1@2x.png" height="3" width="2" data-height="600" data-width="540" position="0 1.5 .05"></a-image>
+            <a-image class="js-set" src="assets/7/henley-mockup-3-z3@2x.png" height="3" data-height="600" data-width="540" position="0 1.5 -.2"></a-image>
+            <a-image class="js-set" src="assets/7/henley-mockup-3-z2@2x.png" height="3" data-height="600" data-width="540" position="0 1.5 0"></a-image>
+            <a-image class="js-set" src="assets/7/henley-mockup-3-z1@2x.png" height="3" data-height="600" data-width="540" position="0 1.5 .05"></a-image>
 
          </a-entity>
 
-         <a-entity   id="wireframe-curved"
+         <!-- <a-entity   id="wireframe-curved"
                      class="target"
                      position="0 1.7 0"
                      data-heightorig="600"
@@ -111,21 +111,21 @@
             <a-curvedimage class="js-set" src="assets/7/henley-mockup-3-z1@2x.png"></a-curvedimage>
          </a-entity>
 
-      </a-entity>
+      </a-entity> -->
 
    </a-scene>
 
    <script>
 
       var settings = {
-         target: 'wireframe-threeDim',
-         hiddenPosition: {
+         target: 'wireframe-straight',  // Which mockup should be active
+         hiddenPosition: {              // Location of the hidden position, e.g. below the ground plane
             x: 0,
             y: -1000,
             z: 0
          },
-         reload: false,    // When developing, it's nice if your phone reloads automatically
-         reloadTime: 6     // In seconds
+         reload: false,                 // When developing, it's nice if your phone reloads automatically
+         reloadTime: 6                  // In seconds
       }
 
       var scene = document.querySelector('#main-scene');
@@ -184,7 +184,7 @@
 
       var targets = {
          els: scene.querySelectorAll('.targets'),
-         wireframeFlat:       {
+         wireframeStraight:       {
             el: scene.querySelector('#wireframe-straight'),
             initPosition: scene.querySelector('#wireframe-straight').getAttribute('position')
          },
@@ -310,6 +310,9 @@
          // if(setBool == true)
          //    curvedImages.getAttribute('radius', radius);
       }
+      /*
+         Sets the flat/planar images based on a given height and width
+      */
 
       function setImagesFlat(setBool){
 
@@ -327,8 +330,11 @@
             flatImages.getAttribute('width', width);
       }
 
+      /*
+         Helper function to return a number based key for each target, might be broke
+      */
       function targetsKey(targetKey){
-         if(targetKey == 'wireframeFlat' || targetKey == 'wireframe-straight'){
+         if(targetKey == 'wireframeStraight' || targetKey == 'wireframe-straight'){
             return 0;
          }
          else if(targetKey == 'wireframeCurved' || targetKey == 'wireframe-curved'){
@@ -355,7 +361,7 @@
          // Depending on the toggleTo target, set a position variable to its initial position
          switch (toggleTo){
             case 'wireframe-straight':
-               var pos = targets.wireframeFlat.initPosition;
+               var pos = targets.wireframeStraight.initPosition;
                break;
 
             case 'wireframe-curved':
@@ -385,7 +391,7 @@
       */
       function forEach(array, action) {
          for (var i = 0; i < array.length; i++)
-         action(array[i]);
+            action(array[i]);
       }
 
    </script>
