@@ -65,6 +65,11 @@ Looking at the differences in prototyping with a single planar mockup, a curved 
 | Curved mockup    | `2` |
 | 3D mockups       | `3` |
 
+## 8. [Video Controls](8--video-controls.html) - Work in Progress
+Well designed video controls for spherical videos. Inspired by [@oscarmarinmiro](https://github.com/oscarmarinmiro/aframe-video-controls).
+
+**Selection:** `Gaze` or `Click`<br>
+
 ## Planned experiments & other documentation:
 See my Medium collection, [Humane Virtuality](https://medium.com/humane-virtuality).
 
