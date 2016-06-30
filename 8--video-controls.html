@@ -182,6 +182,7 @@
             y: -100,
             z: 0
          },
+         enterVR: true,
          reload: false,                 // When developing, it's nice if your phone reloads automatically
          reloadTime: 6                  // In seconds
       }
@@ -212,11 +213,7 @@
 
          toggleTargetTo(targets.active);
 
-         // If the reload setting is turned on, enterVR and reload the page after a set time
-         if(settings.reload == true){
-            scene.enterVR();
-            reloadPage(settings.reloadTime);
-         }
+         devTools();
 
       });
 

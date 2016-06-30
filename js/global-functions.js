@@ -160,3 +160,13 @@ function buildTargets(targets){
    // Return the object
    return targets;
 }
+
+function devTools(){
+   if(settings.enterVR == true){
+      scene.enterVR();
+   }
+   // If the reload setting is turned on, enterVR and reload the page after a set time
+   if(settings.reload == true){
+      reloadPage(settings.reloadTime);
+   }
+}
