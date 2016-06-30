@@ -153,21 +153,16 @@
 
       var targets = {
          els: scene.querySelectorAll('.target'),
-         target1:       {
-            el: scene.querySelector('#target1'),
-            initPosition: scene.querySelector('#target1').getAttribute('position')
-         },
-         target2:     {
-            el: scene.querySelector('#target2'),
-            initPosition: scene.querySelector('#target2').getAttribute('position')
-         },
          active: settings.target
+         // The rest of the object gets built with buildTargets()
       }
 
       /*
          Add event listener to run after scene is loaded
       */
       scene.addEventListener('loaded', function(){
+
+         buildTargets(targets);
 
          setImagesStraight();
          setImagesCurved(targets.target2.el, true);

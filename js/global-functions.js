@@ -142,3 +142,21 @@ function toggleTargetTo(toggleTo){
    targets.active = toggleTo;
 
 }
+
+/*
+   Builds the targets{} by looping through ids
+*/
+function buildTargets(targets){
+
+   // Loop it
+   for(i = 1; i < targets.els.length + 1; i++){
+      var targetName = 'target' + i;
+      targets[targetName] = {
+         el: scene.querySelector('#' + targetName),
+         initPosition: scene.querySelector('#' + targetName).getAttribute('position')
+      };
+   }
+
+   // Return the object
+   return targets;
+}
