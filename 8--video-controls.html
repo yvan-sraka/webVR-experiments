@@ -59,6 +59,7 @@
             </a-sphere>
          </a-entity>
 
+         <!-- Planar -->
          <a-entity id="target1" class="target" position="0 1 -.7" rotation="-40 0 0">
             <a-image class="js-set" src="assets/8/mediaplayer-transparent.png" height=".5" data-height="777" data-width="2025" rotation="0 0 0"></a-image>
 
@@ -84,6 +85,7 @@
             <a-entity geometry="primitive: box" material="color: #582834"></a-entity>
          </a-entity> -->
 
+         <!-- Curved -->
          <a-entity   id="target2"
                      class="target"
                      position="0 1.7 0"
@@ -97,6 +99,21 @@
                      >
 
             <a-curvedimage class="js-set" src="assets/8/mediaplayer-transparent.png"></a-curvedimage>
+
+         </a-entity>
+
+         <!-- Volumetric -->
+         <a-entity   id="target3"
+                     class="target"
+                     position="0 1.7 0"
+                     rotation="-30 0 0"
+                     data-heightorig="777"
+                     data-widthorig="2025"
+                     data-radius=".8"
+                     data-delta="0"
+                     theta-length="80"
+                     data-scale="1"
+                     >
 
             <a-entity id="ui-core">
                <a-cylinder position="0 .17 0" color="yellow" theta-start="200" theta-length="20" radius=".7" height=".05" open-ended="true" side="double"></a-cylinder>
