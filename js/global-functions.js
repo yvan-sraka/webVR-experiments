@@ -114,3 +114,31 @@ function forEach(array, action) {
    for (var i = 0; i < array.length; i++)
       action(array[i]);
 }
+
+/*
+   Toggle to a target. Works by setting all targets below the ground plane, then pulling up the active one
+*/
+function toggleTargetTo(toggleTo){
+
+   if(targets.els == undefined){
+      console.error('target.els is undefined');
+   }
+   if(settings.hiddenPosition == undefined){
+      console.error('settings.hiddenPosition is undefined');
+   }
+
+   // For each target, set the position below the ground plane
+   forEach(targets.els, function(el){
+      el.setAttribute('position', settings.hiddenPosition.x + ' ' + settings.hiddenPosition.y + ' ' + settings.hiddenPosition.z);
+   });
+
+   // Create a var with the initial position of the specific target
+   var pos = targets[toggleTo].initPosition;
+
+   // Find the toggleTo and actually set the position attribute
+   scene.querySelector('#' + toggleTo).setAttribute('position', pos.x + ' ' + pos.y + ' ' + pos.z);
+
+   // Change the active target to the toggleTo
+   targets.active = toggleTo;
+
+}

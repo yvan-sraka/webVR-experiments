@@ -59,8 +59,8 @@
             </a-sphere>
          </a-entity>
 
-         <a-entity id="wireframe-straight" class="target" position="0 1 -.7" rotation="-40 0 0">
-            <!-- <a-image class="js-set" src="assets/8/mediaplayer-transparent.png" height=".5" data-height="777" data-width="2025" rotation="0 0 0"></a-image> -->
+         <a-entity id="target1" class="target" position="0 1 -.7" rotation="-40 0 0">
+            <a-image class="js-set" src="assets/8/mediaplayer-transparent.png" height=".5" data-height="777" data-width="2025" rotation="0 0 0"></a-image>
 
          </a-entity>
          <!-- <a-entity position="0 3 -3" layout="type: circle; margin: 1; radius:8">
@@ -84,7 +84,7 @@
             <a-entity geometry="primitive: box" material="color: #582834"></a-entity>
          </a-entity> -->
 
-         <a-entity   id="wireframe-curved"
+         <a-entity   id="target2"
                      class="target"
                      position="0 1.7 0"
                      rotation="-30 0 0"
@@ -99,12 +99,12 @@
             <a-curvedimage class="js-set" src="assets/8/mediaplayer-transparent.png"></a-curvedimage>
 
             <a-entity id="ui-core">
-               <!-- <a-cylinder position="0 .17 0" color="yellow" theta-start="200" theta-length="20" radius=".7" height=".05" open-ended="true" side="double"></a-cylinder> -->
+               <a-cylinder position="0 .17 0" color="yellow" theta-start="200" theta-length="20" radius=".7" height=".05" open-ended="true" side="double"></a-cylinder>
             </a-entity>
 
             <a-entity id="ui-footer">
-               <!-- <a-curvedimage class="js-set" src="assets/8/icons/bookmark-border.png"></a-curvedimage> -->
-               <!-- <a-image class="js-set" src="assets/8/icons/bookmark.png" height=".03" data-height="42" data-width="36" position="0 0 -.7"></a-image> -->
+               <a-curvedimage class="js-set" src="assets/8/icons/bookmark-border.png"></a-curvedimage>
+               <a-image class="js-set" src="assets/8/icons/bookmark.png" height=".03" data-height="42" data-width="36" position="0 0 -.7"></a-image>
             </a-entity>
 
          </a-entity>
@@ -116,6 +116,12 @@
    <script>
 
       var settings = {
+         target: 'target1',
+         hiddenPosition: {              // Location of the hidden position, e.g. below the ground plane
+            x: 0,
+            y: -100,
+            z: 0
+         },
          reload: false,                 // When developing, it's nice if your phone reloads automatically
          reloadTime: 6                  // In seconds
       }
@@ -130,19 +136,15 @@
 
       var targets = {
          els: scene.querySelectorAll('.target'),
-         wireframeStraight:       {
-            el: scene.querySelector('#wireframe-straight'),
-            initPosition: scene.querySelector('#wireframe-straight').getAttribute('position')
+         target1:       {
+            el: scene.querySelector('#target1'),
+            initPosition: scene.querySelector('#target1').getAttribute('position')
          },
-         wireframeCurved:     {
-            el: scene.querySelector('#wireframe-curved'),
-            initPosition: scene.querySelector('#wireframe-curved').getAttribute('position')
+         target2:     {
+            el: scene.querySelector('#target2'),
+            initPosition: scene.querySelector('#target2').getAttribute('position')
          },
-         // wireframeThreeDim:   {
-         //    el: scene.querySelector('#wireframe-threeDim'),
-         //    initPosition: scene.querySelector('#wireframe-threeDim').getAttribute('position')
-         // },
-         // active: settings.target
+         active: settings.target
       }
 
       /*
@@ -151,7 +153,9 @@
       scene.addEventListener('loaded', function(){
 
          setImagesStraight();
-         setImagesCurved(targets.wireframeCurved.el, true);
+         setImagesCurved(targets.target2.el, true);
+
+         toggleTargetTo('target1');
 
          // If the reload setting is turned on, enterVR and reload the page after a set time
          if(settings.reload == true){
@@ -159,6 +163,29 @@
             reloadPage(settings.reloadTime);
          }
 
+      });
+
+      /*
+         Keylistener functions
+      */
+      // Setup
+      var keyListener = new window.keypress.Listener();
+
+      // check targets object
+      keyListener.simple_combo('c', function(){
+         console.log(targets);
+      });
+      keyListener.simple_combo('1', function(){
+         toggleTargetTo('target1');
+      });
+      keyListener.simple_combo('2', function(){
+         toggleTargetTo('target2');
+      });
+      keyListener.simple_combo('3', function(){
+         toggleTargetTo('target3');
+      });
+      keyListener.simple_combo('4', function(){
+         toggleTargetTo('target4');
       });
 
    </script>
