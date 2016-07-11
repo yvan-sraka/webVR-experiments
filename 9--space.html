@@ -41,15 +41,14 @@
       <!-- Global Settings -->
       <a-sky color="#111 "></a-sky>
 
-      <!-- Human Camera -->
-      <a-camera id="human-camera" position="0 1.7 0" active="true" near=".05">
-         <a-entity position="0 0 -.5" geometry="primitive: plane; height: .005; width: .005" material="color: #fff"></a-entity>
-      </a-camera>
+      <!-- Global Cameras -->
+      <a-camera id="camera-angular" position="0 100 200" active="true"></a-camera>
+      <a-camera id="camera-top" position="0 0 0" active="false"></a-camera>
+      <a-camera id="camera-side" position="0 0 200" active="false"></a-camera>
 
 
       <!-- World Elements -->
-      <a-entity id="universe" rotation="30 0 0" position="0 0 -200">
-      <!-- <a-entity id="universe"> -->
+      <a-entity id="universe">
 
          <a-plane height="50" width="50" material="color: #8f2d56; opacity: .4" rotation="-90 0 0" position="0 0 0"></a-plane>
 
@@ -93,6 +92,7 @@
                      orbital-speed="10" domFlag>
                      <a-sphere></a-sphere>
                      <a-animation></a-animation>
+                     <a-camera id="camera-planet-earth" position="0 2 2" active="true"></a-camera>
          </a-entity>
 
          <a-entity   id="mars"
@@ -117,6 +117,7 @@
                      orbital-speed="20" domFlag>
                      <a-sphere></a-sphere>
                      <a-animation></a-animation>
+                     <a-camera id="camera-planet-jupiter" position="0 2 2" active="true">
          </a-entity>
 
          <a-entity   id="saturn"
@@ -214,17 +215,42 @@
       // KeyListenerSimpleCombo('target', [1, 2, 3]);
 
       // TODO: change to cameras
+      keyListener.simple_combo('0', function(){
+         toggleCameraTo('camera-sun');
+      });
       keyListener.simple_combo('1', function(){
-         toggleTargetTo('target1');
+         toggleCameraTo('camera');
       });
       keyListener.simple_combo('2', function(){
-         toggleTargetTo('target2');
+         toggleCameraTo('camera');
       });
       keyListener.simple_combo('3', function(){
-         toggleTargetTo('target3');
+         toggleCameraTo('camera-planet-earth');
       });
       keyListener.simple_combo('4', function(){
-         toggleTargetTo('target4');
+         toggleCameraTo('camera');
+      });
+      keyListener.simple_combo('5', function(){
+         toggleCameraTo('camera-planet-jupiter');
+      });
+      keyListener.simple_combo('6', function(){
+         toggleCameraTo('camera');
+      });
+      keyListener.simple_combo('7', function(){
+         toggleCameraTo('camera');
+      });
+      keyListener.simple_combo('8', function(){
+         toggleCameraTo('camera');
+      });
+
+      keyListener.simple_combo('i', function(){
+         toggleCameraTo('camera-top');
+      });
+      keyListener.simple_combo('o', function(){
+         toggleCameraTo('camera-angular');
+      });
+      keyListener.simple_combo('p', function(){
+         toggleCameraTo('camera-side');
       });
 
       // function KeyListenerSimpleCombo(base, buildArray){
