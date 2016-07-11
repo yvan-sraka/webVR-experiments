@@ -178,8 +178,13 @@
 
       var planets = {
          els: scene.querySelectorAll('.planet'),
+         // The rest of the object gets built with buildPlanets()
+      }
+
+      var cameras = {
+         els: scene.querySelectorAll('a-camera'),
          active: settings.camera
-         // The rest of the object gets built with buildTargets()
+         // The rest of the object gets built with buildCameras()
       }
 
       /*
@@ -188,6 +193,7 @@
       scene.addEventListener('loaded', function(){
 
          buildPlanets(planets);
+         buildCameras(cameras);
 
          // toggleCameraTo(targets.active); // TODO: change to cameras
 
@@ -280,11 +286,29 @@
             animationDOM.setAttribute('easing', 'linear');
          }
 
-
-
          // Return the object
          return planets;
       }
+
+      function buildCameras(cameras){
+
+         // Loop it to build {}
+         for(i = 0; i < cameras.els.length; i++){
+            var camera = cameras.els[i];
+            var cameraName = camera.getAttribute('id');
+            var cameraEl = scene.querySelector('#' + cameraName)
+
+            // Create the camera object entry
+            cameras[cameraName] = {
+               el: cameraEl
+            }
+
+         }
+
+         // Return the object
+         return cameras;
+      }
+
 
    </script>
    </body>
