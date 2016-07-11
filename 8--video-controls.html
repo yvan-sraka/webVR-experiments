@@ -245,6 +245,8 @@
 
          toggleTargetTo(targets.active);
 
+         setBtnHoverStates();
+
          devTools();
 
       });
@@ -271,6 +273,29 @@
       keyListener.simple_combo('4', function(){
          toggleTargetTo('target4');
       });
+
+      function setBtnHoverStates(){
+         var btns = scene.querySelectorAll('.btn');
+         forEach(btns, function(btn){
+            var pos = btn.querySelector('a-image').getAttribute('position');
+            var delta = .05;
+
+            btn.addEventListener('mouseenter', function () {
+               this.querySelector('a-cylinder').setAttribute('material', 'opacity', '.8');
+               var newPos = {
+                  x: pos.x,
+                  y: pos.y,
+                  z: pos.z + delta,
+               }
+               this.querySelector('a-image').setAttribute('position', newPos);
+            });
+
+            btn.addEventListener('mouseleave', function () {
+               this.querySelector('a-cylinder').setAttribute('material', 'opacity', '.5');
+               this.querySelector('a-image').setAttribute('position', pos)
+            });
+         });
+      }
 
    </script>
    </body>
