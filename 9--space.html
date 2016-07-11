@@ -55,19 +55,105 @@
 
          <a-sphere   id="sun"
                      class="star"
-                     radius="2"
+                     radius="5"
                      color="yellow">
          </a-sphere>
 
-         <a-sphere   id="earth"
+         <a-entity   id="mercury"
                      class="planet"
-                     radius="1"
-                     color="green"
-                     planetary-radius="10"
-                     position="0 0 10"
-                     revolution-speed="10"
-                     axis="0 0 0">
-         </a-sphere>
+                     planetary-radius=".3"
+                     planetary-color="gray"
+                     planetary-axis="0 0 0"
+                     planetary-position="180"
+                     orbital-radius="10"
+                     orbital-speed="10" domFlag>
+                     <a-sphere></a-sphere>
+                     <a-animation></a-animation>
+         </a-entity>
+
+         <a-entity   id="venus"
+                     class="planet"
+                     planetary-radius=".7"
+                     planetary-color="purple"
+                     planetary-axis="0 0 0"
+                     planetary-position="0"
+                     orbital-radius="25"
+                     orbital-speed="10" domFlag>
+                     <a-sphere></a-sphere>
+                     <a-animation></a-animation>
+         </a-entity>
+
+         <a-entity   id="earth"
+                     class="planet"
+                     planetary-radius="1"
+                     planetary-color="green"
+                     planetary-axis="0 0 0"
+                     planetary-position="90"
+                     orbital-radius="50"
+                     orbital-speed="10" domFlag>
+                     <a-sphere></a-sphere>
+                     <a-animation></a-animation>
+         </a-entity>
+
+         <a-entity   id="mars"
+                     class="planet"
+                     planetary-radius="1.1"
+                     planetary-color="crimson"
+                     planetary-axis="0 0 0"
+                     planetary-position="0"
+                     orbital-radius="70"
+                     orbital-speed="5" domFlag>
+                     <a-sphere></a-sphere>
+                     <a-animation></a-animation>
+         </a-entity>
+
+         <a-entity   id="jupiter"
+                     class="planet"
+                     planetary-radius="7"
+                     planetary-color="orange"
+                     planetary-axis="0 0 0"
+                     planetary-position="0"
+                     orbital-radius="100"
+                     orbital-speed="20" domFlag>
+                     <a-sphere></a-sphere>
+                     <a-animation></a-animation>
+         </a-entity>
+
+         <a-entity   id="saturn"
+                     class="planet"
+                     planetary-radius="5"
+                     planetary-color="darkorange"
+                     planetary-axis="0 0 0"
+                     planetary-position="0"
+                     orbital-radius="120"
+                     orbital-speed="22" domFlag>
+                     <a-sphere></a-sphere>
+                     <a-animation></a-animation>
+         </a-entity>
+
+         <a-entity   id="neptune"
+                     class="planet"
+                     planetary-radius="1"
+                     planetary-color="blue"
+                     planetary-axis="0 0 0"
+                     planetary-position="0"
+                     orbital-radius="160"
+                     orbital-speed="8" domFlag>
+                     <a-sphere></a-sphere>
+                     <a-animation></a-animation>
+         </a-entity>
+
+         <a-entity   id="uranus"
+                     class="planet"
+                     planetary-radius="1"
+                     planetary-color="darkblue"
+                     planetary-axis="0 0 0"
+                     planetary-position="0"
+                     orbital-radius="168"
+                     orbital-speed="5" domFlag>
+                     <a-sphere></a-sphere>
+                     <a-animation></a-animation>
+         </a-entity>
 
       </a-entity>
 
