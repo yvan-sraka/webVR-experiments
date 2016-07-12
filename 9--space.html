@@ -54,7 +54,7 @@
 
          <a-sphere   id="sun"
                      class="star"
-                     radius="5"
+                     radius="695700"
                      color="yellow">
          </a-sphere>
 
@@ -72,36 +72,36 @@
 
          <a-entity   id="mercury"
                      class="planet"
-                     planetary-radius=".3"
+                     planetary-radius="2439.7"
                      planetary-color="gray"
                      planetary-axis="0 0 0"
-                     planetary-position="180"
-                     orbital-radius="10"
-                     orbital-speed="10" domFlag>
+                     planetary-position="0"
+                     orbital-radius="57909050"
+                     orbital-speed="47.362" domFlagz>
                      <a-sphere></a-sphere>
                      <a-animation></a-animation>
          </a-entity>
 
          <a-entity   id="venus"
                      class="planet"
-                     planetary-radius=".7"
+                     planetary-radius="6051.8"
                      planetary-color="purple"
                      planetary-axis="0 0 0"
                      planetary-position="0"
-                     orbital-radius="25"
-                     orbital-speed="10" domFlag>
+                     orbital-radius="108208000"
+                     orbital-speed="35.02" domFlagz>
                      <a-sphere></a-sphere>
                      <a-animation></a-animation>
          </a-entity>
 
          <a-entity   id="earth"
                      class="planet"
-                     planetary-radius="1"
+                     planetary-radius="6371.0"
                      planetary-color="green"
                      planetary-axis="0 0 0"
-                     planetary-position="90"
-                     orbital-radius="50"
-                     orbital-speed="10" domFlag>
+                     planetary-position="0"
+                     orbital-radius="149598023"
+                     orbital-speed="29.78" domFlagz>
                      <a-sphere></a-sphere>
                      <a-animation></a-animation>
                      <a-camera id="camera-planet-earth" position="0 2 2" active="true"></a-camera>
@@ -109,24 +109,24 @@
 
          <a-entity   id="mars"
                      class="planet"
-                     planetary-radius="1.1"
+                     planetary-radius="3389.5"
                      planetary-color="crimson"
                      planetary-axis="0 0 0"
                      planetary-position="0"
-                     orbital-radius="70"
-                     orbital-speed="5" domFlag>
+                     orbital-radius="227939200"
+                     orbital-speed="24.077" domFlagz>
                      <a-sphere></a-sphere>
                      <a-animation></a-animation>
          </a-entity>
 
          <a-entity   id="jupiter"
                      class="planet"
-                     planetary-radius="7"
+                     planetary-radius="69911"
                      planetary-color="orange"
                      planetary-axis="0 0 0"
                      planetary-position="0"
-                     orbital-radius="100"
-                     orbital-speed="20" domFlag>
+                     orbital-radius="778299000"
+                     orbital-speed="13.07" domFlagz>
                      <a-sphere></a-sphere>
                      <a-animation></a-animation>
                      <a-camera id="camera-planet-jupiter" position="0 2 2" active="true">
@@ -134,36 +134,36 @@
 
          <a-entity   id="saturn"
                      class="planet"
-                     planetary-radius="5"
+                     planetary-radius="58232"
                      planetary-color="darkorange"
                      planetary-axis="0 0 0"
                      planetary-position="0"
-                     orbital-radius="120"
-                     orbital-speed="22" domFlag>
-                     <a-sphere></a-sphere>
-                     <a-animation></a-animation>
-         </a-entity>
-
-         <a-entity   id="neptune"
-                     class="planet"
-                     planetary-radius="1"
-                     planetary-color="blue"
-                     planetary-axis="0 0 0"
-                     planetary-position="0"
-                     orbital-radius="160"
-                     orbital-speed="8" domFlag>
+                     orbital-radius="1429390000"
+                     orbital-speed="9.69" domFlagz>
                      <a-sphere></a-sphere>
                      <a-animation></a-animation>
          </a-entity>
 
          <a-entity   id="uranus"
                      class="planet"
-                     planetary-radius="1"
+                     planetary-radius="25362"
                      planetary-color="darkblue"
                      planetary-axis="0 0 0"
                      planetary-position="0"
-                     orbital-radius="168"
-                     orbital-speed="5" domFlag>
+                     orbital-radius="2875040000"
+                     orbital-speed="6.80" domFlagz>
+                     <a-sphere></a-sphere>
+                     <a-animation></a-animation>
+         </a-entity>
+
+         <a-entity   id="neptune"
+                     class="planet"
+                     planetary-radius="24622"
+                     planetary-color="blue"
+                     planetary-axis="0 0 0"
+                     planetary-position="0"
+                     orbital-radius="4504450000"
+                     orbital-speed="5.43" domFlagz>
                      <a-sphere></a-sphere>
                      <a-animation></a-animation>
          </a-entity>
@@ -175,10 +175,13 @@
    <script>
 
       var settings = {
-         camera: 'camera-angular',
-         enterVR: true,
-         reload: false,                 // When developing, it's nice if your phone reloads automatically
-         reloadTime: 6                  // In seconds
+         camera:                 'camera-angular',
+         enterVR:                true,
+         reload:                 false,                 // When developing, it's nice if your phone reloads automatically
+         reloadTime:             6,                  // In seconds
+         scalarOrbitalRadius:    1 / 1000000,
+         scalarPlanetaryRadius:  1 / 2000,
+         scalarSunRadius:        1 / 60000
       }
 
 
@@ -206,6 +209,7 @@
       scene.addEventListener('loaded', function(){
 
          buildPlanets(planets);
+         scaleSun();
          buildCameras(cameras);
 
          toggleCameraTo(cameras.active);
@@ -286,16 +290,16 @@
             var planetName = planet.getAttribute('id');
             var planetEl = scene.querySelector('#' + planetName)
 
-            // Create the planet object entry
+            // Create the planet object entry and scale appropriately
             planets[planetName] = {
                el:               planetEl,
                classes:          planetEl.getAttribute('class'),
 
-               planetaryRadius:     planetEl.getAttribute('planetary-radius'),
+               planetaryRadius:     planetEl.getAttribute('planetary-radius') * settings.scalarPlanetaryRadius,
                planetaryColor:      planetEl.getAttribute('planetary-color'),
                // planetaryAxis:       planetEl.getAttribute('planetary-axis'),
                planetaryPosition:   planetEl.getAttribute('planetary-position'), // rotational angle to euclidian
-               orbitalRadius:       planetEl.getAttribute('orbital-radius'),
+               orbitalRadius:       planetEl.getAttribute('orbital-radius') * settings.scalarOrbitalRadius,
                orbitalSpeed:        planetEl.getAttribute('orbital-speed')
             };
 
@@ -355,6 +359,13 @@
 
       }
 
+      function scaleSun(){
+         var sunEl = scene.querySelector('#sun')
+         var sunRadius = sunEl.getAttribute('radius');
+
+         sunEl.setAttribute('radius', sunRadius * settings.scalarSunRadius);
+
+      }
 
    </script>
    </body>
