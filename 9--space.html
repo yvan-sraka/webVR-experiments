@@ -313,9 +313,9 @@
                color:      planets[planetName].planetaryColor
             });
             planetDOM.setAttribute('position', {
-               x: Number(planets[planetName].orbitalRadius) * Math.sin(Number(planets[planetName].planetaryPosition) / (360 * Math.PI * 2)),
+               x: Number(planets[planetName].orbitalRadius) * Math.sin(Number(planets[planetName].planetaryPosition) * Math.PI),
                y: 0,
-               z: Number(planets[planetName].orbitalRadius) * Math.cos(Number(planets[planetName].planetaryPosition) / (360 * Math.PI * 2))
+               z: Number(planets[planetName].orbitalRadius) * Math.cos(Number(planets[planetName].planetaryPosition) * Math.PI)
             });
             // console.log(planetDOM.getAttribute('position'));
             // Create the animation in the DOM
