@@ -196,7 +196,7 @@
          buildPlanets(planets);
          buildCameras(cameras);
 
-         // toggleCameraTo(targets.active); // TODO: change to cameras
+         toggleCameraTo(cameras.active);
 
          devTools();
 
@@ -333,6 +333,14 @@
 
          // Return the object
          return cameras;
+      }
+
+      function toggleCameraTo(targetCamera){
+         // Deactivate active camera
+         cameras.active; //TODO: finish
+
+         // Activate target camera
+
       }
 
 
