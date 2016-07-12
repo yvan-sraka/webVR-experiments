@@ -357,6 +357,9 @@
 
          // Activate target camera
          scene.querySelector('#' + targetCamera).setAttribute('active', true);
+
+         // Set new active camera
+         cameras.active = targetCamera;
       }
 
       function scaleSun(){
