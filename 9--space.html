@@ -353,10 +353,10 @@
 
       function toggleCameraTo(targetCamera){
          // Deactivate active camera
-         cameras.active; //TODO: finish
+         scene.querySelector('#' + cameras.active).setAttribute('active', false);
 
          // Activate target camera
-
+         scene.querySelector('#' + targetCamera).setAttribute('active', true);
       }
 
       function scaleSun(){
