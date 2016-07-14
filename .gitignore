@@ -27,6 +27,7 @@ error_log
 # Models #
 ######################
 **.mix
-/assets/img/
+/assets/img/*.jpg
+/assets/img/*.png
 /assets/sketch/
 *.skp
