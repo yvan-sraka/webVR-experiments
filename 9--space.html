@@ -27,6 +27,10 @@
          Color Palette
       -->
 
+      <a-assets>
+         <a-mixin id="planet" material="roughness: 1; metalness: 0"></a-mixin>
+      </a-assets>
+
       <!-- Global Settings -->
       <a-sky color="#111 "></a-sky>
       <a-light color="#fff" type="ambient" intensity=".1"></a-light>
@@ -69,7 +73,7 @@
                      planetary-position="0"
                      orbital-radius="57909050"
                      orbital-speed="47.362" domFlagz>
-                     <a-sphere></a-sphere>
+                     <a-sphere mixin="planet"></a-sphere>
                      <a-animation></a-animation>
          </a-entity>
 
@@ -81,7 +85,7 @@
                      planetary-position="0"
                      orbital-radius="108208000"
                      orbital-speed="35.02" domFlagz>
-                     <a-sphere></a-sphere>
+                     <a-sphere mixin="planet"></a-sphere>
                      <a-animation></a-animation>
          </a-entity>
 
@@ -93,7 +97,7 @@
                      planetary-position="0"
                      orbital-radius="149598023"
                      orbital-speed="29.78" domFlagz>
-                     <a-sphere></a-sphere>
+                     <a-sphere mixin="planet"></a-sphere>
                      <a-animation></a-animation>
                      <!-- <a-camera id="camera-planet-earth" position="0 2 2" active="true"></a-camera> -->
          </a-entity>
@@ -106,7 +110,7 @@
                      planetary-position="0"
                      orbital-radius="227939200"
                      orbital-speed="24.077" domFlagz>
-                     <a-sphere></a-sphere>
+                     <a-sphere mixin="planet"></a-sphere>
                      <a-animation></a-animation>
          </a-entity>
 
@@ -118,7 +122,7 @@
                      planetary-position="0"
                      orbital-radius="778299000"
                      orbital-speed="13.07" domFlagz>
-                     <a-sphere></a-sphere>
+                     <a-sphere mixin="planet"></a-sphere>
                      <a-animation></a-animation>
                      <!-- <a-camera id="camera-planet-jupiter" position="0 2 2" active="false"></a-camera> -->
          </a-entity>
@@ -131,7 +135,7 @@
                      planetary-position="0"
                      orbital-radius="1429390000"
                      orbital-speed="9.69" domFlagz>
-                     <a-sphere></a-sphere>
+                     <a-sphere mixin="planet"></a-sphere>
                      <a-animation></a-animation>
          </a-entity>
 
@@ -143,7 +147,7 @@
                      planetary-position="0"
                      orbital-radius="2875040000"
                      orbital-speed="6.80" domFlagz>
-                     <a-sphere></a-sphere>
+                     <a-sphere mixin="planet"></a-sphere>
                      <a-animation></a-animation>
          </a-entity>
 
@@ -155,7 +159,7 @@
                      planetary-position="0"
                      orbital-radius="4504450000"
                      orbital-speed="5.43" domFlagz>
-                     <a-sphere></a-sphere>
+                     <a-sphere mixin="planet"></a-sphere>
                      <a-animation></a-animation>
          </a-entity>
 
