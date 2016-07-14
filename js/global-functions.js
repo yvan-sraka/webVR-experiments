@@ -170,3 +170,43 @@ function devTools(){
       reloadPage(settings.reloadTime);
    }
 }
+
+function buildCameras(cameras){
+
+   // Loop it to build {}
+   for(i = 0; i < cameras.els.length; i++){
+      var camera = cameras.els[i];
+      var cameraName = camera.getAttribute('id');
+      var cameraEl = scene.querySelector('#' + cameraName)
+
+      // Create the camera object entry
+      cameras[cameraName] = {
+         el: cameraEl
+      }
+
+   }
+
+   // Return the object
+   return cameras;
+}
+
+function toggleCameraTo(targetCamera){
+
+   if(cameras.active != undefined){
+      activeCamera = cameras.active;
+   }else if(settings.camera != undefined){
+      activeCamera = settings.camera;
+   }else{
+      return;
+   }
+
+
+   // Deactivate active camera
+   scene.querySelector('#' + activeCamera).setAttribute('active', false);
+
+   // Activate target camera
+   scene.querySelector('#' + targetCamera).setAttribute('active', true);
+
+   // Set new active camera
+   cameras.active = targetCamera;
+}

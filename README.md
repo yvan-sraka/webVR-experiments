@@ -141,6 +141,32 @@ Well-designed video controls for spherical videos. Inspired by [@oscarmarinmiro]
 
 
 
+### 9. [Solar System](9--solar-system.html)
+![Image for experiment 9](https://raw.githubusercontent.com/armthethinker/webVR-experiments/master/assets/img/heroes/hero-9.jpg)
+
+After hearing a podcast on [SpaceVR](http://www.spacevr.co/), I was inspired to create an experience based on their project. However, for this prototype, I decided I was building in the wrong direction. So, I wrapped it up and started work on experiment 10.
+
+**Guiding Question:** What does it feel like to see earth from a satalite point-of-view?
+
+| Action | Key |
+| ------ | :-: |
+|Selection| `Gaze` or `Click` |
+
+
+
+### 10. [SpaceVR Simulator](10--spacevr-simulator.html)
+![Image for experiment 10](https://raw.githubusercontent.com/armthethinker/webVR-experiments/master/assets/img/heroes/hero-10.jpg)
+
+This is my second attempt to build a [SpaceVR](http://www.spacevr.co/) simulator. This time, I had a clearer project in-mind: less robust, more to the point. This time it took me less than two hours to throw it all together.
+
+**Guiding Question:** What does it feel like to see earth from a satalite point-of-view?
+
+| Action | Key |
+| ------ | :-: |
+|Selection| `Gaze` or `Click` |
+
+
+
 ## Setup
 ```
 1. $ npm install

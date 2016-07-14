@@ -20,19 +20,28 @@ Supports:
 - [mustache.js](https://mustache.github.io/)
 - [Nunjucks](https://mozilla.github.io/nunjucks/)
 
-Planned:
-
-- [lodash](https://www.npmjs.com/package/lodash.template)
-
 ### Properties
+
+#### template
 
 | Property   | Description                                                                                                                           |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------- |
 | src        | Selector to a `<script template>` element or a URL to an external template file.                                                      |
+| data       | Pass a component name to use the component's data as the dataset for the template context variables.                                  |
 | insert     | Where to insert the rendered HTML using [insertAdjacentHTML](https://developer.mozilla.org/docs/Web/API/Element/insertAdjacentHTML)   |
-| type       | To explicitly define the type of templating engine to use (handlebars, jade, mustache, nunjucks, html). |
+| type       | To explicitly define the type of templating engine to use (handlebars, jade, mustache, nunjucks, html).                               |
 
-Local context variables for the template are passed through the element's [dataset](https://developer.mozilla.org/docs/Web/API/HTMLElement/dataset).
+Local context variables for the template are passed through the element's
+[dataset](https://developer.mozilla.org/docs/Web/API/HTMLElement/dataset) or
+through the `data` property. If both are defined, they will be combined.
+
+#### template-set
+
+| Property   | Description                                                                                                                           |
+| ---------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| on         | Event name to listen to before initializing template component.                                                                       |
+| data       | What to set `template.data` to once event is fired.                                                                                   |
+| src        | What to set `template.src` to once event is fired.                                                                                    |
 
 ### Vanilla HTML
 
@@ -78,9 +87,9 @@ Install and use by directly including the [browser files](dist):
       <script id="forest" type="text/x-nunjucks-template">
         {% for x in range(0, 10) %}
           {% for z in range(0, 10) %}
-            <a-entity template="src: tree.template; type: handlebars"
+            <a-entity template="src: tree.template; type: handlebars; data: tree-data"
                       data-position="{{ x * 10 }} 0 {{ z * 10 }}"
-                      data-trunkcolor="#623B1C"></a-entity>
+                      tree-data="trunkColor: #623B1C; leaves: 500"></a-entity>
           {% endfor %}
         {% endfor %}
       </script>

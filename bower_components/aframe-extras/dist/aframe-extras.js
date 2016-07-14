@@ -21,7 +21,7 @@ module.exports = {
   }
 };
 
-},{"./src/controls":15,"./src/loaders":21,"./src/math":24,"./src/misc":28,"./src/physics":33,"./src/primitives":41,"./src/shadows":42}],3:[function(require,module,exports){
+},{"./src/controls":15,"./src/loaders":21,"./src/math":24,"./src/misc":28,"./src/physics":34,"./src/primitives":42,"./src/shadows":43}],3:[function(require,module,exports){
 var CANNON = require('cannon'),
     quickhull = require('./THREE.quickhull');
 
@@ -19300,7 +19300,7 @@ module.exports = {
   },
 
   removeEventListeners: function () {
-    var canvasEl = this.el.sceneEl && this.sceneEl.canvas;
+    var canvasEl = this.el.sceneEl && this.el.sceneEl.canvas;
     if (canvasEl) {
       canvasEl.removeEventListener('mousedown', this.onMouseDown, false);
       canvasEl.removeEventListener('mousemove', this.onMouseMove, false);
@@ -19412,7 +19412,7 @@ module.exports = {
   },
 
   removeEventListeners: function () {
-    var canvasEl = this.el.sceneEl && this.sceneEl.canvas;
+    var canvasEl = this.el.sceneEl && this.el.sceneEl.canvas;
     if (!canvasEl) { return; }
 
     canvasEl.removeEventListener('touchstart', this.onTouchStart);
@@ -19664,7 +19664,10 @@ module.exports = {
     var loader,
         data = this.data;
 
-    if (!data.src) return;
+    if (!data.src) {
+      console.warn('[%s] `src` property is required.', this.name);
+      return;
+    }
 
     this.remove();
     loader = new THREE.FBXLoader();
@@ -19720,7 +19723,10 @@ module.exports = {
     var loader,
         data = this.data;
 
-    if (!data.src) return;
+    if (!data.src) {
+      console.warn('[%s] `src` property is required.', this.name);
+      return;
+    }
 
     this.remove();
     loader = new THREE.PLYLoader();
@@ -19768,22 +19774,29 @@ module.exports = {
     this.mixer = null;
   },
 
-  update: function () {
+  update: function (previousData) {
     var loader,
         data = this.data;
     if (!data.src) return;
 
-    this.remove();
-    if (data.loader === 'object') {
-      loader = new THREE.ObjectLoader();
-      loader.load(data.src, this.load.bind(this));
-    } else if (data.loader === 'json') {
-      loader = new THREE.JSONLoader();
-      loader.load(data.src, function (geometry, materials) {
-        this.load(new THREE.Mesh(geometry, new THREE.MeshFaceMaterial(materials)));
-      }.bind(this));
-    } else {
-      throw new Error('[three-model] Invalid mode "%s".', data.mode);
+    if (!previousData) {
+      this.remove();
+      if (data.loader === 'object') {
+        loader = new THREE.ObjectLoader();
+        loader.load(data.src, this.load.bind(this));
+      } else if (data.loader === 'json') {
+        loader = new THREE.JSONLoader();
+        loader.load(data.src, function (geometry, materials) {
+          this.load(new THREE.Mesh(geometry, new THREE.MeshFaceMaterial(materials)));
+        }.bind(this));
+      } else {
+        throw new Error('[three-model] Invalid mode "%s".', data.mode);
+      }
+    } else if (data.animation !== previousData.animation) {
+      if (this.model.activeAction) {
+        this.model.activeAction.stop();
+        this.playAnimation();
+      }
     }
   },
 
@@ -19879,13 +19892,13 @@ module.exports = {
   step: function (t, dt) {
     if (isNaN(dt)) return;
 
-    var physics = this.el.sceneEl.systems.physics || {options:{maxInterval: 1 / 60}},
+    var physics = this.el.sceneEl.systems.physics || {maxInterval: 1 / 60},
 
         // TODO - There's definitely a bug with getComputedAttribute and el.data.
         velocity = this.el.getAttribute('velocity') || {x: 0, y: 0, z: 0},
         position = this.el.getAttribute('position') || {x: 0, y: 0, z: 0};
 
-    dt = Math.min(dt, physics.options.maxInterval * 1000);
+    dt = Math.min(dt, physics.maxInterval * 1000);
 
     this.el.setAttribute('position', {
       x: position.x + velocity.x * dt / 1000,
@@ -19946,7 +19959,7 @@ module.exports = {
   }
 };
 
-},{"../math":24,"../physics":33,"./checkpoint":27,"./jump-ability":29,"./toggle-velocity":30}],29:[function(require,module,exports){
+},{"../math":24,"../physics":34,"./checkpoint":27,"./jump-ability":29,"./toggle-velocity":30}],29:[function(require,module,exports){
 var ACCEL_G = -9.8, // m/s^2
     EASING = -15; // m/s^2
 
@@ -20128,7 +20141,7 @@ module.exports = {
     ).normalize();
 
     // Show wireframe
-    if (this.system.options.debug) {
+    if (this.system.debug) {
       this.createWireframe(this.body, shape);
     }
 
@@ -20214,9 +20227,10 @@ module.exports = {
   },
 
   syncToPhysics: function () {
-    if (!this.body) return;
-    if (this.el.components.velocity) this.body.velocity.copy(this.el.getAttribute('velocity'));
-    if (this.el.components.position) this.body.position.copy(this.el.getAttribute('position'));
+    var body = this.body;
+    if (!body) return;
+    if (this.el.components.velocity) body.velocity.copy(this.el.getComputedAttribute('velocity'));
+    if (this.el.components.position) body.position.copy(this.el.getComputedAttribute('position'));
     if (this.wireframe) this.syncWireframe();
   },
 
@@ -20229,6 +20243,21 @@ module.exports = {
 };
 
 },{"../../lib/CANNON-mesh2shape":3,"../../lib/CANNON-shape2mesh":4,"cannon":11}],32:[function(require,module,exports){
+module.exports = {
+  GRAVITY: -9.8,
+  MAX_INTERVAL: 4 / 60,
+  ITERATIONS: 10,
+  CONTACT_MATERIAL: {
+    friction:     0.01,
+    restitution:  0.3,
+    contactEquationStiffness: 1e8,
+    contactEquationRelaxation: 3,
+    frictionEquationStiffness: 1e8,
+    frictionEquationRegularization: 3
+  }
+};
+
+},{}],33:[function(require,module,exports){
 var Body = require('./body');
 
 /**
@@ -20251,7 +20280,7 @@ module.exports = AFRAME.utils.extend({}, Body, {
   }
 });
 
-},{"./body":31}],33:[function(require,module,exports){
+},{"./body":31}],34:[function(require,module,exports){
 var CANNON = require('cannon'),
     math = require('../math');
 
@@ -20284,7 +20313,7 @@ module.exports = {
 // Export CANNON.js.
 window.CANNON = window.CANNON || CANNON;
 
-},{"../math":24,"./dynamic-body":32,"./kinematic-body":34,"./physics":35,"./static-body":36,"./system/physics":37,"cannon":11}],34:[function(require,module,exports){
+},{"../math":24,"./dynamic-body":33,"./kinematic-body":35,"./physics":36,"./static-body":37,"./system/physics":38,"cannon":11}],35:[function(require,module,exports){
 /**
  * Kinematic body.
  *
@@ -20380,7 +20409,7 @@ module.exports = {
           height, groundHeight = -Infinity,
           groundBody;
 
-      dt = Math.min(dt, this.system.options.maxInterval * 1000);
+      dt = Math.min(dt, this.system.maxInterval * 1000);
 
       groundNormal.set(0, 0, 0);
       velocity.copy(this.el.getAttribute('velocity'));
@@ -20482,12 +20511,20 @@ module.exports = {
   }
 };
 
-},{"cannon":11}],35:[function(require,module,exports){
-
+},{"cannon":11}],36:[function(require,module,exports){
+var CONSTANTS = require('./constants'),
+    C_GRAV = CONSTANTS.GRAVITY,
+    C_MAT = CONSTANTS.CONTACT_MATERIAL;
 
 module.exports = {
   schema: {
-    gravity:      { default: -9.8 },
+    gravity:                            { default: C_GRAV },
+    friction:                           { default: C_MAT.friction },
+    restitution:                        { default: C_MAT.restitution },
+    contactEquationStiffness:           { default: C_MAT.contactEquationStiffness },
+    contactEquationRelaxation:          { default: C_MAT.contactEquationRelaxation },
+    frictionEquationStiffness:          { default: C_MAT.frictionEquationStiffness },
+    frictionEquationRegularization:     { default: C_MAT.frictionEquationRegularization },
 
     // Never step more than four frames at once. Effectively pauses the scene
     // when out of focus, and prevents weird "jumps" when focus returns.
@@ -20498,16 +20535,17 @@ module.exports = {
   },
 
   update: function (previousData) {
-    var data = this.data;
+    var data = this.data,
+        schema = this.schema;
     for (var opt in data) {
-      if (!previousData || data[opt] !== previousData[opt]) {
+      if (data[opt] !== (previousData ? previousData[opt] : schema[opt].default)) {
         this.system.setOption(opt, data[opt]);
       }
     }
   }
 };
 
-},{}],36:[function(require,module,exports){
+},{"./constants":32}],37:[function(require,module,exports){
 var Body = require('./body');
 
 /**
@@ -20525,22 +20563,10 @@ module.exports = AFRAME.utils.extend({}, Body, {
   }
 });
 
-},{"./body":31}],37:[function(require,module,exports){
-var CANNON = require('cannon');
-
-var OPTIONS = {
-  friction:     0.01,
-  restitution:  0.3,
-  iterations:   5,
-  gravity:      -9.8,
-
-  // Never step more than four frames at once. Effectively pauses the scene
-  // when out of focus, and prevents weird "jumps" when focus returns.
-  maxInterval:  4 / 60,
-
-  // If true, show wireframes around physics bodies.
-  debug:        false
-};
+},{"./body":31}],38:[function(require,module,exports){
+var CANNON = require('cannon'),
+    CONSTANTS = require('../constants'),
+    C_MAT = CONSTANTS.CONTACT_MATERIAL;
 
 /**
  * Physics system.
@@ -20559,7 +20585,12 @@ module.exports = {
    * Initializes the physics system.
    */
   init: function () {
-    this.options = AFRAME.utils.extend({}, OPTIONS);
+    // Never step more than four frames at once. Effectively pauses the scene
+    // when out of focus, and prevents weird "jumps" when focus returns.
+    this.maxInterval = CONSTANTS.MAX_INTERVAL;
+
+    // If true, show wireframes around physics bodies.
+    this.debug = false;
 
     this.children = {};
     this.children[this.Phase.SIMULATE] = [];
@@ -20571,14 +20602,18 @@ module.exports = {
     this.world.quatNormalizeSkip = 0;
     this.world.quatNormalizeFast = false;
     // this.world.solver.setSpookParams(300,10);
-    this.world.solver.iterations = this.options.iterations;
-    this.world.gravity.set(0, this.options.gravity, 0);
+    this.world.solver.iterations = CONSTANTS.ITERATIONS;
+    this.world.gravity.set(0, CONSTANTS.GRAVITY, 0);
     this.world.broadphase = new CANNON.NaiveBroadphase();
 
-    this.material = new CANNON.Material('slipperyMaterial');
+    this.material = new CANNON.Material({name: 'defaultMaterial'});
     this.contactMaterial = new CANNON.ContactMaterial(this.material, this.material, {
-        friction: this.options.friction,
-        restitution: this.options.restitution
+        friction: C_MAT.friction,
+        restitution: C_MAT.restitution,
+        contactEquationStiffness: C_MAT.contactEquationStiffness,
+        contactEquationRelaxation: C_MAT.contactEquationRelaxation,
+        frictionEquationStiffness: C_MAT.frictionEquationStiffness,
+        frictionEquationRegularization: C_MAT.frictionEquationRegularization
     });
     this.world.addContactMaterial(this.contactMaterial);
   },
@@ -20594,7 +20629,7 @@ module.exports = {
   tick: function (t, dt) {
     if (isNaN(dt)) return;
 
-    this.world.step(Math.min(dt / 1000, this.options.maxInterval));
+    this.world.step(Math.min(dt / 1000, this.maxInterval));
 
     var i;
     for (i = 0; i < this.children[this.Phase.SIMULATE].length; i++) {
@@ -20651,33 +20686,41 @@ module.exports = {
    * @param {mixed} value
    */
   setOption: function (opt, value) {
-    if (this.options[opt] === value) return;
-
     switch (opt) {
       case 'maxInterval': return this.setMaxInterval(value);
       case 'gravity':     return this.setGravity(value);
       case 'debug':       return this.setDebug(value);
+      case 'friction':
+      case 'restitution':
+      case 'contactEquationStiffness':
+      case 'contactEquationRelaxation':
+      case 'frictionEquationStiffness':
+      case 'frictionEquationRegularization':
+        return this.setContactMaterialProperty(opt, value);
       default:
         console.error('Option "%s" not recognized.', opt);
     }
   },
 
   setMaxInterval: function (maxInterval) {
-    this.options.maxInterval = maxInterval;
+    this.maxInterval = maxInterval;
   },
 
   setGravity: function (gravity) {
-    this.options.gravity = gravity;
     this.world.gravity.y = gravity;
   },
 
   setDebug: function (debug) {
-    this.options.debug = debug;
+    this.debug = debug;
     console.warn('[physics] Option "debug" cannot be dynamically updated yet');
+  },
+
+  setContactMaterialProperty: function (prop, value) {
+    this.contactMaterial[prop] = value;
   }
 };
 
-},{"cannon":11}],38:[function(require,module,exports){
+},{"../constants":32,"cannon":11}],39:[function(require,module,exports){
 /**
  * Flat grid.
  *
@@ -20692,7 +20735,7 @@ module.exports = {
     },
     rotation: {x: -90, y: 0, z: 0},
     material: {
-      src: 'url(../../assets/grid.png)',
+      src: 'url(https://cdn.rawgit.com/donmccurdy/aframe-extras/v1.16.3/assets/grid.png)',
       repeat: '75 75'
     }
   },
@@ -20703,7 +20746,7 @@ module.exports = {
   }
 };
 
-},{}],39:[function(require,module,exports){
+},{}],40:[function(require,module,exports){
 /**
  * Flat-shaded ocean primitive.
  *
@@ -20795,7 +20838,7 @@ module.exports.Component = {
   }
 };
 
-},{}],40:[function(require,module,exports){
+},{}],41:[function(require,module,exports){
 /**
  * Tube following a custom path.
  *
@@ -20859,7 +20902,7 @@ module.exports.Component = {
   }
 };
 
-},{}],41:[function(require,module,exports){
+},{}],42:[function(require,module,exports){
 module.exports = {
   'a-grid':        require('./a-grid'),
   'a-ocean':        require('./a-ocean'),
@@ -20883,7 +20926,7 @@ module.exports = {
   }
 };
 
-},{"./a-grid":38,"./a-ocean":39,"./a-tube":40}],42:[function(require,module,exports){
+},{"./a-grid":39,"./a-ocean":40,"./a-tube":41}],43:[function(require,module,exports){
 module.exports = {
   'shadow':       require('./shadow'),
   'shadow-light': require('./shadow-light'),
@@ -20900,7 +20943,7 @@ module.exports = {
   }
 };
 
-},{"./shadow":44,"./shadow-light":43}],43:[function(require,module,exports){
+},{"./shadow":45,"./shadow-light":44}],44:[function(require,module,exports){
 /**
  * Light component.
  *
@@ -20909,7 +20952,7 @@ module.exports = {
  * @namespace light
  * @param {number} [angle=PI / 3] - Maximum extent of light from its direction,
           in radians. For spot lights.
- * @param {bool} [cast=false] - Whether light will cast shadows.
+ * @param {bool} [castShadow=false] - Whether light will cast shadows.
           Only applies to directional, point, and spot lights.
  * @param {string} [color=#FFF] - Light color. For every light.
  * @param {number} [decay=1] - Amount the light dims along the distance of the
@@ -20945,7 +20988,7 @@ module.exports = {
       shadowBias:       { default: 0 },
       shadowCameraFar:  { default: 5000 },
       shadowCameraFov:  { default: 50 },
-      shadowCameraNear: { default: 50 },
+      shadowCameraNear: { default: 0.5 },
       shadowDarkness:   { default: 0.5 },
       shadowMapHeight:  { default: 512 },
       shadowMapWidth:   { default: 512 },
@@ -20956,26 +20999,26 @@ module.exports = {
     var el = this.el;
     this.light = this.getLight();
     el.object3D.add(this.light);
-    el.sceneEl.registerLight(el);
-
-    if (!el.sceneEl.renderer.shadowMap.enabled) {
-      el.sceneEl.renderer.shadowMap.enabled = true;
+    el.sceneEl.systems.light.registerLight(el);
+    if (!el.sceneEl.hasLoaded) {
+      el.sceneEl.addEventListener('loaded', this.play.bind(this));
     }
   },
 
   update: function (previousData) {
-    // TODO: This check won't be necessary after v0.2.0.
-    if (previousData) {
-      var el = this.el;
-      el.object3D.remove(this.light);
-      this.light = this.getLight();
-      el.object3D.add(this.light);
-    }
+    if (!previousData) { return; }
+    this.el.object3D.remove(this.light);
+    this.light = this.getLight();
+    this.el.object3D.add(this.light);
   },
 
-  tick: function () {},
-
-  remove: function () {},
+  play: function () {
+    var el = this.el,
+        renderer = el.sceneEl.renderer;
+    if (renderer && !renderer.shadowMap.enabled) {
+      renderer.shadowMap.enabled = true;
+    }
+  },
 
   /**
    * Creates a new three.js light object given the current attributes of the
@@ -21025,23 +21068,21 @@ module.exports = {
    */
   setShadow: function (light) {
     var data = this.data;
-    if (!this.data.castShadow) { return light; }
-    [
-      'castShadow',
-      'shadowCameraNear',
-      'shadowCameraFar',
-      'shadowCameraFov',
-      'shadowDarkness',
-      'shadowMapHeight',
-      'shadowMapWidth'
-    ].forEach(function (shadowAttr) {
-      light[shadowAttr] = data[shadowAttr];
-    });
+    if (!data.castShadow) { return light; }
+
+    light.castShadow = data.castShadow;
+    light.shadow.camera.near = data.shadowCameraNear;
+    light.shadow.camera.far = data.shadowCameraFar;
+    light.shadow.camera.fov = data.shadowCameraFov;
+    light.shadow.darkness = data.shadowDarkness;
+    light.shadow.mapSize.height = data.shadowMapHeight;
+    light.shadow.mapSize.width = data.shadowMapWidth;
+
     return light;
   }
 };
 
-},{}],44:[function(require,module,exports){
+},{}],45:[function(require,module,exports){
 /**
  * Shadow component.
  *
@@ -21058,25 +21099,19 @@ module.exports = {
   },
 
   init: function () {
-    this.update({});
-    this.el.addEventListener('model-loaded', this.update.bind(this, {}, 'foobar'));
+    this.el.addEventListener('model-loaded', this.update.bind(this));
   },
 
-  tick: function () {},
+  update: function () {
+    var data = this.data;
 
-  update: function (previousData) {
-    // TODO: This check won't be necessary after v0.2.0.
-    if (previousData) {
-      var data = this.data;
-
-      // Applied recursively to support imported models.
-      this.el.object3D.traverse(function(node) {
-        if (node instanceof THREE.Mesh) {
-          node.castShadow = data.cast;
-          node.receiveShadow = data.receive;
-        }
-      });
-    }
+    // Applied recursively to support imported models.
+    this.el.object3D.traverse(function(node) {
+      if (node instanceof THREE.Mesh) {
+        node.castShadow = data.cast;
+        node.receiveShadow = data.receive;
+      }
+    });
   },
 
   remove: function () {}

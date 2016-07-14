@@ -1,4 +1,5 @@
 var debug = AFRAME.utils.debug;
+var extend = AFRAME.utils.extend;
 var templateCache = {};  // Template cache.
 var error = debug('template-component:error');
 var log = debug('template-component:info');
@@ -34,12 +35,23 @@ AFRAME.registerComponent('template', {
       // Selector or URL.
       default: ''
     },
+    data: {
+      default: ''
+    }
   },
 
-  update: function () {
+  update: function (oldData) {
     var data = this.data;
+    var el = this.el;
     var fetcher = data.src[0] === '#' ? fetchTemplateFromScriptTag : fetchTemplateFromXHR;
     var templateCacheItem = templateCache[data.src];
+
+    // Replace children if swapping templates.
+    if (oldData && oldData.src !== data.src) {
+      while (el.firstChild) {
+        el.removeChild(el.firstChild);
+      }
+    }
 
     if (templateCacheItem) {
       this.renderTemplate(templateCacheItem);
@@ -51,9 +63,19 @@ AFRAME.registerComponent('template', {
 
   renderTemplate: function (templateCacheItem) {
     var el = this.el;
-    var renderedTemplate = renderTemplate(
-      templateCacheItem.template, templateCacheItem.type, el.dataset);
-    el.insertAdjacentHTML(this.data.insert, renderedTemplate);
+    var data = this.data;
+    var templateData = {};
+
+    Object.keys(el.dataset).forEach(function convertToData (key) {
+      templateData[key] = el.dataset[key];
+    });
+    if (data.data) {
+      templateData = extend(templateData, el.getComputedAttribute(data.data));
+    }
+
+    var renderedTemplate = renderTemplate(templateCacheItem.template, templateCacheItem.type,
+                                          templateData);
+    el.insertAdjacentHTML(data.insert, renderedTemplate);
   }
 });
 
@@ -215,3 +237,19 @@ function injectTemplateLib (type) {
     };
   });
 };
+
+AFRAME.registerComponent('template-set', {
+  schema: {
+    on: {type: 'string'},
+    src: {type: 'string'},
+    data: {type: 'string'}
+  },
+
+  init: function () {
+    var data = this.data;
+    var el = this.el;
+    el.addEventListener(data.on, function () {
+      el.setAttribute('template', {src: data.src, data: data.data});
+    });
+  }
+});

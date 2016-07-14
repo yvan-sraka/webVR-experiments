@@ -1,6 +1,7 @@
 # A-Frame Extras
 
 [![Build Status](https://travis-ci.org/donmccurdy/aframe-extras.svg?branch=master)](https://travis-ci.org/donmccurdy/aframe-extras)
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/donmccurdy/aframe-extras/master/LICENSE)
 
 Add-ons and helpers for A-Frame VR.
 
@@ -9,13 +10,13 @@ Add-ons and helpers for A-Frame VR.
 In the [dist/](https://github.com/donmccurdy/aframe-extras/tree/master/dist) folder, download any package(s) you need. Include the scripts on your page, and all components are automatically registered for you:
 
 ```html
-<script src="//cdn.rawgit.com/donmccurdy/aframe-extras/v1.16.2/dist/aframe-extras.min.js"></script>
+<script src="//cdn.rawgit.com/donmccurdy/aframe-extras/v1.17.0/dist/aframe-extras.min.js"></script>
 ```
 
-CDN builds for aframe-extras/v1.16.2:
+CDN builds for aframe-extras/v1.17.0:
 
-- [aframe-extras.js](https://cdn.rawgit.com/donmccurdy/aframe-extras/v1.16.2/dist/aframe-extras.js) *(development)*
-- [aframe-extras.min.js](https://cdn.rawgit.com/donmccurdy/aframe-extras/v1.16.2/dist/aframe-extras.min.js) *(production)*
+- [aframe-extras.js](https://cdn.rawgit.com/donmccurdy/aframe-extras/v1.17.0/dist/aframe-extras.js) *(development)*
+- [aframe-extras.min.js](https://cdn.rawgit.com/donmccurdy/aframe-extras/v1.17.0/dist/aframe-extras.min.js) *(production)*
 
 ## Usage (NPM)
 
@@ -46,38 +47,38 @@ browserify custom-extras.js -o bundle.js
 <!-- tree src -I index.js -->
 <pre>
 src
-├── <a href="/src/controls">controls/</a>
+├── <b>controls/</b> (<a href="/src/controls">Documentation</a>)
 │   ├── checkpoint-controls.js
 │   ├── gamepad-controls.js
 │   ├── hmd-controls.js
-│   ├── keyboard-controls.js    <i>(not VR-friendly)</i>
-│   ├── mouse-controls.js       <i>(not VR-friendly)</i>
+│   ├── keyboard-controls.js
+│   ├── mouse-controls.js
 │   ├── touch-controls.js
 │   └── universal-controls.js
-├── <a href="/src/loaders">loaders/</a>
-│   ├── fbx-model.js            <i>(experimental)</i>
+├── <b>loaders/</b> (<a href="/src/loaders">Documentation</a>)
+│   ├── fbx-model.js            <sub><img alt="Experimental" src="https://img.shields.io/badge/status-deprecated-lightgrey.svg"></sub>
 │   ├── ply-model.js
 │   └── three-model.js
-├── <a href="/src/math">math/</a>
+├── <b>math/</b> (<a href="/src/math">Documentation</a>)
 │   ├── quaternion.js
 │   └── velocity.js
-├── <a href="/src/misc">misc/</a>
+├── <b>misc/</b> (<a href="/src/misc">Documentation</a>)
 │   ├── checkpoint.js
-│   ├── jump-ability.js         <i>(not VR-friendly)</i>
+│   ├── jump-ability.js
 │   └── toggle-velocity.js
-├── <a href="/src/physics">physics/</a>
+├── <b>physics/</b> (<a href="/src/physics">Documentation</a>)
 │   ├── body.js
 │   ├── dynamic-body.js
-│   ├── kinematic-body.js
+│   ├── kinematic-body.js       <sub><img alt="Experimental" src="https://img.shields.io/badge/status-experimental-orange.svg"></sub>
 │   ├── physics.js
 │   ├── static-body.js
 │   └── system
 │       └── physics.js
-├── <a href="/src/primitives">primitives/</a>
+├── <b>primitives/</b> (<a href="/src/primitives">Documentation</a>)
 │   ├── a-grid.js
 │   ├── a-ocean.js
 │   └── a-tube.js
-└── <a href="/src/shadows">shadows/</a>
-    ├── shadow-light.js         <i>(experimental)</i>
-    └── shadow.js               <i>(experimental)</i>
+└── <b>shadows/</b> (<a href="/src/shadows">Documentation</a>)    <sub><img alt="Experimental" src="https://img.shields.io/badge/status-experimental-orange.svg"></sub>
+    ├── shadow-light.js
+    └── shadow.js
 </pre>
