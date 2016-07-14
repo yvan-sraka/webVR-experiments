@@ -196,6 +196,8 @@ function toggleCameraTo(targetCamera){
       activeCamera = cameras.active;
    }else if(settings.camera != undefined){
       activeCamera = settings.camera;
+   }else{
+      return;
    }
 
 
