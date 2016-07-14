@@ -15,7 +15,7 @@
 </head>
 <body>
 
-   <a-scene id="main-scene" fog="type: exponential; color: #000; density: .0003">
+   <a-scene>
 
       <!-- Global Settings -->
       <a-sky color="#111"></a-sky>
@@ -72,7 +72,7 @@
       /*
          Setup global variables
       */
-      var scene = document.querySelector('#main-scene');
+      var scene = document.querySelector('a-scene');
       var universe = document.querySelector('#universe');
 
       var planets = {
