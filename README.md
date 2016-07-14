@@ -75,6 +75,9 @@ After hearing a podcast on SpaceVR, I was inspired to create an experience based
 
 **Selection:** `Gaze` or `Click`<br>
 
+## 10. [SpaceVR Simulator](10--spacevr-simulator.html) - Work in Progress
+Second attempt to build a SpaceVR simulator
+
 **Selection:** `Gaze` or `Click`<br>
 
 ## Planned experiments & other documentation:
