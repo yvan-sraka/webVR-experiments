@@ -144,7 +144,7 @@ Well-designed video controls for spherical videos. Inspired by [@oscarmarinmiro]
 ### 9. [Solar System](9--solar-system.html)
 ![Image for experiment 9](https://raw.githubusercontent.com/armthethinker/webVR-experiments/master/assets/img/heroes/hero-9.jpg)
 
-After hearing a podcast on [SpaceVR](http://www.spacevr.co/), I was inspired to create an experience based on their project. However, for this prototype, I decided I was building in the wrong direction. So, I wrapped it up and started work on experiment 10.
+After hearing a podcast on [SpaceVR](http://www.spacevr.co/), I was inspired to create an experience based on their project. However, for this prototype, I decided I was building in the wrong direction. So, I wrapped it up and started work on experiment 10. It now stands as a solar system simulator, with scaled proportions.
 
 **Guiding Question:** What does it feel like to see earth from a satellite point-of-view?
 
