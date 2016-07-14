@@ -36,15 +36,13 @@
       <a-light color="#fff" type="ambient" intensity=".1"></a-light>
 
       <!-- Global Cameras -->
-      <a-camera id="camera-angular" position="0 2000 4500" active="true"></a-camera>
-      <a-camera id="camera-top" position="0 3000 0" active="false"></a-camera>
+      <a-camera id="camera-angular" position="0 500 500" active="true"></a-camera>
+      <a-camera id="camera-top" position="0 500 0" active="false"></a-camera>
       <a-camera id="camera-side" position="0 0 2000" active="false"></a-camera>
 
 
       <!-- World Elements -->
       <a-entity id="universe">
-
-         <a-plane height="10000" width="10000" material="color: #222; opacity: .2" rotation="-90 0 0" position="0 0 0"></a-plane>
 
          <a-sphere   id="sun"
                      class="star"
@@ -171,9 +169,9 @@
 
       var settings = {
          camera:                 'camera-angular',
-         enterVR:                true,
+         enterVR:                false,
          reload:                 false,                 // When developing, it's nice if your phone reloads automatically
-         reloadTime:             6,                  // In seconds
+         reloadTime:             20,                  // In seconds
          scalarOrbitalRadius:    1 / 1000000,
          scalarPlanetaryRadius:  1 / 500,
          scalarSunRadius:        1 / 20000
