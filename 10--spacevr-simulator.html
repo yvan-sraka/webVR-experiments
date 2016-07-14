@@ -26,13 +26,18 @@
 
       <!-- World Elements -->
       <a-entity id="universe">
-
-         <a-sphere   id="sun"
-                     class="star"
-                     radius="695700"
-                     color="yellow">
-            <a-light color="#F7F3D2" type="point" decay=".1"></a-light>
-         </a-sphere>
+<!--
+         <a-entity   id="sun"
+                     class="planet"
+                     planetary-radius="695700"
+                     planetary-color="yellow"
+                     planetary-axis="0 0 0"
+                     planetary-position="0"
+                     orbital-radius="149598023"
+                     orbital-speed="29.78" domFlag>
+            <a-sphere mixin="planet"></a-sphere>
+            <a-animation></a-animation>
+         </a-entity> -->
 
          <!--
 
