@@ -144,8 +144,6 @@ Well-designed video controls for spherical videos. Inspired by [@oscarmarinmiro]
 ### 9. [Solar System](9--solar-system.html)
 After hearing a podcast on SpaceVR, I was inspired to create an experience based on their project. However, for this prototype, I decided I was building in the wrong direction. So I wrapped it up and started work on experiment 10.
 
-**Selection:** `Gaze` or `Click`<br>
-
 
 
 ### 10. [SpaceVR Simulator](10--spacevr-simulator.html) - Work in Progress
