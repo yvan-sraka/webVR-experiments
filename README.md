@@ -70,8 +70,10 @@ Well designed video controls for spherical videos. Inspired by [@oscarmarinmiro]
 
 **Selection:** `Gaze` or `Click`<br>
 
-## 9. [Space](9--space.html) - Work in Progress
-After hearing a podcast on SpaceVR, I was inspired to create an experience based on their project.
+## 9. [Solar System](9--solar-system.html)
+After hearing a podcast on SpaceVR, I was inspired to create an experience based on their project. However, for this prototype, I decided I was building in the wrong direction. So I wrapped it up and started work on experiment 10.
+
+**Selection:** `Gaze` or `Click`<br>
 
 **Selection:** `Gaze` or `Click`<br>
 
