@@ -295,12 +295,12 @@
             planetDOM.setAttribute('material', {
                color:      planets[planetName].planetaryColor
             });
-            planetDOM.setAttribute('position', {
+            planetDOM.setAttribute('position', { //TODO correct math
                x: Number(planets[planetName].orbitalRadius) * Math.sin(Number(planets[planetName].planetaryPosition) * Math.PI),
                y: 0,
                z: Number(planets[planetName].orbitalRadius) * Math.cos(Number(planets[planetName].planetaryPosition) * Math.PI)
             });
-            // console.log(planetDOM.getAttribute('position'));
+
             // Create the animation in the DOM
             var animationDOM = planets[planetName].el.querySelector('a-animation');
             animationDOM.setAttribute('attribute', 'rotation');
