@@ -32,6 +32,7 @@
     "aframe-extras": "donmccurdy/aframe-extras#^1.16.2",
     "is_js": "^0.7.6",
     "bonzo": "ded/bonzo#^2.0.0",
-    "aframe-editor": "aframevr/aframe-editor"
+    "aframe-editor": "aframevr/aframe-editor",
+    "anchor-js": "^3.2.0"
   }
 }

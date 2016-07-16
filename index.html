@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
- <!-- Required meta tags always come first -->
- <meta charset="utf-8">
- <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
- <meta http-equiv="x-ua-compatible" content="ie=edge">
- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
- <title>armthethinker WebVR Experiments</title>
+   <!-- Required meta tags always come first -->
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+   <meta http-equiv="x-ua-compatible" content="ie=edge">
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
+   <script src="bower_components/anchor-js/anchor.min.js"></script>
+   <title>armthethinker WebVR Experiments</title>
 </head>
 <body>
    <div class="container">
@@ -327,6 +328,7 @@ h3{
    border-radius: 6px 6px 0 0;
    box-shadow: rgba(0,0,0,0.1) 0px 15px 40px;
    margin-bottom: 20px;
+   position: relative;
 }
 pre code{
    padding: .6rem .8rem;
@@ -342,10 +344,18 @@ html{
 h3 + p > img{
    width: 100%;
 }
+
 </style>
 <script>
-   var table = document.querySelectorAll('table');
-   for(i = 0; i < table.length; i++)
-      table[i].className = "table";
+
+var table = document.querySelectorAll('table');
+for(i = 0; i < table.length; i++)
+   table[i].className = "table";
+
+anchors.options = {
+   visible: 'always',
+}
+anchors.add('h3');
+
 </script>
 </html>
