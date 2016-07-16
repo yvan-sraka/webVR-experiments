@@ -158,13 +158,28 @@
    <script>
 
       var settings = {
+
+         // Which camera is active at the start
          camera:                 'camera-angular',
-         enterVR:                false,
-         reload:                 false,                 // When developing, it's nice if your phone reloads automatically
-         reloadTime:             20,                  // In seconds
+
+         // Scales the orbital radius
          scalarOrbitalRadius:    1 / 1000000,
+
+         // Scales the planetary radius
          scalarPlanetaryRadius:  1 / 500,
+
+         // Scales the Sun's radius
          scalarSunRadius:        1 / 20000
+
+         // Auto-enter VR
+         enterVR: false,
+
+         // Auto-reload, uses reloadTime
+         reload: false,
+
+         // In seconds
+         reloadTime: 20
+
       }
 
 
