@@ -294,10 +294,12 @@
             //    el.setAttribute('scale', parameters.scale);
             // }
 
+            var scaleAmount = Number(parameters.scale) + Number(parameters.delta[i]);
+
             var scale = {
-               x: Number(parameters.scale) + Number(parameters.delta[i]),
-               y: Number(parameters.scale) + Number(parameters.delta[i]),
-               z: Number(parameters.scale) + Number(parameters.delta[i])
+               x: scaleAmount,
+               y: scaleAmount,
+               z: scaleAmount
             }
 
             el.setAttribute('scale', scale);
