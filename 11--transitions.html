@@ -117,6 +117,15 @@
          transitionJump({x:1, y:2, z:3});
       });
 
+      function setCameraLastPosition(){
+         cameraLastPosition = camera.getAttribute('position');
+      }
+
+      function transitionJump(position){
+         setCameraLastPosition();
+
+         camera.setAttribute('position', position);
+      }
    </script>
    </body>
 </html>
