@@ -1,0 +1,103 @@
+<!doctype html>
+<html>
+<head>
+   <title>11 - Transitions</title>
+   <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no,user-scalable=no,maximum-scale=1">
+   <script src="bower_components/aframe/dist/aframe.js"></script>
+   <script src="js/global-functions.js"></script>
+   <style>
+   *{
+      /*cursor: none;*/
+   }
+   </style>
+
+</head>
+<body>
+
+   <a-scene>
+
+      <!--
+
+      Credits
+
+      -->
+
+      <!--
+         Dark Blue:  006ba6
+         Blue:       0496ff
+         Yellow:     ffbc42
+         Pink:       d81159
+         Plum:       8f2d56
+      -->
+
+      <a-assets>
+
+      </a-assets>
+
+      <!-- Global Settings -->
+      <a-sky color="#ffbc42"></a-sky>
+
+      <a-plane height="20" width="20" material="color: #006ba6" rotation="-90 0 0" position="0 0 0"></a-plane>
+
+      <!-- Human Camera -->
+      <a-camera id="human-camera" position="0 1.7 0" wasd-controls-enabled="true" look-controls-enabled="true"  mouse-controls active="true" near=".05">
+         <a-entity position="0 0 -.5" geometry="primitive: plane; height: .005; width: .005"  material="color: #fff"></a-entity>
+      </a-camera>
+
+      <!-- World Elements -->
+      <a-entity id="world">
+
+         <a-box   height="1"
+                  width="2"
+                  depth="1"
+                  color="#d81159"
+                  position="1 1 -3">
+            <a-animation   attribute="scale"
+                           direction="alternate"
+                           dur="150"
+                           easing="ease-in-sine"
+                           repeat="indefinite"
+                           to="1.2 1 1.2">
+            </a-animation>
+         </a-box>
+
+      </a-entity>
+
+   </a-scene>
+
+
+   <script>
+
+      var settings = {
+
+         // Auto-enter VR
+         enterVR: false,
+
+         // Auto-reload, uses reloadTime
+         reload: false,
+
+         // In seconds
+         reloadTime: 20
+
+      }
+
+
+
+      /*
+         Setup global variables
+      */
+      var scene = document.querySelector('a-scene');
+      var world = document.querySelector('#world');
+
+      /*
+         Add event listener to run after scene is loaded
+      */
+      scene.addEventListener('loaded', function(){
+
+         devTools();
+
+      });
+
+   </script>
+   </body>
+</html>

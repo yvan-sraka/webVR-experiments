@@ -167,6 +167,19 @@ This is my second attempt to build a [SpaceVR](http://www.spacevr.co/) simulator
 
 
 
+### 11. [Transitions](11--transitions.html) - Work in Progress
+![Image for experiment 11](https://raw.githubusercontent.com/armthethinker/webVR-experiments/master/assets/img/heroes/hero-11.jpg)
+
+
+
+**Guiding Question:** What are the best ways to move in VR without position controls?
+
+| Action | Key |
+| ------ | :-: |
+|Selection| `Gaze` or `Click` |
+
+
+
 ## Setup
 ```
 1. $ npm install
