@@ -4,6 +4,7 @@
    <title>11 - Transitions</title>
    <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no,user-scalable=no,maximum-scale=1">
    <script src="bower_components/aframe/dist/aframe-v0.2.0.min.js"></script>
+   <script src="bower_components/Keypress/keypress.js"></script>
    <script src="js/global-functions.js"></script>
    <style>
    *{
@@ -104,6 +105,16 @@
             console.log('I was clicked!');
          });
 
+      });
+
+      /*
+         Keylistener functions
+      */
+      // Setup
+      var keyListener = new window.keypress.Listener();
+
+      keyListener.simple_combo('1', function(){
+         transitionJump({x:1, y:2, z:3});
       });
 
    </script>
