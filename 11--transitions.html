@@ -99,6 +99,11 @@
 
          devTools();
 
+         scene.querySelector('.target').addEventListener('click', function () { // remember that this isn't an All loop
+            this.setAttribute('material', 'color', 'red');
+            console.log('I was clicked!');
+         });
+
       });
 
    </script>
