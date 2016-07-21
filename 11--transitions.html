@@ -233,13 +233,14 @@
          if(removeBool == undefined || removeBool == true){
 
             newEl.addEventListener('animationend', function() {
-               var removeNode = this.parentNode.querySelector('.remove');
-               this.parentNode.removeChild(removeNode);
+               var parentNode = this.parentNode;
+               var removeNode = parentNode.querySelector('.remove');
+               parentNode.removeChild(removeNode);
                console.log('Animation removed with attribute: ' + animationParameters.attribute);
 
-               if(this.parentNode.getAttribute('class') == 'remove'){
-                  removeNode = this.parentNode.parentNode.querySelector('.remove');
-                  this.parentNode.parentNode.removeChild(removeNode);
+               if(parentNode.getAttribute('class') == 'remove'){
+                  removeNode = parentNode.parentNode.querySelector('.remove');
+                  parentNode.parentNode.removeChild(removeNode);
                }
             });
 
