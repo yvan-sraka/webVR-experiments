@@ -143,6 +143,10 @@
             class: 'remove',
          });
 
+         if(middleFunction == undefined){
+            middleFunction = function(){};
+         }
+
          addAnimation(camera.querySelector('#fadeSphere'), {
             attribute: "opacity",
             begin: beginTime,
@@ -243,9 +247,16 @@
 
          // If the middleFunction is defined, then start it with the animation TODO: add wait timer
          if(middleFunction != undefined){
+
+            // To get rid of running each repeat
+            middleFunctionRun = false;
+
             newEl.addEventListener('animationstart', function() {
-               console.log('middleFunction');
-               middleFunction();
+               if(middleFunctionRun == false){
+                  console.log('middleFunction');
+                  middleFunction();
+                  middleFunctionRun = true;
+               }
             });
          }
       }
