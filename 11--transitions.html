@@ -128,11 +128,113 @@
       }
 
       function transitionFade(){
+         addAnimation(camera.querySelector('#fadeSphere'), {
+            attribute: "opacity",
+            begin: 2000,
+            dur: 1000,
+            direction: "alternate",
+            easing: "ease-in-out-sine",
+            fill: "forwards",
+            from: 0,
+            to: 1,
+            repeat: 1,
+            class: 'remove'
+         }, function(){
+            console.log('hi');
+         });
       }
 
       function transitionJumpFade(position){
 
       }
+
+
+      function addAnimation(insertEl, animationParameters, removeBool, middleFunction){
+         // Model:
+         // var animationParameters = {
+         //    attribute: "opacity",
+         //    begin: 2000,
+         //    dur: 1000,
+         //    direction: "alternate",
+         //    easing: "ease-in-out-sine",
+         //    fill: "forwards",
+         //    from: 0,
+         //    to: 1,
+         //    repeat: 1
+         // }
+
+         // Create a new animation element
+         var newEl = document.createElement('a-animation');
+
+         // Set the attributes of the element if they were passed in the animationParameters{}
+         if(animationParameters.attribute != undefined)
+            newEl.setAttribute('attribute', animationParameters.attribute);
+
+         if(animationParameters.begin != undefined)
+            newEl.setAttribute('begin', animationParameters.begin);
+
+         if(animationParameters.dur != undefined)
+            newEl.setAttribute('dur', animationParameters.dur);
+
+         if(animationParameters.direction != undefined)
+            newEl.setAttribute('direction', animationParameters.direction);
+
+         if(animationParameters.easing != undefined)
+            newEl.setAttribute('easing', animationParameters.easing);
+
+         if(animationParameters.fill != undefined)
+            newEl.setAttribute('fill', animationParameters.fill);
+
+         if(animationParameters.from != undefined)
+            newEl.setAttribute('from', animationParameters.from);
+
+         if(animationParameters.to != undefined)
+            newEl.setAttribute('to', animationParameters.to);
+
+         if(animationParameters.repeat != undefined)
+            newEl.setAttribute('repeat', animationParameters.repeat);
+
+         if(animationParameters.class != undefined)
+            newEl.setAttribute('class', animationParameters.class);
+
+         if(animationParameters.id != undefined)
+            newEl.setAttribute('id', animationParameters.id);
+
+         // Add the element to the DOM
+         insertEl.appendChild(newEl);
+
+         // If there isn't a removeBool, but there is a middleFunction(), set the vars as such
+         if(typeof removeBool == 'function'){
+            middleFunction = removeBool;
+            removeBool = undefined;
+
+         }
+
+         // If the remove boolean is set to true (or default is to remove), then remove the animation element after the animation runs
+         if(removeBool == undefined || removeBool == true){
+
+            newEl.addEventListener('animationend', function() {
+               var removeNode = this.parentNode.querySelector('.remove');
+               this.parentNode.removeChild(removeNode);
+               console.log('Animation removed with attribute: ' + animationParameters.attribute);
+
+               if(this.parentNode.getAttribute('class') == 'remove'){
+                  removeNode = this.parentNode.parentNode.querySelector('.remove');
+                  this.parentNode.parentNode.removeChild(removeNode);
+               }
+            });
+
+         }
+
+         // If the middleFunction is defined, then start it with the animation TODO: add wait timer
+         if(middleFunction != undefined){
+            newEl.addEventListener('animationstart', function() {
+               console.log('middleFunction');
+               middleFunction();
+            });
+         }
+      }
+
    </script>
    </body>
 </html>
