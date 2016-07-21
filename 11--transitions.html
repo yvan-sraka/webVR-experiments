@@ -99,8 +99,6 @@
       scene.addEventListener('loaded', function(){
 
 
-         transitionFade(1000, 0, 'sine');
-
          devTools();
 
          scene.querySelector('.target').addEventListener('click', function () { // remember that this isn't an All loop
@@ -117,7 +115,7 @@
       var keyListener = new window.keypress.Listener();
 
       keyListener.simple_combo('1', function(){
-         transitionJump({x:1, y:2, z:3});
+         transitionFadeJump(1000, 0, 'sine', {x:1, y:2, z:5});
       });
 
       function setCameraLastPosition(){
