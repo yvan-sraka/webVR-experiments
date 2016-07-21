@@ -250,6 +250,48 @@
          }
       }
 
+      function addEl(insertEl, elParameters){
+         // Model follows a-entitiy attributes
+
+         // Create a new entity element
+         var newEl = document.createElement('a-' + elParameters.entityType);
+
+         // Set the attributes of the element if they were passed in the elParameters{}
+
+
+         if(elParameters.id != undefined)
+            newEl.setAttribute('id', elParameters.id);
+
+         if(elParameters.class != undefined)
+            newEl.setAttribute('class', elParameters.class);
+
+         if(elParameters.radius != undefined)
+            newEl.setAttribute('radius', elParameters.radius);
+
+         if(elParameters.color != undefined)
+            newEl.setAttribute('color', elParameters.color);
+
+         if(elParameters.position != undefined)
+            newEl.setAttribute('position', elParameters.position);
+
+         if(elParameters.side != undefined)
+            newEl.setAttribute('side', elParameters.side);
+
+         if(elParameters.opacity != undefined)
+            newEl.setAttribute('opacity', elParameters.opacity);
+
+
+
+         // Add the element to the DOM
+         insertEl.appendChild(newEl);
+
+         // If the middleFunction is defined, then start it with the animation TODO: add wait timer
+         // if(nestedEl != undefined){
+         //    nestedEl
+         // }
+
+      }
+
    </script>
    </body>
 </html>
