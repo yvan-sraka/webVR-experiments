@@ -128,7 +128,12 @@
          camera.setAttribute('position', position);
       }
 
-      function transitionFade(){
+      function transitionFadeJump(duration, beginTime, easing, position){
+         transitionFade(duration, beginTime, easing, function(){
+            transitionJump(position);
+         });
+      }
+
       function transitionFade(duration, beginTime, easing, middleFunction){
          addEl(camera, {
             entityType: 'sphere',
