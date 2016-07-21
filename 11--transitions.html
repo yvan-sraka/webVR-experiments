@@ -258,8 +258,9 @@
 
             newEl.addEventListener('animationstart', function() {
                if(middleFunctionRun == false){
-                  console.log('middleFunction');
-                  middleFunction();
+                  setTimeout(function(){
+                     middleFunction();
+                  }, animationParameters.dur);
                   middleFunctionRun = true;
                }
             });
