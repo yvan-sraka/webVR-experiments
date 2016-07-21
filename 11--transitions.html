@@ -99,7 +99,7 @@
       scene.addEventListener('loaded', function(){
 
 
-         transitionFade();
+         transitionFade(1000, 0, 'sine');
 
          devTools();
 
@@ -131,19 +131,31 @@
       }
 
       function transitionFade(){
+      function transitionFade(duration, beginTime, easing, middleFunction){
+         addEl(camera, {
+            entityType: 'sphere',
+            id: 'fadeSphere',
+            radius: .5,
+            color: '#000',
+            position: '0 0 0',
+            side: 'double',
+            opacity: '0',
+            class: 'remove',
+         });
+
          addAnimation(camera.querySelector('#fadeSphere'), {
             attribute: "opacity",
-            begin: 2000,
-            dur: 1000,
+            begin: beginTime,
+            dur: duration,
             direction: "alternate",
-            easing: "ease-in-out-sine",
+            easing: "ease-in-out-" + easing,
             fill: "forwards",
             from: 0,
             to: 1,
             repeat: 1,
             class: 'remove'
          }, function(){
-            console.log('hi');
+            middleFunction;
          });
       }
 
