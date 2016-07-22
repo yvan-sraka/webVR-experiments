@@ -1,0 +1,364 @@
+<!doctype html>
+<html>
+<head>
+   <title>11 - Transitions</title>
+   <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no,user-scalable=no,maximum-scale=1">
+   <script src="bower_components/aframe/dist/aframe-v0.2.0.min.js"></script>
+   <script src="bower_components/Keypress/keypress.js"></script>
+   <script src="js/global-functions.js"></script>
+   <style>
+   *{
+      cursor: none;
+   }
+   </style>
+
+</head>
+<body>
+
+   <a-scene>
+
+      <!--
+
+      Credits
+
+      -->
+
+      <!--
+         Dark Blue:  006ba6
+         Blue:       0496ff
+         Yellow:     ffbc42
+         Pink:       d81159
+         Plum:       8f2d56
+      -->
+
+      <a-assets>
+
+      </a-assets>
+
+      <!-- Global Settings -->
+      <a-sky color="#ffbc42"></a-sky>
+
+      <a-plane height="20" width="20" material="color: #006ba6" rotation="-90 0 0" position="0 0 0"></a-plane>
+
+      <!-- Human Camera -->
+      <a-camera id="human-camera" position="0 1.7 0" active="true" near=".05">
+         <a-entity cursor="fuse: false" position="0 0 -.5" geometry="primitive: plane; height: .005; width: .005"  material="color: #fff"></a-entity>
+      </a-camera>
+
+      <!-- World Elements -->
+      <a-entity id="world">
+
+         <a-box   class="target"
+                  height="1"
+                  width="2"
+                  depth="1"
+                  color="#d81159"
+                  position="1 1 -3">
+            <!-- <a-animation   attribute="scale"
+                           direction="alternate"
+                           dur="150"
+                           easing="ease-in-sine"
+                           repeat="indefinite"
+                           to="1.2 1 1.2"> -->
+            </a-animation>
+         </a-box>
+
+      </a-entity>
+
+   </a-scene>
+
+
+   <script>
+
+      var settings = {
+
+         // Auto-enter VR
+         enterVR: true,
+
+         // Auto-reload, uses reloadTime
+         reload: false,
+
+         // In seconds
+         reloadTime: 10
+
+      }
+
+
+
+      /*
+         Setup global variables
+      */
+      var scene = document.querySelector('a-scene');
+      var world = document.querySelector('#world');
+      var camera = document.querySelector('a-camera');
+      var cameraLastPosition = camera.getAttribute('position');
+      // var targets = {
+      //    els: scene.querySelectorAll('.target'),
+      //    active: settings.target
+      //    // The rest of the object gets built with buildTargets()
+      // }
+      // var cameras = {
+      //    els: scene.querySelectorAll('a-camera'),
+      //    active: settings.camera
+      //    // The rest of the object gets built with buildCameras()
+      // }
+
+      /*
+         Add event listener to run after scene is loaded
+      */
+      scene.addEventListener('loaded', function(){
+
+         // buildCameras(cameras);
+         // buildTargets(targets);
+
+         devTools();
+
+         scene.querySelector('.target').addEventListener('click', function () { // remember that this isn't an All loop
+            this.setAttribute('material', 'color', 'red');
+            console.log('I was clicked!');
+            transitionFadeJump(1000, 0, 'sine', {x:1, y:2, z:5});
+         });
+
+      });
+
+      /*
+         Keylistener functions
+      */
+      // Setup
+      var keyListener = new window.keypress.Listener();
+
+      keyListener.simple_combo('1', function(){
+         console.log('fadejump, short');
+         transitionFadeJump(100, 0, 'sine', {x:1, y:2, z:5});
+      });
+      keyListener.simple_combo('2', function(){
+         console.log('fadejump, long');
+         transitionFadeJump(100, 0, 'sine', {x:1, y:2, z:5});
+      });
+      keyListener.simple_combo('3', function(){
+         console.log('micromovements');
+         transitionMicromovements({x:-5, y:1.7, z:5}, 5, 800);
+      });
+
+      function setCameraLastPosition(){
+         cameraLastPosition = camera.getAttribute('position');
+      }
+
+      function transitionJump(position){
+         setCameraLastPosition();
+
+         camera.setAttribute('position', position);
+      }
+
+      function transitionFadeJump(duration, beginTime, easing, position){
+         transitionFade(duration, beginTime, easing, function(){
+            transitionJump(position);
+         });
+      }
+
+      function transitionFade(duration, beginTime, easing, middleFunction){
+         addEl(camera, {
+            entityType: 'sphere',
+            id: 'fadeSphere',
+            radius: .5,
+            color: '#000',
+            position: '0 0 0',
+            side: 'double',
+            opacity: '0',
+            class: 'remove',
+         });
+
+         if(middleFunction == undefined){
+            middleFunction = function(){};
+         }
+
+         addAnimation(camera.querySelector('#fadeSphere'), {
+            attribute: "opacity",
+            begin: beginTime,
+            dur: duration,
+            direction: "alternate",
+            easing: "ease-in-out-" + easing,
+            fill: "forwards",
+            from: 0,
+            to: 1,
+            repeat: 1,
+            class: 'remove'
+         }, function(){
+
+            middleFunction();
+         });
+      }
+
+      function transitionMicromovements(position, stepCount, duration){
+         var oldPos = camera.getAttribute('position');
+         var newPos = position;
+
+         var steps = {
+            x: (newPos.x - oldPos.x) / stepCount,
+            y: (newPos.y - oldPos.y) / stepCount,
+            z: (newPos.z - oldPos.z) / stepCount
+         }
+
+         var stepDuration = duration / stepCount;
+
+         function callback(){
+            return function(){
+               oldPos = camera.getAttribute('position');
+               newPosition = {
+                  x: oldPos.x + steps.x,
+                  y: oldPos.y + steps.y,
+                  z: oldPos.z + steps.z
+               };
+               camera.setAttribute('position', newPosition);
+            }
+         }
+
+         for(i = 0; i < stepCount; i++){
+            console.log(i);
+
+            setTimeout(callback(), stepDuration * (i+1));
+
+         }
+
+      }
+
+      function addAnimation(insertEl, animationParameters, removeBool, middleFunction){
+         // Model:
+         // var animationParameters = {
+         //    attribute: "opacity",
+         //    begin: 2000,
+         //    dur: 1000,
+         //    direction: "alternate",
+         //    easing: "ease-in-out-sine",
+         //    fill: "forwards",
+         //    from: 0,
+         //    to: 1,
+         //    repeat: 1
+         // }
+
+         // Create a new animation element
+         var newEl = document.createElement('a-animation');
+
+         // Set the attributes of the element if they were passed in the animationParameters{}
+         if(animationParameters.attribute != undefined)
+            newEl.setAttribute('attribute', animationParameters.attribute);
+
+         if(animationParameters.begin != undefined)
+            newEl.setAttribute('begin', animationParameters.begin);
+
+         if(animationParameters.dur != undefined)
+            newEl.setAttribute('dur', animationParameters.dur);
+
+         if(animationParameters.direction != undefined)
+            newEl.setAttribute('direction', animationParameters.direction);
+
+         if(animationParameters.easing != undefined)
+            newEl.setAttribute('easing', animationParameters.easing);
+
+         if(animationParameters.fill != undefined)
+            newEl.setAttribute('fill', animationParameters.fill);
+
+         if(animationParameters.from != undefined)
+            newEl.setAttribute('from', animationParameters.from);
+
+         if(animationParameters.to != undefined)
+            newEl.setAttribute('to', animationParameters.to);
+
+         if(animationParameters.repeat != undefined)
+            newEl.setAttribute('repeat', animationParameters.repeat);
+
+         if(animationParameters.class != undefined)
+            newEl.setAttribute('class', animationParameters.class);
+
+         if(animationParameters.id != undefined)
+            newEl.setAttribute('id', animationParameters.id);
+
+         // Add the element to the DOM
+         insertEl.appendChild(newEl);
+
+         // If there isn't a removeBool, but there is a middleFunction(), set the vars as such
+         if(typeof removeBool == 'function'){
+            middleFunction = removeBool;
+            removeBool = undefined;
+
+         }
+
+         // If the remove boolean is set to true (or default is to remove), then remove the animation element after the animation runs
+         if(removeBool == undefined || removeBool == true){
+
+            newEl.addEventListener('animationend', function() {
+               var parentNode = this.parentNode;
+               var removeNode = parentNode.querySelector('.remove');
+               parentNode.removeChild(removeNode);
+               console.log('Animation removed with attribute: ' + animationParameters.attribute);
+
+               if(parentNode.getAttribute('class') == 'remove'){
+                  removeNode = parentNode.parentNode.querySelector('.remove');
+                  parentNode.parentNode.removeChild(removeNode);
+               }
+            });
+
+         }
+
+         // If the middleFunction is defined, then start it with the animation TODO: add wait timer
+         if(middleFunction != undefined){
+
+            // To get rid of running each repeat
+            middleFunctionRun = false;
+
+            newEl.addEventListener('animationstart', function() {
+               if(middleFunctionRun == false){
+                  setTimeout(function(){
+                     middleFunction();
+                  }, animationParameters.dur);
+                  middleFunctionRun = true;
+               }
+            });
+         }
+      }
+
+      function addEl(insertEl, elParameters){
+         // Model follows a-entitiy attributes
+
+         // Create a new entity element
+         var newEl = document.createElement('a-' + elParameters.entityType);
+
+         // Set the attributes of the element if they were passed in the elParameters{}
+
+
+         if(elParameters.id != undefined)
+            newEl.setAttribute('id', elParameters.id);
+
+         if(elParameters.class != undefined)
+            newEl.setAttribute('class', elParameters.class);
+
+         if(elParameters.radius != undefined)
+            newEl.setAttribute('radius', elParameters.radius);
+
+         if(elParameters.color != undefined)
+            newEl.setAttribute('color', elParameters.color);
+
+         if(elParameters.position != undefined)
+            newEl.setAttribute('position', elParameters.position);
+
+         if(elParameters.side != undefined)
+            newEl.setAttribute('side', elParameters.side);
+
+         if(elParameters.opacity != undefined)
+            newEl.setAttribute('opacity', elParameters.opacity);
+
+
+
+         // Add the element to the DOM
+         insertEl.appendChild(newEl);
+
+         // If the middleFunction is defined, then start it with the animation TODO: add wait timer
+         // if(nestedEl != undefined){
+         //    nestedEl
+         // }
+
+      }
+
+   </script>
+   </body>
+</html>

@@ -208,15 +208,26 @@
    <script>
 
       var settings = {
+
+         // Which target should be activated
          target: 'target1',
-         hiddenPosition: {              // Location of the hidden position, e.g. below the ground plane
+
+         // Location of the hidden position, e.g. below the ground plane
+         hiddenPosition: {
             x: 0,
             y: -100,
             z: 0
          },
+
+         // Auto-enter VR
          enterVR: true,
-         reload: false,                 // When developing, it's nice if your phone reloads automatically
-         reloadTime: 6                  // In seconds
+
+         // Auto-reload, uses reloadTime
+         reload: false,
+
+         // In seconds
+         reloadTime: 6
+
       }
 
 

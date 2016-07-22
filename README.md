@@ -8,8 +8,20 @@ Comments, suggestions, and pull requests welcome.
 
 ## Experiments
 
+1.  [Hello World](#1-hello-world)
+2.  [UI Test](#2-ui-test)
+3.  [Figures in Space](#3-figures-in-space)
+4.  [ViewPoint](#4-viewpoint)
+5.  [Missed Connections](#5-missed-connections)
+6.  [Head Tracked Transformations](#6-head-tracked-transformatinos)
+7.  [Product Selection & Customization](#7-product-selection)
+8.  [Video Controls](#8-video-controls)
+9.  [Solar System](#9-solar-system)
+10. [SpaceVR Simulator](#10-spacevr-simulator)
+11. [Transitions](#11-transitions)
 
-### 1. [Hello World](1--helloworld.html)
+
+<h3 id="1-hello-world">1. <a href="1--helloworld.html">Hello World</a></h3>
 ![Image for experiment 1](https://raw.githubusercontent.com/armthethinker/webVR-experiments/master/assets/img/heroes/hero-1.jpg)
 
 A basic world with random components. Made while learning A-Frame.
@@ -22,7 +34,7 @@ A basic world with random components. Made while learning A-Frame.
 
 
 
-### 2. [UI Test](2--ui.html)
+<h3 id="2-ui-test">2. <a href="2--ui.html">UI Test</a></h3>
 ![Image for experiment 2](https://raw.githubusercontent.com/armthethinker/webVR-experiments/master/assets/img/heroes/hero-2.jpg)
 
 A basic test with cylinder UI.
@@ -35,7 +47,7 @@ A basic test with cylinder UI.
 
 
 
-### 3. [Figures in Space](3--figures-in-space.html)
+<h3 id="3-figures-in-space">3. <a href="3--figures-in-space.html">Figures in Space</a></h3>
 ![Image for experiment 3](https://raw.githubusercontent.com/armthethinker/webVR-experiments/master/assets/img/heroes/hero-3.jpg)
 
 Testing a project for IXDS.
@@ -48,7 +60,7 @@ Testing a project for IXDS.
 
 
 
-### 4. [ViewPoint](4--viewpoint.html)
+<h3 id="4-viewpoint">4. <a href="4--viewpoint.html">ViewPoint</a></h3>
 ![Image for experiment 4](https://raw.githubusercontent.com/armthethinker/webVR-experiments/master/assets/img/heroes/hero-4.jpg)
 
 The working model for a class project (IXDS public display).
@@ -65,7 +77,7 @@ Team Members: Iris Wu, Tiffany Wang, Ryan Huber
 
 
 
-### 5. [Missed Connections](5--missed-connections.html)
+<h3 id="5-missed-connections">5. <a href="5--missed-connections.html">Missed Connections</a></h3>
 ![Image for experiment 5](https://raw.githubusercontent.com/armthethinker/webVR-experiments/master/assets/img/heroes/hero-5.jpg)
 
 Prototype and final presentation for a class project (Programming Usable Interfaces).
@@ -83,7 +95,7 @@ Team Members: Andrew Novotny, Joel Rodrigues, & Rachel Ng
 
 
 
-### 6. [Head Tracked Transformations](6--head-tracked-transformations.html)
+<h3 id="6-head-tracked-transformations">6. <a href="6--head-tracked-transformations.html">Head Tracked Transformations</a></h3>
 ![Image for experiment 6](https://raw.githubusercontent.com/armthethinker/webVR-experiments/master/assets/img/heroes/hero-6.jpg)
 
 For headsets without positional tracking (e.g. Google Cardboard), how can we allow position-esque movement? In this set of experiments, the blocks mutate based on the selected transformation.
@@ -108,7 +120,7 @@ For headsets without positional tracking (e.g. Google Cardboard), how can we all
 
 
 
-### 7. [Product Selection & Customization](7--product-selection-customization.html)
+<h3 id="7-product-selection-customization">7. <a href="7--product-selection-customization.html">Product Selection Customization</a></h3>
 ![Image for experiment 7](https://raw.githubusercontent.com/armthethinker/webVR-experiments/master/assets/img/heroes/hero-7.jpg)
 
 Looking at the differences in prototyping with a single planar mockup, a curved mockup, and a three dimensional mockup.
@@ -128,7 +140,7 @@ Looking at the differences in prototyping with a single planar mockup, a curved 
 
 
 
-### 8. [Video Controls](8--video-controls.html) - Work in Progress
+<h3 id="8-video-controls">8. <a href="8--video-controls.html">Video Controls - Work in Progress</a></h3>
 ![Image for experiment 8](https://raw.githubusercontent.com/armthethinker/webVR-experiments/master/assets/img/heroes/hero-8.jpg)
 
 Well-designed video controls for spherical videos. Inspired by [@oscarmarinmiro](https://github.com/oscarmarinmiro/aframe-video-controls).
@@ -141,7 +153,7 @@ Well-designed video controls for spherical videos. Inspired by [@oscarmarinmiro]
 
 
 
-### 9. [Solar System](9--solar-system.html)
+<h3 id="9-solar-system">9. <a href="9--solar-system.html">Solar System</a></h3>
 ![Image for experiment 9](https://raw.githubusercontent.com/armthethinker/webVR-experiments/master/assets/img/heroes/hero-9.jpg)
 
 After hearing a podcast on [SpaceVR](http://www.spacevr.co/), I was inspired to create an experience based on their project. However, for this prototype, I decided I was building in the wrong direction. So, I wrapped it up and started work on experiment 10. It now stands as a solar system simulator, with scaled proportions.
@@ -154,7 +166,7 @@ After hearing a podcast on [SpaceVR](http://www.spacevr.co/), I was inspired to 
 
 
 
-### 10. [SpaceVR Simulator](10--spacevr-simulator.html)
+<h3 id="10-spacevr-simulator">10. <a href="10--spacevr-simulator.html">SpaceVR Simulator</a></h3>
 ![Image for experiment 10](https://raw.githubusercontent.com/armthethinker/webVR-experiments/master/assets/img/heroes/hero-10.jpg)
 
 This is my second attempt to build a [SpaceVR](http://www.spacevr.co/) simulator. This time, I had a clearer project in-mind: less robust, more to the point. This time it took me less than two hours to throw it all together.
@@ -164,6 +176,22 @@ This is my second attempt to build a [SpaceVR](http://www.spacevr.co/) simulator
 | Action | Key |
 | ------ | :-: |
 |Selection| `Gaze` or `Click` |
+
+
+
+<h3 id="11-transitions">11. <a href="11--transitions.html">Transitions - Work in Progress</a></h3>
+![Image for experiment 11](https://raw.githubusercontent.com/armthethinker/webVR-experiments/master/assets/img/heroes/hero-11.jpg)
+
+
+
+**Guiding Question:** What are the best ways to move in VR without position controls?
+
+| Transition Name | Action |
+| --------------- | ------ |
+| `Jump` | Instantly move from one position to another. |
+| `Fade` | View fades into black, then back up. |
+| `Fade Jump` | View fades into black. Position instantly changes. View fades back up. |
+| `Micro-Movements` | Many short jumps between the current position and final position. |
 
 
 
