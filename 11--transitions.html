@@ -104,6 +104,7 @@
          scene.querySelector('.target').addEventListener('click', function () { // remember that this isn't an All loop
             this.setAttribute('material', 'color', 'red');
             console.log('I was clicked!');
+            transitionFadeJump(1000, 0, 'sine', {x:1, y:2, z:5});
          });
 
       });
