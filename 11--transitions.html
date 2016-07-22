@@ -116,7 +116,16 @@
       var keyListener = new window.keypress.Listener();
 
       keyListener.simple_combo('1', function(){
-         transitionFadeJump(1000, 0, 'sine', {x:1, y:2, z:5});
+         console.log('fadejump, short');
+         transitionFadeJump(100, 0, 'sine', {x:1, y:2, z:5});
+      });
+      keyListener.simple_combo('2', function(){
+         console.log('fadejump, long');
+         transitionFadeJump(100, 0, 'sine', {x:1, y:2, z:5});
+      });
+      keyListener.simple_combo('3', function(){
+         console.log('micromovements');
+         transitionMicromovements({x:-5, y:1.7, z:5}, 5, 800);
       });
 
       function setCameraLastPosition(){
