@@ -177,10 +177,38 @@
          });
       }
 
-      function transitionJumpFade(position){
+      function transitionMicromovements(position, stepCount, duration){
+         var oldPos = camera.getAttribute('position');
+         var newPos = position;
+
+         var steps = {
+            x: (newPos.x - oldPos.x) / stepCount,
+            y: (newPos.y - oldPos.y) / stepCount,
+            z: (newPos.z - oldPos.z) / stepCount
+         }
+
+         var stepDuration = duration / stepCount;
+
+         function callback(){
+            return function(){
+               oldPos = camera.getAttribute('position');
+               newPosition = {
+                  x: oldPos.x + steps.x,
+                  y: oldPos.y + steps.y,
+                  z: oldPos.z + steps.z
+               };
+               camera.setAttribute('position', newPosition);
+            }
+         }
+
+         for(i = 0; i < stepCount; i++){
+            console.log(i);
+
+            setTimeout(callback(), stepDuration * (i+1));
+
+         }
 
       }
-
 
       function addAnimation(insertEl, animationParameters, removeBool, middleFunction){
          // Model:
