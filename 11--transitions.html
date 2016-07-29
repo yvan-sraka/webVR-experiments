@@ -76,6 +76,9 @@
 
       var settings = {
 
+         // Height of user's eyes in meters
+         height: 1.7,
+
          // Auto-enter VR
          enterVR: true,
 
@@ -104,6 +107,8 @@
 
 
          devTools();
+
+         setCameraHeight(camera, settings.height);
 
          scene.querySelector('.target').addEventListener('click', function () { // remember that this isn't an All loop
             this.setAttribute('material', 'color', 'red');
