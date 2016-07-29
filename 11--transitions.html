@@ -148,6 +148,10 @@
          transitionAnimate({x:-5, y:1.7, z:5}, 1);
       });
 
+      keyListener.simple_combo('c', function(){
+         console.log(camera.getAttribute('position'));
+      });
+
       function setCameraLastPosition(){
          cameraLastPosition = camera.getAttribute('position');
       }
