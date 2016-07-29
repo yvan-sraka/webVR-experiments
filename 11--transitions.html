@@ -309,7 +309,14 @@
          if(typeof removeBool == 'function'){
             middleFunction = removeBool;
             removeBool = undefined;
-
+         }else if(removeBool == true){
+            var classes = newEl.getAttribute('class');
+            if(classes == null){
+               newEl.setAttribute('class', 'remove');
+            }else{
+               classes += ' remove';
+               newEl.setAttribute('class', classes);
+            }
          }
 
          // If the remove boolean is set to true (or default is to remove), then remove the animation element after the animation runs
