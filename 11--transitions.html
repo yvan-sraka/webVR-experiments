@@ -214,9 +214,34 @@
 
       }
 
-      function transitionAnimate(position, duration){ //Todo: change to speed
+      function transitionAnimate(position, speed){ //Todo: change to speed
          var oldPos = camera.getAttribute('position');
          var newPos = position;
+
+         console.log(newPos);
+
+         // Physics reminder time!
+         // v = x / t
+         // thus, t = x / v
+
+         function subtractPositionObjects(objA, objB){
+            var x = objA.x - objB.x;
+            var y = objA.y - objB.y;
+            var z = objA.z - objB.z;
+            return {x, y, z};
+         }
+
+         var differenceObj = subtractPositionObjects(newPos, oldPos);
+
+         console.log(differenceObj);
+
+         var distance = Math.sqrt(Math.pow(differenceObj.x, 2) + Math.pow(differenceObj.y, 2) + Math.pow(differenceObj.z, 2));
+
+         console.log(distance);
+
+         var duration = (distance / speed) * 1000;
+
+         console.log(duration);
 
          addAnimation(camera, {
             attribute: 'position',
