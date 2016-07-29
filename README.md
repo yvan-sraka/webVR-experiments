@@ -192,6 +192,7 @@ This is my second attempt to build a [SpaceVR](http://www.spacevr.co/) simulator
 | `Fade` | View fades into black, then back up. |
 | `Fade Jump` | View fades into black. Position instantly changes. View fades back up. |
 | `Micro-Movements` | Many short jumps between the current position and final position. |
+| `Animate` | Continuous movement from one location to another. |
 
 
 

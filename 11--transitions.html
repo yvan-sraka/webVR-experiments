@@ -127,6 +127,10 @@
          console.log('micromovements');
          transitionMicromovements({x:-5, y:1.7, z:5}, 5, 800);
       });
+      keyListener.simple_combo('4', function(){
+         console.log('animation');
+         transitionAnimate({x:-5, y:1.7, z:5}, 2000);
+      });
 
       function setCameraLastPosition(){
          cameraLastPosition = camera.getAttribute('position');
@@ -208,6 +212,18 @@
 
          }
 
+      }
+
+      function transitionAnimate(position, duration){ //Todo: change to speed
+         var oldPos = camera.getAttribute('position');
+         var newPos = position;
+
+         addAnimation(camera, {
+            attribute: 'position',
+            dur: duration,
+            easing: 'linear',
+            to: newPos.x + ' ' + newPos.y + ' ' + newPos.z
+         }, true);
       }
 
       function addAnimation(insertEl, animationParameters, removeBool, middleFunction){
