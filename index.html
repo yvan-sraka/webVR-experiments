@@ -308,36 +308,54 @@
 <p><h3 id="11-transitions">11. <a href="11--transitions.html">Transitions - Work in Progress</a></h3>
 <img src="https://raw.githubusercontent.com/armthethinker/webVR-experiments/master/assets/img/heroes/hero-11.jpg" alt="Image for experiment 11"></p>
 <p><strong>Guiding Question:</strong> What are the best ways to move in VR without position controls?</p>
+<p><em>Devs</em>: Each transition can be selected by passing its name into <code>settings.transition</code>. Short and long alternatives are available for each transition as well with the exception of the individual<code>Jump</code> and <code>Fade</code> transitions.</p>
 <table>
 <thead>
 <tr>
 <th>Transition Name</th>
 <th>Action</th>
+<th>Parameters</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>Jump</code></td>
 <td>Instantly move from one position to another.</td>
+<td><code>position</code></td>
 </tr>
 <tr>
 <td><code>Fade</code></td>
-<td>View fades into black, then back up.</td>
+<td>View fades into black, then back up. Useless by itself. Used in <code>Fade Jump</code> and can be used in other custom transitions.</td>
+<td><code>duration, beginTime, easing, middleFuntion</code></td>
 </tr>
 <tr>
 <td><code>Fade Jump</code></td>
 <td>View fades into black. Position instantly changes. View fades back up.</td>
+<td><code>duration, beginTime, easing, position</code></td>
 </tr>
 <tr>
 <td><code>Micro-Movements</code></td>
 <td>Many short jumps between the current position and final position.</td>
+<td><code>position, stepCount, duration</code></td>
 </tr>
 <tr>
 <td><code>Animate</code></td>
-<td>Continuous movement from one location to another.</td>
+<td>Continuous, linear movement from one location to another.</td>
+<td><code>position, speed</code></td>
 </tr>
 </tbody>
 </table>
+<p>Example:</p>
+<pre><code class="lang-js">// Fade Jump
+settings = {
+   transition: &#39;Fade Jump&#39;
+}
+
+// Fade Jump Long
+settings = {
+   transition: &#39;Fade Jump Long&#39;
+}
+</code></pre>
 <h2 id="setup">Setup</h2>
 <pre><code>1. $ npm install
 2. $ bower update

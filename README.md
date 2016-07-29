@@ -182,17 +182,30 @@ This is my second attempt to build a [SpaceVR](http://www.spacevr.co/) simulator
 <h3 id="11-transitions">11. <a href="11--transitions.html">Transitions - Work in Progress</a></h3>
 ![Image for experiment 11](https://raw.githubusercontent.com/armthethinker/webVR-experiments/master/assets/img/heroes/hero-11.jpg)
 
-
-
 **Guiding Question:** What are the best ways to move in VR without position controls?
 
-| Transition Name | Action |
-| --------------- | ------ |
-| `Jump` | Instantly move from one position to another. |
-| `Fade` | View fades into black, then back up. |
-| `Fade Jump` | View fades into black. Position instantly changes. View fades back up. |
-| `Micro-Movements` | Many short jumps between the current position and final position. |
-| `Animate` | Continuous movement from one location to another. |
+*Devs*: Each transition can be selected by passing its name into `settings.transition`. Short and long alternatives are available for each transition as well with the exception of the individual`Jump` and `Fade` transitions.
+
+| Transition Name   | Action | Parameters |
+| ----------------- | ------ | ---------- |
+| `Jump`            | Instantly move from one position to another. | `position` |
+| `Fade`            | View fades into black, then back up. Useless by itself. Used in `Fade Jump` and can be used in other custom transitions. | `duration, beginTime, easing, middleFuntion` |
+| `Fade Jump`       | View fades into black. Position instantly changes. View fades back up. | `duration, beginTime, easing, position` |
+| `Micro-Movements` | Many short jumps between the current position and final position. | `position, stepCount, duration` |
+| `Animate`         | Continuous, linear movement from one location to another. | `position, speed` |
+
+Example:
+```js
+// Fade Jump
+settings = {
+   transition: 'Fade Jump'
+}
+
+// Fade Jump Long
+settings = {
+   transition: 'Fade Jump Long'
+}
+```
 
 
 
