@@ -93,7 +93,6 @@
       */
       scene.addEventListener('loaded', function(){
 
-
          devTools();
 
          setCameraHeight(camera, settings.height);
@@ -237,7 +236,7 @@
 
       }
 
-      function transitionAnimate(position, speed){ //Todo: change to speed
+      function transitionAnimate(position, speed){
          var oldPos = camera.getAttribute('position');
          var newPos = position;
 
