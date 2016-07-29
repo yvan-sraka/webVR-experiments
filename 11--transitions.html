@@ -108,12 +108,6 @@
 
          setCameraHeight(camera, settings.height);
 
-         scene.querySelector('.target').addEventListener('click', function () { // remember that this isn't an All loop
-            this.setAttribute('material', 'color', 'red');
-            console.log('I was clicked!');
-            transitionFadeJump(1000, 0, 'sine', {x:1, y:2, z:5});
-         });
-
          placeTransitionOrbs([
             {x: -5.499636956049418,    y: 6.312620687104538,   z: -12.971373578044469},
             {x: 12.709765049944446,    y: 6.644548700847149,   z: -8.388245758668296},
@@ -122,6 +116,18 @@
             {x: -2.8239695631562753,   y: 0,                   z: -7.139200987208032},
             {x: 8.900519242752663,     y: 0,                   z: -1.9215587285872922}
          ], true);
+
+         var targets = scene.querySelectorAll('.target')
+
+         forEach(targets, function(el){
+            el.addEventListener('click', function () { // remember that this isn't an All loop
+               // this.setAttribute('material', 'color', 'red');
+               console.log('I was clicked!');
+
+               setDefaultTransition(el);
+
+            });
+         });
 
       });
 
@@ -433,6 +439,46 @@
                position: orbPositions[i]
             })
          };
+      }
+
+      function setDefaultTransition(el){
+
+         newPos = el.getAttribute('position');
+
+         switch(settings.transition){
+            case 'Jump':
+               transitionJump(newPos);
+            case 'Fade Jump':
+               transitionFadeJump(400, 0, 'sine', newPos);
+               break;
+            case 'Fade Jump Short':
+               transitionFadeJump(200, 0, 'sine', newPos);
+               break;
+            case 'Fade Jump Long':
+               transitionFadeJump(1000, 0, 'sine', newPos);
+               break;
+            case 'Micro-Movements':
+               transitionMicromovements(newPos, 5, 800);
+               break;
+            case 'Micro-Movements Short':
+               transitionMicromovements(newPos, 10, 800);
+               break;
+            case 'Micro-Movements Long':
+               transitionMicromovements(newPos, 3, 800);
+               break;
+            case 'Animate':
+               transitionAnimate(newPos, 10);
+               break;
+            case 'Animate Short':
+               transitionAnimate(newPos, 100);
+               break;
+            case 'Animate Long':
+               transitionAnimate(newPos, 1);
+               break;
+            default:
+               break;
+         }
+
       }
 
    </script>
