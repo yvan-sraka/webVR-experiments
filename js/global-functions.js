@@ -210,3 +210,9 @@ function toggleCameraTo(targetCamera){
    // Set new active camera
    cameras.active = targetCamera;
 }
+
+function setCameraHeight(camera, height){
+   var cameraPosition = camera.getAttribute('position');
+   cameraPosition.y = height;
+   camera.setAttribute('position', cameraPosition);
+}
