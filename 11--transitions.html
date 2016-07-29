@@ -116,6 +116,15 @@
             transitionFadeJump(1000, 0, 'sine', {x:1, y:2, z:5});
          });
 
+         placeTransitionOrbs([
+            {x: -5.499636956049418,    y: 6.312620687104538,   z: -12.971373578044469},
+            {x: 12.709765049944446,    y: 6.644548700847149,   z: -8.388245758668296},
+            {x: 17.54385488277026,     y: 6.344360808608376,   z: -12.965917521979673},
+            {x: 19.155885460376894,    y: 0,                   z: -26.4025057439792},
+            {x: -2.8239695631562753,   y: 0,                   z: -7.139200987208032},
+            {x: 8.900519242752663,     y: 0,                   z: -1.9215587285872922}
+         ], true);
+
       });
 
       /*
@@ -402,6 +411,26 @@
          //    nestedEl
          // }
 
+      }
+
+      /*
+      Places transition orbs around the world based on a given array. Adds the height of the user by default (pass 'false' to not add height).
+      */
+      function placeTransitionOrbs(orbPositions, addHeight){
+         for(i = 0; i < orbPositions.length; i++){
+
+            if(addHeight == true || addHeight == undefined){
+               orbPositions[i].y += settings.height;
+            }
+
+            addEl(world, {
+               entityType: 'sphere',
+               radius: .3,
+               color: '#333',
+               opacity: .7,
+               position: orbPositions[i]
+            })
+         };
       }
 
    </script>
