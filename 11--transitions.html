@@ -8,7 +8,7 @@
    <script src="js/global-functions.js"></script>
    <style>
    *{
-      cursor: none;
+      /*cursor: none;*/
    }
    </style>
 
@@ -32,38 +32,27 @@
       -->
 
       <a-assets>
+         <a-asset-item id="mv-obj" src="assets/models/monument-valley.obj"></a-asset-item>
+         <a-asset-item id="mv-mtl" src="assets/models/monument-valley.mtl"></a-asset-item>
 
       </a-assets>
 
       <!-- Global Settings -->
-      <a-sky color="#ffbc42"></a-sky>
+      <a-sky color="#64e6ff"></a-sky>
 
-      <a-plane height="20" width="20" material="color: #006ba6" rotation="-90 0 0" position="0 0 0"></a-plane>
 
-      <!-- Human Camera -->
-      <a-camera id="human-camera" position="0 1.7 0" active="true" near=".05">
-         <a-entity cursor="fuse: false" position="0 0 -.5" geometry="primitive: plane; height: .005; width: .005"  material="color: #fff"></a-entity>
-      </a-camera>
 
       <!-- World Elements -->
       <a-entity id="world">
 
-         <a-box   class="target"
-                  height="1"
-                  width="2"
-                  depth="1"
-                  color="#d81159"
-                  position="1 1 -3">
-            <!-- <a-animation   attribute="scale"
-                           direction="alternate"
-                           dur="150"
-                           easing="ease-in-sine"
-                           repeat="indefinite"
-                           to="1.2 1 1.2"> -->
-            </a-animation>
-         </a-box>
+         <a-entity obj-model="obj: #mv-obj; mtl: #mv-mtl" scale=".3 .3 .3" position="6 -.3 -13"></a-entity>
 
       </a-entity>
+
+      <!-- Human Camera -->
+      <a-camera id="human-camera" position="0 1.7 0" wasd-controls="fly:true" active="true" near=".05">
+         <a-entity cursor="fuse: true; maxDistance: 50; timeout: 500" position="0 0 -2" geometry="primitive: plane; height: .05; width: .05"  material="color: #fff"></a-entity>
+      </a-camera>
 
    </a-scene>
 
@@ -71,6 +60,12 @@
    <script>
 
       var settings = {
+
+         // Default transition
+         transition: 'Animate Short',
+
+         // Height of user's eyes in meters
+         height: 1.7,
 
          // Auto-enter VR
          enterVR: true,
@@ -98,13 +93,36 @@
       */
       scene.addEventListener('loaded', function(){
 
-
          devTools();
 
-         scene.querySelector('.target').addEventListener('click', function () { // remember that this isn't an All loop
-            this.setAttribute('material', 'color', 'red');
-            console.log('I was clicked!');
-            transitionFadeJump(1000, 0, 'sine', {x:1, y:2, z:5});
+         setCameraHeight(camera, settings.height);
+
+         placeTransitionOrbs([
+            {x: -5.499636956049418,    y: 6.312620687104538,   z: -12.971373578044469},
+            {x: 12.709765049944446,    y: 6.644548700847149,   z: -8.388245758668296},
+            {x: 17.54385488277026,     y: 6.344360808608376,   z: -12.965917521979673},
+            {x: 19.155885460376894,    y: 0,                   z: -26.4025057439792},
+            {x: -2.8239695631562753,   y: 0,                   z: -7.139200987208032},
+            {x: 8.900519242752663,     y: 0,                   z: -1.9215587285872922},
+            {x: -4.3808164081879015, y: 0.27386687755558664, z: -17.19795420116629},
+            {x: -4.183515004950278, y: 0.0736484668674784, z: -24.184966522656342},
+            {x: 4.346838095657409, y: 3.891294220787595, z: -14.966443485230126},
+            {x: 16.950260752918833, y: 17.556817190615043, z: -18.575435892985322},
+            {x: 12.501794418453516, y: 17.427153687426213, z: -13.6169492206195},
+            {x: 16.54346786694255, y: 23.745154233402964, z: -23.495441524818382}
+
+         ], true);
+
+         var targets = scene.querySelectorAll('.target')
+
+         forEach(targets, function(el){
+            el.addEventListener('click', function () { // remember that this isn't an All loop
+               // this.setAttribute('material', 'color', 'red');
+               console.log('I was clicked!');
+
+               setDefaultTransition(el);
+
+            });
          });
 
       });
@@ -126,6 +144,14 @@
       keyListener.simple_combo('3', function(){
          console.log('micromovements');
          transitionMicromovements({x:-5, y:1.7, z:5}, 5, 800);
+      });
+      keyListener.simple_combo('4', function(){
+         console.log('animation');
+         transitionAnimate({x:-5, y:1.7, z:5}, 1);
+      });
+
+      keyListener.simple_combo('c', function(){
+         console.log(camera.getAttribute('position'));
       });
 
       function setCameraLastPosition(){
@@ -210,6 +236,43 @@
 
       }
 
+      function transitionAnimate(position, speed){
+         var oldPos = camera.getAttribute('position');
+         var newPos = position;
+
+         console.log(newPos);
+
+         // Physics reminder time!
+         // v = x / t
+         // thus, t = x / v
+
+         function subtractPositionObjects(objA, objB){
+            var x = objA.x - objB.x;
+            var y = objA.y - objB.y;
+            var z = objA.z - objB.z;
+            return {x, y, z};
+         }
+
+         var differenceObj = subtractPositionObjects(newPos, oldPos);
+
+         console.log(differenceObj);
+
+         var distance = Math.sqrt(Math.pow(differenceObj.x, 2) + Math.pow(differenceObj.y, 2) + Math.pow(differenceObj.z, 2));
+
+         console.log(distance);
+
+         var duration = (distance / speed) * 1000;
+
+         console.log(duration);
+
+         addAnimation(camera, {
+            attribute: 'position',
+            dur: duration,
+            easing: 'linear',
+            to: newPos.x + ' ' + newPos.y + ' ' + newPos.z
+         }, true);
+      }
+
       function addAnimation(insertEl, animationParameters, removeBool, middleFunction){
          // Model:
          // var animationParameters = {
@@ -268,7 +331,14 @@
          if(typeof removeBool == 'function'){
             middleFunction = removeBool;
             removeBool = undefined;
-
+         }else if(removeBool == true){
+            var classes = newEl.getAttribute('class');
+            if(classes == null){
+               newEl.setAttribute('class', 'remove');
+            }else{
+               classes += ' remove';
+               newEl.setAttribute('class', classes);
+            }
          }
 
          // If the remove boolean is set to true (or default is to remove), then remove the animation element after the animation runs
@@ -344,6 +414,67 @@
          // if(nestedEl != undefined){
          //    nestedEl
          // }
+
+      }
+
+      /*
+      Places transition orbs around the world based on a given array. Adds the height of the user by default (pass 'false' to not add height).
+      */
+      function placeTransitionOrbs(orbPositions, addHeight){
+         for(i = 0; i < orbPositions.length; i++){
+
+            if(addHeight == true || addHeight == undefined){
+               orbPositions[i].y += settings.height;
+            }
+
+            addEl(world, {
+               entityType: 'sphere',
+               radius: .3,
+               color: '#333',
+               opacity: .7,
+               position: orbPositions[i],
+               class: 'target'
+            })
+         };
+      }
+
+      function setDefaultTransition(el){
+
+         newPos = el.getAttribute('position');
+
+         switch(settings.transition){
+            case 'Jump':
+               transitionJump(newPos);
+            case 'Fade Jump':
+               transitionFadeJump(400, 0, 'sine', newPos);
+               break;
+            case 'Fade Jump Short':
+               transitionFadeJump(200, 0, 'sine', newPos);
+               break;
+            case 'Fade Jump Long':
+               transitionFadeJump(1000, 0, 'sine', newPos);
+               break;
+            case 'Micro-Movements':
+               transitionMicromovements(newPos, 5, 800);
+               break;
+            case 'Micro-Movements Short':
+               transitionMicromovements(newPos, 10, 800);
+               break;
+            case 'Micro-Movements Long':
+               transitionMicromovements(newPos, 3, 800);
+               break;
+            case 'Animate':
+               transitionAnimate(newPos, 10);
+               break;
+            case 'Animate Short':
+               transitionAnimate(newPos, 100);
+               break;
+            case 'Animate Long':
+               transitionAnimate(newPos, 1);
+               break;
+            default:
+               break;
+         }
 
       }
 
