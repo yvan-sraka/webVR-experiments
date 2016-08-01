@@ -50,8 +50,16 @@
       <a-entity id="world">
 
          <a-entity obj-model="obj: #mv-obj; mtl: #mv-mtl" scale=".3 .3 .3" position="6 -.3 -13"></a-entity>
-         <a-sphere radius="2.1" material="src: #ms-1; side: double" position="5.281238208730752 1.7 13.320115124771668" rotation="0 90 0"></a-sphere>
-         <a-sphere radius="2.1" material="src: #ms-2; side: double" position="0.3638128680856906 1.7 14.139963967279039" rotation="0 0 0"></a-sphere>
+
+
+         <!-- Close to window -->
+         <a-sphere class="ms-spherical" radius="2.1" material="src: #ms-2; side: back; opacity: 1" position=".8 1.7 14" rotation="0 100 0"></a-sphere>
+         <a-sphere class="ms-exit" position=".3 1.5 13.1" radius=".1" material="color: #333; opacity: .7"></a-sphere>
+
+         <!-- Close to counter -->
+         <a-sphere class="ms-spherical" radius="2.1" material="src: #ms-1; side: back; opacity: 1" position="5 1.7 14" rotation="0 100 0"></a-sphere>
+         <a-sphere class="ms-exit" position="3.1 1.6 13.1" radius=".1" material="color: #333; opacity: .7"></a-sphere>
+
 
       </a-entity>
 
