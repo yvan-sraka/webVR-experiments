@@ -36,6 +36,9 @@
          <a-asset-item id="mv-obj" src="assets/models/monument-valley.obj"></a-asset-item>
          <a-asset-item id="mv-mtl" src="assets/models/monument-valley.mtl"></a-asset-item>
 
+         <img id="ms-1" src="assets/spherical/main-squeeze.jpg">
+         <img id="ms-2" src="assets/spherical/main-squeeze-2.jpg">
+
       </a-assets>
 
       <!-- Global Settings -->
@@ -47,6 +50,8 @@
       <a-entity id="world">
 
          <a-entity obj-model="obj: #mv-obj; mtl: #mv-mtl" scale=".3 .3 .3" position="6 -.3 -13"></a-entity>
+         <a-sphere radius="2.1" material="src: #ms-1; side: double" position="5.281238208730752 1.7 13.320115124771668" rotation="0 90 0"></a-sphere>
+         <a-sphere radius="2.1" material="src: #ms-2; side: double" position="0.3638128680856906 1.7 14.139963967279039" rotation="0 0 0"></a-sphere>
 
       </a-entity>
 
