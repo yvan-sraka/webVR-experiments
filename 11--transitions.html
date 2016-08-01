@@ -439,9 +439,12 @@
          };
       }
 
-      function setDefaultTransition(el){
+      function setDefaultTransition(el, givenPosition){
 
-         newPos = el.getAttribute('position');
+         if(givenPosition == undefined)
+            newPos = el.getAttribute('position');
+         else
+            newPos = givenPosition;
 
          switch(settings.transition){
             case 'Jump':
