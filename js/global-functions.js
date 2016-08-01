@@ -25,6 +25,16 @@ function reloadPage(seconds){
 
 }
 
+function checkSettingsCallback(){
+
+   fetchSettings();
+
+   if(settings.verbose == true){
+      console.log('new settings', settings);
+   }
+
+}
+
 /*
    Set the parameters of curved image sets using parent settings
 */

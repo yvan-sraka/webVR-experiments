@@ -5,6 +5,7 @@
    <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no,user-scalable=no,maximum-scale=1">
    <script src="bower_components/aframe/dist/aframe-v0.2.0.min.js"></script>
    <script src="bower_components/Keypress/keypress.js"></script>
+   <script src="bower_components/fetch/fetch.js"></script>
    <script src="js/global-functions.js"></script>
    <style>
    *{
@@ -59,26 +60,19 @@
 
    <script>
 
-      var settings = {
+      var settings = null;
 
-         // Default transition
-         transition: 'Animate Short',
+      fetchSettings();
 
-         // Height of user's eyes in meters
-         height: 1.7,
-
-         // Auto-enter VR
-         enterVR: true,
-
-         // Auto-reload, uses reloadTime
-         reload: false,
-
-         // In seconds
-         reloadTime: 10
-
+      function fetchSettings(){
+         fetch('assets/11/11-settings.json').then(function(response){
+            response.json().then(function(responseData){
+               settings = responseData;
+            });
+         });
       }
 
-
+      var intervalID = window.setInterval(checkSettingsCallback, 1500);
 
       /*
          Setup global variables

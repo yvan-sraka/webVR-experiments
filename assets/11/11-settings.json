@@ -1,0 +1,15 @@
+{
+
+   "transition": "Jump",
+
+   "height": 1.7,
+
+   "enterVR": true,
+
+   "reload": false,
+
+   "reloadTime": 10,
+
+   "verbose": false
+
+}
