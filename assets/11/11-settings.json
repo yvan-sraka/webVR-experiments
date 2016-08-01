@@ -4,6 +4,8 @@
 
    "height": 1.7,
 
+   "cameraPosition": "5 1.7 14",
+
    "enterVR": true,
 
    "reload": false,

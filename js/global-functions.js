@@ -226,3 +226,7 @@ function setCameraHeight(camera, height){
    cameraPosition.y = height;
    camera.setAttribute('position', cameraPosition);
 }
+
+function setCamera(camera, position){
+   camera.setAttribute('position', position);
+}
