@@ -417,11 +417,15 @@
       /*
       Places transition orbs around the world based on a given array. Adds the height of the user by default (pass 'false' to not add height).
       */
-      function placeTransitionOrbs(orbPositions, addHeight){
+      function placeTransitionOrbs(orbPositions, addHeight, addClass){
          for(i = 0; i < orbPositions.length; i++){
 
             if(addHeight == true || addHeight == undefined){
                orbPositions[i].y += settings.height;
+            }
+
+            if(addClass == undefined){
+               addClass = 'target';
             }
 
             addEl(world, {
@@ -430,7 +434,7 @@
                color: '#333',
                opacity: .7,
                position: orbPositions[i],
-               class: 'target'
+               class: addClass
             })
          };
       }
