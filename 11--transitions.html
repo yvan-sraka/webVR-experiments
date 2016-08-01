@@ -117,8 +117,8 @@
          var targets = scene.querySelectorAll('.target')
 
          forEach(targets, function(el){
-            el.addEventListener('click', function () { // remember that this isn't an All loop
-               // this.setAttribute('material', 'color', 'red');
+            el.addEventListener('click', function () {
+
                console.log('I was clicked!');
 
                setDefaultTransition(el);
@@ -160,8 +160,6 @@
       }
 
       function transitionJump(position){
-         setCameraLastPosition();
-
          camera.setAttribute('position', position);
       }
 
