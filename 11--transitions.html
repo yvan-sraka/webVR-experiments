@@ -112,7 +112,14 @@
 
          ], true);
 
-         var targets = scene.querySelectorAll('.target')
+         var sphericalImageTargetOrbPositions = [
+            {x: 3.2, y: 0, z: 14},
+            {x: 2.6, y: 0, z: 14}
+         ];
+
+         placeTransitionOrbs(sphericalImageTargetOrbPositions, true, 'sphericalImageTarget')
+
+         var targets = scene.querySelectorAll('.target');
 
          forEach(targets, function(el){
             el.addEventListener('click', function () {
@@ -121,6 +128,23 @@
 
                setDefaultTransition(el);
 
+            });
+         });
+
+         var sphericalImageTarget = scene.querySelectorAll('.sphericalImageTarget');
+         var msSpheres = scene.querySelectorAll('.ms-spherical');
+         var msSpheresExit = scene.querySelectorAll('.ms-exit'); //TODO put on door
+
+         sphericalImageTarget[0].addEventListener('click', function () {
+            setDefaultTransition(sphericalImageTarget[0], msSpheres[0].getAttribute('position'));
+         });
+         sphericalImageTarget[1].addEventListener('click', function () {
+            setDefaultTransition(sphericalImageTarget[1], msSpheres[1].getAttribute('position'));
+         });
+
+         forEach(msSpheresExit, function(el){
+            el.addEventListener('click', function () {
+               setDefaultTransition(el, '0 ' + settings.height + ' 0');
             });
          });
 
