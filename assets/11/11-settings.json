@@ -1,10 +1,10 @@
 {
 
-   "transition": "Jump",
+   "transition": "Micro-Movements Long",
 
    "height": 1.7,
 
-   "cameraPosition": "5 1.7 14",
+   "cameraPosition": "0 1.7 0",
 
    "enterVR": true,
 
