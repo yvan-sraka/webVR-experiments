@@ -315,6 +315,30 @@
          });
       }
 
+      function setGroundPlane(){
+
+         var ground = scene.querySelector('#ground');
+
+         if(settings.groundPlane){
+            ground.setAttribute('material', 'opacity', 1);
+         }else{
+            ground.setAttribute('material', 'opacity', 0);
+         }
+
+      }
+
+      function setVideosphere(){
+
+         var videosphere = scene.querySelector('a-videosphere');
+
+         if(settings.videosphere){
+            videosphere.setAttribute('material', 'opacity', 1);
+         }else{
+            videosphere.setAttribute('material', 'opacity', 0);
+         }
+
+      }
+
    </script>
    </body>
 </html>
