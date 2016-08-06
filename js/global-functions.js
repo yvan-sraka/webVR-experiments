@@ -25,13 +25,17 @@ function reloadPage(seconds){
 
 }
 
-function checkSettingsCallback(){
+function checkSettingsCallback(passedFunction){
 
    fetchSettings();
 
-   if(settings.verbose == true){
-      console.log('new settings', settings);
-   }
+   // if(settings.verbose != undefined){
+   //    if(settings.verbose)
+   //       console.log('new settings', settings);
+   // }
+
+   // if(passedFunction != undefined)
+   //    passedFunction;
 
 }
 
