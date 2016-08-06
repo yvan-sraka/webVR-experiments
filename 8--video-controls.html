@@ -219,23 +219,23 @@
       var scene = document.querySelector('#main-scene');
       var world = scene.querySelector('#world');
 
-      var targets = {
-         els: scene.querySelectorAll('.target'),
-         active: settings.target
-         // The rest of the object gets built with buildTargets()
-      }
+      var targets = null;
 
       /*
          Add event listener to run after scene is loaded
       */
       scene.addEventListener('loaded', function(){
 
+         targets = {
+            els: scene.querySelectorAll('.target'),
+            active: settings.target
+            // The rest of the object gets built with buildTargets()
+         }
+
          buildTargets(targets);
 
          setImagesStraight();
          setImagesCurved(targets.target2.el, true);
-
-         toggleTargetTo(targets.active);
 
          setBtnHoverStates();
 
