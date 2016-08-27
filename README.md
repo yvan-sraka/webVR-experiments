@@ -104,11 +104,12 @@ For headsets without positional tracking (e.g. Google Cardboard), how can we all
 
 | Action | Key |
 | ------ | :-: |
-|  Movement    |   `W A S D`  |
-|  Toggle target to be locked to camera or to world    |   `T`  |
-|  Toggle building    |   `B`  |
-|  Toggle pillars    |   `P`  |
-|  console.log(Camera Attributes, activeTarget Attributes)    |   `C`|
+|  Movement                                               |  `W A S D` |
+|  Toggle target to be locked to camera or to world         |   `T`  |
+|  Toggle building                                          |   `B`  |
+|  Toggle pillars                                           |   `P`  |
+|  Toggle fog                                               |   `F`  |
+|  console.log(Camera Attributes, activeTarget Attributes)  |   `C`  |
 
 | Transformation | Key |
 | -------------- |:------:|
