@@ -172,6 +172,10 @@
 <td style="text-align:center"><code>P</code></td>
 </tr>
 <tr>
+<td>Toggle fog</td>
+<td style="text-align:center"><code>F</code></td>
+</tr>
+<tr>
 <td>console.log(Camera Attributes, activeTarget Attributes)</td>
 <td style="text-align:center"><code>C</code></td>
 </tr>
@@ -308,13 +312,14 @@
 <p><h3 id="11-transitions">11. <a href="11--transitions.html">Transitions - Work in Progress</a></h3>
 <img src="https://raw.githubusercontent.com/armthethinker/webVR-experiments/master/assets/img/heroes/hero-11.jpg" alt="Image for experiment 11"></p>
 <p><strong>Guiding Question:</strong> What are the best ways to move in VR without position controls?</p>
-<p><em>Devs</em>: Each transition can be selected by passing its name into <code>settings.transition</code>. Short and long alternatives are available for each transition as well with the exception of the individual<code>Jump</code> and <code>Fade</code> transitions.</p>
+<p><em>Devs</em>: Each transition can be selected by passing its name into <code>settings.transition</code>. Short and long alternatives are available for each transition as well with the exception of the individual <code>Jump</code> and <code>Fade</code> transitions.</p>
 <table>
 <thead>
 <tr>
 <th>Transition Name</th>
 <th>Action</th>
 <th>Parameters</th>
+<th style="text-align:center">Key</th>
 </tr>
 </thead>
 <tbody>
@@ -322,26 +327,57 @@
 <td><code>Jump</code></td>
 <td>Instantly move from one position to another.</td>
 <td><code>position</code></td>
+<td style="text-align:center"><code>1</code></td>
 </tr>
 <tr>
 <td><code>Fade</code></td>
 <td>View fades into black, then back up. Useless by itself. Used in <code>Fade Jump</code> and can be used in other custom transitions.</td>
-<td><code>duration, beginTime, easing, middleFuntion</code></td>
+<td><code>duration, beginTime, easing, middleFunction</code></td>
+<td style="text-align:center">N/A</td>
 </tr>
 <tr>
 <td><code>Fade Jump</code></td>
 <td>View fades into black. Position instantly changes. View fades back up.</td>
 <td><code>duration, beginTime, easing, position</code></td>
+<td style="text-align:center"><code>2</code></td>
 </tr>
 <tr>
 <td><code>Micro-Movements</code></td>
 <td>Many short jumps between the current position and final position.</td>
 <td><code>position, stepCount, duration</code></td>
+<td style="text-align:center"><code>3</code></td>
 </tr>
 <tr>
 <td><code>Animate</code></td>
 <td>Continuous, linear movement from one location to another.</td>
 <td><code>position, speed</code></td>
+<td style="text-align:center"><code>4</code></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Action</th>
+<th style="text-align:center">Key</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Selection</td>
+<td style="text-align:center"><code>Gaze</code> or <code>Click</code></td>
+</tr>
+<tr>
+<td>Toggle to short version of transition</td>
+<td style="text-align:center"><code>-</code></td>
+</tr>
+<tr>
+<td>Toggle to long version of transition</td>
+<td style="text-align:center"><code>=</code></td>
+</tr>
+<tr>
+<td>console.log(Camera Position)</td>
+<td style="text-align:center"><code>C</code></td>
 </tr>
 </tbody>
 </table>
@@ -401,6 +437,10 @@ pre code{
    background-color: #f7f7f9;
    border-radius: .25rem;
    display: block;
+}
+code{
+   padding: 0.1rem 0.3rem;
+   display: inline-block;
 }
 html{
    padding-bottom: 100px;

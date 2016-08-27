@@ -185,15 +185,22 @@ This is my second attempt to build a [SpaceVR](http://www.spacevr.co/) simulator
 
 **Guiding Question:** What are the best ways to move in VR without position controls?
 
-*Devs*: Each transition can be selected by passing its name into `settings.transition`. Short and long alternatives are available for each transition as well with the exception of the individual`Jump` and `Fade` transitions.
+*Devs*: Each transition can be selected by passing its name into `settings.transition`. Short and long alternatives are available for each transition as well with the exception of the individual `Jump` and `Fade` transitions.
 
-| Transition Name   | Action | Parameters |
-| ----------------- | ------ | ---------- |
-| `Jump`            | Instantly move from one position to another. | `position` |
-| `Fade`            | View fades into black, then back up. Useless by itself. Used in `Fade Jump` and can be used in other custom transitions. | `duration, beginTime, easing, middleFuntion` |
-| `Fade Jump`       | View fades into black. Position instantly changes. View fades back up. | `duration, beginTime, easing, position` |
-| `Micro-Movements` | Many short jumps between the current position and final position. | `position, stepCount, duration` |
-| `Animate`         | Continuous, linear movement from one location to another. | `position, speed` |
+| Transition Name   | Action | Parameters | Key |
+| ----------------- | ------ | ---------- | :-: |
+| `Jump`            | Instantly move from one position to another. | `position` | `1` |
+| `Fade`            | View fades into black, then back up. Useless by itself. Used in `Fade Jump` and can be used in other custom transitions. | `duration, beginTime, easing, middleFunction` | N/A |
+| `Fade Jump`       | View fades into black. Position instantly changes. View fades back up. | `duration, beginTime, easing, position` | `2` |
+| `Micro-Movements` | Many short jumps between the current position and final position. | `position, stepCount, duration` | `3` |
+| `Animate`         | Continuous, linear movement from one location to another. | `position, speed` | `4` |
+
+| Action | Key |
+| ------ | :-: |
+| Selection | `Gaze` or `Click` |
+| Toggle to short version of transition | `-` |
+| Toggle to long version of transition | `=` |
+| console.log(Camera Position) | `C` |
 
 Example:
 ```js
