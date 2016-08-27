@@ -7,17 +7,18 @@
   "devDependencies": {
     "bower": "^1.7.7",
     "deploy": "^1.0.3",
-    "ghpages": "0.0.3",
+    "ghpages": "0.0.8",
     "grunt": "^0.4.5",
     "grunt-contrib-watch": "^1.0.0",
     "grunt-md2html": "^0.3.1"
   },
   "scripts": {
+    "deploy-maybe": "gh-pages -d dist",
     "deploy": "ghpages"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/armthethinker/webVR-experiments.git"
+    "url": "https://github.com/armthethinker/webVR-experiments.git"
   },
   "keywords": [
     "vr"
