@@ -19,21 +19,8 @@
 
    <a-scene>
 
-      <!--
-
-      Credits
-
-      -->
-
-      <!--
-         Dark Blue:  006ba6
-         Blue:       0496ff
-         Yellow:     ffbc42
-         Pink:       d81159
-         Plum:       8f2d56
-      -->
-
       <a-assets>
+
          <a-asset-item id="mv-obj" src="assets/models/monument-valley.obj"></a-asset-item>
          <a-asset-item id="mv-mtl" src="assets/models/monument-valley.mtl"></a-asset-item>
 
@@ -46,11 +33,10 @@
       <!-- Global Settings -->
       <a-sky color="#64e6ff"></a-sky>
 
-
-
       <!-- World Elements -->
       <a-entity id="world">
 
+         <!-- Environment model -->
          <a-entity obj-model="obj: #mv-obj; mtl: #mv-mtl" scale=".3 .3 .3" position="6 -.3 -13"></a-entity>
 
 
@@ -74,7 +60,7 @@
 
       </a-entity>
 
-      <!-- Human Camera -->
+      <!-- Human Camera, put down here for a reason, but I can't remember why -->
       <a-camera id="human-camera" position="0 1.7 0" wasd-controls="fly:true" active="true" near=".05">
          <a-entity cursor="fuse: true; maxDistance: 50; timeout: 500" position="0 0 -2" geometry="primitive: plane; height: .05; width: .05"  material="color: #fff"></a-entity>
       </a-camera>
@@ -84,8 +70,13 @@
 
    <script>
 
+
+      /*
+         Fetch the settings every 1.5sec
+      */
       var settings = null;
 
+      // Fetches the settings JSON object
       fetchSettings();
 
       function fetchSettings(){
@@ -96,7 +87,9 @@
          });
       }
 
+      // Creates the interval based settings check
       var intervalID = window.setInterval(checkSettingsCallback, 1500);
+
 
       /*
          Setup global variables
@@ -106,15 +99,19 @@
       var camera = document.querySelector('a-camera');
       var cameraLastPosition = camera.getAttribute('position');
 
+
       /*
          Add event listener to run after scene is loaded
       */
       scene.addEventListener('loaded', function(){
 
+         // Pull in the dev tools from global.js
          devTools();
 
+         // Situate the camera based on given position
          setCamera(camera, settings.cameraPosition);
 
+         // Place all of the transition orbs around the scene
          placeTransitionOrbs([
             {x: -5.499636956049418,    y: 6.3,     z: -12.971373578044469},
             {x: 12.709765049944446,    y: 6.6,     z: -8.388245758668296},
@@ -127,29 +124,30 @@
             {x: 4.346838095657409,     y: 0,       z: -14.966443485230126},
             {x: 16.950260752918833,    y: 17.5,    z: -18.575435892985322},
             {x: 12.501794418453516,    y: 17.5,    z: -13.6169492206195},
-            {x: 16.54346786694255,     y: 23.7,    z: -23.495441524818382},
-
+            {x: 16.54346786694255,     y: 23.7,    z: -23.495441524818382}
          ], true);
 
+         // Create the spherical image orbs array
          var sphericalImageTargetOrbPositions = [
             {x: 3.2, y: 0, z: 14},
             {x: 2.6, y: 0, z: 14}
          ];
 
+         // And place them around the scene
          placeTransitionOrbs(sphericalImageTargetOrbPositions, true, 'sphericalImageTarget')
 
+         // Find all targets
          var targets = scene.querySelectorAll('.target');
 
+         // And for each of them, add the 'click' event listener. It fires when the user gazes at the orb
          forEach(targets, function(el){
             el.addEventListener('click', function () {
-
                console.log('I was clicked!');
-
                setDefaultTransition(el);
-
             });
          });
 
+         // Do the same for the spherical images too
          var sphericalImageTarget = scene.querySelectorAll('.sphericalImageTarget');
          var msSpheres = scene.querySelectorAll('.ms-spherical');
          var msSpheresExit = scene.querySelectorAll('.ms-exit'); //TODO put on door
@@ -172,9 +170,10 @@
       /*
          Keylistener functions
       */
-      // Setup
+      // Create new listener
       var keyListener = new window.keypress.Listener();
 
+      // And tie them to keys
       keyListener.simple_combo('1', function(){
          console.log('fadejump, short');
          transitionFadeJump(100, 0, 'sine', {x:1, y:2, z:5});
@@ -200,17 +199,21 @@
          cameraLastPosition = camera.getAttribute('position');
       }
 
+      /*
+         Create the composable transistions
+      */
+
+      // Jump: instantaneous change in position
       function transitionJump(position){
          camera.setAttribute('position', position);
       }
 
-      function transitionFadeJump(duration, beginTime, easing, position){
-         transitionFade(duration, beginTime, easing, function(){
-            transitionJump(position);
-         });
-      }
-
-      function transitionFade(duration, beginTime, easing, middleFunction){
+      // Fade: useless by itself as a transition, but integral to the fade +
+      // jump transition. It also creates the sphere that goes over the
+      // camera. Accepts a duration, easing function, and allows you to pass
+      // a middle function to act in the middle of the transition.
+      function transitionFade(duration, easing, middleFunction){
+         // Adds a sphere around the camera
          addEl(camera, {
             entityType: 'sphere',
             id: 'fadeSphere',
@@ -222,10 +225,12 @@
             class: 'remove',
          });
 
+         // Creates an empty middleFunction if one isn't defined
          if(middleFunction == undefined){
             middleFunction = function(){};
          }
-
+         // Add the opacity animation to the sphere, making it seem like the
+         // world goes dark and then comes back up.
          addAnimation(camera.querySelector('#fadeSphere'), {
             attribute: "opacity",
             begin: beginTime,
@@ -238,23 +243,41 @@
             repeat: 1,
             class: 'remove'
          }, function(){
-
+            // And pass the middle function down.
             middleFunction();
          });
       }
 
+      // Fade (fade + jump): fade to black, jump, then unfade.
+      function transitionFadeJump(duration, easing, position){
+         // Use the fade transition, passing variables down, and include the
+         // jump transition as the middle function
+         transitionFade(duration, easing, function(){
+            transitionJump(position);
+         });
+      }
+
+      // Micro-movements: creates a stepped motion between the current
+      // position and the final position.
       function transitionMicromovements(position, stepCount, duration){
+         // Get the current position and the final position
          var oldPos = camera.getAttribute('position');
          var newPos = position;
 
+         // Create a steps object, a linear distance calculation for a single
+         // step for each dimensional component
          var steps = {
             x: (newPos.x - oldPos.x) / stepCount,
             y: (newPos.y - oldPos.y) / stepCount,
             z: (newPos.z - oldPos.z) / stepCount
          }
 
+         // Calculate the time to pause on each step
          var stepDuration = duration / stepCount;
 
+         // I don't really know how callbacks work, but I stumbled long enough
+         // to make this work. This moves the camera one step towards the
+         // final position.
          function callback(){
             return function(){
                oldPos = camera.getAttribute('position');
@@ -267,6 +290,7 @@
             }
          }
 
+         // Loops the single step action however many times stepCount dictates
          for(i = 0; i < stepCount; i++){
             console.log(i);
 
@@ -276,17 +300,15 @@
 
       }
 
+      // Animate: smooth animation between the current position and final
+      // position, derived from a speed variable. Speed is in seconds.
       function transitionAnimate(position, speed){
+         // Get the current and final positions
          var oldPos = camera.getAttribute('position');
          var newPos = position;
 
-         console.log(newPos);
-
-         // Physics reminder time!
-         // v = x / t
-         // thus, t = x / v
-
-         function subtractPositionObjects(objA, objB){
+         // Calculate linear distance per component and total
+         function calcLinearDistance(objA, objB){
             var x = objA.x - objB.x;
             var y = objA.y - objB.y;
             var z = objA.z - objB.z;
@@ -302,9 +324,11 @@
          console.log(distance);
 
          var duration = (distance / speed) * 1000;
+         // Physics reminder time!
+         // v = x / t
+         // thus, t = x / v
 
-         console.log(duration);
-
+         // Add the camera animation
          addAnimation(camera, {
             attribute: 'position',
             dur: duration,
@@ -313,10 +337,12 @@
          }, true);
       }
 
+      // Didn't get this far...
       function transitionRotate(){
 
       }
 
+      // Adds an animation to an element based on given parameters
       function addAnimation(insertEl, animationParameters, removeBool, middleFunction){
          // Model:
          // var animationParameters = {
@@ -334,7 +360,8 @@
          // Create a new animation element
          var newEl = document.createElement('a-animation');
 
-         // Set the attributes of the element if they were passed in the animationParameters{}
+         // Set the attributes of the element if they were passed in the
+         // animationParameters{}
          if(animationParameters.attribute != undefined)
             newEl.setAttribute('attribute', animationParameters.attribute);
 
@@ -371,7 +398,8 @@
          // Add the element to the DOM
          insertEl.appendChild(newEl);
 
-         // If there isn't a removeBool, but there is a middleFunction(), set the vars as such
+         // If there isn't a removeBool, but there is a middleFunction(), set
+         // the vars as such
          if(typeof removeBool == 'function'){
             middleFunction = removeBool;
             removeBool = undefined;
@@ -385,7 +413,8 @@
             }
          }
 
-         // If the remove boolean is set to true (or default is to remove), then remove the animation element after the animation runs
+         // If the remove boolean is set to true (or default is to remove),
+         // then remove the animation element after the animation runs
          if(removeBool == undefined || removeBool == true){
 
             newEl.addEventListener('animationend', function() {
@@ -402,12 +431,15 @@
 
          }
 
-         // If the middleFunction is defined, then start it with the animation TODO: add wait timer
+         // If the middleFunction is defined, then start it with the animation
+         // Should probably have a wait timer (TODO)
          if(middleFunction != undefined){
 
-            // To get rid of running each repeat
+            // To get rid of running on each repeat
             middleFunctionRun = false;
 
+            // When the animation starts, wait half of the duration of the
+            // animationParameters.dur to start the middle function.
             newEl.addEventListener('animationstart', function() {
                if(middleFunctionRun == false){
                   setTimeout(function(){
@@ -419,15 +451,15 @@
          }
       }
 
+      // Create an element inside of a given element based on parameters
       function addEl(insertEl, elParameters){
          // Model follows a-entitiy attributes
 
          // Create a new entity element
          var newEl = document.createElement('a-' + elParameters.entityType);
 
-         // Set the attributes of the element if they were passed in the elParameters{}
-
-
+         // Set the attributes of the element if they were passed in the
+         // elParameters{}
          if(elParameters.id != undefined)
             newEl.setAttribute('id', elParameters.id);
 
@@ -449,22 +481,15 @@
          if(elParameters.opacity != undefined)
             newEl.setAttribute('opacity', elParameters.opacity);
 
-
-
          // Add the element to the DOM
          insertEl.appendChild(newEl);
 
-         // If the middleFunction is defined, then start it with the animation TODO: add wait timer
-         // if(nestedEl != undefined){
-         //    nestedEl
-         // }
-
       }
 
-      /*
-      Places transition orbs around the world based on a given array. Adds the height of the user by default (pass 'false' to not add height).
-      */
+      // Places transition orbs around the world based on a given array. Adds
+      // the height of the user by default (pass 'false' to not add height).
       function placeTransitionOrbs(orbPositions, addHeight, addClass){
+         // Loop through all given orb positions
          for(i = 0; i < orbPositions.length; i++){
 
             if(addHeight == true || addHeight == undefined){
@@ -475,6 +500,7 @@
                addClass = 'target';
             }
 
+            // Add sphere to world
             addEl(world, {
                entityType: 'sphere',
                radius: .3,
@@ -486,13 +512,16 @@
          };
       }
 
-      function setDefaultTransition(el, givenPosition){
-
+      // Controller for the active transition
+      function setActiveTransition(el, givenPosition){
+         // If the given position isn't defined, then get the position of the
+         // given element
          if(givenPosition == undefined)
             newPos = el.getAttribute('position');
          else
             newPos = givenPosition;
 
+         // Set the transition based on the settings object
          switch(settings.transition){
             case 'Jump':
                transitionJump(newPos);
@@ -527,9 +556,8 @@
             default:
                break;
          }
-
       }
 
    </script>
-   </body>
+</body>
 </html>
