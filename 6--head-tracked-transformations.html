@@ -88,7 +88,10 @@
          building: false,
 
          // true is on, false is off
-         pillars:  true
+         pillars:  true,
+
+         // true is on, false is off
+         fog:  true
 
       }
 
@@ -111,6 +114,12 @@
          // Setup observer
          setObserver();
       });
+
+      var fog = {
+         state: settings.fog,
+         density: scene.getAttribute('fog').density
+      }
+      console.log(fog.density);
 
       // Create a camera object
       var camera = {
@@ -167,6 +176,9 @@
       });
       keyListener.simple_combo('p', function(){
          togglePillars();
+      });
+      keyListener.simple_combo('f', function(){
+         toggleFog();
       });
       keyListener.simple_combo('0', function(){
          setObserver(defaultTransformation);
@@ -338,6 +350,16 @@
       function resetTargetRotations(){
          targets[0].setAttribute('rotation', defaultPositions[0]);
          targets[1].setAttribute('rotation', defaultPositions[1]);
+      }
+
+      function toggleFog(){
+         if(fog.state){
+            scene.setAttribute('fog', 'density', 0);
+            fog.state = false;
+         }else{
+            scene.setAttribute('fog', 'density', fog.density);
+            fog.state = true;
+         }
       }
 
       function updateTarget(target, transformationType){
