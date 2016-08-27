@@ -221,18 +221,20 @@
 
          // Observe the changes to the camera
          observer = new MutationObserver(function(transformations){
+            // For each element in transformations (which comes from the MutationObserver), set camera attributes and update the target
             transformations.forEach(function(transformation){
                setCameraAttributes();
                updateTarget(activeTarget, transformationType);
             });
          });
 
-         // I don't know what I'm doing here
+         // I don't know what I'm doing here, Mozilla's docs told me to do it
          var observerConfig = {
             attributes:    true,
             childList:     true,
             characterData: true
          }
+
          // Set up the observer
          observer.observe(camera.el, observerConfig);
 
@@ -289,7 +291,8 @@
             else{
                console.log("halp");
             }
-         }else{ // otherwise, set the active target to what we are toggling to
+         }else{
+            // otherwise, set the active target to what we are toggling to
             activeTarget = toggleTo;
          }
 
