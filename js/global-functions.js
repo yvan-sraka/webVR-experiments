@@ -27,16 +27,10 @@ function reloadPage(seconds){
 
 function checkSettingsCallback(passedFunction){
 
-   fetchSettings();
-
-   // if(settings.verbose != undefined){
-   //    if(settings.verbose)
-   //       console.log('new settings', settings);
-   // }
-
-   // if(passedFunction != undefined)
-   //    passedFunction;
-
+   if(settings.fetch == true || settings.fetch == undefined)
+      fetchSettings();
+   else
+      return;
 }
 
 /*
