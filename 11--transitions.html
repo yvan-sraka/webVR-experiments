@@ -146,7 +146,7 @@
          forEach(targets, function(el){
             el.addEventListener('click', function () {
                console.log('I was clicked!');
-               setDefaultTransition(el);
+               setActiveTransition(el);
             });
          });
 
@@ -156,15 +156,15 @@
          var msSpheresExit = scene.querySelectorAll('.ms-exit'); //TODO put on door
 
          sphericalImageTarget[0].addEventListener('click', function () {
-            setDefaultTransition(sphericalImageTarget[0], msSpheres[0].parentNode.getAttribute('position'));
+            setActiveTransition(sphericalImageTarget[0], msSpheres[0].parentNode.getAttribute('position'));
          });
          sphericalImageTarget[1].addEventListener('click', function () {
-            setDefaultTransition(sphericalImageTarget[1], msSpheres[1].parentNode.getAttribute('position'));
+            setActiveTransition(sphericalImageTarget[1], msSpheres[1].parentNode.getAttribute('position'));
          });
 
          forEach(msSpheresExit, function(el){
             el.addEventListener('click', function () {
-               setDefaultTransition(el, '0 ' + settings.height + ' 0');
+               setActiveTransition(el, '0 ' + settings.height + ' 0');
             });
          });
 
