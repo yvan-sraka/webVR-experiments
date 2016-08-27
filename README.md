@@ -180,7 +180,7 @@ This is my second attempt to build a [SpaceVR](http://www.spacevr.co/) simulator
 
 
 
-<h3 id="11-transitions">11. <a href="11--transitions.html">Transitions - Work in Progress</a></h3>
+<h3 id="11-transitions">11. <a href="11--transitions.html">Transitions</a></h3>
 ![Image for experiment 11](https://raw.githubusercontent.com/armthethinker/webVR-experiments/master/assets/img/heroes/hero-11.jpg)
 
 **Guiding Question:** What are the best ways to move in VR without position controls?
