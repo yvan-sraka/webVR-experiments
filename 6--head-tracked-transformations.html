@@ -204,6 +204,9 @@
       keyListener.simple_combo('7', function(){
          setObserver(7);
       });
+      keyListener.simple_combo('8', function(){
+         setObserver(8);
+      });
 
       // Set global observer and creation function
       var observer = undefined;
@@ -374,6 +377,11 @@
             // Rotate target with human camera rotation
             case 1:
                target.setAttribute('rotation', cameraRotationScalar(camera, [1, 1, 1]));
+               break;
+
+            // Rotate target with human camera rotation
+            case 8:
+               target.setAttribute('rotation', cameraRotationScalar(camera, [-1, -1, 1]));
                break;
 
             // Rotate target with human camera rotation
