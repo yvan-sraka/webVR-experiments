@@ -345,10 +345,10 @@
 
          var distance = calcLinearDistance(newPos, oldPos);
 
-         var duration = (distance / speed) * 1000;
          // Physics reminder time!
          // v = x / t
          // thus, t = x / v
+         var duration = (distance.dist / speed) * 1000;
 
          // Add the camera animation
          addAnimation(camera, {
