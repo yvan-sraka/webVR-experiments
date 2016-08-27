@@ -339,16 +339,11 @@
             var x = objA.x - objB.x;
             var y = objA.y - objB.y;
             var z = objA.z - objB.z;
-            return {x, y, z};
+            var dist = Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2) + Math.pow(z, 2));
+            return {x, y, z, dist};
          }
 
-         var differenceObj = subtractPositionObjects(newPos, oldPos);
-
-         console.log(differenceObj);
-
-         var distance = Math.sqrt(Math.pow(differenceObj.x, 2) + Math.pow(differenceObj.y, 2) + Math.pow(differenceObj.z, 2));
-
-         console.log(distance);
+         var distance = calcLinearDistance(newPos, oldPos);
 
          var duration = (distance / speed) * 1000;
          // Physics reminder time!
