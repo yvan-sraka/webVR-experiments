@@ -228,9 +228,6 @@
          console.log(camera.getAttribute('position'));
       });
 
-      function setCameraLastPosition(){
-         cameraLastPosition = camera.getAttribute('position');
-      }
 
       /*
          Create the composable transistions
@@ -325,10 +322,7 @@
 
          // Loops the single step action however many times stepCount dictates
          for(i = 0; i < stepCount; i++){
-            console.log(i);
-
             setTimeout(callback(), stepDuration * (i+1));
-
          }
 
       }
