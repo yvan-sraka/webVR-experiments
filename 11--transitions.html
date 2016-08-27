@@ -178,22 +178,52 @@
 
       // And tie them to keys
       keyListener.simple_combo('1', function(){
-         console.log('fadejump, short');
-         transitionFadeJump(100, 0, 'sine', {x:1, y:2, z:5});
+         // By turning off the .fetch variable, the browser stops looking
+         // to the /assets/11/11-settings.json file. That's nice because
+         // we can instead feed it our new selection without having it be
+         // replaced in 1.5 seconds.
+         settings.fetch = false;
+         settings.transition = "Jump"
+         console.log("Fetch turned off.");
+         console.log("Transition set to: ", settings.transition);
       });
       keyListener.simple_combo('2', function(){
-         console.log('fadejump, long');
-         transitionFadeJump(100, 0, 'sine', {x:1, y:2, z:5});
+         settings.fetch = false;
+         settings.transition = "Fade Jump"
+         console.log("Fetch turned off.");
+         console.log("Transition set to: ", settings.transition);
       });
       keyListener.simple_combo('3', function(){
-         console.log('micromovements');
-         transitionMicromovements({x:-5, y:1.7, z:5}, 5, 800);
+         settings.fetch = false;
+         settings.transition = "Micro-Movements"
+         console.log("Fetch turned off.");
+         console.log("Transition set to: ", settings.transition);
       });
       keyListener.simple_combo('4', function(){
-         console.log('animation');
-         transitionAnimate({x:-5, y:1.7, z:5}, 1);
+         settings.fetch = false;
+         settings.transition = "Animate"
+         console.log("Fetch turned off.");
+         console.log("Transition set to: ", settings.transition);
       });
-
+      keyListener.simple_combo('-', function(){
+         var transition = settings.transition;
+         // Since an incoming variable may include 'Short' or 'Long', we
+         // just cut it right on out of there. No errors to see here.
+         var newStr1 = transition.replace(/Short/, ' ');
+         var newStr2 = newStr1.replace(/Long/, ' ');
+         var newStr3 = newStr2.trim();
+         settings.transition = newStr3 + " Short";
+         console.log("Transition set to: ", settings.transition);
+      });
+      keyListener.simple_combo('=', function(){
+         var transition = settings.transition;
+         var newStr1 = transition.replace(/Short/, ' ');
+         var newStr2 = newStr1.replace(/Long/, ' ');
+         var newStr3 = newStr2.trim();
+         settings.transition = newStr3 + " Long";
+         console.log("Transition set to: ", settings.transition);
+      });
+      // Useful for setting up orbs
       keyListener.simple_combo('c', function(){
          console.log(camera.getAttribute('position'));
       });
