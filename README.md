@@ -61,7 +61,7 @@ Testing a project for IXDS.
 
 
 <h3 id="4-viewpoint">4. <a href="4--viewpoint.html">ViewPoint</a></h3>
-![Image for experiment 4](https://raw.githubusercontent.com/armthethinker/webVR-experiments/master/assets/img/heroes/hero-4.jpg)
+![Image for experiment 4](https://raw.githubusercontent.com/armthethinker/webVR-experiments/master/assets/img/heroes/hero-4.gif)
 
 The working model for a class project (IXDS public display).
 
@@ -96,7 +96,7 @@ Team Members: Andrew Novotny, Joel Rodrigues, & Rachel Ng
 
 
 <h3 id="6-head-tracked-transformations">6. <a href="6--head-tracked-transformations.html">Head Tracked Transformations</a></h3>
-![Image for experiment 6](https://raw.githubusercontent.com/armthethinker/webVR-experiments/master/assets/img/heroes/hero-6.jpg)
+![Image for experiment 6](https://raw.githubusercontent.com/armthethinker/webVR-experiments/master/assets/img/heroes/hero-6.gif)
 
 For headsets without positional tracking (e.g. Google Cardboard), how can we allow position-esque movement? In this set of experiments, the blocks mutate based on the selected transformation.
 
@@ -122,7 +122,7 @@ For headsets without positional tracking (e.g. Google Cardboard), how can we all
 
 
 <h3 id="7-product-selection-customization">7. <a href="7--product-selection-customization.html">Product Selection Customization</a></h3>
-![Image for experiment 7](https://raw.githubusercontent.com/armthethinker/webVR-experiments/master/assets/img/heroes/hero-7.jpg)
+![Image for experiment 7](https://raw.githubusercontent.com/armthethinker/webVR-experiments/master/assets/img/heroes/hero-7.gif)
 
 Looking at the differences in prototyping with a single planar mockup, a curved mockup, and a three dimensional mockup.
 
@@ -168,7 +168,7 @@ After hearing a podcast on [SpaceVR](http://www.spacevr.co/), I was inspired to 
 
 
 <h3 id="10-spacevr-simulator">10. <a href="10--spacevr-simulator.html">SpaceVR Simulator</a></h3>
-![Image for experiment 10](https://raw.githubusercontent.com/armthethinker/webVR-experiments/master/assets/img/heroes/hero-10.jpg)
+![Image for experiment 10](https://raw.githubusercontent.com/armthethinker/webVR-experiments/master/assets/img/heroes/hero-10.gif)
 
 This is my second attempt to build a [SpaceVR](http://www.spacevr.co/) simulator. This time, I had a clearer project in-mind: less robust, more to the point. This time it took me less than two hours to throw it all together.
 
@@ -181,7 +181,7 @@ This is my second attempt to build a [SpaceVR](http://www.spacevr.co/) simulator
 
 
 <h3 id="11-transitions">11. <a href="11--transitions.html">Transitions</a></h3>
-![Image for experiment 11](https://raw.githubusercontent.com/armthethinker/webVR-experiments/master/assets/img/heroes/hero-11.jpg)
+![Image for experiment 11](https://raw.githubusercontent.com/armthethinker/webVR-experiments/master/assets/img/heroes/hero-11.gif)
 
 **Guiding Question:** What are the best ways to move in VR without position controls?
 
