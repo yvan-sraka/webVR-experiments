@@ -20,7 +20,8 @@
     "tests"
   ],
   "dependencies": {
-    "aframe": "aframevr/aframe#^0.2.0",
+    "aframe": "aframevr/aframe#^0.3.0",
+    "aframe2": "aframevr/aframe#^0.2.0",
     "aframe-animation-component": "ngokevin/aframe-animation-component",
     "aframe-editor": "aframevr/aframe-editor",
     "aframe-event-set-component": "ngokevin/aframe-event-set-component",
