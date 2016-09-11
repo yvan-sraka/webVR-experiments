@@ -1,0 +1,14 @@
+{
+  "name": "aframe-event-set-component",
+  "homepage": "https://github.com/ngokevin/aframe-event-set-component",
+  "version": "0.2.0",
+  "_release": "0.2.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.2.0",
+    "commit": "074c93cc5a95e4902b7fee02458de9647b4f999d"
+  },
+  "_source": "git://github.com/ngokevin/aframe-event-set-component.git",
+  "_target": "*",
+  "_originalSource": "ngokevin/aframe-event-set-component"
+}

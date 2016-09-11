@@ -1,0 +1,13 @@
+{
+  "name": "three-sixty",
+  "homepage": "https://github.com/ashconnell/three-sixty",
+  "_release": "bd365e75a5",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "bd365e75a502e29242622cc284bc4e9fd8f7b34f"
+  },
+  "_source": "git://github.com/ashconnell/three-sixty.git",
+  "_target": "*",
+  "_originalSource": "ashconnell/three-sixty"
+}

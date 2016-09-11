@@ -1,0 +1,14 @@
+{
+  "name": "aframe-proxy-controls",
+  "homepage": "https://github.com/donmccurdy/aframe-proxy-controls",
+  "version": "0.6.0",
+  "_release": "0.6.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.6.0",
+    "commit": "ff9fee48b072a0fce7ff7bd56c408a30c28562cf"
+  },
+  "_source": "git://github.com/donmccurdy/aframe-proxy-controls.git",
+  "_target": "^0.6.0",
+  "_originalSource": "donmccurdy/aframe-proxy-controls"
+}

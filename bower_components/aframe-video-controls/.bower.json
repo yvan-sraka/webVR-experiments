@@ -1,0 +1,14 @@
+{
+  "name": "aframe-video-controls",
+  "homepage": "https://github.com/oscarmarinmiro/aframe-video-controls",
+  "version": "0.2.1",
+  "_release": "0.2.1",
+  "_resolution": {
+    "type": "version",
+    "tag": "0.2.1",
+    "commit": "e3941556469bee4e539d6cca8e75cd21ce246fbd"
+  },
+  "_source": "git://github.com/oscarmarinmiro/aframe-video-controls.git",
+  "_target": "^0.2.1",
+  "_originalSource": "oscarmarinmiro/aframe-video-controls"
+}

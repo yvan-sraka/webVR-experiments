@@ -29,7 +29,7 @@
 <li><a href="#8-video-controls">Video Controls</a></li>
 <li><a href="#9-solar-system">Solar System</a></li>
 <li><a href="#10-spacevr-simulator">SpaceVR Simulator</a></li>
-<li><a href="#11-transitions">Transitions</a></li>
+<li><a href="#11-environment-traversal">Environment Traversal</a></li>
 </ol>
 <p><h3 id="1-hello-world">1. <a href="1--helloworld.html">Hello World</a></h3>
 <img src="https://raw.githubusercontent.com/armthethinker/webVR-experiments/master/assets/img/heroes/hero-1.jpg" alt="Image for experiment 1"></p>
@@ -86,7 +86,7 @@
 </tbody>
 </table>
 <p><h3 id="4-viewpoint">4. <a href="4--viewpoint.html">ViewPoint</a></h3>
-<img src="https://raw.githubusercontent.com/armthethinker/webVR-experiments/master/assets/img/heroes/hero-4.jpg" alt="Image for experiment 4"></p>
+<img src="https://raw.githubusercontent.com/armthethinker/webVR-experiments/master/assets/img/heroes/hero-4.gif" alt="Image for experiment 4"></p>
 <p>The working model for a class project (IXDS public display).</p>
 <p><strong>Guiding Question:</strong> Can A-Frame be used to present designs for an installation piece in a museum?</p>
 <p>Team Members: Iris Wu, Tiffany Wang, Ryan Huber</p>
@@ -144,7 +144,7 @@
 </tbody>
 </table>
 <p><h3 id="6-head-tracked-transformations">6. <a href="6--head-tracked-transformations.html">Head Tracked Transformations</a></h3>
-<img src="https://raw.githubusercontent.com/armthethinker/webVR-experiments/master/assets/img/heroes/hero-6.jpg" alt="Image for experiment 6"></p>
+<img src="https://raw.githubusercontent.com/armthethinker/webVR-experiments/master/assets/img/heroes/hero-6.gif" alt="Image for experiment 6"></p>
 <p>For headsets without positional tracking (e.g. Google Cardboard), how can we allow position-esque movement? In this set of experiments, the blocks mutate based on the selected transformation.</p>
 <p><strong>Guiding Question:</strong> Can head rotations be tied to an object to allow position-esque movements?</p>
 <table>
@@ -212,7 +212,7 @@
 </tbody>
 </table>
 <p><h3 id="7-product-selection-customization">7. <a href="7--product-selection-customization.html">Product Selection Customization</a></h3>
-<img src="https://raw.githubusercontent.com/armthethinker/webVR-experiments/master/assets/img/heroes/hero-7.jpg" alt="Image for experiment 7"></p>
+<img src="https://raw.githubusercontent.com/armthethinker/webVR-experiments/master/assets/img/heroes/hero-7.gif" alt="Image for experiment 7"></p>
 <p>Looking at the differences in prototyping with a single planar mockup, a curved mockup, and a three dimensional mockup.</p>
 <p><strong>Guiding Question:</strong> What can be learned by taking a design from the web and translating it into VR?</p>
 <table>
@@ -292,7 +292,7 @@
 </tbody>
 </table>
 <p><h3 id="10-spacevr-simulator">10. <a href="10--spacevr-simulator.html">SpaceVR Simulator</a></h3>
-<img src="https://raw.githubusercontent.com/armthethinker/webVR-experiments/master/assets/img/heroes/hero-10.jpg" alt="Image for experiment 10"></p>
+<img src="https://raw.githubusercontent.com/armthethinker/webVR-experiments/master/assets/img/heroes/hero-10.gif" alt="Image for experiment 10"></p>
 <p>This is my second attempt to build a <a href="http://www.spacevr.co/">SpaceVR</a> simulator. This time, I had a clearer project in-mind: less robust, more to the point. This time it took me less than two hours to throw it all together.</p>
 <p><strong>Guiding Question:</strong> What does it feel like to see earth from a satellite point-of-view?</p>
 <table>
@@ -309,8 +309,8 @@
 </tr>
 </tbody>
 </table>
-<p><h3 id="11-transitions">11. <a href="11--transitions.html">Transitions</a></h3>
-<img src="https://raw.githubusercontent.com/armthethinker/webVR-experiments/master/assets/img/heroes/hero-11.jpg" alt="Image for experiment 11"></p>
+<p><h3 id="11-environment-traversal">11. <a href="11--environment-traversal.html">Environment Traversal</a></h3>
+<img src="https://raw.githubusercontent.com/armthethinker/webVR-experiments/master/assets/img/heroes/hero-11.gif" alt="Image for experiment 11"></p>
 <p><strong>Guiding Question:</strong> What are the best ways to move in VR without position controls?</p>
 <p><em>Devs</em>: Each transition can be selected by passing its name into <code>settings.transition</code>. Short and long alternatives are available for each transition as well with the exception of the individual <code>Jump</code> and <code>Fade</code> transitions.</p>
 <table>
@@ -393,13 +393,15 @@ settings = {
 }
 </code></pre>
 <h2 id="setup">Setup</h2>
-<pre><code>1. $ npm install
-2. $ bower update
-3. $ grunt
-</code></pre><p>Grunt uses <a href="https://chrome.google.com/webstore/detail/livereload/jnihajbhpnppcggbcgedagnkighmdlei">LiveReload</a>.</p>
+<pre><code class="lang-bash">$ npm install
+$ bower update
+$ grunt
+</code></pre>
+<p>Grunt uses <a href="https://chrome.google.com/webstore/detail/livereload/jnihajbhpnppcggbcgedagnkighmdlei">LiveReload</a>.</p>
 <p>To deploy,</p>
-<pre><code>$ npm run deploy
-</code></pre><p>Personal site: <a href="http://andrewrmchugh.rocks">andrewrmchugh.rocks</a>.</p>
+<pre><code class="lang-bash">$ npm run deploy
+</code></pre>
+<p>Personal site: <a href="http://andrewrmchugh.rocks">andrewrmchugh.rocks</a>.</p>
 
          </div>
       </div>

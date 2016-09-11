@@ -1,0 +1,14 @@
+{
+  "name": "aframe-editor",
+  "homepage": "https://github.com/aframevr/aframe-editor",
+  "version": "0.3.0",
+  "_release": "0.3.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.3.0",
+    "commit": "7dfe01104bf7f17a8af54fdc2b123425581274a5"
+  },
+  "_source": "git://github.com/aframevr/aframe-editor.git",
+  "_target": "*",
+  "_originalSource": "aframevr/aframe-editor"
+}

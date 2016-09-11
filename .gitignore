@@ -10,7 +10,7 @@ Thumbs.db
 
 # Packages #
 ######################
-/bower_components/
+#/bower_components/
 /node_modules/
 
 # Privacy #
@@ -26,8 +26,8 @@ error_log
 
 # Models #
 ######################
-**.mix
-/assets/img/*.jpg
-/assets/img/*.png
-/assets/sketch/
-*.skp
+#**.mix
+#/assets/img/*.jpg
+#/assets/img/*.png
+#/assets/sketch/
+#*.skp
