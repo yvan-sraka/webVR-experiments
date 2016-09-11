@@ -216,7 +216,7 @@ settings = {
 }
 ```
 
-<h3 id="12-mhci-portugal">11. <a href="12--mhci-portugal.html">MHCI Portugal</a></h3>
+<h3 id="12-mhci-portugal">12. <a href="12--mhci-portugal.html">MHCI Portugal - Work in Progress</a></h3>
 ![Image for experiment 12](https://raw.githubusercontent.com/armthethinker/webVR-experiments/master/assets/img/heroes/hero-12.jpg)
 
 ~~**Guiding Question:** What are the best ways to move in VR without position controls?~~
