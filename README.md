@@ -226,7 +226,7 @@ $ grunt
 Grunt uses [LiveReload](https://chrome.google.com/webstore/detail/livereload/jnihajbhpnppcggbcgedagnkighmdlei).
 
 To deploy,
-```shell
+```bash
 $ npm run deploy
 ```
 
