@@ -18,7 +18,7 @@ Comments, suggestions, and pull requests welcome.
 8.  [Video Controls](#8-video-controls)
 9.  [Solar System](#9-solar-system)
 10. [SpaceVR Simulator](#10-spacevr-simulator)
-11. [Transitions](#11-transitions)
+11. [Environment Traversal](#11-environment-traversal)
 
 
 <h3 id="1-hello-world">1. <a href="1--helloworld.html">Hello World</a></h3>
@@ -180,7 +180,7 @@ This is my second attempt to build a [SpaceVR](http://www.spacevr.co/) simulator
 
 
 
-<h3 id="11-transitions">11. <a href="11--transitions.html">Transitions</a></h3>
+<h3 id="11-environment-traversal">11. <a href="11--environment-traversal.html">Environment Traversal</a></h3>
 ![Image for experiment 11](https://raw.githubusercontent.com/armthethinker/webVR-experiments/master/assets/img/heroes/hero-11.gif)
 
 **Guiding Question:** What are the best ways to move in VR without position controls?
