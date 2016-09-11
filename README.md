@@ -218,15 +218,15 @@ settings = {
 
 
 ## Setup
-```
-1. $ npm install
-2. $ bower update
-3. $ grunt
+```bash
+$ npm install
+$ bower update
+$ grunt
 ```
 Grunt uses [LiveReload](https://chrome.google.com/webstore/detail/livereload/jnihajbhpnppcggbcgedagnkighmdlei).
 
 To deploy,
-```
+```shell
 $ npm run deploy
 ```
 
