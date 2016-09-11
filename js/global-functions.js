@@ -179,17 +179,25 @@ function devTools(){
    }
 }
 
-function buildCameras(cameras){
+function buildCameras(cameras, options){
 
    // Loop it to build {}
    for(i = 0; i < cameras.els.length; i++){
       var camera = cameras.els[i];
       var cameraName = camera.getAttribute('id');
-      var cameraEl = scene.querySelector('#' + cameraName)
+      var cameraPrefix = '';
+      if(options.strip != undefined && options.strip == true){
+         var cameraNameNew = cameraName.replace(/camera-/, '');
+         cameraName = cameraNameNew;
+         cameraPrefix = 'camera-';
+      }
+      var cameraId = '#' + cameraPrefix + cameraName;
+      var cameraEl = scene.querySelector(cameraId)
 
       // Create the camera object entry
       cameras[cameraName] = {
-         el: cameraEl
+         el: cameraEl,
+         id: cameraId
       }
 
    }
