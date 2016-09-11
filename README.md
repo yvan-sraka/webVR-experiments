@@ -19,6 +19,7 @@ Comments, suggestions, and pull requests welcome.
 9.  [Solar System](#9-solar-system)
 10. [SpaceVR Simulator](#10-spacevr-simulator)
 11. [Environment Traversal](#11-environment-traversal)
+12. [MHCI Portugal](#12-mhci-portugal)
 
 
 <h3 id="1-hello-world">1. <a href="1--helloworld.html">Hello World</a></h3>
@@ -214,6 +215,11 @@ settings = {
    transition: 'Fade Jump Long'
 }
 ```
+
+<h3 id="12-mhci-portugal">11. <a href="12--mhci-portugal.html">MHCI Portugal</a></h3>
+![Image for experiment 12](https://raw.githubusercontent.com/armthethinker/webVR-experiments/master/assets/img/heroes/hero-12.jpg)
+
+~~**Guiding Question:** What are the best ways to move in VR without position controls?~~
 
 
 
