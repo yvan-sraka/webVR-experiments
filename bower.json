@@ -37,6 +37,7 @@
     "bonzo": "ded/bonzo#^2.0.0",
     "anchor-js": "^3.2.0",
     "fetch": "github/fetch#^1.0.0",
-    "three-sixty": "ashconnell/three-sixty"
+    "three-sixty": "ashconnell/three-sixty",
+    "jquery": "^3.1.1"
   }
 }
