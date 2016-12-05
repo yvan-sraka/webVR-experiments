@@ -1,11 +1,11 @@
 {
   "name": "aframe-animation-component",
   "homepage": "https://github.com/ngokevin/aframe-animation-component",
-  "_release": "5be4aca674",
+  "_release": "719a2e7c5c",
   "_resolution": {
     "type": "branch",
     "branch": "master",
-    "commit": "5be4aca674c6b2f236d1166d5ac518efeadff282"
+    "commit": "719a2e7c5c8e78b6bc318b64d7f8a526ad6804c5"
   },
   "_source": "git://github.com/ngokevin/aframe-animation-component.git",
   "_target": "*",

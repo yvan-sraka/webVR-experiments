@@ -44,5 +44,30 @@
       <a-light color="#ddf" distance="100" intensity="0.4" type="point"></a-light>
 
     </a-scene>
+    <style>
+.mode-instruction {
+  position: fixed;
+  top: 5px;
+  left: 5px;
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #FFF;
+}
+    </style>
+    <p class="mode-instruction">Mode: <span data-bind="mode">Default</span>. (&lt;Space&gt; to change)</p>
+    <script>
+      var controlledEl = document.querySelector('[keyboard-controls]');
+      var labelEl = document.querySelector('[data-bind=mode]');
+
+      var modes = ['default', 'fly', 'fps'];
+      var labels = ['Default', 'Fly', 'FPS'];
+      var modeIndex = 0;
+
+      controlledEl.addEventListener('keyup:Space', function () {
+        modeIndex = (modeIndex + 1) % modes.length;
+        controlledEl.setAttribute('keyboard-controls', 'mode', modes[modeIndex]);
+        labelEl.innerHTML = labels[modeIndex];
+      });
+    </script>
   </body>
 </html>
