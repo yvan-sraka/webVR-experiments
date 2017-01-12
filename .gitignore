@@ -10,7 +10,6 @@ Thumbs.db
 
 # Packages #
 ######################
-#/bower_components/
 /node_modules/
 
 # Privacy #
