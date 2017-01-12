@@ -20,8 +20,8 @@
     "tests"
   ],
   "dependencies": {
-    "aframe": "aframevr/aframe#^0.3.0",
-    "aframe2": "aframevr/aframe#^0.2.0",
+    "aframe": "aframevr/aframe",
+    "aframe2": "aframevr/aframe#0.2.0",
     "aframe-animation-component": "ngokevin/aframe-animation-component",
     "aframe-editor": "aframevr/aframe-editor",
     "aframe-event-set-component": "ngokevin/aframe-event-set-component",
@@ -38,6 +38,6 @@
     "anchor-js": "^3.2.0",
     "fetch": "github/fetch#^1.0.0",
     "three-sixty": "ashconnell/three-sixty",
-    "jquery": "^3.1.1"
+    "jQuery": "^3.1.1"
   }
 }
