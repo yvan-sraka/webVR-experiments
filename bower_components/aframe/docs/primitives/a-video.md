@@ -5,7 +5,7 @@ layout: docs
 parent_section: primitives
 ---
 
-The video primitive displays a video on a flat plane as a texture. It is an entity that prescribes the [geometry](../components/geometry.md) with its geometric primitive set to `plane`.
+The video primitive plays a video as a texture on a flat plane.
 
 ## Example
 
@@ -35,7 +35,7 @@ The video primitive displays a video on a flat plane as a texture. It is an enti
 | roughness       | material.roughness      | 0.5           |
 | segments-height | geometry.segmentsHeight | 1             |
 | segments-width  | geometry.segmentsWidth  | 1             |
-| shader          | material.shader         | standard      |
+| shader          | material.shader         | flat          |
 | side            | material.side           | front         |
 | src             | material.src            | None          |
 | transparent     | material.transparent    | false         |
@@ -45,6 +45,13 @@ The video primitive displays a video on a flat plane as a texture. It is an enti
 
 iOS has a lot of restrictions on playing videos in the browser. To play an inline video texture, we must:
 
-- Set the `<meta name="apple-mobile-web-app-capable" content="yes">` meta tag (will be injected if missing).
-- Set the `webkit-playsinline` attribute to the video element.
+- Set the `<meta name="apple-mobile-web-app-capable" content="yes">` meta tag. A-Frame will will inject this if missing.
+- Set the `webkit-playsinline` and `playsinline` attribute to the video element. A-Frame will add this to all videos if missing).
 - Pin the webpage to the iOS homescreen.
+
+Inline video support on iOS 10 may change this. On certain Android devices or
+browsers, we must:
+
+[android-touch-bug]: https://bugs.chromium.org/p/chromium/issues/detail?id=178297
+
+- Require user interaction to trigger the video (such as a click or tap event). See [Chromium Bug 178297][android-touch-bug].

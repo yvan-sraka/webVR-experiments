@@ -19,6 +19,7 @@ A-Frame is a framework for creating virtual reality web experiences.
 Find out more:
 
 - [Guide](https://aframe.io/docs/guide/)
+- [Device & Platform Support][aframe-browser-support]
 - [Examples](https://aframe.io/examples/)
 - [awesome-aframe](https://github.com/aframevr/awesome-aframe)
 - [Ask us on Slack!](https://aframevr-slack.herokuapp.com/)
@@ -33,11 +34,11 @@ To get started immediately, just fire up [__this CodePen example scene__](http:/
 
 To embed this library in your project, include this file:
 
-* [`aframe.min.js`](https://aframe.io/releases/0.2.0/aframe.min.js)
+* [`aframe.min.js`](https://aframe.io/releases/0.4.0/aframe.min.js)
 
 For the unminified version for local development (with source maps), include this file:
 
-* [`aframe.js`](https://aframe.io/releases/0.2.0/aframe.js)
+* [`aframe.js`](https://aframe.io/releases/0.4.0/aframe.js)
 
 __Also, be sure to check out the awesome [examples](https://aframe.io/examples/) (or [the ones in this repository](examples/)).__
 
@@ -45,55 +46,52 @@ __Also, be sure to check out the awesome [examples](https://aframe.io/examples/)
 
 First install from npm:
 
-    npm install aframe
+```sh
+npm install aframe
+```
 
 And in your Browserify/Webpack modules, simply require the module:
 
-    require('aframe')
-
+```js
+require('aframe')
+```
 
 ## Local Installation and Development
 
 Alternatively, you can clone this repository to work locally on this project and explore the examples.
 
-    git clone git@github.com:aframevr/aframe.git
-    cd aframe && npm install
+```sh
+git clone https://github.com/aframevr/aframe.git
+cd aframe && npm install
+```
 
 To start the local development server:
 
-    npm start
+```sh
+npm start
+```
 
 And fire up __[http://localhost:9000](http://localhost:9000)__!
 
-## Maintainers
-
-Ensure you have [cloned the repo and installed the dependencies](#local-installation-and-development).
-
-### Publishing to [npm](https://www.npmjs.com/)
-
-To increment the preminor version of the package (e.g., `0.1.19` to `0.1.20`) and create a git tag (e.g., `v0.1.20`):
-
-    npm run release:bump
-
-___NOTE:___ npm versions __cannot__ be unpublished.
-
-Once the package is 100% ready to go, to push the new version to npm (e.g., `0.1.20`) and to the new tag to GitHub (e.g., `v0.1.20`):
-
-    npm run release:push
-
 ## Updating `dist` Files
 
-    npm run dist
+```sh
+npm run dist
+```
 
 ## Publishing to GitHub Pages
 
 To publish to __https://aframevr.github.io/aframe/__:
 
-    npm run ghpages
+```sh
+npm run ghpages
+```
 
 To publish to __https://your_username.github.io/aframe/__:
 
-    npm run ghpages your_username
+```sh
+npm run ghpages your_username
+```
 
 ## Contributing
 
@@ -111,6 +109,9 @@ This program is free software and is distributed under an [MIT License](LICENSE)
 [downloads-url]: https://npmjs.org/package/aframe
 [semistandard-image]: https://img.shields.io/badge/code%20style-semistandard-brightgreen.svg?style=flat-square
 [semistandard-url]: https://github.com/Flet/semistandard
+[aframe-browser-support]: https://aframe.io/docs/master/introduction/device-and-platform-support.html
 <!-- codecov -->
 [codecov-image]: https://codecov.io/gh/aframevr/aframe/branch/master/graph/badge.svg
 [codecov-url]: https://codecov.io/gh/aframevr/aframe
+
+[aframe-browser-support]: https://aframe.io/docs/0.3.0/introduction/device-and-platform-support.html

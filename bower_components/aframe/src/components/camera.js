@@ -1,8 +1,9 @@
 var registerComponent = require('../core/component').registerComponent;
 var THREE = require('../lib/three');
 var utils = require('../utils/');
+var bind = utils.bind;
 
-var checkHeadsetConnected = utils.checkHeadsetConnected;
+var checkHasPositionalTracking = utils.device.checkHasPositionalTracking;
 
 /**
  * Camera component.
@@ -34,8 +35,8 @@ module.exports.Component = registerComponent('camera', {
     el.setObject3D('camera', camera);
 
     // Add listeners to save and restore camera pose if headset is present.
-    this.onEnterVR = this.onEnterVR.bind(this);
-    this.onExitVR = this.onExitVR.bind(this);
+    this.onEnterVR = bind(this.onEnterVR, this);
+    this.onExitVR = bind(this.onExitVR, this);
     sceneEl.addEventListener('enter-vr', this.onEnterVR);
     sceneEl.addEventListener('exit-vr', this.onExitVR);
   },
@@ -109,7 +110,7 @@ module.exports.Component = registerComponent('camera', {
     var userHeightOffset = this.data.userHeight;
 
     oldOffset = oldOffset || 0;
-    currentPosition = el.getComputedAttribute('position') || {x: 0, y: 0, z: 0};
+    currentPosition = el.getAttribute('position') || {x: 0, y: 0, z: 0};
     el.setAttribute('position', {
       x: currentPosition.x,
       y: currentPosition.y - oldOffset + userHeightOffset,
@@ -120,20 +121,18 @@ module.exports.Component = registerComponent('camera', {
   /**
    * Remove the height offset (called when entering VR) since WebVR API gives absolute
    * position.
-   * Does not apply for mobile.
    */
   removeHeightOffset: function () {
     var currentPosition;
     var el = this.el;
-    var headsetConnected;
-    var sceneEl = el.sceneEl;
+    var hasPositionalTracking;
     var userHeightOffset = this.data.userHeight;
 
-    // If there's not a headset connected we keep the offset.
+    // Remove the offset if there is positional tracking when entering VR.
     // Necessary for fullscreen mode with no headset.
-    // Checking this.headsetConnected to make the value injectable for unit tests.
-    headsetConnected = this.headsetConnected || checkHeadsetConnected();
-    if (sceneEl.isMobile || !userHeightOffset || !headsetConnected) { return; }
+    // Checking this.hasPositionalTracking to make the value injectable for unit tests.
+    hasPositionalTracking = this.hasPositionalTracking || checkHasPositionalTracking();
+    if (!userHeightOffset || !hasPositionalTracking) { return; }
 
     currentPosition = el.getAttribute('position') || {x: 0, y: 0, z: 0};
     el.setAttribute('position', {
@@ -148,9 +147,9 @@ module.exports.Component = registerComponent('camera', {
    */
   saveCameraPose: function () {
     var el = this.el;
-    var headsetConnected = this.headsetConnected || checkHeadsetConnected();
+    var hasPositionalTracking = this.hasPositionalTracking || checkHasPositionalTracking();
 
-    if (this.savedPose || !headsetConnected) { return; }
+    if (this.savedPose || !hasPositionalTracking) { return; }
 
     this.savedPose = {
       position: el.getAttribute('position'),
@@ -164,9 +163,9 @@ module.exports.Component = registerComponent('camera', {
   restoreCameraPose: function () {
     var el = this.el;
     var savedPose = this.savedPose;
-    var headsetConnected = this.headsetConnected || checkHeadsetConnected();
+    var hasPositionalTracking = this.hasPositionalTracking || checkHasPositionalTracking();
 
-    if (!savedPose || !headsetConnected) { return; }
+    if (!savedPose || !hasPositionalTracking) { return; }
 
     // Reset camera orientation.
     el.setAttribute('position', savedPose.position);

@@ -5,6 +5,28 @@ var propertyTypes = PropertyTypes.propertyTypes;
 var register = PropertyTypes.registerPropertyType;
 
 suite('propertyTypes', function () {
+  suite('asset', function () {
+    var parse = propertyTypes.asset.parse;
+
+    setup(function () {
+      var el = this.el = document.createElement('div');
+      el.setAttribute('id', 'hello');
+      el.setAttribute('src', 'file2.jpg');
+      document.body.appendChild(el);
+    });
+
+    teardown(function () {
+      this.el.parentNode.removeChild(this.el);
+    });
+
+    test('parses asset', function () {
+      assert.equal(parse('url(file.jpg)'), 'file.jpg');
+      assert.equal(parse('file.jpg'), 'file.jpg');
+      assert.equal(parse('#hello'), 'file2.jpg');
+      assert.equal(parse('#where'), null);
+    });
+  });
+
   suite('boolean', function () {
     var parse = propertyTypes.boolean.parse;
     var stringify = propertyTypes.boolean.stringify;
@@ -31,6 +53,17 @@ suite('propertyTypes', function () {
       register('mytype', 5);
       assert.ok('mytype' in propertyTypes);
       assert.equal(propertyTypes.mytype.default, 5);
+    });
+  });
+
+  suite('int', function () {
+    var parse = propertyTypes.int.parse;
+
+    test('parses int', function () {
+      assert.equal(parse('5'), 5);
+      assert.equal(parse(5), 5);
+      assert.equal(parse('4.5'), 4);
+      assert.equal(parse(4.5), 4);
     });
   });
 
@@ -120,6 +153,27 @@ suite('propertyTypes', function () {
       assert.equal(stringify([]), '');
       assert.equal(stringify([5, 10]), '5, 10');
       assert.equal(stringify([1, 'five', true, '5 0 5']), '1, five, true, 5 0 5');
+    });
+  });
+
+  suite('src', function () {
+    var parse = propertyTypes.src.parse;
+
+    setup(function () {
+      var el = this.el = document.createElement('div');
+      el.setAttribute('id', 'hello');
+      el.setAttribute('src', 'file2.jpg');
+      document.body.appendChild(el);
+    });
+
+    teardown(function () {
+      this.el.parentNode.removeChild(this.el);
+    });
+
+    test('parses src', function () {
+      assert.equal(parse('url(file.jpg)'), 'file.jpg');
+      assert.equal(parse('file.jpg'), 'file.jpg');
+      assert.equal(parse('#hello'), 'file2.jpg');
     });
   });
 });

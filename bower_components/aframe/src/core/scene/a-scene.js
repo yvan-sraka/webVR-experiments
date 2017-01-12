@@ -11,10 +11,12 @@ var AEntity = require('../a-entity');
 var ANode = require('../a-node');
 var initPostMessageAPI = require('./postMessage');
 
-var checkHeadsetConnected = utils.checkHeadsetConnected;
+var bind = utils.bind;
+var checkHeadsetConnected = utils.device.checkHeadsetConnected;
+var isIOS = utils.device.isIOS();
+var isMobile = utils.device.isMobile();
 var registerElement = re.registerElement;
-var isIOS = utils.isIOS();
-var isMobile = utils.isMobile();
+var warn = utils.debug('core:a-scene:warn');
 
 /**
  * Scene element, holds all entities.
@@ -40,7 +42,9 @@ module.exports = registerElement('a-scene', {
         'canvas': '',
         'inspector': '',
         'keyboard-shortcuts': '',
-        'vr-mode-ui': ''
+        'screenshot': '',
+        'vr-mode-ui': '',
+        'auto-enter-vr': ''
       }
     },
 
@@ -50,7 +54,7 @@ module.exports = registerElement('a-scene', {
         this.isMobile = isMobile;
         this.isScene = true;
         this.object3D = new THREE.Scene();
-        this.render = this.render.bind(this);
+        this.render = bind(this.render, this);
         this.systems = {};
         this.time = 0;
 
@@ -94,7 +98,7 @@ module.exports = registerElement('a-scene', {
 
     attachedCallback: {
       value: function () {
-        var resize = this.resize.bind(this);
+        var resize = bind(this.resize, this);
         initMetaTags(this);
         initWakelock(this);
         this.initSystems();
@@ -108,7 +112,7 @@ module.exports = registerElement('a-scene', {
 
     initSystems: {
       value: function () {
-        Object.keys(systems).forEach(this.initSystem.bind(this));
+        Object.keys(systems).forEach(bind(this.initSystem, this));
       }
     },
 
@@ -224,14 +228,25 @@ module.exports = registerElement('a-scene', {
     },
 
     /**
-     * Wraps Entity.getComputedAttribute to take into account for systems.
-     * If system exists, then return system data rather than possible component data.
+     * `getAttribute` used to be `getDOMAttribute` and `getComputedAttribute` used to be
+     * what `getAttribute` is now. Now legacy code.
      */
     getComputedAttribute: {
       value: function (attr) {
+        warn('`getComputedAttribute` is deprecated. Use `getAttribute` instead.');
+        this.getAttribute(attr);
+      }
+    },
+
+    /**
+     * Wraps Entity.getDOMAttribute to take into account for systems.
+     * If system exists, then return system data rather than possible component data.
+     */
+    getDOMAttribute: {
+      value: function (attr) {
         var system = this.systems[attr];
         if (system) { return system.data; }
-        return AEntity.prototype.getComputedAttribute.call(this, attr);
+        return AEntity.prototype.getDOMAttribute.call(this, attr);
       }
     },
 
@@ -401,13 +416,14 @@ module.exports = registerElement('a-scene', {
      */
     render: {
       value: function (time) {
+        var effect = this.effect;
         var timeDelta = time - this.time;
 
         if (this.isPlaying) { this.tick(time, timeDelta); }
-        this.effect.render(this.object3D, this.camera);
 
+        this.animationFrameID = effect.requestAnimationFrame(this.render);
+        effect.render(this.object3D, this.camera);
         this.time = time;
-        this.animationFrameID = window.requestAnimationFrame(this.render);
       },
       writable: true
     }
@@ -437,8 +453,9 @@ function getCanvasSize (canvasEl, embedded) {
 
 function requestFullscreen (canvas) {
   var requestFullscreen =
-    canvas.requestFullScreen ||
-    canvas.webkitRequestFullScreen ||
-    canvas.mozRequestFullScreen;
+    canvas.requestFullscreen ||
+    canvas.webkitRequestFullscreen ||
+    canvas.mozRequestFullScreen ||  // The capitalized `S` is not a typo.
+    canvas.msRequestFullscreen;
   requestFullscreen.apply(canvas);
 }

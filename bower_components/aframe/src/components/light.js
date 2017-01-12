@@ -1,3 +1,4 @@
+var bind = require('../utils/bind');
 var diff = require('../utils').diff;
 var debug = require('../utils/debug');
 var registerComponent = require('../core/component').registerComponent;
@@ -16,8 +17,7 @@ module.exports.Component = registerComponent('light', {
     groundColor: {type: 'color', if: {type: ['hemisphere']}},
     decay: {default: 1, if: {type: ['point', 'spot']}},
     distance: {default: 0.0, min: 0, if: {type: ['point', 'spot']}},
-    intensity: {default: 1.0, min: 0,
-                if: {type: ['ambient', 'directional', 'hemisphere', 'point', 'spot']}},
+    intensity: {default: 1.0, min: 0, if: {type: ['ambient', 'directional', 'hemisphere', 'point', 'spot']}},
     penumbra: {default: 0, min: 0, max: 1, if: {type: ['spot']}},
     type: {default: 'directional',
            oneOf: ['ambient', 'directional', 'hemisphere', 'point', 'spot']},
@@ -55,7 +55,7 @@ module.exports.Component = registerComponent('light', {
             break;
           }
 
-          case 'groundcolor': {
+          case 'groundColor': {
             light.groundColor.set(value);
             break;
           }
@@ -76,7 +76,7 @@ module.exports.Component = registerComponent('light', {
               if (value.hasLoaded) {
                 self.onSetTarget(value);
               } else {
-                value.addEventListener('loaded', self.onSetTarget.bind(self, value));
+                value.addEventListener('loaded', bind(self.onSetTarget, self, value));
               }
             }
             break;
@@ -147,7 +147,7 @@ module.exports.Component = registerComponent('light', {
           if (target.hasLoaded) {
             this.onSetTarget(target);
           } else {
-            target.addEventListener('loaded', this.onSetTarget.bind(this, target));
+            target.addEventListener('loaded', bind(this.onSetTarget, this, target));
           }
         }
         return light;
@@ -168,7 +168,7 @@ module.exports.Component = registerComponent('light', {
           if (target.hasLoaded) {
             this.onSetTarget(target);
           } else {
-            target.addEventListener('loaded', this.onSetTarget.bind(this, target));
+            target.addEventListener('loaded', bind(this.onSetTarget, this, target));
           }
         }
         return light;

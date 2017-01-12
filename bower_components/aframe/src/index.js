@@ -1,3 +1,12 @@
+var debug = require('./utils/debug');
+var error = debug('A-Frame:warn');
+var info = debug('A-Frame:info');
+
+if (document.currentScript && document.currentScript.parentNode !== document.head) {
+  error('Put the A-Frame <script> tag in the <head> of the HTML before <a-scene> to ensure everything for A-Frame is properly registered before they are used in the <body>.');
+  info('Also make sure that any component <script> tags are included after A-Frame, but still before <a-scene>.');
+}
+
 // Polyfill `Promise`.
 window.Promise = window.Promise || require('promise-polyfill');
 
@@ -57,7 +66,6 @@ require('./core/a-mixin');
 
 // Extras.
 require('./extras/components/');
-require('./extras/declarative-events/');
 require('./extras/primitives/');
 
 console.log('A-Frame Version:', pkg.version);
@@ -65,6 +73,7 @@ console.log('three Version:', pkg.dependencies['three']);
 console.log('WebVR Polyfill Version:', pkg.dependencies['webvr-polyfill']);
 
 module.exports = window.AFRAME = {
+  AComponent: require('./core/component').Component,
   AEntity: AEntity,
   ANode: ANode,
   AScene: AScene,

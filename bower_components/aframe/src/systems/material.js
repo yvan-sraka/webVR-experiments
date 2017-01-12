@@ -29,16 +29,31 @@ module.exports.System = registerSystem('material', {
   /**
    * Determine whether `src` is a image or video. Then try to load the asset, then call back.
    *
-   * @param {string} src - Texture URL.
+   * @param {string, or element} src - Texture URL or element.
    * @param {string} data - Relevant texture data used for caching.
    * @param {function} cb - Callback to pass texture to.
    */
   loadTexture: function (src, data, cb) {
     var self = this;
-    utils.srcLoader.validateSrc(src, loadImageCb, loadVideoCb, loadCanvasCb);
+
+    // Canvas.
+    if (src.tagName === 'CANVAS') {
+      this.loadCanvas(src, data, cb);
+      return;
+    }
+
+    // Video element.
+    if (src.tagName === 'VIDEO') {
+      if (!src.hasAttribute('src') && !src.hasAttribute('srcObject')) {
+        warn('Video element was defined without `src` nor `srcObject` attributes.');
+      }
+      this.loadVideo(src, data, cb);
+      return;
+    }
+
+    utils.srcLoader.validateSrc(src, loadImageCb, loadVideoCb);
     function loadImageCb (src) { self.loadImage(src, data, cb); }
     function loadVideoCb (src) { self.loadVideo(src, data, cb); }
-    function loadCanvasCb (src) { self.loadCanvas(src, data, cb); }
   },
 
   /**
@@ -242,21 +257,24 @@ function loadImageTexture (src, data) {
 }
 
 /**
- * Set texture properties such as repeat.
+ * Set texture properties such as repeat and offset.
  *
  * @param {object} data - With keys like `repeat`.
  */
 function setTextureProperties (texture, data) {
-  // Handle UV repeat.
-  var repeat = data.repeat || '1 1';
-  var repeatXY = repeat.split(' ');
+  var offset = data.offset || {x: 0, y: 0};
+  var repeat = data.repeat || {x: 1, y: 1};
 
   // Don't bother setting repeat if it is 1/1. Power-of-two is required to repeat.
-  if (repeat === '1 1' || repeatXY.length !== 2) { return; }
+  if (repeat.x === 1 && repeat.y === 1) { return; }
 
   texture.wrapS = THREE.RepeatWrapping;
   texture.wrapT = THREE.RepeatWrapping;
-  texture.repeat.set(parseFloat(repeatXY[0]), parseFloat(repeatXY[1]));
+  texture.repeat.set(repeat.x, repeat.y);
+
+  // Don't bother setting offset if it is 0/0.
+  if (offset.x === 0 && offset.y === 0) { return; }
+  texture.offset.set(offset.x, offset.y);
 }
 
 /**

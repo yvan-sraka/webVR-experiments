@@ -4,14 +4,13 @@ type: introduction
 layout: docs
 parent_section: introduction
 order: 2
-version: 0.3.0
 installation: true
 ---
 
 <script async src="//assets.codepen.io/assets/embed/ei.js"></script>
 
 Welcome! Make sure to read the [introduction][introduction]. If you're ready to
-go, we have several ways of getting started.
+go, there are multiple ways of getting started.
 
 <!--toc-->
 
@@ -40,22 +39,28 @@ We can grab the boilerplate in one of two ways:
 
 <a class="btn btn-download" href="https://github.com/aframevr/aframe-boilerplate/archive/master.zip" download="aframe-boilerplate.zip">Download .ZIP<span></span></a>
 
+We should develop with a local server so that files are properly served. We can either:
+
+- Download the [Mongoose](https://www.cesanta.com/products/binary) application
+  and open it from the same directory as your HTML file.
+- Or use Node and npm to start the local server with `npm install && npm run start`.
+
 ## Include the JS Build
 
 If we want to just include the JS build from the CDN, we can drop a `<script>` tag straight into our HTML:
 
 ```html
 <!-- Production Version, Minified -->
-<script src="https://aframe.io/releases/{{ version }}/aframe.min.js"></script>
+<script src="https://aframe.io/releases/0.4.0/aframe.min.js"></script>
 
 <!-- Development Version, Uncompressed with Source Maps -->
-<script src="https://aframe.io/releases/{{ version }}/aframe.js"></script>
+<script src="https://aframe.io/releases/0.4.0/aframe.js"></script>
 ```
 
 If we want to serve it locally, we can download the JS build:
 
-<a id="builds-prod" class="btn btn-download" href="https://aframe.io/releases/{{ version }}/aframe.min.js" download>Production Version <span>{{ version }}</span></a> <em class="install-note">Minified</em>
-<a id="builds-dev" class="btn btn-download" href="https://aframe.io/releases/{{ version }}/aframe.js" download>Development Version <span>{{ version }}</span></a> <em class="install-note">Uncompressed with Source Maps</em>
+<a id="builds-prod" class="btn btn-download" href="https://aframe.io/releases/0.4.0/aframe.min.js" download>Production Version <span>0.4.0</span></a> <em class="install-note">Minified</em>
+<a id="builds-dev" class="btn btn-download" href="https://aframe.io/releases/0.4.0/aframe.js" download>Development Version <span>0.4.0</span></a> <em class="install-note">Uncompressed with Source Maps</em>
 
 ## Install from npm
 

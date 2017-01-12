@@ -1,9 +1,10 @@
 var ANode = require('./a-node');
+var bind = require('../utils/bind');
 var debug = require('../utils/debug');
 var registerElement = require('./a-register-element').registerElement;
 var THREE = require('../lib/three');
 
-var xhrLoader = new THREE.XHRLoader();
+var fileLoader = new THREE.XHRLoader();
 var warn = debug('core:a-assets:warn');
 
 /**
@@ -14,6 +15,8 @@ module.exports = registerElement('a-assets', {
     createdCallback: {
       value: function () {
         this.isAssets = true;
+        this.fileLoader = fileLoader;
+        this.timeout = null;
       }
     },
 
@@ -35,7 +38,7 @@ module.exports = registerElement('a-assets', {
         // Wait for <img>s.
         imgEls = this.querySelectorAll('img');
         for (i = 0; i < imgEls.length; i++) {
-          imgEl = setCrossOrigin(imgEls[i]);
+          imgEl = fixUpMediaElement(imgEls[i]);
           loaded.push(new Promise(function (resolve, reject) {
             imgEl.onload = resolve;
             imgEl.onerror = reject;
@@ -45,21 +48,27 @@ module.exports = registerElement('a-assets', {
         // Wait for <audio>s and <video>s.
         mediaEls = this.querySelectorAll('audio, video');
         for (i = 0; i < mediaEls.length; i++) {
-          mediaEl = setCrossOrigin(mediaEls[i]);
+          mediaEl = fixUpMediaElement(mediaEls[i]);
           loaded.push(mediaElementLoaded(mediaEl));
         }
 
         // Trigger loaded for scene to start rendering.
-        Promise.all(loaded).then(this.load.bind(this));
+        Promise.all(loaded).then(bind(this.load, this));
 
         // Timeout to start loading anyways.
         timeout = parseInt(this.getAttribute('timeout'), 10) || 3000;
-        setTimeout(function () {
+        this.timeout = setTimeout(function () {
           if (self.hasLoaded) { return; }
           warn('Asset loading timed out in ', timeout, 'ms');
           self.emit('timeout');
           self.load();
         }, timeout);
+      }
+    },
+
+    detachedCallback: {
+      value: function () {
+        if (this.timeout) { clearTimeout(this.timeout); }
       }
     },
 
@@ -73,6 +82,9 @@ module.exports = registerElement('a-assets', {
   })
 });
 
+/**
+ * Preload using XHRLoader for any type of asset.
+ */
 registerElement('a-asset-item', {
   prototype: Object.create(ANode.prototype, {
     createdCallback: {
@@ -85,18 +97,27 @@ registerElement('a-asset-item', {
     attachedCallback: {
       value: function () {
         var self = this;
-        var src = src = this.getAttribute('src');
-        xhrLoader.load(src, function (textResponse) {
+        var src = this.getAttribute('src');
+        fileLoader.load(src, function handleOnLoad (textResponse) {
           THREE.Cache.files[src] = textResponse;
           self.data = textResponse;
-          // Workaround for a Chrome bug.
-          // if another XMLHttpRequest is sent to the same url
-          // before the previous one closes. The second request never finishes.
-          // setTimeout finishes the first request and lets the logic
-          // triggered by load open subsequent requests.
-          // setTimeout can be removed once the fix for the bug below ships:
-          // https://bugs.chromium.org/p/chromium/issues/detail?id=633696&q=component%3ABlink%3ENetwork%3EXHR%20&colspec=ID%20Pri%20M%20Stars%20ReleaseBlock%20Component%20Status%20Owner%20Summary%20OS%20Modified
+          /*
+            Workaround for a Chrome bug. If another XHR is sent to the same url before the
+            previous one closes, the second request never finishes.
+            setTimeout finishes the first request and lets the logic triggered by load open
+            subsequent requests.
+            setTimeout can be removed once the fix for the bug below ships:
+            https://bugs.chromium.org/p/chromium/issues/detail?id=633696&q=component%3ABlink%3ENetwork%3EXHR%20&colspec=ID%20Pri%20M%20Stars%20ReleaseBlock%20Component%20Status%20Owner%20Summary%20OS%20Modified
+          */
           setTimeout(function load () { ANode.prototype.load.call(self); });
+        }, function handleOnProgress (xhr) {
+          self.emit('progress', {
+            loadedBytes: xhr.loaded,
+            totalBytes: xhr.total,
+            xhr: xhr
+          });
+        }, function handleOnError (xhr) {
+          self.emit('error', {xhr: xhr});
         });
       }
     }
@@ -139,6 +160,27 @@ function mediaElementLoaded (el) {
 }
 
 /**
+ * Automatically add attributes to media elements where convenient.
+ * crossorigin, playsinline.
+ */
+function fixUpMediaElement (mediaEl) {
+  // Cross-origin.
+  var newMediaEl = setCrossOrigin(mediaEl);
+
+  // Plays inline for mobile.
+  if (newMediaEl.tagName === 'VIDEO') {
+    newMediaEl.setAttribute('playsinline', '');
+    newMediaEl.setAttribute('webkit-playsinline', '');
+  }
+
+  if (newMediaEl !== mediaEl) {
+    mediaEl.parentNode.appendChild(newMediaEl);
+    mediaEl.parentNode.removeChild(mediaEl);
+  }
+  return newMediaEl;
+}
+
+/**
  * Automatically set `crossorigin` if not defined on the media element.
  * If it is not defined, we must create and re-append a new media element <img> and
  * have the browser re-request it with `crossorigin` set.
@@ -155,18 +197,18 @@ function setCrossOrigin (mediaEl) {
 
   src = mediaEl.getAttribute('src');
 
-  // Does not have protocol.
-  if (src.indexOf('://') === -1) { return mediaEl; }
+  if (src !== null) {
+    // Does not have protocol.
+    if (src.indexOf('://') === -1) { return mediaEl; }
 
-  // Determine if cross origin is actually needed.
-  if (extractDomain(src) === window.location.host) { return mediaEl; }
+    // Determine if cross origin is actually needed.
+    if (extractDomain(src) === window.location.host) { return mediaEl; }
+  }
 
   warn('Cross-origin element was requested without `crossorigin` set. ' +
        'A-Frame will re-request the asset with `crossorigin` attribute set.', src);
   mediaEl.crossOrigin = 'anonymous';
   newMediaEl = mediaEl.cloneNode(true);
-  mediaEl.parentNode.appendChild(newMediaEl);
-  mediaEl.parentNode.removeChild(mediaEl);
   return newMediaEl;
 }
 

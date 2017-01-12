@@ -30,6 +30,9 @@ var Component = module.exports.Component = function (el, attr, id) {
   this.id = id;
   this.attrName = this.name + (id ? '__' + id : '');
   this.updateCachedAttrValue(attr);
+
+  if (!el.hasLoaded) { return; }
+  this.updateProperties(this.attrValue);
 };
 
 Component.prototype = {
@@ -37,7 +40,7 @@ Component.prototype = {
    * Contains the type schema and defaults for the data values.
    * Data is coerced into the types of the values of the defaults.
    */
-  schema: { },
+  schema: {},
 
   /**
    * Init handler. Similar to attachedCallback.
@@ -166,12 +169,16 @@ Component.prototype = {
   },
 
   /**
-   * Writes cached attribute data to the entity DOM element.
+   * Write cached attribute data to the entity DOM element.
+   *
+   * @param {bool} isDefault - Whether component is a default component. Always flush for
+   *   default components.
    */
-  flushToDOM: function () {
-    var attrValue = this.attrValue;
+  flushToDOM: function (isDefault) {
+    var attrValue = isDefault ? this.data : this.attrValue;
     if (!attrValue) { return; }
-    HTMLElement.prototype.setAttribute.call(this.el, this.attrName, this.stringify(attrValue));
+    HTMLElement.prototype.setAttribute.call(this.el, this.attrName,
+                                            this.stringify(attrValue));
   },
 
   /**
@@ -188,9 +195,9 @@ Component.prototype = {
     if (value !== undefined) { this.updateCachedAttrValue(value); }
 
     if (this.updateSchema) {
-      this.updateSchema(buildData(el, this.name, this.schema, this.attrValue, true));
+      this.updateSchema(buildData(el, this.name, this.attrName, this.schema, this.attrValue, true));
     }
-    this.data = buildData(el, this.name, this.schema, this.attrValue);
+    this.data = buildData(el, this.name, this.attrName, this.schema, this.attrValue);
 
     // Don't update if properties haven't changed
     if (!isSinglePropSchema && utils.deepEqual(oldData, this.data)) { return; }
@@ -201,16 +208,20 @@ Component.prototype = {
       // Play the component if the entity is playing.
       this.update(oldData);
       if (el.isPlaying) { this.play(); }
+      el.emit('componentinitialized', {
+        id: this.id,
+        name: this.name,
+        data: this.getData()
+      }, false);
     } else {
       this.update(oldData);
+      el.emit('componentchanged', {
+        id: this.id,
+        name: this.name,
+        newData: this.getData(),
+        oldData: oldData
+      }, false);
     }
-
-    el.emit('componentchanged', {
-      id: this.id,
-      name: this.name,
-      newData: this.getData(),
-      oldData: oldData
-    }, false);
   },
 
   /**
@@ -228,7 +239,7 @@ Component.prototype = {
     // Extend base schema with new schema chunk.
     utils.extend(extendedSchema, schemaAddon);
     this.schema = processSchema(extendedSchema);
-    this.el.emit('schemachanged', { component: this.name });
+    this.el.emit('schemachanged', {component: this.name});
   }
 };
 
@@ -264,8 +275,6 @@ module.exports.registerComponent = function (name, definition) {
   }
   NewComponent = function (el, attr, id) {
     Component.call(this, el, attr, id);
-    if (!el.hasLoaded) { return; }
-    this.updateProperties(this.attrValue);
   };
 
   NewComponent.prototype = Object.create(Component.prototype, proto);
@@ -278,6 +287,7 @@ module.exports.registerComponent = function (name, definition) {
   components[name] = {
     Component: NewComponent,
     dependencies: NewComponent.prototype.dependencies,
+    isSingleProp: isSingleProp(NewComponent.prototype.schema),
     multiple: NewComponent.prototype.multiple,
     parse: NewComponent.prototype.parse,
     parseAttrValueForCache: NewComponent.prototype.parseAttrValueForCache,
@@ -303,12 +313,13 @@ module.exports.registerComponent = function (name, definition) {
  *
  * @param {object} el - Element to build data from.
  * @param {object} name - Component name.
+ * @param {object} attrName - Attribute name associated to the component.
  * @param {object} schema - Component schema.
  * @param {object} elData - Element current data.
  * @param {boolean} silent - Suppress warning messages.
  * @return {object} The component data
  */
-function buildData (el, name, schema, elData, silent) {
+function buildData (el, name, attrName, schema, elData, silent) {
   var componentDefined = elData !== undefined && elData !== null;
   var data;
   var isSinglePropSchema = isSingleProp(schema);
@@ -320,14 +331,17 @@ function buildData (el, name, schema, elData, silent) {
   } else {
     data = {};
     Object.keys(schema).forEach(function applyDefault (key) {
-      data[key] = schema[key].default;
+      var defaultValue = schema[key].default;
+      data[key] = defaultValue && defaultValue.constructor === Object
+        ? utils.extend({}, defaultValue)
+        : defaultValue;
     });
   }
 
   // 2. Mixin values.
   mixinEls.forEach(handleMixinUpdate);
   function handleMixinUpdate (mixinEl) {
-    var mixinData = mixinEl.getAttribute(name);
+    var mixinData = mixinEl.getAttribute(attrName);
     if (mixinData) {
       data = extendProperties(data, mixinData, isSinglePropSchema);
     }

@@ -13,13 +13,15 @@ var THREE = require('../lib/three');
  */
 module.exports.Component = registerComponent('tracked-controls', {
   schema: {
-    controller: { default: 0 },
-    id: { default: 'OpenVR Gamepad' }
+    controller: {default: 0},
+    id: {default: 'Match none by default!'},
+    rotationOffset: {default: 0}
   },
 
   init: function () {
     this.buttonStates = {};
-    this.axisState = [];
+    this.previousAxis = [];
+    this.previousControllerPosition = new THREE.Vector3();
   },
 
   update: function () {
@@ -33,8 +35,8 @@ module.exports.Component = registerComponent('tracked-controls', {
 
   tick: function (time, delta) {
     var mesh = this.el.getObject3D('mesh');
-    if (!mesh) { return; }
-    if (mesh.update) { mesh.update(delta / 1000); }
+    // Update mesh animations.
+    if (mesh && mesh.update) { mesh.update(delta / 1000); }
     this.updatePose();
     this.updateButtons();
   },
@@ -43,6 +45,7 @@ module.exports.Component = registerComponent('tracked-controls', {
     var controllerEuler = new THREE.Euler();
     var controllerPosition = new THREE.Vector3();
     var controllerQuaternion = new THREE.Quaternion();
+    var deltaControllerPosition = new THREE.Vector3();
     var dolly = new THREE.Object3D();
     var standingMatrix = new THREE.Matrix4();
     controllerEuler.order = 'YXZ';
@@ -72,12 +75,17 @@ module.exports.Component = registerComponent('tracked-controls', {
       el.setAttribute('rotation', {
         x: THREE.Math.radToDeg(controllerEuler.x),
         y: THREE.Math.radToDeg(controllerEuler.y),
-        z: THREE.Math.radToDeg(controllerEuler.z)
+        z: THREE.Math.radToDeg(controllerEuler.z) + this.data.rotationOffset
       });
+
+      deltaControllerPosition.copy(controllerPosition).sub(this.previousControllerPosition);
+      this.previousControllerPosition.copy(controllerPosition);
+      var currentPosition = el.getAttribute('position');
+
       el.setAttribute('position', {
-        x: controllerPosition.x,
-        y: controllerPosition.y,
-        z: controllerPosition.z
+        x: currentPosition.x + deltaControllerPosition.x,
+        y: currentPosition.y + deltaControllerPosition.y,
+        z: currentPosition.z + deltaControllerPosition.z
       });
     };
   })(),
@@ -95,7 +103,7 @@ module.exports.Component = registerComponent('tracked-controls', {
   },
 
   handleAxes: function (controllerAxes) {
-    var previousAxis = this.axisState;
+    var previousAxis = this.previousAxis;
     var changed = false;
     var i;
     for (i = 0; i < controllerAxes.length; ++i) {
@@ -105,8 +113,8 @@ module.exports.Component = registerComponent('tracked-controls', {
       }
     }
     if (!changed) { return; }
-    previousAxis = controllerAxes.slice();
-    this.el.emit('axismove', {axis: previousAxis});
+    this.previousAxis = controllerAxes.slice();
+    this.el.emit('axismove', {axis: this.previousAxis});
   },
 
   handleButton: function (id, buttonState) {

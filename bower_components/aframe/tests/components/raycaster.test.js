@@ -74,6 +74,40 @@ suite('raycaster', function () {
     });
   });
 
+  suite('refreshObjects', function () {
+    test('refresh objects when new entities are added to the scene', function (done) {
+      var el = this.el;
+      var newEl = document.createElement('a-entity');
+      var numObjects = el.components.raycaster.objects.length;
+      var sceneEl = this.el.sceneEl;
+      sceneEl.addEventListener('child-attached', doAssert);
+      sceneEl.appendChild(newEl);
+      function doAssert () {
+        assert.equal(el.components.raycaster.objects.length, numObjects + 1);
+        sceneEl.removeEventListener('child-attached', doAssert);
+        done();
+      }
+    });
+
+    test('refresh objects when new entities are removed from the scene', function (done) {
+      var el = this.el;
+      var newEl = document.createElement('a-entity');
+      var numObjects = el.components.raycaster.objects.length;
+      var sceneEl = this.el.sceneEl;
+      sceneEl.addEventListener('child-detached', doAssert);
+      sceneEl.addEventListener('child-attached', doRemove);
+      sceneEl.appendChild(newEl);
+
+      function doRemove () { sceneEl.removeChild(newEl); }
+      function doAssert () {
+        assert.equal(el.components.raycaster.objects.length, numObjects);
+        sceneEl.removeEventListener('child-attached', doRemove);
+        sceneEl.removeEventListener('child-detached', doAssert);
+        done();
+      }
+    });
+  });
+
   suite('raycaster', function () {
     setup(function createRaycasterAndTarget (done) {
       var el = this.el;

@@ -1,8 +1,8 @@
+var bind = require('../utils/bind');
 var constants = require('../constants/');
 var registerSystem = require('../core/system').registerSystem;
 
 var DEFAULT_CAMERA_ATTR = 'data-aframe-default-camera';
-var DEFAULT_USER_HEIGHT = 1.6;
 
 /**
  * Camera system. Manages which camera is active among multiple cameras in scene.
@@ -15,7 +15,7 @@ module.exports.System = registerSystem('camera', {
     // Wait for all entities to fully load before checking for existence of camera.
     // Since entities wait for <a-assets> to load, any cameras attaching to the scene
     // will do so asynchronously.
-    this.sceneEl.addEventListener('loaded', this.setupDefaultCamera.bind(this));
+    this.sceneEl.addEventListener('loaded', bind(this.setupDefaultCamera, this));
   },
 
   /**
@@ -37,7 +37,7 @@ module.exports.System = registerSystem('camera', {
     defaultCameraEl = document.createElement('a-entity');
     defaultCameraEl.setAttribute('position', '0 0 0');
     defaultCameraEl.setAttribute(DEFAULT_CAMERA_ATTR, '');
-    defaultCameraEl.setAttribute('camera', {active: true, userHeight: DEFAULT_USER_HEIGHT});
+    defaultCameraEl.setAttribute('camera', {active: true, userHeight: constants.DEFAULT_CAMERA_HEIGHT});
     defaultCameraEl.setAttribute('wasd-controls', '');
     defaultCameraEl.setAttribute('look-controls', '');
     defaultCameraEl.setAttribute(constants.AFRAME_INJECTED, '');

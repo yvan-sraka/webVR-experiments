@@ -5,12 +5,15 @@ layout: docs
 parent_section: components
 ---
 
+[fog]: ./fog.md
+[geometry]: ./geometry.md
+
 The material component gives appearance to an entity. We can define properties
 such as color, opacity, or texture. This is often paired with the [geometry
 component][geometry] which provides shape.
 
-Custom materials and shaders can be registered to extend the material component
-in order to provide a wide range of visual effects.
+We can register custom materials to extend the material component to provide a
+wide range of visual effects.
 
 <!--toc-->
 
@@ -37,8 +40,11 @@ Here is an example of using an example custom material:
 
 ## Properties
 
-The material component has a few base properties. More properties will be
-available depending on the material applied.
+[flat]: #flat
+[standard]: #standard
+
+The material component has some base properties. More properties are available
+depending on the material type applied.
 
 | Property    | Description                                                                                                                                       | Default Value |
 |-------------|---------------------------------------------------------------------------------------------------------------------------------------------------|---------------|
@@ -48,7 +54,7 @@ available depending on the material applied.
 | transparent | Whether material is transparent. Transparent entities are rendered after non-transparent entities.                                                | false         |
 | shader      | Which material to use. Defaults to the [standard material][standard]. Can be set to the [flat material][flat] or to a registered custom material. | standard      |
 | side        | Which sides of the mesh to render. Can be one of `front`, `back`, or `double`.                                                                    | front         |
-| visible | Whether material is visible. Raycasters will ignore visible materials. | true |
+| visible | Whether material is visible. Raycasters will ignore invisible materials. | true |
 
 ## Events
 
@@ -59,28 +65,46 @@ available depending on the material applied.
 
 ## Built-in Materials
 
-A-Frame ships with a few built-in materials.
+A-Frame ships with a couple of built-in materials.
 
 ### `standard`
 
+[threestandardmaterial]: http://threejs.org/docs/#Reference/Materials/MeshStandardMaterial
+
 The `standard` material is the default material. It uses the physically-based
-[THREE.MeshStandardMaterial][standard].
+[THREE.MeshStandardMaterial][threestandardmaterial].
 
 #### Properties
 
 These properties are available on top of the base material properties.
 
-| Property  | Description                                                                                                                                     | Default Value |
-|-----------|-------------------------------------------------------------------------------------------------------------------------------------------------|---------------|
-| color     | Base diffuse color.                                                                                                                             | #fff          |
-| height    | Height of video (in pixels), if defining a video texture.                                                                                       | 360           |
-| envMap    | Environment cubemap texture for reflections. Can be a selector to <a-cubemap> or a comma-separated list of URLs.                                | None          |
-| fog       | Whether or not material is affected by [fog][fog].                                                                                              | true          |
-| metalness | How metallic the material is from `0` to `1`.                                                                                                   | 0.5           |
-| repeat    | How many times a texture (defined by `src`) repeats in the X and Y direction.                                                                   | 1 1           |
-| roughness | How rough the material is from `0` to `1`. A rougher material will scatter reflected light in more directions than a smooth material.           | 0.5           |
-| width     | Width of video (in pixels), if defining a video texture.                                                                                        | 640           |
-| src       | Image or video texture map. Can either be a selector to an `<img>` or `<video>`, or an inline URL.                                              | None          |
+| Property                      | Description                                                                                                                                     | Default Value |
+|-------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------|---------------|
+| ambientOcclusionMap           | Ambient occlusion map. Used to add shadows to the mesh. Can either be a selector to an `<img>` an inline URL.                                   | None          |
+| ambientOcclusionMapIntensity  | The intensity of the ambient occlusion map, a number between 0 and 1.                                                                           | 1             |
+| ambientOcclusionTextureRepeat | How many times the ambient occlusion texture repeats in the X and Y direction.                                                                  | 1 1           |
+| ambientOcclusionTextureOffset | How the ambient occlusion texture is offset in the x y direction.                                                                               | 0 0           |
+| color                         | Base diffuse color.                                                                                                                             | #fff          |
+| displacementMap               | Displacement map. Used to distort a mesh. Can either be a selector to an `<img>` an inline URL.                                                 | None          |
+| displacementMapScale          | The intensity of the displacement map effect                                                                                                    | 1             |
+| displacementMapBias           | The zero point of the displacement map.                                                                                                         | 0.5           |
+| displacementTextureRepeat     | How many times the displacement texture repeats in the X and Y direction.                                                                       | 1 1           |
+| displacementTextureOffset     | How the displacement texture is offset in the x y direction.                                                                                    | 0 0           |
+| height                        | Height of video (in pixels), if defining a video texture.                                                                                       | 360           |
+| envMap                        | Environment cubemap texture for reflections. Can be a selector to <a-cubemap> or a comma-separated list of URLs.                                | None          |
+| fog                           | Whether or not material is affected by [fog][fog].                                                                                              | true          |
+| metalness                     | How metallic the material is from `0` to `1`.                                                                                                   | 0.5           |
+| normalMap                     | Normal map. Used to add the illusion of complex detail. Can either be a selector to an `<img>` an inline URL.                                   | None          |
+| normalMapScale                | Scale of the effect of the normal map in the X and Y directions.                                                                                | 1 1           |
+| normalTextureRepeat           | How many times the normal texture repeats in the X and Y direction.                                                                             | 1 1           |
+| normalTextureOffset           | How the normal texture is offset in the x y direction.                                                                                          | 0 0           |
+| repeat                        | How many times a texture (defined by `src`) repeats in the X and Y direction.                                                                   | 1 1           |
+| roughness                     | How rough the material is from `0` to `1`. A rougher material will scatter reflected light in more directions than a smooth material.           | 0.5           |
+| sphericalEnvMap               | Environment spherical texture for reflections. Can either be a selector to an `<img>`, or an inline URL.                                        | None          |
+| width                         | Width of video (in pixels), if defining a video texture.                                                                                        | 640           |
+| wireframe                     | Whether to render just the geometry edges.                                                                                                      | false         |
+| wireframeLinewidth            | Width in px of the rendered line.                                                                                                               | 2             |
+| src                           | Image or video texture map. Can either be a selector to an `<img>` or `<video>`, or an inline URL.                                              | None          |
 
 #### Physically-Based Shading
 
@@ -88,11 +112,10 @@ Physically-based shading is a shading model that aims to make materials behave
 realistically to lighting conditions. Appearance is a result of the interaction
 between the incoming light and the properties of the material.
 
-To achieve realism, the diffuse `color` (can be supplied through the base
-material component), `metalness`, `roughness` properties of the material must
-be accurately controlled, often based on real-world material studies. Some
-people have compiled charts of realistic values for different kinds of
-materials that can be used as a starting point.
+To achieve realism, the diffuse `color`, `metalness`, `roughness` properties of
+the material must be accurately controlled, often based on real-world material
+studies. Some people have compiled charts of realistic values for different
+kinds of materials that we can use as a starting point.
 
 For example, for a tree bark material, as an estimation, we might set:
 
@@ -102,13 +125,29 @@ For example, for a tree bark material, as an estimation, we might set:
 </a-entity>
 ```
 
+#### Distortion Maps
+
+There are three properties which give the illusion of complex geometry:
+
+- **Ambient occlusion maps** - Applies a texture to the image which add shadows.
+- **Displacement maps** - Distorts a simpler model at a high resolution
+  allowing more detail. This will affect the mesh's silhouette but can be
+  expensive.
+- **Normal maps** - Defines the angle of the surface at that point. Giving the
+  appearance of complex geometry without distorting the model. This does not
+  change the geometry but normal maps are cheaper.
+
 #### Environment Maps
 
-The `envMap` property defines what environment the material reflects.  Unlike
-textures, the `envMap` property takes a cubemap, six images put together to
-form a cube. The cubemap is wrapped around the mesh and applied as a texture.
-The clarity of the environment depends on the `metalness`, and `roughness`
-properties.
+The `envMap` and `sphericalEnvMap` properties define what environment
+the material reflects. The clarity of the environment reflection depends
+on the `metalness`, and `roughness` properties.
+
+The `sphericalEnvMap` property takes a single spherical mapped
+texture. Of the kind you would assign to a `<a-sky>`.
+
+Unlike textures, the `envMap` property takes a cubemap, six images put together
+to form a cube. The cubemap wraps around the mesh and applied as a texture.
 
 For example:
 
@@ -131,6 +170,7 @@ For example:
 
 ### `flat`
 
+[basic]: http://threejs.org/docs/#Reference/Materials/MeshBasicMaterial
 
 The `flat` material uses the [THREE.MeshBasicMaterial][basic]. Flat materials
 are not affected by the scene's lighting conditions. This is useful for things
@@ -142,16 +182,20 @@ such as images or videos. Set `shader` to `flat`:
 
 #### Properties
 
-| Property  | Description                                                                                                                                     | Default Value |
+| Property             | Description                                                                                                                          | Default Value |
 |-----------|-------------------------------------------------------------------------------------------------------------------------------------------------|---------------|
-| color     | Base diffuse color.                                                                                                                             | #fff          |
-| fog       | Whether or not material is affected by [fog][fog].                                                                                              | true          |
-| height    | Height of video (in pixels), if defining a video texture.                                                                                       | 360           |
-| repeat    | How many times a texture (defined by `src`) repeats in the X and Y direction.                                                                   | 1 1           |
-| src       | Image or video texture map. Can either be a selector to an `<img>` or `<video>`, or an inline URL.                                              | None          |
-| width     | Width of video (in pixels), if defining a video texture.                                                                                        | 640           |
+| color                | Base diffuse color.                                                                                                                  | #fff          |
+| fog                  | Whether or not material is affected by [fog][fog].                                                                                   | true          |
+| height               | Height of video (in pixels), if defining a video texture.                                                                            | 360           |
+| repeat               | How many times a texture (defined by `src`) repeats in the X and Y direction.                                                        | 1 1           |
+| src                  | Image or video texture map. Can either be a selector to an `<img>` or `<video>`, or an inline URL.                                   | None          |
+| width                | Width of video (in pixels), if defining a video texture.                                                                             | 640           |
+| wireframe            | Whether to render just the geometry edges.                                                                                           | false         |
+| wireframeLinewidth   | Width in px of the rendered line.                                                                                                    | 2             |
 
 ## Textures
+
+[asm]: ../core/asset-management-system.md
 
 To set a texture using one of the built-in materials, specify the `src`
 property. `src` can be a selector to either an `<img>` or `<video>` element in the
@@ -177,11 +221,10 @@ preloading through this method.
 ```
 
 Most of the other properties works together with textures. For example, the
-`color` property will act as the base color and be multiplied per pixel with
-the texture. Set it to `#fff` to maintain the original colors of the texture.
+`color` property will act as the base color and multiplies per pixel with the
+texture. Set it to `#fff` to maintain the original colors of the texture.
 
-Textures are cached by A-Frame in order to not push redundant textures to the
-GPU.
+A-Frame caches textures are to not push redundant textures to the GPU.
 
 ### Video Textures
 
@@ -204,6 +247,8 @@ selector for the `id` attribute (e.g., `#my-video`):
 
 #### Controlling Video Textures
 
+[mediaplayback]: https://developer.mozilla.org/docs/Web/Guide/HTML/Using_HTML5_audio_and_video#Controlling_media_playback
+
 To control the video playback such as pausing or seeking, we can use the video
 element to [control media playback][mediaplayback]. For example:
 
@@ -213,9 +258,9 @@ videoEl.currentTime = 122;  // Seek to 122 seconds.
 videoEl.pause();
 ```
 
-This doesn't work as well if you are passing an inline URL, in which case a
-video element will be created internally. To get a handle on the video element,
-we should define one in `<a-assets>`.
+This doesn't work as well if you are passing an inline URL, in which case
+A-Frame creates a video element internally. To get a handle on the video
+element, we should define one in `<a-assets>`.
 
 ## Canvas Textures
 
@@ -247,7 +292,7 @@ refresh itself as the canvas changes.
 ### Repeating Textures
 
 We might want to tile textures rather than having them stretch. The `repeat`
-property can be used to repeat textures.
+property can repeat textures.
 
 ```html
 <a-entity geometry="primitive: plane; width: 100"
@@ -258,16 +303,16 @@ property can be used to repeat textures.
 
 Transparency and alpha channels are tricky in 3D graphics. If you are having
 issues where transparent materials in the foreground do not composite correctly
-over materials in the background, it is probably due to underlying design of
-the OpenGL compositor (which WebGL is an API for).
+over materials in the background, the issues are probably due to underlying
+design of the OpenGL compositor (which WebGL is an API for).
 
 In an ideal scenario, transparency in A-Frame would "just work", regardless of
 where the developer places an entity in 3D space, or in which order they define
-the elements in markup. In the current version of A-Frame, however, it is easy
-to create scenarios where foreground entities occlude background entities. This
-creates confusion and unwanted visual defects.
+the elements in markup. We can often run into scenarios where foreground
+entities occlude background entities. This creates confusion and unwanted
+visual defects.
 
-To work around, try changing the order of the entities.
+To work around this issue, try changing the order of the entities in the HTML.
 
 ## Register a Custom Material
 
@@ -299,6 +344,8 @@ AFRAME.registerShader('custom', {
 
 ### Example
 
+[line-dashed]: http://threejs.org/docs/index.html#Reference/Materials/LineDashedMaterial
+
 To create a custom material, we have the `init` and `update` handlers set and
 update `this.material` to the desired material. Here is an example of
 registering a [`THREE.LinedDashedMaterial`][line-dashed]:
@@ -315,6 +362,7 @@ AFRAME.registerShader('line-dashed', {
    */
   init: function (data) {
     this.material = new THREE.LineDashedMaterial(data);
+    this.update(data);  // `update()` currently not called after `init`. (#1834)
   },
 
   /**
@@ -326,104 +374,3 @@ AFRAME.registerShader('line-dashed', {
   }
 });
 ```
-
-## Register a Custom GLSL Shader
-
-We also use `registerShader` for registering
-[THREE.ShaderMaterial][shader-material]s to create custom shaders.
-
-We can provide our own [GLSL][glsl] vertex and fragment shaders (small programs
-that run on the GPU), and we can define a schema for their uniforms and
-attributes just as we would with [component schemas][component-schema]. The
-shader's schema will extend the base material component's schema, and as a
-result we can pass values from HTML directly to the shader.
-
-### Schema
-
-`THREE.ShaderMaterial`-based schemas pass uniforms to shaders. To specify a
-uniform, set `is` to `uniform`:
-
-```js
-AFRAME.registerShader('sun', {
-  schema: {
-    sunPosition: {type: 'vec3', is: 'uniform'},
-    time: {type: 'time', is: 'uniform'}
-  }
-});
-```
-
-#### Property Types
-
-These property types will be converted to the appropriate GLSL types.
-
-| Type     | Description                                                                                                                                                              |
-| -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| color    | Built-in convenience (vec3) uniform type. Will take colors in multiple formats and automatically convert them to vec3 format (e.g., 'red' -> `THREE.Vector3(1, 0, 0)`)   |
-| number   | Maps to GLSL `float`.                                                                                                                                                    |
-| time     | Built-in convenience (float) uniform type. If specified, the material component will continuously update the shader with the global scene time.                          |
-| vec2     | Maps to GLSL `vec2`.                                                                                                                                                     |
-| vec3     | Maps to GLSL `vec3`.                                                                                                                                                     |
-| vec4     | Maps to GLSL `vec4`.                                                                                                                                                     |
-
-### Example
-
-Here is a simple shader that sets the material to a flat color. The vertex
-shader shown is the default vertex shader. The shaders need to be a string:
-
-```js
-AFRAME.registerShader('hello-world', {
-  schema: {
-    color: {type: 'vec3', default: '0.5 0.5 0.5', is: 'uniform'}
-  },
-
-  vertexShader: [
-    'void main() {',
-    '  gl_Position = projectionMatrix * modelViewMatrix * position;',
-    '}'
-  ].join('\n'),
-
-  fragmentShader: [
-    'uniform vec3 color;'
-    'void main() {'
-    '  gl_FragColor = vec4(color, 1.0);',
-    '}'
-  ].join('\n')
-});
-```
-
-Then to use the custom shader, we set the material component's `shader` property to
-the name of the registered shader. Then we pass the defined shader uniforms as
-properties like we would with components:
-
-```html
-<a-entity geometry="primitive: box"
-          material="shader: hello-world; color: 0.3 0.3 0.3"></a-entity>
-```
-
-### Additional Resources
-
-- [A-Frame Shader Example][shaderex]
-- [ShaderToy][shadertoy]
-
-[asm]: ../core/asset-management-system.md
-[basic]: http://threejs.org/docs/#Reference/Materials/MeshBasicMaterial
-[built-in]: #built-in_shading_models
-[component-schema]: ../core/component.md#schema
-[corsimage]: https://developer.mozilla.org/docs/Web/HTML/CORS_enabled_image
-[cross-component-changes]: http://codepen.io/team/mozvr/pen/NxEpJe
-[customshader]: ../core/shaders.md#registering_a_custom_shader
-[flat]: ../core/shaders.md#flat_shading_model
-[fog]: ../components/fog.md
-[geometry]: ./geometry.md
-[glsl]: https://en.wikipedia.org/wiki/OpenGL_Shading_Language
-[line-dashed]: http://threejs.org/docs/index.html#Reference/Materials/LineDashedMaterial
-[material]: ../components/material.md
-[mediaplayback]: https://developer.mozilla.org/docs/Web/Guide/HTML/Using_HTML5_audio_and_video#Controlling_media_playback
-[register-custom-shaders]: #registering_a_custom_shader
-[shader-material]: http://threejs.org/docs/#Reference/Materials/ShaderMaterial
-[shaderex]: https://github.com/aframevr/aframe/tree/50a07cac9cd2f764b9ff4cd0a5bb20e408f8f4d6/examples/test-shaders
-[shaders]: ../core/shaders.md
-[shadertoy]: https://www.shadertoy.com
-[standard]: ../core/shaders.md#standard_shading_model
-[standard]: http://threejs.org/docs/#Reference/Materials/MeshStandardMaterial
-[threematerial]: http://threejs.org/docs/#Reference/Materials/Material

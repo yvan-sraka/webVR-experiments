@@ -6,7 +6,14 @@ parent_section: primitives
 ---
 
 
-The curved image primitive creates images that bend around the user. Curved images arranged around the camera can be pleasing for legibility since each pixel sits at the same distance from the user. They can be a better choice than angled flat planes for complex layouts because they ensure a smooth surface rather than a series of awkward seams between planes. It is an entity that prescribes a double-sided open-ended cylinder with the [geometry component](../components/geometry.md) and rendering textures on the inside of the cylinder with the [material component](../components/material.md).
+The curved image primitive creates images that bend around the user. Curved
+images arranged around the camera can be pleasing for legibility since each
+pixel sits at the same distance from the user. They can be a better choice than
+angled flat planes for complex layouts because they ensure a smooth surface
+rather than a series of awkward seams between planes.
+
+Under the hood, a curved image is a double-sided open-ended cylinder with
+textures mapped to the inside of the cylinder.
 
 ## Example
 
@@ -21,7 +28,7 @@ The curved image primitive creates images that bend around the user. Curved imag
                  rotation="0 100 0" scale="0.8 0.8 0.8"></a-curvedimage>
 
   <!-- Defining the URL inline. Not recommended but more comfortable for web developers. -->
-  <a-curvedimage src="another-image.png"></a-curved-image>
+  <a-curvedimage src="another-image.png"></a-curvedimage>
 </a-scene>
 ```
 
@@ -39,7 +46,7 @@ The curved image primitive creates images that bend around the user. Curved imag
 | roughness       | material.roughness      | 0.5           |
 | segments-height | geometry.segmentsHeight | 18            |
 | segments-radial | geometry.segmentsRadial | 36            |
-| shader          | material.shader         | standard      |
+| shader          | material.shader         | flat          |
 | side            | material.side           | front         |
 | src             | material.src            | None          |
 | theta-length    | geometry.thetaLength    | 360           |
@@ -48,4 +55,7 @@ The curved image primitive creates images that bend around the user. Curved imag
 
 ## Fine-Tuning
 
-Ensuring that the image is not distorted by stretching requires us to carefully set the `height`, `radius`, and `theta-length` attributes with respect to the image aspect ratio. Once those values are fine-tuned to avoid distortion, `scale` can then be used to safely adjust the distance of the curved image relative to the user.
+Ensuring that the image is not distorted by stretching requires us to carefully
+set the `height`, `radius`, and `theta-length` attributes relative to the image
+aspect ratio. Once those values are fine-tuned to avoid distortion, we can use
+`scale` to safely adjust the distance of the curved image relative to the user.

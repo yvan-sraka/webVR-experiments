@@ -1,12 +1,12 @@
 {
   "name": "aframe-keyboard-controls",
   "homepage": "https://github.com/donmccurdy/aframe-keyboard-controls",
-  "version": "1.2.1",
-  "_release": "1.2.1",
+  "version": "1.3.0",
+  "_release": "1.3.0",
   "_resolution": {
     "type": "version",
-    "tag": "v1.2.1",
-    "commit": "faa4976bf196235f5f4cfbf8735cb06ac6174f13"
+    "tag": "v1.3.0",
+    "commit": "b3cb9eefdbb4aea3e9eec93a5242af5b6b202032"
   },
   "_source": "git://github.com/donmccurdy/aframe-keyboard-controls.git",
   "_target": "^1.0.0",

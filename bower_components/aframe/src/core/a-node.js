@@ -1,6 +1,7 @@
 /* global HTMLElement, MutationObserver */
 var registerElement = require('./a-register-element').registerElement;
 var utils = require('../utils/');
+var bind = utils.bind;
 
 /**
  * Base class for A-Frame that manages loading of objects.
@@ -22,9 +23,13 @@ module.exports = registerElement('a-node', {
 
     attachedCallback: {
       value: function () {
-        var mixins = this.getAttribute('mixin');
+        var mixins;
+
+        this.hasLoaded = false;
         this.sceneEl = this.closestScene();
         this.emit('nodeready', {}, false);
+
+        mixins = this.getAttribute('mixin');
         if (mixins) { this.updateMixins(mixins); }
       },
       writable: window.debug
@@ -71,7 +76,9 @@ module.exports = registerElement('a-node', {
     },
 
     detachedCallback: {
-      value: function () { /* no-op */ }
+      value: function () {
+        this.hasLoaded = false;
+      }
     },
 
     /**
@@ -120,8 +127,8 @@ module.exports = registerElement('a-node', {
         // To determine what listeners will be removed
         var diff = oldMixinsIds.filter(function (i) { return newMixinsIds.indexOf(i) < 0; });
         this.mixinEls = [];
-        diff.forEach(this.unregisterMixin.bind(this));
-        newMixinsIds.forEach(this.registerMixin.bind(this));
+        diff.forEach(bind(this.unregisterMixin, this));
+        newMixinsIds.forEach(bind(this.registerMixin, this));
       }
     },
 

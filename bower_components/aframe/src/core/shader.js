@@ -5,13 +5,17 @@ var shaders = module.exports.shaders = {};  // Keep track of registered shaders.
 var shaderNames = module.exports.shaderNames = [];  // Keep track of the names of registered shaders.
 var THREE = require('../lib/three');
 
+// A-Frame properties to three.js uniform types.
 var propertyToThreeMapping = {
+  array: 'v3',
+  color: 'v3',
+  int: 'i',
   number: 'f',
+  map: 't',
   time: 'f',
-  vec4: 'v4',
-  vec3: 'v3',
   vec2: 'v2',
-  color: 'v3'
+  vec3: 'v3',
+  vec4: 'v4'
 };
 
 /**
@@ -28,7 +32,7 @@ Shader.prototype = {
    * Contains the type schema and defaults for the data values.
    * Data is coerced into the types of the values of the defaults.
    */
-  schema: { },
+  schema: {},
 
   vertexShader:
     'void main() {' +
