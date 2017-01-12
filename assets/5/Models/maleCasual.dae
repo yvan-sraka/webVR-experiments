@@ -162,7 +162,7 @@
         </geometry>
     </library_geometries>
     <library_materials>
-        <material id="ID6" name="__auto_">
+        <material id="ID6" name="auto">
             <instance_effect url="#ID7" />
         </material>
     </library_materials>
