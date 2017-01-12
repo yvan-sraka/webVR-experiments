@@ -7,7 +7,7 @@
     "branch": "master",
     "commit": "b833021a9008cc1fc2063e4dd522e11344f8058e"
   },
-  "_source": "git://github.com/ngokevin/aframe-layout-component.git",
+  "_source": "https://github.com/ngokevin/aframe-layout-component.git",
   "_target": "*",
   "_originalSource": "ngokevin/aframe-layout-component"
 }

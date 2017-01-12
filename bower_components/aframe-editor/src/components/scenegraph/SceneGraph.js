@@ -44,13 +44,13 @@ export default class SceneGraph extends React.Component {
       this.forceUpdate();
     });
 
-    Events.on('entitySelected', (entity, self) => {
+    Events.on('entityselected', (entity, self) => {
       if (self) { return; }
       this.setValue(entity);
     });
-    Events.on('entityIdChanged', this.rebuildOptions);
+    Events.on('entityidchanged', this.rebuildOptions);
     document.addEventListener('componentremoved', this.rebuildOptions);
-    Events.on('domModified', this.rebuildOptions);
+    Events.on('dommodified', this.rebuildOptions);
   }
 
   setValue = value => {
@@ -63,7 +63,7 @@ export default class SceneGraph extends React.Component {
         if (this.props.onChange) {
           this.props.onChange(value);
         }
-        Events.emit('entitySelected', value, true);
+        Events.emit('entityselected', value, true);
         found = true;
       }
     }
@@ -120,9 +120,6 @@ export default class SceneGraph extends React.Component {
             html: html
           });
 
-          if (child.tagName.toLowerCase() !== 'a-entity') {
-            continue;
-          }
           treeIterate(child, depth);
         }
       }
@@ -163,6 +160,11 @@ export default class SceneGraph extends React.Component {
     }
   }
 
+  cloneEntity = option => {
+    cloneEntity(option);
+    ga('send', 'event', 'SceneGraph', 'cloneEntity');
+  }
+
   renderOptions () {
     var filterText = this.state.filterText.toUpperCase();
     return this.state.options
@@ -173,15 +175,23 @@ export default class SceneGraph extends React.Component {
       })
       .map((option, idx) => {
         let className = 'option' + (option.value === this.state.value ? ' active' : '');
+        let cloneButton = <a onClick={() => this.cloneEntity(option.value)}
+          title="Clone entity" className="button fa fa-clone"></a>;
+        let removeButton = <a onClick={event => { event.stopPropagation(); removeEntity(option.value); } }
+            title="Remove entity" className="button fa fa-trash-o"></a>;
+
+        if (option.value.tagName === 'A-SCENE') {
+          cloneButton = '';
+          removeButton = '';
+        }
+
         return (
           <div key={idx} className={className} value={option.value}
             onClick={() => this.setValue(option.value)}>
             <span dangerouslySetInnerHTML={{__html: option.html}}></span>
               <span className="icons">
-                <a onClick={() => cloneEntity(option.value)}
-                  title="Clone entity" className="button fa fa-clone"></a>
-                <a onClick={event => { event.stopPropagation(); removeEntity(option.value); } }
-                  title="Remove entity" className="button fa fa-trash-o"></a>
+                {cloneButton}
+                {removeButton}
               </span>
           </div>
         );

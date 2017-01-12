@@ -1,7 +1,7 @@
 language: node_js
 
 node_js:
-  - '0.12'
+  - 4
 
 install:
   - npm install
@@ -12,6 +12,7 @@ script:
 env:
   matrix:
     - CI_ACTION="npm run dist"
+    - CI_ACTION="npm run test:ci"
 
 branches:
   only:

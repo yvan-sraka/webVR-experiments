@@ -30,14 +30,16 @@ export default class Component extends React.Component {
     var clipboard = new Clipboard('[data-action="copy-component-to-clipboard"]', {
       text: trigger => {
         var componentName = trigger.getAttribute('data-component').toLowerCase();
+        ga('send', 'event', 'Components', 'copyComponentToClipboard', componentName);
         return getClipboardRepresentation(this.state.entity, componentName);
       }
     });
     clipboard.on('error', e => {
       // @todo Show the error in the UI
+      console.error(e);
     });
 
-    Events.on('selectedEntityComponentChanged', detail => {
+    Events.on('selectedentitycomponentchanged', detail => {
       if (detail.name === this.props.name) {
         this.forceUpdate();
       }
@@ -58,7 +60,7 @@ export default class Component extends React.Component {
     event.stopPropagation();
     if (confirm('Do you really want to remove component `' + componentName + '`?')) {
       this.props.entity.removeAttribute(componentName);
-      Events.emit('componentRemoved', {entity: this.props.entity, component: componentName});
+      Events.emit('componentremoved', {entity: this.props.entity, component: componentName});
       ga('send', 'event', 'Components', 'removeComponent', componentName);
     }
   }
@@ -75,7 +77,7 @@ export default class Component extends React.Component {
       return (
         <PropertyRow key={componentName} name={componentName} schema={schema}
           data={componentData.data} componentname={componentName}
-          entity={this.props.entity}/>
+          isSingle={true} entity={this.props.entity}/>
       );
     }
 
@@ -83,7 +85,7 @@ export default class Component extends React.Component {
       <PropertyRow key={propertyName} name={propertyName}
         schema={componentData.schema[propertyName]}
         data={componentData.data[propertyName]} componentname={this.props.name}
-        entity={this.props.entity}/>
+        isSingle={false} entity={this.props.entity}/>
     ));
   }
 
@@ -107,10 +109,10 @@ export default class Component extends React.Component {
             <a title='Copy to clipboard' data-action='copy-component-to-clipboard'
               data-component={subComponentName || componentName}
               className='flat-button' onClick={event => event.stopPropagation()}>
-              copy html
+              Copy Attributes
             </a>
             <a title='Remove component' className='flat-button'
-              onClick={this.removeComponent}>remove</a>
+              onClick={this.removeComponent}>Remove</a>
           </div>
         </div>
         <div className='collapsible-content'>

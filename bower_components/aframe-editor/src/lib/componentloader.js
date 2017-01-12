@@ -1,45 +1,62 @@
+/* global XMLHttpRequest JSON */
+import {getMajorVersion} from './utils.js';
+
+const registryBaseUrl = 'https://aframe.io/aframe-registry/build/';
+
+/**
+ * Asynchronously load and register components from the registry.
+ */
 function ComponentLoader () {
-  this.components = null;
-  this.loadComponentsData();
+  this.components = [];
+  this.loadFromRegistry();
 }
 
 ComponentLoader.prototype = {
-  loadComponentsData: function () {
-    var xhr = new window.XMLHttpRequest();
+  /**
+   * XHR the registry JSON.
+   */
+  loadFromRegistry: function () {
+    var xhr = new XMLHttpRequest();
+
     // @todo Remove the sync call and use a callback
-    xhr.open('GET', 'https://raw.githubusercontent.com/aframevr/aframe-components/master/components.json', false);
-    xhr.onload = function () {
-      this.components = window.JSON.parse(xhr.responseText);
-      // console.info('Loaded components:', Object.keys(this.components).length);
-    }.bind(this);
-    xhr.onerror = function () {
-      // process error
+    xhr.open('GET', registryBaseUrl + getMajorVersion(AFRAME.version) + '.json');
+
+    xhr.onload = () => {
+      if (xhr.status === 404) {
+        console.error('Error loading registry file: 404');
+      } else {
+        this.components = JSON.parse(xhr.responseText).components;
+        console.info('Registry file loaded. ' + Object.keys(this.components).length + ' components available.');
+      }
     };
+    xhr.onerror = () => { console.error('Error loading registry file.'); };
     xhr.send();
   },
-  addComponentToScene: function (componentName, onLoaded) {
-    var component = this.components[componentName];
-    if (component && !component.included) {
-      var script = document.createElement('script');
-      script.src = component.url;
-      script.setAttribute('data-component-name', componentName);
-      script.setAttribute('data-component-description', component.description);
-      script.onload = script.onreadystatechange = function () {
-        script.onreadystatechange = script.onload = null;
-        onLoaded();
-      };
-      var head = document.getElementsByTagName('head')[0];
-      (head || document.body).appendChild(script);
 
-      var link = document.createElement('script');
-      link.href = component.url;
-      link.type = 'text/css';
-      link.rel = 'stylesheet';
-      document.getElementsByTagName('head')[0].appendChild(link);
+  /**
+   * Inject component script. If already injected, then resolve.
+   *
+   * @returns {Promise}
+   */
+  addComponentToScene: function (packageName, componentName) {
+    const component = this.components[packageName];
+    if (component.included) { return Promise.resolve(componentName); }
+
+    let script = document.createElement('script');
+    script.src = component.file;
+    script.setAttribute('data-component-description', component.description);
+    script.setAttribute('data-component-names', component.names);
+    script.setAttribute('data-component-url', component.npmUrl);
+    script.setAttribute('data-package-name', packageName);
+
+    return new Promise(resolve => {
+      script.addEventListener('load', () => {
+        script.onreadystatechange = script.onload = null;
+        resolve(componentName);
+      });
+      (document.head || document.body).appendChild(script);
       component.included = true;
-    } else {
-      onLoaded();
-    }
+    });
   }
 };
 

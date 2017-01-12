@@ -1,13 +1,13 @@
 {
   "name": "aframe-template-component",
   "homepage": "https://github.com/ngokevin/aframe-template-component",
-  "_release": "55226b9e17",
+  "_release": "7a5c7e19fc",
   "_resolution": {
     "type": "branch",
     "branch": "master",
-    "commit": "55226b9e1794f052e0aa002a4f2a7cc4f0382bac"
+    "commit": "7a5c7e19fc2d8c69fa1ddae0289dc7b2e4b23764"
   },
-  "_source": "git://github.com/ngokevin/aframe-template-component.git",
+  "_source": "https://github.com/ngokevin/aframe-template-component.git",
   "_target": "*",
   "_originalSource": "ngokevin/aframe-template-component"
 }

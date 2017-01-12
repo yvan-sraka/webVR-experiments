@@ -1,7 +1,5 @@
 import React from 'react';
 import ComponentsContainer from './ComponentsContainer';
-import Clipboard from 'clipboard';
-import {getClipboardRepresentation} from '../../actions/entity';
 import Events from '../../lib/Events';
 
 export default class Sidebar extends React.Component {
@@ -18,20 +16,12 @@ export default class Sidebar extends React.Component {
   }
 
   componentDidMount () {
-    var clipboard = new Clipboard('[data-action="copy-entity-to-clipboard"]', {
-      text: trigger => {
-        return getClipboardRepresentation(this.state.entity);
-      }
-    });
-    clipboard.on('error', e => {
-      // @todo Show the error on the UI
-    });
 
-    Events.on('componentRemoved', event => {
+    Events.on('componentremoved', event => {
       this.forceUpdate();
     });
 
-    Events.on('componentAdded', event => {
+    Events.on('componentadded', event => {
       this.forceUpdate();
     });
   }
@@ -42,16 +32,19 @@ export default class Sidebar extends React.Component {
   }
 
   componentChanged = (event) => {
-    Events.emit('selectedEntityComponentChanged', event.detail);
+    Events.emit('selectedentitycomponentchanged', event.detail);
   }
 
   componentWillReceiveProps (newProps) {
     if (this.state.entity !== newProps.entity) {
       if (this.state.entity) {
         this.state.entity.removeEventListener('componentchanged', this.componentChanged);
+        this.state.entity.removeEventListener('componentinitialized', this.componentCreated);
       }
       if (newProps.entity) {
         newProps.entity.addEventListener('componentchanged', this.componentChanged);
+        newProps.entity.addEventListener('componentinitialized', this.componentCreated);
+
       }
       this.setState({entity: newProps.entity});
     }
@@ -60,18 +53,8 @@ export default class Sidebar extends React.Component {
   render () {
     const entity = this.state.entity;
     if (entity) {
-      const entityButtons = <div>
-        <a href='#' title='Copy entity HTML to clipboard' data-action='copy-entity-to-clipboard'
-          className='button fa fa-clipboard' onClick={event => event.stopPropagation()}></a>
-      </div>;
-      const entityName = '<' + entity.tagName.toLowerCase() + '>';
-
       return (
         <div id='sidebar'>
-          <div className='sidebar-title'>
-            <code>{entityName}</code>
-            {entityButtons}
-          </div>
           <ComponentsContainer entity={this.state.entity}/>
         </div>
       );

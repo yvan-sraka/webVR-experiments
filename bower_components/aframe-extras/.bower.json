@@ -8,7 +8,7 @@
     "tag": "v1.17.0",
     "commit": "4a7603e4ef0b99bf729aecfb87634cf927737d09"
   },
-  "_source": "git://github.com/donmccurdy/aframe-extras.git",
+  "_source": "https://github.com/donmccurdy/aframe-extras.git",
   "_target": "^1.16.2",
   "_originalSource": "donmccurdy/aframe-extras"
 }

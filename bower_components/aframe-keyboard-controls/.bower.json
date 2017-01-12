@@ -8,7 +8,7 @@
     "tag": "v1.3.0",
     "commit": "b3cb9eefdbb4aea3e9eec93a5242af5b6b202032"
   },
-  "_source": "git://github.com/donmccurdy/aframe-keyboard-controls.git",
+  "_source": "https://github.com/donmccurdy/aframe-keyboard-controls.git",
   "_target": "^1.0.0",
   "_originalSource": "donmccurdy/aframe-keyboard-controls"
 }

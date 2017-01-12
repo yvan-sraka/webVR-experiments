@@ -1,6 +1,8 @@
 import React from 'react';
-import Collapsible from '../Collapsible';
 import Events from '../../lib/Events';
+var INSPECTOR = require('../../lib/inspector.js');
+import Select from 'react-select';
+import 'react-select/dist/react-select.css';
 
 export default class AddComponent extends React.Component {
   static propTypes = {
@@ -11,58 +13,102 @@ export default class AddComponent extends React.Component {
    * Add blank component.
    * If component is instanced, generate an ID.
    */
-  addComponent = () => {
+  addComponent = (componentName) => {
     var entity = this.props.entity;
-    var componentName = this.refs.select.value;
+    var packageName;
+    var selectedOption = this.options.filter(function (option) {
+      return option.value === componentName;
+    })[0];
 
-    if (AFRAME.components[componentName].multiple &&
-        isComponentInstanced(entity, componentName)) {
-      componentName = componentName + '__' +
-                         generateComponentInstanceId(entity, componentName);
+    if (selectedOption.origin === 'registry') {
+      [packageName, componentName] = selectedOption.value.split('.');
+      INSPECTOR.componentLoader.addComponentToScene(packageName, componentName)
+        .then(addComponent);
+    } else {
+      componentName = selectedOption.value;
+      addComponent(componentName);
     }
 
-    entity.setAttribute(componentName, '');
-    Events.emit('componentAdded', {entity: entity, component: componentName});
-    ga('send', 'event', 'Components', 'addComponent', componentName);
+    function addComponent (componentName) {
+      if (AFRAME.components[componentName].multiple &&
+          isComponentInstanced(entity, componentName)) {
+        componentName = componentName + '__' +
+                        generateComponentInstanceId(entity, componentName);
+      }
+
+      entity.setAttribute(componentName, '');
+      Events.emit('componentadded', {entity: entity, component: componentName});
+      ga('send', 'event', 'Components', 'addComponent', componentName);
+    }
   }
 
   /**
    * Component dropdown options.
    */
-  renderComponentOptions () {
+  getComponentsOptions () {
     const usedComponents = Object.keys(this.props.entity.components);
-    return Object.keys(AFRAME.components)
+    var commonOptions = Object.keys(AFRAME.components)
       .filter(function (componentName) {
         return AFRAME.components[componentName].multiple ||
                usedComponents.indexOf(componentName) === -1;
       })
       .sort()
       .map(function (value) {
-        return <option key={value} value={value}>{value}</option>;
+        return {value: value, label: value, origin: 'loaded'};
       });
+
+    // Create the list of components that should appear in the registry group
+    var registryComponents = [];
+    Object.keys(INSPECTOR.componentLoader.components)
+      .forEach(function (componentPackageName) {
+        var componentPackage = INSPECTOR.componentLoader.components[componentPackageName];
+        componentPackage.names.forEach(function (componentName) {
+          if (usedComponents.indexOf(componentName) === -1) {
+            registryComponents.push({componentPackageName, componentName});
+          }
+        });
+      });
+    var registryOptions = registryComponents
+      .map(function (item) {
+        return {value: item.componentPackageName + '.' + item.componentName,
+          label: item.componentName, origin: 'registry'};
+      });
+
+    this.options = commonOptions.concat(registryOptions);
+    this.options = this.options.sort(function (a, b) {
+      return a.label === b.label ? 0 : a.label < b.label ? -1 : 1;
+    });
+  }
+
+  renderOption (option) {
+    var bullet = <span title="Component already loaded in the scene">&#9679;</span>;
+    return <strong className="option">{option.label} {option.origin === 'loaded' ? bullet : ''}</strong>;
   }
 
   render () {
     const entity = this.props.entity;
     if (!entity) { return <div></div>; }
 
+    this.getComponentsOptions();
+
     return (
-      <Collapsible>
-        <div className='collapsible-header'>
-          <span>COMPONENTS</span>
+        <div className='add-component-container'>
+          <Select
+            className="add-component"
+            ref="select"
+            options={this.options}
+            simpleValue
+            clearable={true}
+            placeholder="Add component..."
+            noResultsText="No components found"
+            onChange={this.addComponent}
+            optionRenderer={this.renderOption}
+            searchable={true}
+          />
+          <a href="https://aframe.io/aframe-registry" target="_blank" title="A-Frame Registry" className="aregistry-button">
+            <img src="https://aframe.io/aframe-inspector/assets/a-registry-logo-min.svg"/>
+          </a>
         </div>
-        <div className='collapsible-content'>
-          <div className='row'>
-            <span className='text'>Add</span>
-            <span className='value'>
-              <select ref='select'>
-                {this.renderComponentOptions()}
-              </select>
-              <a className='button fa fa-plus-circle' onClick={this.addComponent}/>
-            </span>
-          </div>
-        </div>
-      </Collapsible>
     );
   }
 }

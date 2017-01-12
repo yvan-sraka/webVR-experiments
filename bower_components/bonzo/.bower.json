@@ -33,7 +33,7 @@
     "tag": "v2.0.0",
     "commit": "e2f6bbebae2540d867d20c7b27990ac732981a47"
   },
-  "_source": "git://github.com/ded/bonzo.git",
+  "_source": "https://github.com/ded/bonzo.git",
   "_target": "^2.0.0",
   "_originalSource": "ded/bonzo"
 }

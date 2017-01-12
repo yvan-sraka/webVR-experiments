@@ -1,13 +1,13 @@
 {
   "name": "aframe-text-component",
   "homepage": "https://github.com/ngokevin/aframe-text-component",
-  "_release": "6a4e23f6dc",
+  "_release": "f48926373a",
   "_resolution": {
     "type": "branch",
     "branch": "master",
-    "commit": "6a4e23f6dc60c775b7795d28cc9f8b51979bd957"
+    "commit": "f48926373a2985ea419b85206d4ac0a30a59ddad"
   },
-  "_source": "git://github.com/ngokevin/aframe-text-component.git",
+  "_source": "https://github.com/ngokevin/aframe-text-component.git",
   "_target": "*",
   "_originalSource": "ngokevin/aframe-text-component"
 }

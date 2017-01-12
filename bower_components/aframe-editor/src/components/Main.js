@@ -6,7 +6,7 @@ import ReactDOM from 'react-dom';
 
 const Events = require('../lib/Events.js');
 import ComponentsSidebar from './components/Sidebar';
-import ModalTextures from './modals/ModalTextures';
+import ModalHelp from './modals/ModalHelp';
 import SceneGraph from './scenegraph/SceneGraph';
 import ToolBar from './ToolBar';
 
@@ -30,22 +30,30 @@ export default class Main extends React.Component {
   componentDidMount () {
     // Create an observer to notify the changes in the scene
     var observer = new MutationObserver(function (mutations) {
-      Events.emit('domModified', mutations);
+      Events.emit('dommodified', mutations);
     });
     var config = {attributes: true, childList: true, characterData: true};
     observer.observe(this.state.sceneEl, config);
 
-    Events.on('openTexturesModal', function (textureOnClose) {
+    Events.on('opentexturesmodal', function (textureOnClose) {
       this.setState({isModalTexturesOpen: true, textureOnClose: textureOnClose});
     }.bind(this));
 
-    Events.on('entitySelected', entity => {
+    Events.on('entityselected', entity => {
       this.setState({entity: entity});
     });
 
-    Events.on('inspectorModeChanged', enabled => {
+    Events.on('inspectormodechanged', enabled => {
       this.setState({inspectorEnabled: enabled});
     });
+
+    Events.on('openhelpmodal', () => {
+      this.setState({isHelpOpen: true});
+    });
+  }
+
+  onCloseHelpModal = value => {
+    this.setState({isHelpOpen: false});
   }
 
   onModalTextureOnClose = value => {
@@ -69,15 +77,12 @@ export default class Main extends React.Component {
 
   render () {
     var scene = this.state.sceneEl;
-    var textureDialogOpened = this.state.isModalTexturesOpen;
     let editButton = <a className='toggle-edit' onClick={this.toggleEdit}>{(this.state.inspectorEnabled ? 'Back to Scene' : 'Inspect Scene')}</a>;
 
     return (
       <div>
         {editButton}
         <div id='aframe-inspector-panels' className={this.state.inspectorEnabled ? '' : 'hidden'}>
-          <ModalTextures ref='modaltextures' isOpen={textureDialogOpened}
-            onClose={this.onModalTextureOnClose}/>
           <div id='left-sidebar'>
             <SceneGraph scene={scene} selectedEntity={this.state.entity}/>
           </div>
@@ -86,6 +91,7 @@ export default class Main extends React.Component {
             <ComponentsSidebar entity={this.state.entity}/>
           </div>
         </div>
+        <ModalHelp isOpen={this.state.isHelpOpen} onClose={this.onCloseHelpModal}/>
       </div>
     );
   }
@@ -98,10 +104,23 @@ function injectCSS (url) {
   link.rel = 'stylesheet';
   link.media = 'screen,print';
   link.setAttribute('data-aframe-inspector', 'style');
-  document.getElementsByTagName('head')[0].appendChild(link);
+  document.head.appendChild(link);
 }
 
 (function init () {
+  var webFontLoader = document.createElement('script');
+  webFontLoader.innerHTML = 'WebFont.load({google: {families: ["Roboto Mono"]}});';
+
+  var webFont = document.createElement('script');
+  webFont.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1.6.16/webfont.js';
+  webFont.addEventListener('load', function () {
+    document.head.appendChild(webFontLoader);
+  });
+  webFont.addEventListener('error', function () {
+    console.warn('Could not load WebFont script:', webFont.src);
+  });
+  document.head.appendChild(webFont);
+
   var div = document.createElement('div');
   div.id = 'aframe-inspector';
   div.setAttribute('data-aframe-inspector', 'app');
@@ -110,4 +129,6 @@ function injectCSS (url) {
     ReactDOM.render(<Main/>, div);
   });
   AFRAME.INSPECTOR = INSPECTOR;
+
+  console.log('A-Frame Inspector Version:', VERSION, '(' + BUILD_TIMESTAMP + ' Commit: ' + COMMIT_HASH.substr(0, 7) + ')');
 })();

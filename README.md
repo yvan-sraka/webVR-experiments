@@ -12,13 +12,14 @@ Comments, suggestions, and pull requests welcome.
 2.  [UI Test](#2-ui-test)
 3.  [Figures in Space](#3-figures-in-space)
 4.  [ViewPoint](#4-viewpoint)
-5.  [Missed Connections](#5-missed-connections)
+5.  [Terrain (Previously Missed Connections)](#5-missed-connections)
 6.  [Head Tracked Transformations](#6-head-tracked-transformations)
 7.  [Product Selection & Customization](#7-product-selection-customization)
 8.  [Video Controls](#8-video-controls)
 9.  [Solar System](#9-solar-system)
 10. [SpaceVR Simulator](#10-spacevr-simulator)
 11. [Environment Traversal](#11-environment-traversal)
+12. [MHCI Portugal](#12-mhci-portugal)
 
 
 <h3 id="1-hello-world">1. <a href="1--helloworld.html">Hello World</a></h3>
@@ -65,6 +66,8 @@ Testing a project for IXDS.
 
 The working model for a class project (IXDS public display).
 
+[Case study](http://andrewrmchugh.rocks/projects/viewpoint.php)
+
 **Guiding Question:** Can A-Frame be used to present designs for an installation piece in a museum?
 
 Team Members: Iris Wu, Tiffany Wang, Ryan Huber
@@ -77,10 +80,10 @@ Team Members: Iris Wu, Tiffany Wang, Ryan Huber
 
 
 
-<h3 id="5-missed-connections">5. <a href="5--missed-connections.html">Missed Connections</a></h3>
+<h3 id="5-missed-connections">5. <a href="5--missed-connections.html">Terrain (Previously Missed Connections)</a></h3>
 ![Image for experiment 5](https://raw.githubusercontent.com/armthethinker/webVR-experiments/master/assets/img/heroes/hero-5.jpg)
 
-Prototype and final presentation for a class project (Programming Usable Interfaces).
+Experience the missed connections section of Craigslist in a surreal city environment. Prototype and final presentation for a class project (Programming Usable Interfaces).
 
 **Guiding Question:** Given (another) short timeframe, can we build more with in A-Frame than with Swift?
 
@@ -99,6 +102,8 @@ Team Members: Andrew Novotny, Joel Rodrigues, & Rachel Ng
 ![Image for experiment 6](https://raw.githubusercontent.com/armthethinker/webVR-experiments/master/assets/img/heroes/hero-6.gif)
 
 For headsets without positional tracking (e.g. Google Cardboard), how can we allow position-esque movement? In this set of experiments, the blocks mutate based on the selected transformation.
+
+[Case study](https://medium.com/humane-virtuality/head-tracked-transformations-e7102d3c9789)
 
 **Guiding Question:** Can head rotations be tied to an object to allow position-esque movements?
 
@@ -125,6 +130,8 @@ For headsets without positional tracking (e.g. Google Cardboard), how can we all
 ![Image for experiment 7](https://raw.githubusercontent.com/armthethinker/webVR-experiments/master/assets/img/heroes/hero-7.gif)
 
 Looking at the differences in prototyping with a single planar mockup, a curved mockup, and a three dimensional mockup.
+
+[Case study](https://medium.com/humane-virtuality/product-presentation-in-virtual-reality-28f98ca2eb9)
 
 **Guiding Question:** What can be learned by taking a design from the web and translating it into VR?
 
@@ -185,6 +192,8 @@ This is my second attempt to build a [SpaceVR](http://www.spacevr.co/) simulator
 
 **Guiding Question:** What are the best ways to move in VR without position controls?
 
+[Case study](https://medium.com/humane-virtuality/environment-traversal-in-vr-bebc10417761#.687h6a2j1)
+
 *Devs*: Each transition can be selected by passing its name into `settings.transition`. Short and long alternatives are available for each transition as well with the exception of the individual `Jump` and `Fade` transitions.
 
 | Transition Name   | Action | Parameters | Key |
@@ -214,6 +223,11 @@ settings = {
    transition: 'Fade Jump Long'
 }
 ```
+
+<h3 id="12-mhci-portugal">12. <a href="12--mhci-portugal.html">MHCI Portugal - Work in Progress</a></h3>
+![Image for experiment 12](https://raw.githubusercontent.com/armthethinker/webVR-experiments/master/assets/img/heroes/hero-12.jpg)
+
+~~**Guiding Question:** What are the best ways to move in VR without position controls?~~
 
 
 

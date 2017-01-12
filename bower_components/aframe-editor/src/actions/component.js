@@ -1,4 +1,5 @@
 import React from 'react';
+import {getMajorVersion} from '../lib/utils.js';
 
 /**
  * Get the list of modified properties
@@ -11,6 +12,9 @@ function getModifiedProperties (entity, componentName) {
   var defaultData = entity.components[componentName].schema;
   var diff = {};
   for (var key in data) {
+    // Prevent adding unknown attributes
+    if (!defaultData[key]) { continue; }
+
     var defaultValue = defaultData[key].default;
     var currentValue = data[key];
 
@@ -31,7 +35,8 @@ function getModifiedProperties (entity, componentName) {
  */
 export function getClipboardRepresentation (entity, componentName) {
   var diff = getModifiedProperties(entity, componentName);
-  return AFRAME.utils.styleParser.stringify(diff);
+  var attributes = AFRAME.utils.styleParser.stringify(diff).replace(/;|:/g, '$& ');
+  return `${componentName}="${attributes}"`;
 }
 
 /**
@@ -42,7 +47,7 @@ export function getClipboardRepresentation (entity, componentName) {
 export function getComponentDocsUrl (componentName) {
   if (AFRAME.components[componentName]) {
     // Returns link from the core components
-    return 'https://aframe.io/docs/' + AFRAME.version + '/components/' +
+    return 'https://aframe.io/docs/' + getMajorVersion(AFRAME.version) + '/components/' +
       (componentName === 'camera' ? '' : componentName.toLowerCase() + '.html');
   }
 }

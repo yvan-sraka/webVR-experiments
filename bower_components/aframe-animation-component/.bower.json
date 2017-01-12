@@ -7,7 +7,7 @@
     "branch": "master",
     "commit": "719a2e7c5c8e78b6bc318b64d7f8a526ad6804c5"
   },
-  "_source": "git://github.com/ngokevin/aframe-animation-component.git",
+  "_source": "https://github.com/ngokevin/aframe-animation-component.git",
   "_target": "*",
   "_originalSource": "ngokevin/aframe-animation-component"
 }

@@ -774,6 +774,12 @@
 
 		};
 
+		this.toggleSpace = function () {
+
+			this.setSpace(scope.space === 'local' ? 'world' : 'local');
+
+		};
+
 		this.setSpace = function ( space ) {
 
 			scope.space = space;
@@ -1112,7 +1118,7 @@
 
 			_dragging = false;
 
-			if ( event instanceof TouchEvent ) {
+			if ( 'TouchEvent' in window && event instanceof TouchEvent ) {
 
 				// Force "rollover"
 
